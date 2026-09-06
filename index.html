@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MapleStory KMS - 도형 추적 Lie Detector</title>
+  <title>MapleStory KMS - 5회 클릭 & 문자 입력 거탐</title>
   <style>
     * { box-sizing: border-box; user-select: none; font-family: "Malgun Gothic", Dotum, sans-serif; }
 
@@ -20,217 +20,176 @@
       color: #fff;
     }
 
-    /* ================= 1. MÀN HÌNH THÔNG BÁO CHUẨN BỊ (CHUẨN ẢNH 1) ================= */
-    .ld-window {
-      width: 530px;
-      background: #ffffff;
-      border: 3px solid #334155;
-      border-radius: 8px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+    /* ================= GIAI ĐOẠN 1: BÓNG 5 LẦN (CHUẨN ẢNH 1) ================= */
+    .bubble-stage-card {
+      width: 600px;
+      height: 420px;
+      background: radial-gradient(circle at center, #15803d 0%, #064e3b 40%, #091e17 100%);
+      border: 3px solid #4ade80;
+      border-radius: 12px;
+      position: relative;
       overflow: hidden;
-      display: block;
-    }
-    .ld-titlebar {
-      background: #1e2530;
-      padding: 6px 14px;
-      font-size: 13px;
-      font-weight: 800;
-      color: #facc15;
-      letter-spacing: 0.5px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95);
       display: flex;
-      align-items: center;
+      flex-direction: column;
       justify-content: space-between;
-      border-bottom: 2px solid #0f172a;
-    }
-    .ld-body-upper {
-      padding: 24px 20px 18px;
-      text-align: center;
-      background: #ffffff;
-      color: #1e293b;
-    }
-    .ld-main-countdown {
-      font-size: 18px;
-      font-weight: 800;
-      line-height: 1.5;
-    }
-    .ld-main-countdown .sec-highlight {
-      font-size: 26px;
-      color: #0284c7;
-      font-family: 'Consolas', monospace;
-      font-weight: 900;
-    }
-    .ld-sub-warning {
-      margin-top: 6px;
-      font-size: 14px;
-      color: #64748b;
-      font-weight: 600;
     }
 
-    .ld-body-lower {
-      background: #e2e8f0;
-      border-top: 1px solid #cbd5e1;
-      padding: 16px 20px;
-      text-align: center;
-      color: #334155;
-    }
-    .ld-instructions {
-      font-size: 13px;
-      line-height: 1.6;
-      font-weight: 600;
-      margin-bottom: 14px;
-    }
-
-    /* 3 Ô xem trước quá trình mờ dần */
-    .preview-steps-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-    .preview-card {
-      width: 95px;
-      height: 95px;
-      background: radial-gradient(circle, #eab308 15%, #b45309 90%);
-      border: 2px solid #78350f;
-      border-radius: 6px;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: inset 0 0 8px rgba(0,0,0,0.4);
-    }
-    .preview-target-icon {
+    /* Lớp hào quang & hiệu ứng lá xanh nổ tung */
+    .green-blast-bg {
       position: absolute;
-      bottom: 8px;
-      right: 8px;
-      width: 28px;
-      height: 28px;
+      top: -30px; left: -30px; right: -30px; bottom: -30px;
+      background: 
+        radial-gradient(ellipse at 50% 50%, rgba(163, 230, 53, 0.45) 0%, rgba(34, 197, 94, 0.25) 45%, transparent 75%),
+        repeating-conic-gradient(from 0deg, rgba(234, 179, 8, 0.15) 0deg 15deg, transparent 15deg 30deg);
+      animation: rotateBurst 12s linear infinite;
+      pointer-events: none;
     }
-    .preview-arrow {
-      color: #94a3b8;
-      font-size: 18px;
-      font-weight: 900;
-    }
-
-    .btn-start-track {
-      padding: 9px 34px;
-      background: linear-gradient(180deg, #f97316 0%, #ea580c 100%);
-      border: 1px solid #c2410c;
-      border-radius: 4px;
-      color: #ffffff;
-      font-weight: 800;
-      font-size: 14px;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(234, 88, 12, 0.4);
-    }
-    .btn-start-track:hover { background: #c2410c; }
-
-    /* ================= 2. SÂN CHƠI BÁM ĐUỔI THỰC CHIẾN (CHUẨN ẢNH 2) ================= */
-    .game-window {
-      width: 650px;
-      background: #1e2430;
-      border: 3px solid #475569;
-      border-radius: 10px;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.95);
-      overflow: hidden;
-      display: none;
+    @keyframes rotateBurst {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
-    /* Nền ngụy trang mật ong/caramel honeycomb lồi lõm */
-    .camo-arena {
+    /* Các dòng chữ thư pháp vàng gây nhiễu */
+    .distract-text-layer {
+      position: absolute;
       width: 100%;
-      height: 380px;
-      background-color: #b87a14;
-      background-image: 
-        radial-gradient(circle at 20% 30%, #fcd34d 0%, #d97706 35%, transparent 60%),
-        radial-gradient(circle at 75% 25%, #fbbf24 0%, #b45309 40%, transparent 65%),
-        radial-gradient(circle at 40% 70%, #fde68a 0%, #92400e 45%, transparent 60%),
-        radial-gradient(circle at 85% 75%, #f59e0b 0%, #78350f 45%, transparent 65%),
-        radial-gradient(circle at 50% 40%, #b45309 10%, #78350f 70%);
-      background-size: 160px 160px;
-      position: relative;
-      overflow: hidden;
-      cursor: crosshair;
-    }
-
-    /* Vòng tròn bong bóng ngụy trang gây nhiễu */
-    .camo-bubble {
-      position: absolute;
-      border: 3px solid rgba(254, 240, 138, 0.45);
-      border-radius: 50%;
-      box-shadow: inset 0 0 14px rgba(69, 26, 3, 0.6), 0 4px 8px rgba(0,0,0,0.3);
+      height: 100%;
       pointer-events: none;
-    }
-
-    /* Mục tiêu tròn trắng chứa tâm ngắm xanh lá */
-    .tracking-orb {
-      position: absolute;
-      width: 62px;
-      height: 62px;
-      border-radius: 50%;
-      background: #ffffff;
-      box-shadow: 0 0 16px rgba(255, 255, 255, 0.85);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.3s;
-      z-index: 20;
-    }
-
-    /* Số đếm cyan trên đầu mục tiêu */
-    .floating-timer-cyan {
-      position: absolute;
-      top: -38px;
-      font-family: 'Consolas', monospace;
-      font-size: 34px;
+      font-family: 'Batang', serif;
       font-weight: 900;
-      color: #67e8f9;
-      text-shadow: 0 0 8px #0891b2, 0 2px 4px #000;
-      pointer-events: none;
+      color: rgba(250, 204, 21, 0.7);
+      text-shadow: 0 0 6px #854d0e;
+      font-size: 20px;
+      line-height: 1.5;
+      padding: 30px;
+      letter-spacing: 4px;
+      transform: skew(-8deg, -4deg);
     }
-
-    /* Dòng phụ đề game góc dưới */
-    .bottom-game-prompt {
+    .fake-damage-num {
       position: absolute;
-      bottom: 12px;
-      left: 0;
-      right: 0;
-      text-align: center;
-      font-size: 15px;
+      font-family: 'Consolas', monospace;
       font-weight: 900;
       color: #fef08a;
-      text-shadow: 0 2px 4px #000, 0 0 6px #b45309;
-      letter-spacing: -0.3px;
+      text-shadow: 0 0 8px #ca8a04, 0 2px 4px #000;
       pointer-events: none;
+    }
+
+    .bubble-hud {
+      padding: 12px 18px;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 20;
+      border-bottom: 2px solid rgba(74, 222, 128, 0.4);
+    }
+    .bubble-count-text {
+      font-size: 15px;
+      font-weight: 800;
+      color: #fef08a;
+    }
+    .bubble-count-text b { font-size: 19px; color: #4ade80; }
+
+    /* Quả bóng mục tiêu nổ sáng */
+    .bubble-target-ball {
+      position: absolute;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fef08a 0%, #84cc16 55%, #15803d 100%);
+      border: 3px solid #ecfccb;
+      box-shadow: 0 0 25px #bef264, inset 0 0 10px #ffffff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
       z-index: 30;
+      transition: all 0.18s ease-out;
+    }
+    .bubble-target-ball:active { transform: scale(0.9); }
+
+    /* ================= GIAI ĐOẠN 2: KHUNG GÕ CHỮ (CHUẨN ẢNH 2) ================= */
+    .type-stage-card {
+      width: 440px;
+      background: #3a2228;
+      border: 3px solid #5a3a42;
+      border-radius: 8px;
+      padding: 24px 20px 22px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95);
+      position: relative;
+      display: none;
+      /* Nền vân gạch xưởng Ludibrium */
+      background-image: 
+        repeating-linear-gradient(0deg, rgba(0,0,0,0.3) 0px, rgba(0,0,0,0.3) 2px, transparent 2px, transparent 18px),
+        repeating-linear-gradient(90deg, rgba(0,0,0,0.2) 0px, rgba(0,0,0,0.2) 2px, transparent 2px, transparent 36px);
     }
 
-    /* Thanh tiến trình tích lũy thời gian giữ chuột */
-    .progress-track-wrapper {
-      background: #111827;
-      padding: 12px 20px 14px;
-      border-top: 2px solid #334155;
+    /* Đồng hồ điện tử Cyan đếm lùi */
+    .cyan-clock-display {
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 54px;
+      font-weight: 900;
+      color: #38bdf8;
+      text-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+      text-align: center;
+      line-height: 1;
+      margin-bottom: 14px;
+      letter-spacing: 2px;
     }
-    .progress-bar-bg {
+
+    /* Hướng dẫn tiếng Hàn màu xanh xám */
+    .korean-prompt-text {
+      text-align: center;
+      color: #7dd3fc;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.5;
+      font-style: italic;
+      margin-bottom: 16px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+    }
+    .lives-left-text {
+      display: block;
+      color: #93c5fd;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    /* Khung vẽ chữ Hangul Canvas có vết xước & nhiễu */
+    .hangul-canvas-box {
       width: 100%;
-      height: 18px;
-      background: #1e293b;
-      border-radius: 9px;
+      height: 90px;
+      background: #ffffff;
+      border: 2px solid #1e293b;
+      border-radius: 4px;
       overflow: hidden;
-      border: 1px solid #475569;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+      margin-bottom: 16px;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+      position: relative;
     }
-    .progress-bar-fill {
-      width: 0%;
+    #hangulCanvas {
+      width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, #22c55e 0%, #4ade80 100%);
-      box-shadow: 0 0 10px #22c55e;
-      transition: width 0.08s linear;
+      display: block;
     }
 
-    .score-banner {
+    /* Ô gõ chữ tiếng Hàn */
+    .hangul-input-bar {
+      width: 100%;
+      height: 42px;
+      background: #ffffff;
+      border: 2px solid #0f172a;
+      border-radius: 4px;
+      padding: 6px 12px;
+      font-size: 16.5px;
+      font-weight: bold;
+      color: #000;
+      outline: none;
+    }
+
+    .score-toast {
       margin-top: 16px;
       padding: 8px 24px;
       border-radius: 20px;
@@ -239,248 +198,240 @@
       font-size: 15px;
       border: 1px solid #475569;
     }
-    .score-banner b { color: #facc15; }
+    .score-toast b { color: #facc15; }
   </style>
 </head>
 <body>
 
-  <!-- 1. POP-UP THÔNG BÁO CHUẨN BỊ (Chuẩn ảnh 1) -->
-  <div class="ld-window" id="noticeWindow">
-    <div class="ld-titlebar">
-      <span>LIE DETECTOR :</span>
+  <!-- 1. GIAI ĐOẠN 1: BÓNG 5 LẦN (Chuẩn ảnh 1) -->
+  <div class="bubble-stage-card" id="bubbleStage">
+    <div class="green-blast-bg"></div>
+
+    <div class="distract-text-layer">
+      놓은 를을 베틱거나 히싣다.<br>
+      사냥터에서 몬스터를 처치하세요.<br>
+      인벤토리가 가득 찼습니다.
     </div>
-    <div class="ld-body-upper">
-      <div class="ld-main-countdown">
-        <span class="sec-highlight" id="prepTimer">8</span>초 후 거짓말 탐지 미니게임이 시작됩니다.
-      </div>
-      <div class="ld-sub-warning">
-        게임이 시작되기 전에 안전한 곳으로 이동해 주세요
-      </div>
+
+    <!-- Số damage trôi nổi giả lập game -->
+    <div class="fake-damage-num" style="top: 140px; right: 80px; font-size: 26px;">1181 COMBO</div>
+    <div class="fake-damage-num" style="bottom: 80px; left: 40px; font-size: 28px;">48031 12975254</div>
+
+    <div class="bubble-hud">
+      <span class="bubble-count-text">거짓말 탐지: 목표를 5회 클릭하세요</span>
+      <span class="bubble-count-text">클릭 수: <b id="bubbleHits">0</b> / 5</span>
     </div>
-    <div class="ld-body-lower">
-      <div class="ld-instructions">
-        점점 투명해지면서 움직이는 도형 위에<br>
-        마우스 커서가 위치하도록 마우스를 움직여주세요.<br><br>
-        마우스 커서가 도형에 위치한 시간에 따라<br>
-        통과/실패가 결정됩니다
-      </div>
 
-      <!-- 3 Ảnh xem trước quá trình tàng hình -->
-      <div class="preview-steps-row">
-        <!-- Bước 1: Trắng rõ -->
-        <div class="preview-card">
-          <svg width="60" height="60" viewBox="0 0 60 60">
-            <path d="M 30 5 L 37 20 L 53 23 L 42 34 L 44 50 L 30 42 L 16 50 L 18 34 L 7 23 L 23 20 Z" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
-          </svg>
-          <div class="preview-target-icon" id="reticleP1"></div>
-        </div>
+    <!-- Mục tiêu bóng di chuyển -->
+    <div class="bubble-target-ball" id="bubbleTarget">🍀</div>
 
-        <div class="preview-arrow">▶</div>
-
-        <!-- Bước 2: Bán trong suốt -->
-        <div class="preview-card">
-          <svg width="60" height="60" viewBox="0 0 60 60" style="opacity: 0.5;">
-            <path d="M 30 5 L 37 20 L 53 23 L 42 34 L 44 50 L 30 42 L 16 50 L 18 34 L 7 23 L 23 20 Z" fill="#ffffff"/>
-          </svg>
-          <div class="preview-target-icon" id="reticleP2"></div>
-        </div>
-
-        <div class="preview-arrow">▶</div>
-
-        <!-- Bước 3: Gần như tàng hình -->
-        <div class="preview-card">
-          <svg width="60" height="60" viewBox="0 0 60 60" style="opacity: 0.15;">
-            <path d="M 30 5 L 37 20 L 53 23 L 42 34 L 44 50 L 30 42 L 16 50 L 18 34 L 7 23 L 23 20 Z" fill="#ffffff"/>
-          </svg>
-          <div class="preview-target-icon" id="reticleP3"></div>
-        </div>
-      </div>
-
-      <button class="btn-start-track" onclick="startTrackingGame()">바로 시작 (Bắt đầu ngay)</button>
+    <div style="padding: 10px; z-index: 20; text-align: center; font-size: 13px; color: #cbd5e1; background: rgba(0,0,0,0.5);">
+      Nhấp trúng quả bóng màu xanh lục 5 lần liên tiếp
     </div>
   </div>
 
-  <!-- 2. SÂN CHƠI BÁM ĐUỔI THỰC CHIẾN (Chuẩn ảnh 2) -->
-  <div class="game-window" id="gameWindow">
-    <div class="ld-titlebar">
-      <span>LIE DETECTOR :</span>
-    </div>
-    
-    <div class="camo-arena" id="camoArena">
-      <!-- Bong bóng ngụy trang -->
-      <div class="camo-bubble" style="width: 90px; height: 90px; top: 30px; left: 60px;"></div>
-      <div class="camo-bubble" style="width: 120px; height: 120px; top: 180px; left: 70px;"></div>
-      <div class="camo-bubble" style="width: 110px; height: 110px; top: 40px; right: 80px;"></div>
-      <div class="camo-bubble" style="width: 140px; height: 140px; bottom: 30px; right: 100px;"></div>
-      <div class="camo-bubble" style="width: 80px; height: 80px; top: 150px; left: 320px;"></div>
+  <!-- 2. GIAI ĐOẠN 2: KHUNG GÕ CHỮ (Chuẩn ảnh 2) -->
+  <div class="type-stage-card" id="typeStage">
+    <div class="cyan-clock-display" id="cyanTimer">49</div>
 
-      <!-- Mục tiêu bám đuổi -->
-      <div class="tracking-orb" id="trackingOrb">
-        <div class="floating-timer-cyan" id="floatingTimer">7</div>
-        <div id="orbReticle" style="width: 38px; height: 38px;"></div>
-      </div>
-
-      <div class="bottom-game-prompt">
-        카운트다운 종료 후, 움직이는 도형에 커서를 올려두세요
-      </div>
+    <div class="korean-prompt-text">
+      아래 이미지 안의 한글을<br>보이는 대로 입력하세요
+      <span class="lives-left-text" id="livesText">세번 남았습니다</span>
     </div>
 
-    <!-- Thanh tiến trình giữ chuột -->
-    <div class="progress-track-wrapper">
-      <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: bold; margin-bottom: 6px; color: #cbd5e1;">
-        <span>목표 유지 게이지 (Tiến trình bám đuổi)</span>
-        <span id="progressPercent">0%</span>
-      </div>
-      <div class="progress-bar-bg">
-        <div class="progress-bar-fill" id="progressFill"></div>
-      </div>
+    <div class="hangul-canvas-box">
+      <canvas id="hangulCanvas" width="400" height="90"></canvas>
     </div>
+
+    <input type="text" class="hangul-input-bar" id="hangulInput" placeholder="Nhập chữ tiếng Hàn và bấm Enter..." autocomplete="off">
   </div>
 
-  <div class="score-banner" id="scoreBanner">Đúng: <b>0</b> | Chuỗi liên tiếp: <b>0</b></div>
+  <div class="score-toast" id="scoreBar">Đúng: <b>0</b> | Chuỗi liên tiếp: <b>0</b></div>
 
   <script>
-    // Hàm tạo biểu tượng tâm ngắm xanh lá chuẩn xác (Green reticle crosshair)
-    function getGreenReticleSVG() {
-      return `
-        <svg width="100%" height="100%" viewBox="0 0 36 36">
-          <circle cx="18" cy="18" r="14" fill="none" stroke="#15803d" stroke-width="2.5"/>
-          <circle cx="18" cy="18" r="7" fill="none" stroke="#16a34a" stroke-width="2"/>
-          <line x1="18" y1="2" x2="18" y2="10" stroke="#15803d" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="18" y1="26" x2="18" y2="34" stroke="#15803d" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="2" y1="18" x2="10" y2="18" stroke="#15803d" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="26" y1="18" x2="34" y2="18" stroke="#15803d" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="18" cy="18" r="2.5" fill="#22c55e"/>
-        </svg>
-      `;
+    // Kho từ vựng Hangul mô phỏng captcha chữ biến dạng
+    const HANGUL_WORDS = [
+      "애가형영것", "단풍잎바람", "자쿰의투구", "헤네시스숲", 
+      "엘리니아꽃", "루디브리엄", "시그너스궁", "오르비스탑"
+    ];
+
+    let bubbleClicks = 0;
+    let typeLives = 3;
+    let remainingTime = 49;
+    let timerInterval = null;
+    let currentTargetWord = "";
+    let score = 0, streak = 0;
+
+    const bubbleStage = document.getElementById('bubbleStage');
+    const typeStage = document.getElementById('typeStage');
+    const bubbleHits = document.getElementById('bubbleHits');
+    const bubbleTarget = document.getElementById('bubbleTarget');
+    const cyanTimer = document.getElementById('cyanTimer');
+    const livesText = document.getElementById('livesText');
+    const hangulInput = document.getElementById('hangulInput');
+    const canvas = document.getElementById('hangulCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // ================= KHỞI TẠO BÓNG 5 LẦN =================
+    function startBubblePhase() {
+      clearInterval(timerInterval);
+      bubbleClicks = 0;
+      bubbleHits.textContent = bubbleClicks;
+      bubbleStage.style.display = 'flex';
+      typeStage.style.display = 'none';
+
+      moveBubbleToRandomPos();
+
+      bubbleTarget.onclick = () => {
+        bubbleClicks++;
+        bubbleHits.textContent = bubbleClicks;
+
+        if (bubbleClicks >= 5) {
+          // Hoàn thành giai đoạn 1 -> Chuyển sang giai đoạn 2
+          bubbleStage.style.display = 'none';
+          typeStage.style.display = 'block';
+          startTypePhase();
+        } else {
+          moveBubbleToRandomPos();
+        }
+      };
     }
 
-    // Nhúng tâm ngắm vào 3 ô preview
-    document.getElementById('reticleP1').innerHTML = getGreenReticleSVG();
-    document.getElementById('reticleP2').innerHTML = getGreenReticleSVG();
-    document.getElementById('reticleP3').innerHTML = getGreenReticleSVG();
-    document.getElementById('orbReticle').innerHTML = getGreenReticleSVG();
+    function moveBubbleToRandomPos() {
+      // Phạm vi khung 600 x 420 (trừ lề HUD và kích thước bóng 72px)
+      const x = 30 + Math.random() * 490;
+      const y = 70 + Math.random() * 260;
+      bubbleTarget.style.left = x + 'px';
+      bubbleTarget.style.top = y + 'px';
+    }
 
-    let prepSec = 8;
-    let prepInterval = null;
-    let gameLoop = null;
+    // ================= KHỞI TẠO GÕ CHỮ THƯ PHÁP =================
+    function startTypePhase() {
+      typeLives = 3;
+      remainingTime = 49;
+      cyanTimer.textContent = remainingTime;
+      updateLivesText();
 
-    let score = 0, streak = 0;
-    let progress = 0;
-    let isCursorOverTarget = false;
+      hangulInput.value = '';
+      hangulInput.focus();
 
-    // Tọa độ và vận tốc của mục tiêu
-    let posX = 260, posY = 140;
-    let velX = 2.4, velY = 2.0;
-    let remainingGameSec = 7;
+      // Chọn 1 từ ngẫu nhiên và vẽ lên Canvas với các hiệu ứng biến dạng
+      currentTargetWord = HANGUL_WORDS[Math.floor(Math.random() * HANGUL_WORDS.length)];
+      renderDistortedHangul(currentTargetWord);
 
-    function startPrepCountdown() {
-      clearInterval(prepInterval);
-      prepSec = 8;
-      document.getElementById('prepTimer').textContent = prepSec;
-      prepInterval = setInterval(() => {
-        prepSec--;
-        document.getElementById('prepTimer').textContent = prepSec;
-        if (prepSec <= 0) {
-          clearInterval(prepInterval);
-          startTrackingGame();
+      // Đếm ngược thời gian từ 49s xuống 0
+      timerInterval = setInterval(() => {
+        remainingTime--;
+        cyanTimer.textContent = remainingTime;
+
+        if (remainingTime <= 0) {
+          clearInterval(timerInterval);
+          failChallenge("Hết thời gian (시간 초과)!");
         }
       }, 1000);
+
+      // Lắng nghe phím Enter
+      hangulInput.onkeydown = (e) => {
+        if (e.key === 'Enter') {
+          checkTypedAnswer();
+        }
+      };
     }
 
-    function startTrackingGame() {
-      clearInterval(prepInterval);
-      document.getElementById('noticeWindow').style.display = 'none';
-      document.getElementById('gameWindow').style.display = 'block';
-
-      // Khởi tạo thông số
-      progress = 0;
-      isCursorOverTarget = false;
-      remainingGameSec = 7;
-      document.getElementById('progressFill').style.width = '0%';
-      document.getElementById('progressPercent').textContent = '0%';
-      document.getElementById('floatingTimer').textContent = remainingGameSec;
-
-      const orb = document.getElementById('trackingOrb');
-      orb.style.opacity = '1';
-
-      // Lắng nghe sự kiện chuột vào/ra khỏi mục tiêu
-      orb.onmouseenter = () => { isCursorOverTarget = true; };
-      orb.onmouseleave = () => { isCursorOverTarget = false; };
-
-      // Đặt vị trí ngẫu nhiên ban đầu
-      posX = 150 + Math.random() * 300;
-      posY = 80 + Math.random() * 180;
-      velX = (Math.random() > 0.5 ? 2.4 : -2.4);
-      velY = (Math.random() > 0.5 ? 2.0 : -2.0);
-
-      let elapsedTime = 0;
-
-      // Vòng lặp chuyển động & tính điểm
-      gameLoop = setInterval(() => {
-        elapsedTime += 25;
-
-        // Cập nhật số đếm ngược cyan (mỗi giây)
-        if (elapsedTime % 1000 < 25 && remainingGameSec > 0) {
-          remainingGameSec--;
-          document.getElementById('floatingTimer').textContent = remainingGameSec;
-        }
-
-        // Độ mờ tàng hình dần (từ 1.0 xuống 0.15 trong 7 giây)
-        const currentOpacity = Math.max(0.15, 1.0 - (elapsedTime / 6500));
-        orb.style.opacity = currentOpacity;
-
-        // Di chuyển nảy góc trong khung (kích thước khung: 650 x 380, kích thước orb: 62)
-        posX += velX;
-        posY += velY;
-
-        if (posX <= 10 || posX >= 578) velX *= -1;
-        if (posY <= 10 || posY >= 308) velY *= -1;
-
-        orb.style.left = posX + 'px';
-        orb.style.top = posY + 'px';
-
-        // Nếu giữ chuột trúng mục tiêu -> Tăng thanh tiến trình
-        if (isCursorOverTarget) {
-          progress = Math.min(100, progress + 0.55);
-          document.getElementById('progressFill').style.width = progress + '%';
-          document.getElementById('progressPercent').textContent = Math.floor(progress) + '%';
-
-          // Đạt 100% -> THÀNH CÔNG
-          if (progress >= 100) {
-            endGame(true);
-          }
-        }
-
-        // Hết 7 giây mà chưa đạt 100% -> THẤT BẠI
-        if (elapsedTime >= 7000 && progress < 100) {
-          endGame(false);
-        }
-      }, 25);
+    function updateLivesText() {
+      if (typeLives === 3) livesText.textContent = "세번 남았습니다";
+      else if (typeLives === 2) livesText.textContent = "두번 남았습니다";
+      else if (typeLives === 1) livesText.textContent = "한번 남았습니다";
     }
 
-    function endGame(isSuccess) {
-      clearInterval(gameLoop);
+    // Hàm vẽ chữ thư pháp, vết xước và hạt muối tiêu (Salt & Pepper Noise)
+    function renderDistortedHangul(text) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      if (isSuccess) {
-        score++;
-        streak++;
-        alert("★ 통과 (Chính xác! Bạn đã bám sát mục tiêu tàng hình thành công)");
-      } else {
-        streak = 0;
-        alert("✖ 실패 (Thất bại! Bạn chưa tích lũy đủ 100% thời gian giữ chuột trên mục tiêu)");
+      // 1. Nền trắng có hạt xám li ti
+      ctx.fillStyle = "#fafafa";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // 2. Vẽ từng ký tự chữ cái với màu sắc, góc nghiêng và độ méo khác nhau
+      const colors = ["#451a03", "#0f172a", "#581c87", "#701a75", "#1c1917"];
+      const charWidth = 62;
+      const startX = 35;
+
+      for (let i = 0; i < text.length; i++) {
+        ctx.save();
+        ctx.fillStyle = colors[i % colors.length];
+        ctx.font = "900 44px 'Batang', 'Gungsuh', serif";
+
+        const x = startX + i * charWidth;
+        const y = 60 + (Math.random() * 8 - 4);
+        const angle = (Math.random() * 0.2 - 0.1); // Nghiêng nhẹ
+
+        ctx.translate(x, y);
+        ctx.rotate(angle);
+        ctx.fillText(text[i], 0, 0);
+        ctx.restore();
       }
 
-      document.getElementById('scoreBanner').innerHTML = `Đúng: <b>${score}</b> | Chuỗi liên tiếp: <b>${streak}</b>`;
+      // 3. Vẽ các đường gạch xước ngang và chéo xuyên qua chữ (chống đọc máy)
+      for (let i = 0; i < 7; i++) {
+        ctx.beginPath();
+        ctx.strokeStyle = (i % 2 === 0) ? "rgba(15, 23, 42, 0.65)" : "rgba(185, 28, 28, 0.45)";
+        ctx.lineWidth = 1.2 + Math.random() * 1.5;
+        ctx.moveTo(Math.random() * 50, Math.random() * canvas.height);
+        ctx.bezierCurveTo(
+          120, Math.random() * canvas.height,
+          260, Math.random() * canvas.height,
+          canvas.width - 20, Math.random() * canvas.height
+        );
+        ctx.stroke();
+      }
 
-      // Quay lại màn hình thông báo chuẩn bị
-      document.getElementById('gameWindow').style.display = 'none';
-      document.getElementById('noticeWindow').style.display = 'block';
-      startPrepCountdown();
+      // 4. Phủ lớp hạt nhiễu (noise speckles)
+      for (let i = 0; i < 650; i++) {
+        ctx.fillStyle = Math.random() > 0.5 ? "rgba(0,0,0,0.7)" : "rgba(120,53,15,0.6)";
+        const px = Math.random() * canvas.width;
+        const py = Math.random() * canvas.height;
+        ctx.fillRect(px, py, 1.5, 1.5);
+      }
+    }
+
+    function checkTypedAnswer() {
+      const userVal = hangulInput.value.trim();
+
+      if (userVal === currentTargetWord) {
+        // Đúng
+        clearInterval(timerInterval);
+        score++;
+        streak++;
+        alert("★ 통과 (Chính xác! Bạn đã hoàn thành xác minh)");
+        resetGame();
+      } else {
+        // Sai -> trừ mạng
+        typeLives--;
+        updateLivesText();
+        hangulInput.value = '';
+
+        if (typeLives <= 0) {
+          clearInterval(timerInterval);
+          failChallenge("Bạn đã nhập sai quá 3 lần (실패)!");
+        }
+      }
+      document.getElementById('scoreBar').innerHTML = `Đúng: <b>${score}</b> | Chuỗi liên tiếp: <b>${streak}</b>`;
+    }
+
+    function failChallenge(msg) {
+      streak = 0;
+      alert("✖ 실패: " + msg);
+      document.getElementById('scoreBar').innerHTML = `Đúng: <b>${score}</b> | Chuỗi liên tiếp: <b>${streak}</b>`;
+      resetGame();
+    }
+
+    function resetGame() {
+      startBubblePhase();
     }
 
     // Bắt đầu
-    startPrepCountdown();
+    startBubblePhase();
   </script>
 </body>
 </html>
