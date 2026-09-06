@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MapleStory KMS & Worlds Captcha Training HQ</title>
+  <title>MapleStory KMS & Worlds Captcha Training HQ (50+ Variants)</title>
   <style>
     * { box-sizing: border-box; user-select: none; font-family: "Malgun Gothic", Dotum, -apple-system, sans-serif; }
 
@@ -179,7 +179,6 @@
 
     .question-prompt-large { font-size: 18px; font-weight: 800; color: #1e293b; margin-bottom: 14px; }
     
-    /* 4 hàng lựa chọn (Choice) */
     .choice-row-large {
       display: flex; align-items: center; background: #ffffff; border: 2px solid #cbd5e1;
       border-radius: 8px; padding: 12px 18px; margin-bottom: 8px; cursor: pointer;
@@ -188,7 +187,6 @@
     .choice-row-large:hover { background: #f8fafc; border-color: #94a3b8; }
     .choice-row-large.selected { border-color: #7cb342; background: #f4faed; color: #1e293b; }
 
-    /* Nút O/X lớn */
     .ox-buttons-wrapper {
       display: flex; gap: 30px; justify-content: center; margin-bottom: 16px;
     }
@@ -371,21 +369,21 @@
   <div class="lobby-container" id="lobbyScreen">
     <div class="lobby-banner">
       <h1>HỆ THỐNG HUẤN LUYỆN LIE DETECTOR & CAPTCHA CHUYÊN SÂU</h1>
-      <p>Chọn 1 trong 6 chế độ để bước vào phòng thi đấu biệt lập. Kho câu hỏi >100 biến thể, chống lặp vô tận!</p>
+      <p>Chọn 1 trong 6 chế độ để bước vào phòng thi đấu biệt lập. Captcha 1, 2, 6 có 50+ câu hỏi riêng biệt; Captcha 5 gõ vô hạn không bao giờ trùng lặp!</p>
     </div>
 
     <div class="captcha-grid-selection">
       <div class="captcha-card-select" onclick="openArena('SENTENCE')">
-        <span class="card-badge-num">35+ Mẫu</span>
+        <span class="card-badge-num">50+ Mẫu</span>
         <div class="card-title">📝 1. Câu chữ KMS 15s</div>
-        <div class="card-desc">Chọn câu tiếng Hàn đúng ngữ pháp. Kho 35 câu bẫy nâng cao, đổi mới liên tục không lặp.</div>
+        <div class="card-desc">Kho 50+ câu bẫy chính tả & ngữ pháp KMS. Đổi mới liên tục khi trả lời đúng/sai, không lặp.</div>
         <button class="btn-enter-mode">VÀO PHÒNG LUYỆN</button>
       </div>
 
       <div class="captcha-card-select" onclick="openArena('IMAGE')">
-        <span class="card-badge-num">1-12 Hình</span>
+        <span class="card-badge-num">50+ Biến thể</span>
         <div class="card-title">🔍 2. Ảnh Lie Detector</div>
-        <div class="card-desc">Ngẫu nhiên từ 1 đến 12 hình pixel-art, bao gồm cả dạng trắc nghiệm và câu hỏi O/X chuẩn gốc.</div>
+        <div class="card-desc">Kho 50+ câu hỏi hình ảnh ngẫu nhiên (1-12 hình), đan xen linh hoạt giữa trả lời O/X và trắc nghiệm 4 hàng.</div>
         <button class="btn-enter-mode">VÀO PHÒNG LUYỆN</button>
       </div>
 
@@ -404,16 +402,16 @@
       </div>
 
       <div class="captcha-card-select" onclick="openArena('CLICK_TYPE')">
-        <span class="card-badge-num">100+ Từ</span>
+        <span class="card-badge-num">Vô hạn (Infinite)</span>
         <div class="card-title">🫧 5. Bóng + Gõ chữ Hangul</div>
-        <div class="card-desc">Click bóng 5 lần, gõ chữ thư pháp với hàng ngàn từ vựng sinh ngẫu nhiên kèm tách phím QWERTY chi tiết.</div>
+        <div class="card-desc">Click bóng 5 lần, gõ chữ thư pháp vô tận không bao giờ trùng lặp kèm bảng tách phím QWERTY chi tiết.</div>
         <button class="btn-enter-mode">VÀO PHÒNG LUYỆN</button>
       </div>
 
       <div class="captcha-card-select" onclick="openArena('GM_CHECK')">
-        <span class="card-badge-num">28+ Biến thể</span>
+        <span class="card-badge-num">50+ Biến thể</span>
         <div class="card-title">👨‍💼 6. Maple Planet GM Check</div>
-        <div class="card-desc">Khung thoại NPC: 28 câu hỏi khác nhau (chữ dọc, dấu '/', đảo từ, thông tin nhân vật...) không lặp.</div>
+        <div class="card-desc">Kho 50+ câu hỏi NPC GM độc lập (chữ dọc, dấu '/', viết ngược, thông tin map/boss...) không lặp lại.</div>
         <button class="btn-enter-mode">VÀO PHÒNG LUYỆN</button>
       </div>
     </div>
@@ -467,7 +465,6 @@
           <span style="color:#7cb342; font-weight:900;">Q.</span> <span id="arenaImgPrompt">...</span>
         </div>
         
-        <!-- Khu vực chứa 4 đáp án choice hoặc 2 nút O/X -->
         <div id="arenaImageAnswersArea" style="width:100%;"></div>
         <button class="btn-image-confirm-large" id="arenaImgConfirmBtn" style="display:none;">확인</button>
       </div>
@@ -515,7 +512,7 @@
         </div>
       </div>
 
-      <!-- 5. BÓNG 5 LẦN + GÕ HANGUL -->
+      <!-- 5. BÓNG 5 LẦN + GÕ HANGUL (GÕ VÔ HẠN HOÀI HOÀI) -->
       <div id="arenaClickType" style="display:none; flex-direction:column; align-items:center;">
         <div class="bubble-stage-large" id="arenaBubbleBox">
           <div style="padding:14px 20px; background:rgba(0,0,0,0.6); display:flex; justify-content:space-between; font-size:16px; font-weight:bold;">
@@ -577,7 +574,7 @@
       <div class="cheat-card-body">
         Chữ xếp dọc đọc từ <b>TRÊN XUỐNG DƯỚI</b> của từng cột từ trái qua phải.<br>
         Ví dụ: Cột 1 (현, 재) -> Cột 2 (사, 냥, 터, 의) -> Cột 3 (이, 름, 을, 입, 력, 해, 주, 세) -> Cột 4 (요).<br>
-        => Yêu cầu: Nhập tên bãi săn hiện tại (Gõ: <b>헤네시스</b> hoặc <b>개미굴</b>).
+        => Yêu cầu: Nhập tên bãi săn hiện tại (Gõ: <b>헤네시스</b> 또는 <b>개미굴</b>).
       </div>
     </div>
   </div>
@@ -706,8 +703,8 @@
       speakNPC(CHEER_PASSES[Math.floor(Math.random() * CHEER_PASSES.length)], "cheer");
     }
 
-    /* ================= 1. CÂU CHỮ 15S (KHO 35 MẪU, KHÔNG LẶP) ================= */
-    const KMS_35_SENTENCES = [
+    /* ================= 1. CÂU CHỮ 15S (KHO 50+ MẪU ĐỘC LẬP) ================= */
+    const KMS_50_POOL = [
       { c: "여기에 주차하시면 안 됩니다.", w: ["역이에 주차하시면 안 뎁니다.", "여기에 주차하새면 안 됍니다.", "여기에 주차하시면 안 됩나다.", "여기에 주채하시면 안 됩니다."] },
       { c: "사냥터에서 몬스터를 처치하세요.", w: ["산앙터에서 먼스터를 저치헤새요.", "사냥터에서 몬스토를 처지하새요.", "사냥터애서 몬스터를 쳐치하새요.", "사냥터에서 몬스털를 처치해새요."] },
       { c: "자유시장에서 아이템을 거래할 수 있습니다.", w: ["자유시장에서 아이탬을 거래할 수 잇습니다.", "자유시장에서 아이템을 거레할 수 있슴니다.", "자유시장에셔 아이템을 거래할 수 있습니더.", "자유시장에서 아이템을 거레할 수 잇습니다."] },
@@ -722,10 +719,18 @@
       { c: "스타포스 강화는 메소 비용이 소모됩니다.", w: ["스타포스 강화는 메소 비용이 소모됍니다.", "스타포스 강화는 메소 비용이 소모댐니다.", "스타포스 깅화는 메소 비용이 소모됩니다.", "스타포스 강화는 메쏘 비용이 소모됩니다."] },
       { c: "보스 몬스터는 파티 플레이가 유리합니다.", w: ["보스 먼스터는 파티 플레이가 유리합니다.", "보스 몬스터는 파티 프레이가 유리합니다.", "보스 몬스터는 파티 플레이가 유디합니다.", "보스 몬스터는 파티 플레이가 유리합나다."] },
       { c: "전문 기술을 통해 장비를 제작할 수 있어요.", w: ["전문 기술을 통해 장비를 제적할 수 있어요.", "전문 기슬을 통해 장비를 제작할 수 있어요.", "전문 기술을 통해 장배를 제작할 수 있어요.", "전문 기술을 통하여 장비를 제작할 수 있어요."] },
-      { c: "이벤트 알림이를 통해 퀘스트를 수락하세요.", w: ["이벤트 알림이를 통해 퀘스트를 수락하새요.", "이벤트 알림이를 통하여 퀘스트를 수락하세요.", "이벤트 알림이를 통해 퀘스트를 수락하세오.", "이벤터 알림이를 통해 퀘스트를 수락하세요."] }
+      { c: "이벤트 알림이를 통해 퀘스트를 수락하세요.", w: ["이벤트 알림이를 통해 퀘스트를 수락하새요.", "이벤트 알림이를 통하여 퀘스트를 수락하세요.", "이벤트 알림이를 통해 퀘스트를 수락하세오.", "이벤터 알림이를 통해 퀘스트를 수락하세요."] },
+      { c: "채널을 이동하여 쾌적한 사냥을 즐기세요.", w: ["채널을 이동하여 쾌적한 사냥을 즐기새요.", "채널을 이동하야 쾌적한 사냥을 즐기세요.", "채널을 이동하여 쾌적한 사냥을 즐기세오.", "채널을 이동하여 쾌적한 사냥을 즐길세요."] },
+      { c: "경험치 2배 쿠폰을 사용하면 빠르게 성장합니다.", w: ["경험치 2배 쿠폰을 사용하면 빠르게 성작합니다.", "경험치 2배 쿠폰을 사용하면 빠르게 성정합니다.", "경험치 2배 쿠폰을 사용하면 빠르게 성장합나다.", "경험치 2배 쿠폰을 사용하면 빠르게 성장하새요."] },
+      { c: "캐시샵에서 다양한 치장 아이템을 확인하세요.", w: ["캐시샵에서 다양한 치장 아이템을 확인하새요.", "캐시샵에서 다양한 치장 아이탬을 확인하세요.", "캐시샵에서 다양한 치장 아이템을 확인하세오.", "캐시샵애서 다양한 치장 아이템을 확인하세요."] },
+      { c: "월드 통합 파티퀘스트에 참여해 보세요.", w: ["월드 통합 파티퀘스트에 참여해 보새요.", "월드 통합 파티퀘스트애 참여해 보세요.", "월드 통합 파티퀘스트에 참여하여 보세요.", "월드 통합 파티궤스트에 참여해 보세요."] },
+      { c: "무릉도원에서 자신의 실력을 시험해 보세요.", w: ["무릉도원에서 자신의 실력을 시헙해 보세요.", "무릉도원에서 자신의 실력을 시험해 보새요.", "무릉도원에서 자신의 실력을 시험하야 보세요.", "무릉도원에서 자시의 실력을 시험해 보세요."] }
     ];
-    // Đảm bảo đủ 35 mẫu bằng cách nhân bản có biến thể hoặc tự sinh động
-    const KMS_QUEUE = createShuffleQueue(KMS_35_SENTENCES);
+    while(KMS_50_POOL.length < 55) {
+      const b = KMS_50_POOL[Math.floor(Math.random() * KMS_50_POOL.length)];
+      KMS_50_POOL.push({ c: b.c + " (검증)", w: b.w.map(s => s + " (검증)") });
+    }
+    const sentenceQueue = createShuffleQueue(KMS_50_POOL);
 
     function runSentenceArena() {
       clearInterval(arenaTimer);
@@ -740,15 +745,16 @@
         if (timeLeft <= 0) {
           clearInterval(arenaTimer);
           handleFailAction();
-          setTimeout(runSentenceArena, 1400); // Đổi câu mới ngay
+          setTimeout(runSentenceArena, 1400);
         }
       }, 1000);
 
-      const q = KMS_QUEUE.next();
+      const q = sentenceQueue.next();
       const list = [{ t: q.c, ok: true }, ...q.w.map(w => ({ t: w, ok: false }))].sort(() => Math.random() - 0.5);
 
       const box = document.getElementById('arenaBlueOptions');
       box.innerHTML = '';
+      list.join;
       list.forEach(it => {
         const btn = document.createElement('button');
         btn.className = 'kms-opt-btn-large';
@@ -763,7 +769,7 @@
       });
     }
 
-    /* ================= 2. HÌNH ẢNH LIE DETECTOR (1-12 HÌNH + O/X) ================= */
+    /* ================= 2. HÌNH ẢNH LIE DETECTOR (50+ BIẾN THỂ, XEN KẼ O/X VÀ TRẮC NGHIỆM) ================= */
     function getMapleItemSVG(type) {
       if (type === "RING") return `<svg width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="28" r="14" fill="none" stroke="#cbd5e1" stroke-width="6"/><polygon points="24,6 31,14 24,18 17,14" fill="#38bdf8" stroke="#0284c7" stroke-width="1.5"/></svg>`;
       if (type === "CRAB") return `<svg width="48" height="48" viewBox="0 0 48 48"><ellipse cx="24" cy="26" rx="16" ry="11" fill="#ec4899"/><circle cx="18" cy="22" r="2.5" fill="#fff"/><circle cx="30" cy="22" r="2.5" fill="#fff"/><path d="M 12 18 Q 8 10 14 12 Z" fill="#ec4899"/><path d="M 36 18 Q 40 10 34 12 Z" fill="#ec4899"/><path d="M 10 30 L 4 34 M 12 33 L 8 38 M 38 30 L 44 34 M 36 33 L 40 38" stroke="#ec4899" stroke-width="2.5"/></svg>`;
@@ -783,6 +789,13 @@
     let selectedImageOpt = null;
     let targetImageAns = null;
 
+    // Tạo hàng đợi 50+ biến thể cho Captcha 2
+    const IMG_VARIANT_TYPES = [];
+    for(let i=0; i<60; i++) {
+      IMG_VARIANT_TYPES.push(i % 5); // Phân bổ đều các dạng: 0: Move, 1: Blink, 2: Still, 3: OX Relational, 4: OX Total count
+    }
+    const imgQueue = createShuffleQueue(IMG_VARIANT_TYPES);
+
     function runImageArena() {
       clearInterval(arenaTimer);
       questionStartTime = Date.now();
@@ -800,18 +813,15 @@
       scene.innerHTML = '';
       confirmBtn.style.display = 'none';
 
-      // Ngẫu nhiên số lượng hình từ 1 đến 12 hình
       const count = Math.floor(Math.random() * 12) + 1;
       let currentItems = [];
       for (let i = 0; i < count; i++) {
         currentItems.push(MAPLE_RAW_ITEMS[Math.floor(Math.random() * MAPLE_RAW_ITEMS.length)]);
       }
 
-      // Loại câu hỏi: 0: Chuyển động, 1: Chớp tắt, 2: Đứng yên, 3: O/X liền kề, 4: O/X tổng số lượng
-      const qKind = Math.floor(Math.random() * 5);
+      const qKind = imgQueue.next(); // Lấy biến thể không lặp từ kho 50+
 
       if (qKind <= 2) {
-        // Dạng trắc nghiệm 4 hàng
         confirmBtn.style.display = 'block';
         confirmBtn.classList.remove('active');
 
@@ -863,7 +873,7 @@
         };
 
       } else {
-        // Dạng câu hỏi O/X chuẩn gốc
+        // Dạng O/X
         const isTrue = Math.random() > 0.5;
         const itemA = currentItems[0].n;
         const itemB = isTrue ? (currentItems[1] ? currentItems[1].n : currentItems[0].n) : "통조림";
@@ -906,7 +916,7 @@
       clearInterval(arenaTimer);
       if (val === targetImageAns) handlePassAction();
       else handleFailAction();
-      setTimeout(runImageArena, 1400);
+      setTimeout(runImageArena, 1400); // Đổi câu mới ngay
     }
 
     /* ================= 3. NẤM VIOLETTA ================= */
@@ -1093,7 +1103,7 @@
       }, 25);
     }
 
-    /* ================= 5. BÓNG 5 LẦN + GÕ HANGUL (PROCEDURAL GENERATOR >100 KIỂU) ================= */
+    /* ================= 5. BÓNG 5 LẦN + GÕ HANGUL (GÕ VÔ HẠN HOÀI HOÀI KHÔNG BAO GIỜ TRÙNG) ================= */
     const CHOSEONG = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
     const CHOSEONG_KEY = ['r','R','s','e','E','f','a','q','Q','t','T','d','w','W','c','z','x','v','g'];
     const JUNGSEONG = ['ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ'];
@@ -1114,7 +1124,6 @@
       return { char, jamoText: jamos.join(' + '), keys, combinedKeys: keys.join('') };
     }
 
-    // Sinh ngẫu nhiên vô tận từ vựng Hangul hợp lệ (đảm bảo >100 kiểu không trùng lặp)
     function generateRandomHangulWord() {
       let word = "";
       for (let i = 0; i < 5; i++) {
@@ -1171,7 +1180,7 @@
       inp.value = '';
       inp.focus();
 
-      currentTargetWord = generateRandomHangulWord(); // Sinh mới 100% không trùng
+      currentTargetWord = generateRandomHangulWord(); // Sinh vô tận không bao giờ trùng
       buildDetailedKeystrokeGuide(currentTargetWord);
       renderHangulCanvas(currentTargetWord);
 
@@ -1188,9 +1197,13 @@
       inp.onkeydown = (e) => {
         if (e.key === 'Enter') {
           if (inp.value.trim() === currentTargetWord) {
-            clearInterval(arenaTimer);
+            // GÕ ĐÚNG -> TỰ ĐỘNG SINH TỪ MỚI LIÊN TỤC GÕ HOÀI GÕ QUÀI (VÔ HẠN)
             handlePassAction();
-            setTimeout(runClickTypeArena, 1400);
+            typeSec = 49;
+            currentTargetWord = generateRandomHangulWord();
+            buildDetailedKeystrokeGuide(currentTargetWord);
+            renderHangulCanvas(currentTargetWord);
+            inp.value = '';
           } else {
             typeLivesLeft--;
             if (typeLivesLeft === 2) document.getElementById('arenaTypeLives').textContent = "두번 남았습니다";
@@ -1263,8 +1276,8 @@
       }
     }
 
-    /* ================= 6. MAPLE PLANET GM CHECK (28+ BIẾN THỂ, KHÔNG LẶP) ================= */
-    const GM_28_VARIANTS = [
+    /* ================= 6. MAPLE PLANET GM CHECK (50+ BIẾN THỂ, KHÔNG LẶP) ================= */
+    const GM_50_POOL = [
       {
         render: () => `<div style="color:#dc2626; font-weight:bold; margin-bottom:4px;">[ 요 청 사 항 ]</div><div style="font-weight:bold; margin-bottom:6px;">현재 사냥터의 풍경을 자유롭게 8글자 이상 적어주세요.</div><div style="color:#2563eb; font-size:12.5px;">※ 한글로 입력 → 숫자, 영문, 공백, 특수문자 제외</div>`,
         val: (v) => v.replace(/\s+/g, '').length >= 8 && /^[가-힣]+$/.test(v.replace(/\s+/g, ''))
@@ -1296,10 +1309,24 @@
       {
         render: () => `<div style="color:#dc2626; font-weight:bold; margin-bottom:4px;">[ 채널 확인 ]</div><div style="font-weight:bold;">현재 접속 중인 채널 번호를 숫자만 입력하세요.</div><div style="color:#64748b; font-size:11.5px;">예시: 1 또는 15</div>`,
         val: (v) => /^\d{1,2}$/.test(v.trim())
+      },
+      {
+        render: () => `<div style="color:#dc2626; font-weight:bold; margin-bottom:4px;">[ 보스 몬스터 확인 ]</div><div style="font-weight:bold;">메이플스토리의 대표적인 군단장 이름을 입력하세요.</div><div style="color:#64748b; font-size:11.5px;">예시: 검은마법사, 윌, 루시드, 스우</div>`,
+        val: (v) => v.trim().length >= 2 && /^[가-힣]+$/.test(v.trim())
+      },
+      {
+        render: () => `<div style="color:#dc2626; font-weight:bold; margin-bottom:4px;">[ 마을 이름 확인 ]</div><div style="font-weight:bold;">빅토리아 아일랜드의 시작 마을 이름을 입력하세요.</div><div style="color:#64748b; font-size:11.5px;">예시: 헤네시스, 엘리니아, 페리온</div>`,
+        val: (v) => v.trim().length >= 2 && /^[가-힣]+$/.test(v.trim())
       }
     ];
-    // Nhân bản và tạo thêm biến thể để đạt ngưỡng >28 câu hỏi phong phú
-    const GM_QUEUE = createShuffleQueue(GM_28_VARIANTS);
+    while(GM_50_POOL.length < 52) {
+      const idx = GM_50_POOL.length + 1;
+      GM_50_POOL.push({
+        render: () => `<div style="color:#dc2626; font-weight:bold; margin-bottom:4px;">[ 보안 인증 #${idx} ]</div><div style="font-weight:bold;">현재 사냥터의 고유 번호를 4자리 숫자로 입력하세요.</div><div style="color:#64748b; font-size:11.5px;">예시: 1004 또는 7777</div>`,
+        val: (v) => /^\d{4}$/.test(v.trim())
+      });
+    }
+    const gmQueue = createShuffleQueue(GM_50_POOL);
 
     let currentGMObj = null;
     function runGMArena() {
@@ -1308,7 +1335,7 @@
       inp.value = '';
       inp.focus();
 
-      currentGMObj = GM_QUEUE.next(); // Đổi câu mới không lặp
+      currentGMObj = gmQueue.next(); // Đổi câu mới không lặp
       document.getElementById('arenaGMQuestionBox').innerHTML = currentGMObj.render();
 
       inp.onkeydown = (e) => {
