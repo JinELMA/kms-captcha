@@ -3,1655 +3,1486 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MapleStory KMS & Worlds Captcha Training Platform</title>
+  <title>Maple KMS & Worlds Captcha Training HQ</title>
   <style>
     * { box-sizing: border-box; user-select: none; font-family: "Malgun Gothic", Dotum, -apple-system, sans-serif; }
 
     body {
       margin: 0;
       min-height: 100vh;
-      background: linear-gradient(rgba(10, 18, 30, 0.45), rgba(10, 18, 30, 0.7)),
+      background: linear-gradient(rgba(10, 18, 30, 0.7), rgba(10, 18, 30, 0.85)),
                   url('bg.jpg.jpg'), url('bg.jpg'),
                   url('https://images.alphacoders.com/279/279287.jpg') center/cover no-repeat fixed;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       color: #fff;
       padding: 16px;
+      overflow-x: hidden;
     }
 
-    /* ================= MENU CHỌN 6 CAPTCHA ================= */
-    .hub-navbar {
-      width: 780px;
-      margin-bottom: 14px;
-      background: rgba(15, 23, 42, 0.96);
-      border: 2px solid #f59e0b;
-      border-radius: 12px;
-      padding: 8px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-    }
-    .nav-btn {
-      padding: 10px 8px;
-      background: #1e293b;
-      color: #cbd5e1;
-      border: 1px solid #334155;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.15s;
-    }
-    .nav-btn.active {
-      background: #f59e0b;
-      color: #0f172a;
-      border-color: #f59e0b;
-      box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
-    }
-
-    /* MÀN HÌNH CHỜ TRƯỚC KHI BẮT ĐẦU */
-    .start-screen-card {
-      width: 780px;
-      background: rgba(24, 34, 52, 0.95);
+    /* ================= THANH ĐIỀU HÀNH TRÊN CÙNG ================= */
+    .top-studio-bar {
+      width: 100%;
+      max-width: 1100px;
+      background: rgba(15, 23, 42, 0.95);
       border: 2px solid #38bdf8;
       border-radius: 12px;
-      padding: 32px 24px;
-      text-align: center;
-      box-shadow: 0 16px 45px rgba(0,0,0,0.8);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+      margin-bottom: 16px;
+      backdrop-filter: blur(8px);
     }
-    .start-screen-card h2 { margin-top: 0; color: #facc15; font-size: 22px; }
-    .start-screen-card p { color: #cbd5e1; font-size: 14.5px; line-height: 1.6; max-width: 620px; margin: 12px auto 24px; }
-    .btn-main-start {
-      padding: 11px 36px;
-      font-size: 17px;
-      font-weight: 900;
-      color: #0f172a;
-      background: #22c55e;
-      border: none;
-      border-radius: 8px;
+    .studio-identity {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .user-tag-input {
+      background: #0f172a;
+      border: 1px solid #64748b;
+      border-radius: 6px;
+      padding: 6px 12px;
+      color: #facc15;
+      font-weight: 800;
+      font-size: 14px;
+      outline: none;
+      width: 170px;
+    }
+    .user-tag-input:focus { border-color: #38bdf8; }
+    .studio-stats-group {
+      display: flex;
+      gap: 18px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .studio-stats-group b { color: #facc15; }
+    .btn-action-tool {
+      background: #334155;
+      border: 1px solid #64748b;
+      color: #cbd5e1;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 4px 16px rgba(34, 197, 94, 0.4);
       transition: all 0.15s;
     }
-    .btn-main-start:hover { background: #16a34a; transform: scale(1.02); }
+    .btn-action-tool:hover { background: #475569; color: #fff; }
 
-    /* ================= 1. DẠNG CÂU CHỮ 15S (KMS NÂNG CAO) ================= */
-    .kms-blue-box {
-      width: 380px;
+    /* ================= 1. MÀN HÌNH SẢNH CHÍNH (LOBBY VIEW) ================= */
+    .lobby-container {
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 0.3s ease-out;
+    }
+    .lobby-banner {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98));
+      border: 2px solid #f59e0b;
+      border-radius: 14px;
+      padding: 24px 28px;
+      text-align: center;
+      margin-bottom: 20px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+    }
+    .lobby-banner h1 { margin: 0 0 8px; color: #facc15; font-size: 26px; }
+    .lobby-banner p { margin: 0; color: #94a3b8; font-size: 14.5px; }
+
+    .captcha-grid-selection {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      width: 100%;
+    }
+    .captcha-card-select {
+      background: rgba(30, 41, 59, 0.9);
+      border: 2px solid #475569;
+      border-radius: 12px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 190px;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .captcha-card-select:hover {
+      transform: translateY(-4px);
+      border-color: #f59e0b;
+      box-shadow: 0 12px 30px rgba(245, 158, 11, 0.3);
+      background: rgba(40, 53, 75, 0.95);
+    }
+    .card-badge-num {
+      position: absolute;
+      top: 12px; right: 14px;
+      background: #0f172a;
+      border: 1px solid #64748b;
+      border-radius: 20px;
+      padding: 2px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #38bdf8;
+    }
+    .card-title { font-size: 17px; font-weight: 900; color: #ffffff; margin-bottom: 6px; }
+    .card-desc { font-size: 13px; color: #94a3b8; line-height: 1.5; margin-bottom: 12px; }
+    .btn-enter-mode {
+      width: 100%;
+      padding: 9px;
+      background: #2563eb;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      font-weight: 800;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .captcha-card-select:hover .btn-enter-mode { background: #f59e0b; color: #0f172a; }
+
+    /* ================= 2. MÀN HÌNH ĐẤU TRƯỜNG BIỆT LẬP (DEDICATED ARENA) ================= */
+    .arena-container {
+      width: 100%;
+      max-width: 1100px;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      animation: zoomIn 0.25s ease-out;
+    }
+    .arena-top-nav {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .btn-back-lobby {
+      padding: 8px 18px;
+      background: #dc2626;
+      border: 1px solid #ef4444;
+      border-radius: 6px;
+      color: #fff;
+      font-weight: 800;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-back-lobby:hover { background: #b91c1c; }
+    .arena-stage-title {
+      font-size: 20px;
+      font-weight: 900;
+      color: #facc15;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    }
+
+    /* KHU VỰC NHÂN VẬT THOẠI & CHÂM BIẾM (ANIMATED TALKING NPC) */
+    .npc-speaker-bar {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.95);
+      border: 2px solid #eab308;
+      border-radius: 12px;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+    }
+    .npc-portrait-circle {
+      width: 72px;
+      height: 72px;
+      background: #1e293b;
+      border: 2px solid #facc15;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: 0 0 14px rgba(250, 204, 21, 0.4);
+    }
+    .talking-avatar-svg {
+      animation: npcBobbing 0.6s infinite alternate ease-in-out;
+    }
+    @keyframes npcBobbing {
+      from { transform: translateY(0); }
+      to { transform: translateY(-4px); }
+    }
+    .npc-mouth {
+      animation: mouthTalk 0.25s infinite alternate;
+      transform-origin: 42px 49px;
+    }
+    @keyframes mouthTalk {
+      0% { transform: scaleY(0.4); }
+      100% { transform: scaleY(1.4); }
+    }
+    .npc-dialogue-bubble {
+      flex: 1;
+      background: #1e293b;
+      border: 1.5px solid #64748b;
+      border-radius: 10px;
+      padding: 10px 16px;
+      position: relative;
+    }
+    .npc-dialogue-bubble::before {
+      content: '';
+      position: absolute;
+      left: -9px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-right: 9px solid #64748b;
+    }
+    .npc-speaker-name {
+      font-size: 12px;
+      font-weight: 800;
+      color: #38bdf8;
+      margin-bottom: 3px;
+    }
+    .npc-speech-content {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #f8fafc;
+      line-height: 1.4;
+      transition: color 0.2s;
+    }
+    .npc-speech-content.roast {
+      color: #f87171 !important;
+      animation: shakeText 0.35s ease-in-out;
+    }
+    .npc-speech-content.cheer {
+      color: #4ade80 !important;
+    }
+    @keyframes shakeText {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    /* ================= BỘ KHUNG TO KHỔNG LỒ CỦA 6 CAPTCHA (LARGE SCALE) ================= */
+    .arena-display-workspace {
+      width: 100%;
+      min-height: 480px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* 1. CÂU CHỮ 15S KHỔNG LỒ */
+    .kms-blue-box-large {
+      width: 520px;
       background: #18488e;
-      border: 3px solid #2b67be;
-      border-radius: 8px;
-      padding: 20px 16px 22px;
-      box-shadow: 0 14px 40px rgba(0,0,0,0.8);
+      border: 4px solid #2b67be;
+      border-radius: 12px;
+      padding: 24px 20px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.85);
       display: flex;
       flex-direction: column;
       align-items: center;
     }
-    .kms-timer-yellow {
+    .kms-blue-box-large .kms-timer-yellow {
       font-family: 'Consolas', monospace;
-      font-size: 48px;
-      font-weight: 800;
-      color: #ffe600;
-      text-shadow: 0 0 10px rgba(255, 230, 0, 0.6);
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-    .kms-title {
-      font-size: 14.5px;
-      color: #ffffff;
-      margin-bottom: 14px;
-      font-weight: 600;
-    }
-    .kms-options-group { width: 100%; display: flex; flex-direction: column; gap: 7px; }
-    .kms-opt-btn {
-      width: 100%; min-height: 42px;
-      background-color: #bad3eb;
-      border: 1px solid #7c9fbe;
-      border-radius: 4px;
-      color: #1a222a;
-      font-size: 13.5px;
-      font-weight: 700;
-      display: flex; align-items: center;
-      padding: 6px 12px;
-      cursor: pointer;
-      text-align: left;
-    }
-    .kms-opt-btn:hover { background-color: #d1e5f8; }
-    .kms-opt-btn.correct { background-color: #4ade80 !important; border-color: #16a34a !important; color: #052e16 !important; }
-    .kms-opt-btn.wrong { background-color: #f87171 !important; border-color: #dc2626 !important; color: #fff !important; }
-
-    /* ================= 2. DẠNG HÌNH ẢNH LIE DETECTOR (CHUẨN ẢNH) ================= */
-    .image-detector-card {
-      width: 780px;
-      background: #ffffff;
-      border: 2px solid #cbd5e1;
-      border-radius: 12px;
-      padding: 20px 24px;
-      box-shadow: 0 18px 45px rgba(0,0,0,0.6);
-      color: #333;
-    }
-    .img-top-row {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      margin-bottom: 8px;
-    }
-    .clock-indicator {
-      display: flex; align-items: center; gap: 6px;
-      color: #1e293b; font-size: 22px; font-weight: 800; font-family: 'Consolas', monospace;
-    }
-    .clock-circle-green {
-      width: 20px; height: 20px; border: 3px solid #7cb342; border-radius: 50%; position: relative;
-    }
-    .clock-circle-green::after {
-      content: ''; position: absolute; width: 2px; height: 6px; background: #7cb342; top: 2px; left: 6px;
-    }
-    .scene-dark-box {
-      width: 100%;
-      height: 180px;
-      background: #1e242d;
-      border-radius: 8px;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: space-evenly;
-      padding: 10px;
-      margin-bottom: 14px;
-      box-shadow: inset 0 0 14px rgba(0,0,0,0.8);
-    }
-    .game-sprite-item {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 48px;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6));
-    }
-
-    @keyframes moveHorizontal { 0%, 100% { transform: translateX(-18px); } 50% { transform: translateX(18px); } }
-    @keyframes moveVertical { 0%, 100% { transform: translateY(-14px); } 50% { transform: translateY(14px); } }
-    @keyframes blinkVisibility { 0%, 100% { opacity: 1; } 50% { opacity: 0.05; } }
-    @keyframes scalePulse { 0%, 100% { transform: scale(0.8); } 50% { transform: scale(1.25); } }
-
-    .anim-move-h { animation: moveHorizontal var(--speed, 1.4s) ease-in-out infinite alternate; }
-    .anim-move-v { animation: moveVertical var(--speed, 1.3s) ease-in-out infinite alternate; }
-    .anim-blink { animation: blinkVisibility var(--speed, 0.65s) steps(2, start) infinite; }
-    .anim-pulse { animation: scalePulse var(--speed, 1.1s) ease-in-out infinite alternate; }
-
-    .question-prompt-row {
-      font-size: 16px;
-      font-weight: 700;
-      color: #1e293b;
-      margin-bottom: 14px;
-      line-height: 1.4;
-    }
-    .question-prompt-row .q-green-tag {
-      color: #7cb342;
+      font-size: 58px;
       font-weight: 900;
-      margin-right: 6px;
+      color: #ffe600;
+      text-shadow: 0 0 14px rgba(255, 230, 0, 0.7);
+      margin-bottom: 10px;
     }
-
-    .choice-rows-container {
+    .kms-blue-box-large .kms-title {
+      font-size: 16px;
+      color: #ffffff;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+    .kms-options-group-large {
+      width: 100%;
       display: flex;
       flex-direction: column;
       gap: 9px;
-      margin-bottom: 18px;
     }
-    .choice-row-item {
+    .kms-opt-btn-large {
+      width: 100%;
+      min-height: 48px;
+      background-color: #bad3eb;
+      border: 1.5px solid #7c9fbe;
+      border-radius: 6px;
+      color: #1a222a;
+      font-size: 15px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      padding: 8px 14px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.15s;
+    }
+    .kms-opt-btn-large:hover { background-color: #d1e5f8; transform: translateX(4px); }
+    .kms-opt-btn-large.correct { background-color: #4ade80 !important; border-color: #16a34a !important; color: #052e16 !important; }
+    .kms-opt-btn-large.wrong { background-color: #f87171 !important; border-color: #dc2626 !important; color: #fff !important; }
+
+    /* 2. HÌNH ẢNH LIE DETECTOR KHỔNG LỒ (880px) */
+    .image-detector-large {
+      width: 900px;
+      background: #ffffff;
+      border: 3px solid #cbd5e1;
+      border-radius: 14px;
+      padding: 24px 28px;
+      box-shadow: 0 22px 55px rgba(0,0,0,0.85);
+      color: #333;
+    }
+    .img-top-row-large {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .clock-indicator-large {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #1e293b;
+      font-size: 26px;
+      font-weight: 900;
+      font-family: 'Consolas', monospace;
+    }
+    .scene-dark-box-large {
+      width: 100%;
+      height: 230px;
+      background: #1e242d;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      padding: 15px;
+      margin-bottom: 18px;
+      box-shadow: inset 0 0 18px rgba(0,0,0,0.85);
+    }
+    .game-sprite-large {
+      font-size: 64px;
+      display: inline-flex;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,0.7));
+    }
+    .question-prompt-large {
+      font-size: 18px;
+      font-weight: 800;
+      color: #1e293b;
+      margin-bottom: 16px;
+    }
+    .choice-row-large {
       display: flex;
       align-items: center;
       background: #ffffff;
-      border: 1.5px solid #cbd5e1;
+      border: 2px solid #cbd5e1;
       border-radius: 8px;
-      padding: 10px 16px;
+      padding: 12px 18px;
+      margin-bottom: 10px;
       cursor: pointer;
-      font-size: 15px;
-      font-weight: 600;
-      color: #334155;
-      transition: all 0.15s;
-    }
-    .choice-row-item:hover { background: #f8fafc; border-color: #94a3b8; }
-    .choice-row-item.selected {
-      border-color: #7cb342;
-      background: #f4faed;
-      color: #1e293b;
+      font-size: 16px;
       font-weight: 700;
+      color: #334155;
     }
-    .choice-num-badge {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: #b0bec5;
-      color: #ffffff;
-      font-size: 13px;
-      font-weight: bold;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 14px;
-    }
-    .choice-row-item.selected .choice-num-badge {
-      background: #7cb342;
-    }
-    .btn-image-confirm {
-      width: 140px;
-      height: 40px;
+    .choice-row-large:hover { background: #f8fafc; border-color: #94a3b8; }
+    .choice-row-large.selected { border-color: #7cb342; background: #f4faed; color: #1e293b; }
+    .btn-image-confirm-large {
+      width: 160px;
+      height: 46px;
       background: #b0bec5;
       color: #ffffff;
       border: none;
       border-radius: 6px;
       font-weight: 800;
-      font-size: 15px;
-      margin: 0 auto;
+      font-size: 16px;
+      margin: 16px auto 0;
       display: block;
       cursor: not-allowed;
-      transition: background 0.15s;
     }
-    .btn-image-confirm.active {
-      background: #94a3b8;
-      cursor: pointer;
-    }
-    .btn-image-confirm.active:hover {
-      background: #7cb342;
-    }
+    .btn-image-confirm-large.active { background: #7cb342; cursor: pointer; }
 
-    /* ================= 3. MINIGAME VIOLETTA ================= */
-    .notice-card {
-      width: 480px; background: #222631; border: 2px solid #556073; border-radius: 8px;
-      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.9); overflow: hidden; display: block;
+    /* 3. NẤM VIOLETTA KHỔNG LỒ (880px) */
+    .stage-card-large {
+      width: 880px;
+      background: #171a22;
+      border: 4px solid #525f75;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.95);
     }
-    .notice-header {
-      background: #171921; padding: 10px 16px; font-size: 14.5px; font-weight: bold;
-      color: #ffffff; display: flex; align-items: center; gap: 8px; border-bottom: 2px solid #333a48;
-    }
-    .notice-timer-yellow {
-      color: #facc15; font-size: 24px; font-family: 'Consolas', monospace; font-weight: 900;
-    }
-    .notice-body { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
-    .notice-blue-box {
+    .stage-top-banner-large {
       background: linear-gradient(180deg, #0284c7 0%, #0369a1 100%);
-      border: 1px solid #38bdf8; border-radius: 6px; padding: 12px 14px;
-      font-size: 13.5px; line-height: 1.6; color: #ffffff; font-weight: bold;
+      padding: 12px 18px;
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 800;
+      text-align: center;
     }
-    .notice-blue-box .hl { color: #fef08a; }
-    .notice-dialog-box {
-      background: #313745; border: 1px solid #475266; border-radius: 6px;
-      padding: 14px 16px; display: flex; align-items: center; justify-content: space-between;
+    .stage-area-large {
+      width: 100%;
+      height: 310px;
+      background: #252a36;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 4px solid #0f1117;
     }
-    .notice-dialog-text { font-size: 13px; color: #f8fafc; line-height: 1.6; font-weight: 600; }
-    .notice-dialog-text .warn { color: #facc15; font-weight: bold; }
-    .btn-start-play {
-      margin: 4px auto 0; padding: 8px 30px;
-      background: linear-gradient(180deg, #f97316 0%, #ea580c 100%);
-      border: 1px solid #fdba74; border-radius: 4px; color: #ffffff;
-      font-weight: bold; cursor: pointer; font-size: 14px;
+    .curtain-l-large, .curtain-r-large {
+      position: absolute; top: 0; bottom: 0; width: 95px; z-index: 25;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
     }
-
-    .stage-card {
-      width: 650px; background: #171a22; border: 3px solid #525f75;
-      border-radius: 10px; overflow: hidden; box-shadow: 0 22px 60px rgba(0, 0, 0, 0.95); display: none;
+    .curtain-l-large {
+      left: 0; background: repeating-linear-gradient(90deg, #7f1d1d, #991b1b 18px, #b91c1c 28px, #5c0f0f 45px);
+      border-right: 4px solid #3b0707;
     }
-    .stage-top-banner {
-      background: linear-gradient(180deg, #0284c7 0%, #0369a1 100%);
-      padding: 9px 14px; color: #ffffff; font-size: 14px; font-weight: 700;
-      text-align: center; border-bottom: 2px solid #075985;
+    .curtain-r-large {
+      right: 0; background: repeating-linear-gradient(90deg, #5c0f0f, #b91c1c 17px, #991b1b 27px, #7f1d1d 45px);
+      border-left: 4px solid #3b0707;
     }
-    .stage-area {
-      width: 100%; height: 250px; background: #252a36; position: relative;
-      overflow: hidden; border-bottom: 3px solid #0f1117;
-    }
-    .stage-truss {
-      position: absolute; top: 0; left: 0; right: 0; height: 48px;
-      background: repeating-linear-gradient(45deg, #1e232d, #1e232d 10px, #2c3342 10px, #2c3342 20px);
-      border-bottom: 2px solid #11141a; opacity: 0.85;
-    }
-    .curtain-l, .curtain-r {
-      position: absolute; top: 0; bottom: 0; width: 70px; z-index: 25;
-      box-shadow: inset 0 0 15px rgba(0,0,0,0.7);
-    }
-    .curtain-l {
-      left: 0; background: repeating-linear-gradient(90deg, #7f1d1d, #991b1b 14px, #b91c1c 22px, #5c0f0f 35px);
-      border-right: 3px solid #3b0707;
-    }
-    .curtain-r {
-      right: 0; background: repeating-linear-gradient(90deg, #5c0f0f, #b91c1c 13px, #991b1b 21px, #7f1d1d 35px);
-      border-left: 3px solid #3b0707;
-    }
-    .stage-floor-rail {
-      position: absolute; bottom: 0; left: 0; right: 0; height: 52px;
+    .stage-floor-rail-large {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 65px;
       background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 75%, #94a3b8 100%);
-      border-top: 3px solid #cbd5e1; box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
+      border-top: 4px solid #cbd5e1;
     }
-    .shroom-lane {
-      position: absolute; bottom: 24px; width: 95px; height: 115px;
+    .shroom-lane-large {
+      position: absolute; bottom: 30px; width: 120px; height: 140px;
       display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
       transition: transform 0.85s cubic-bezier(0.45, 0.05, 0.55, 0.95); z-index: 10;
     }
-    .red-arrow-target {
-      position: absolute; top: -26px; font-size: 30px; color: #ef4444;
-      animation: bounceArrow 0.45s infinite alternate; display: none;
+    .stage-buttons-row-large {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+      padding: 20px 32px 24px; background: #151820;
     }
-    @keyframes bounceArrow { from { transform: translateY(0); } to { transform: translateY(-8px); } }
-
-    .stage-buttons-row {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
-      padding: 16px 24px 20px; background: #151820;
+    .num-btn-large {
+      height: 58px; background: linear-gradient(180deg, #475569 0%, #334155 100%);
+      color: #94a3b8; border: 2px solid #1e293b; border-radius: 8px;
+      font-size: 26px; font-weight: 900; cursor: not-allowed;
     }
-    .num-btn {
-      height: 48px; background: linear-gradient(180deg, #475569 0%, #334155 100%);
-      color: #94a3b8; border: 1px solid #1e293b; border-radius: 7px;
-      font-size: 21px; font-weight: 900; cursor: not-allowed;
-    }
-    .num-btn.ready {
+    .num-btn-large.ready {
       background: linear-gradient(180deg, #64748b 0%, #475569 100%);
       color: #ffffff; border-color: #64748b; cursor: pointer;
     }
-    .num-btn.ready:hover {
+    .num-btn-large.ready:hover {
       background: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%); border-color: #38bdf8;
     }
 
-    /* ================= 4. BÁM HÌNH TÀNG HÌNH ================= */
-    .ld-window {
-      width: 530px; background: #ffffff; border: 3px solid #334155; border-radius: 8px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9); overflow: hidden; display: block;
+    /* 4. BÁM ĐUỔI HÌNH TÀNG HÌNH KHỔNG LỒ (880px x 450px) */
+    .game-window-large {
+      width: 880px; background: #1e2430; border: 4px solid #475569;
+      border-radius: 12px; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.95); overflow: hidden;
     }
-    .ld-titlebar {
-      background: #1e2530; padding: 6px 14px; font-size: 13px; font-weight: 800;
-      color: #facc15; border-bottom: 2px solid #0f172a;
-    }
-    .ld-body-upper { padding: 22px 20px 16px; text-align: center; color: #1e293b; }
-    .ld-main-countdown { font-size: 17.5px; font-weight: 800; }
-    .ld-main-countdown .sec-highlight { font-size: 26px; color: #0284c7; font-family: 'Consolas', monospace; font-weight: 900; }
-    .ld-sub-warning { margin-top: 5px; font-size: 13.5px; color: #64748b; font-weight: 600; }
-    .ld-body-lower { background: #e2e8f0; border-top: 1px solid #cbd5e1; padding: 16px 20px; text-align: center; color: #334155; }
-    .ld-instructions { font-size: 13px; line-height: 1.6; font-weight: 600; margin-bottom: 12px; }
-    .preview-steps-row { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 14px; }
-    .preview-card {
-      width: 90px; height: 90px; background: radial-gradient(circle, #eab308 15%, #b45309 90%);
-      border: 2px solid #78350f; border-radius: 6px; position: relative;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .btn-start-track {
-      padding: 9px 32px; background: linear-gradient(180deg, #f97316 0%, #ea580c 100%);
-      border: 1px solid #c2410c; border-radius: 4px; color: #ffffff; font-weight: 800; font-size: 14px; cursor: pointer;
-    }
-
-    .game-window {
-      width: 660px; background: #1e2430; border: 3px solid #475569;
-      border-radius: 10px; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.95); overflow: hidden; display: none;
-    }
-    .camo-arena {
-      width: 100%; height: 380px; background-color: #b87a14;
+    .camo-arena-large {
+      width: 100%; height: 440px; background-color: #b87a14;
       background-image: 
         radial-gradient(circle at 20% 30%, #fcd34d 0%, #d97706 35%, transparent 60%),
         radial-gradient(circle at 75% 25%, #fbbf24 0%, #b45309 40%, transparent 65%),
         radial-gradient(circle at 40% 70%, #fde68a 0%, #92400e 45%, transparent 60%),
         radial-gradient(circle at 85% 75%, #f59e0b 0%, #78350f 45%, transparent 65%);
-      background-size: 160px 160px; position: relative; overflow: hidden; cursor: crosshair;
+      background-size: 200px 200px; position: relative; overflow: hidden; cursor: crosshair;
     }
-    .camo-bubble {
-      position: absolute; border: 3px solid rgba(254, 240, 138, 0.45); border-radius: 50%;
-      box-shadow: inset 0 0 14px rgba(69, 26, 3, 0.6); pointer-events: none;
-    }
-    .tracking-orb {
-      position: absolute; width: 62px; height: 62px; border-radius: 50%;
-      background: #ffffff; box-shadow: 0 0 16px rgba(255, 255, 255, 0.85);
+    .tracking-orb-large {
+      position: absolute; width: 78px; height: 78px; border-radius: 50%;
+      background: #ffffff; box-shadow: 0 0 22px rgba(255, 255, 255, 0.9);
       display: flex; align-items: center; justify-content: center; transition: opacity 0.3s; z-index: 20;
     }
-    .floating-timer-cyan {
-      position: absolute; top: -38px; font-family: 'Consolas', monospace;
-      font-size: 34px; font-weight: 900; color: #67e8f9; text-shadow: 0 0 8px #0891b2, 0 2px 4px #000; pointer-events: none;
-    }
-    .bottom-game-prompt {
-      position: absolute; bottom: 12px; left: 0; right: 0; text-align: center;
-      font-size: 14.5px; font-weight: 900; color: #fef08a; text-shadow: 0 2px 4px #000; pointer-events: none; z-index: 30;
-    }
-    .progress-track-wrapper { background: #111827; padding: 12px 20px 14px; border-top: 2px solid #334155; }
-    .progress-bar-bg { width: 100%; height: 18px; background: #1e293b; border-radius: 9px; overflow: hidden; border: 1px solid #475569; }
-    .progress-bar-fill { width: 0%; height: 100%; background: linear-gradient(90deg, #22c55e 0%, #4ade80 100%); transition: width 0.08s linear; }
 
-    /* ================= 5. BÓNG 5 LẦN + GÕ CHỮ + VỆT MỜ CHỐNG OCR ================= */
-    .bubble-stage-card {
-      width: 620px; height: 420px; background: radial-gradient(circle at center, #15803d 0%, #064e3b 40%, #091e17 100%);
-      border: 3px solid #4ade80; border-radius: 12px; position: relative; overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95); display: flex; flex-direction: column; justify-content: space-between;
+    /* 5. BÓNG 5 LẦN + GÕ HANGUL KHỔNG LỒ */
+    .bubble-stage-large {
+      width: 880px; height: 480px; background: radial-gradient(circle at center, #15803d 0%, #064e3b 40%, #091e17 100%);
+      border: 4px solid #4ade80; border-radius: 14px; position: relative; overflow: hidden;
+      display: flex; flex-direction: column; justify-content: space-between;
     }
-    .green-blast-bg {
-      position: absolute; top: -30px; left: -30px; right: -30px; bottom: -30px;
-      background: radial-gradient(ellipse at 50% 50%, rgba(163, 230, 53, 0.45) 0%, rgba(34, 197, 94, 0.25) 45%, transparent 75%);
-      animation: rotateBurst 12s linear infinite; pointer-events: none;
+    .type-stage-large {
+      width: 720px; background: #3a2228; border: 4px solid #5a3a42; border-radius: 12px;
+      padding: 26px 28px; box-shadow: 0 24px 60px rgba(0,0,0,0.95);
     }
-    @keyframes rotateBurst { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    .distract-text-layer {
-      position: absolute; width: 100%; height: 100%; pointer-events: none; font-family: 'Batang', serif;
-      font-weight: 900; color: rgba(250, 204, 21, 0.7); text-shadow: 0 0 6px #854d0e; font-size: 20px; line-height: 1.5; padding: 30px;
+    .hangul-canvas-box-large {
+      width: 100%; height: 110px; background: #ffffff; border: 2px solid #1e293b;
+      border-radius: 6px; overflow: hidden; margin-bottom: 18px; position: relative;
     }
-    .bubble-hud {
-      padding: 12px 18px; background: rgba(0,0,0,0.6); display: flex; justify-content: space-between;
-      align-items: center; z-index: 20; border-bottom: 2px solid rgba(74, 222, 128, 0.4);
-    }
-    .bubble-count-text { font-size: 15px; font-weight: 800; color: #fef08a; }
-    .bubble-count-text b { font-size: 19px; color: #4ade80; }
-    .bubble-target-ball {
-      position: absolute; width: 72px; height: 72px; border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #fef08a 0%, #84cc16 55%, #15803d 100%);
-      border: 3px solid #ecfccb; box-shadow: 0 0 25px #bef264; cursor: pointer;
-      display: flex; align-items: center; justify-content: center; font-size: 32px; z-index: 30;
-    }
-
-    .type-stage-card {
-      width: 550px; background: #3a2228; border: 3px solid #5a3a42; border-radius: 10px;
-      padding: 22px 20px 20px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95); position: relative; display: none;
-      background-image: 
-        repeating-linear-gradient(0deg, rgba(0,0,0,0.3) 0px, rgba(0,0,0,0.3) 2px, transparent 2px, transparent 18px),
-        repeating-linear-gradient(90deg, rgba(0,0,0,0.2) 0px, rgba(0,0,0,0.2) 2px, transparent 2px, transparent 36px);
-    }
-    .cyan-clock-display {
-      font-family: 'Consolas', monospace; font-size: 50px; font-weight: 900;
-      color: #38bdf8; text-shadow: 0 0 12px rgba(56, 189, 248, 0.7); text-align: center; margin-bottom: 12px;
-    }
-    .korean-prompt-text {
-      text-align: center; color: #7dd3fc; font-size: 14.5px; font-weight: 700; font-style: italic; margin-bottom: 14px;
-    }
-
-    /* KHUNG CHỮ CÓ VỆT MỜ CHẠY QUA LẠI CHỐNG OCR */
-    .hangul-canvas-box {
-      width: 100%; height: 95px; background: #ffffff; border: 2px solid #1e293b;
-      border-radius: 4px; overflow: hidden; margin-bottom: 14px; box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-      position: relative;
-    }
-    #hangulCanvas { width: 100%; height: 100%; display: block; }
-    
-    /* Dải sáng mờ trượt qua lại */
-    .moving-blur-strip {
-      position: absolute;
-      top: 0; bottom: 0;
-      width: 85px;
+    .moving-blur-strip-large {
+      position: absolute; top: 0; bottom: 0; width: 110px;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45), rgba(255,255,255,0.7), rgba(255,255,255,0.45), transparent);
-      backdrop-filter: blur(3.5px);
-      animation: sweepBlurMotion 2.4s ease-in-out infinite alternate;
-      pointer-events: none;
-      box-shadow: 0 0 16px rgba(255,255,255,0.6);
-    }
-    @keyframes sweepBlurMotion {
-      0% { left: -90px; transform: skewX(-16deg); }
-      100% { left: calc(100% + 20px); transform: skewX(-16deg); }
-    }
-
-    /* Đốm nhiễu tròn mờ lơ lửng */
-    .floating-blur-lens {
-      position: absolute;
-      width: 60px; height: 60px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.35) 0%, rgba(200,225,255,0.1) 70%, transparent 100%);
-      backdrop-filter: blur(2.5px);
-      animation: floatLens 4.5s ease-in-out infinite alternate;
+      backdrop-filter: blur(4px);
+      animation: sweepBlurMotionLarge 2.2s ease-in-out infinite alternate;
       pointer-events: none;
     }
-    @keyframes floatLens {
-      0% { top: 5px; left: 8%; }
-      50% { top: 28px; left: 68%; }
-      100% { top: 12px; left: 35%; }
+    @keyframes sweepBlurMotionLarge {
+      0% { left: -120px; transform: skewX(-16deg); }
+      100% { left: calc(100% + 40px); transform: skewX(-16deg); }
     }
 
-    .hangul-input-bar {
-      width: 100%; height: 42px; background: #ffffff; border: 2px solid #0f172a;
-      border-radius: 4px; padding: 6px 12px; font-size: 17px; font-weight: bold; color: #000; outline: none; margin-bottom: 12px;
-    }
-    .trainer-guide-panel {
-      background: #1e293b; border: 1.5px solid #38bdf8; border-radius: 8px; padding: 12px 14px;
-    }
-    .trainer-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-    .trainer-title { font-size: 13px; font-weight: 800; color: #facc15; }
-    .btn-toggle-hint {
-      background: #334155; border: 1px solid #64748b; color: #cbd5e1; padding: 3px 8px; border-radius: 4px; font-size: 11px; cursor: pointer;
-    }
-    .syllable-hints-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 10px; }
-    .syllable-col { background: #0f172a; border: 1px solid #475569; border-radius: 6px; padding: 6px 4px; text-align: center; }
-    .hangul-char-badge { font-size: 18px; font-weight: 900; color: #38bdf8; display: block; margin-bottom: 4px; }
-    .jamo-split-text { font-size: 11px; color: #94a3b8; display: block; margin-bottom: 6px; }
-    kbd {
-      background: #e2e8f0; color: #0f172a; border: 1px solid #94a3b8; border-bottom: 2px solid #64748b;
-      border-radius: 3px; font-family: 'Consolas', monospace; font-size: 12px; font-weight: 900; padding: 1px 4px; display: inline-block;
-    }
-    kbd.shift-key { background: #fde047; border-color: #ca8a04; }
-    .full-string-guide {
-      background: #090d16; border: 1px dashed #64748b; border-radius: 4px; padding: 6px 10px; font-size: 12.5px;
-      color: #cbd5e1; display: flex; align-items: center; justify-content: space-between;
-    }
-    .full-keys-code { font-family: 'Consolas', monospace; font-size: 14.5px; font-weight: 900; color: #4ade80; letter-spacing: 2px; }
-
-    /* ================= 6. MAPLE PLANET GM CHECK ================= */
-    .gm-outer-wrap { display: flex; flex-direction: column; align-items: center; }
-    .gm-window-frame {
-      position: relative; width: 700px; height: 318px;
+    /* 6. MAPLE PLANET GM CHECK KHỔNG LỒ (880px) */
+    .gm-window-large {
+      position: relative; width: 880px; height: 400px;
       background-color: #d1d5db; background-image: url('gm_box.png'); background-size: 100% 100%;
-      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.9); border-radius: 4px; overflow: hidden;
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.95); border-radius: 6px; overflow: hidden;
     }
-    .question-overlay-panel {
+    .gm-question-large {
       position: absolute; top: 8.5%; left: 28.5%; width: 68.5%; height: 59.5%;
-      background: #ffffff; color: #000000; padding: 8px 12px; font-size: 12.5px; line-height: 1.5;
-      font-weight: 500; display: flex; flex-direction: column; justify-content: flex-start; overflow-y: auto;
+      background: #ffffff; color: #000000; padding: 12px 16px; font-size: 15px; line-height: 1.6;
+      display: flex; flex-direction: column; justify-content: flex-start; overflow-y: auto;
     }
-    .vertical-grid-wrap {
-      display: flex; gap: 16px; font-size: 13.5px; font-weight: bold; letter-spacing: 2px; padding: 4px 6px; color: #000;
+    .gm-input-large {
+      position: absolute; top: 69.6%; left: 30.6%; width: 48.8%; height: 8.2%;
+      background: #fff; border: 1.5px solid #334155; padding: 4px 10px; font-size: 15px; font-weight: bold; outline: none;
     }
-    .vert-col { display: flex; flex-direction: column; text-align: center; }
-    .input-overlay-field {
-      position: absolute; top: 69.6%; left: 30.6%; width: 48.8%; height: 7.8%;
-      background: transparent; border: 1px solid transparent; padding: 2px 6px; font-size: 13px; font-weight: bold; color: #000; outline: none;
+    .gm-confirm-large {
+      position: absolute; top: 89.2%; left: 89.7%; width: 8.9%; height: 8.2%;
+      background: rgba(249, 115, 22, 0.1); border: 1px solid transparent; cursor: pointer; border-radius: 3px;
     }
-    .input-overlay-field:focus { background: rgba(255, 255, 255, 0.9); border-color: #3b82f6; }
-    .btn-overlay-confirm {
-      position: absolute; top: 89.2%; left: 89.7%; width: 8.9%; height: 7.8%;
-      background: rgba(255, 255, 255, 0); border: 1px solid transparent; cursor: pointer; border-radius: 2px;
-    }
-    .btn-overlay-confirm:hover { background: rgba(249, 115, 22, 0.25); border-color: #fb923c; }
-    .helper-card {
-      width: 700px; margin-top: 14px; background: #1e293b; border: 1.5px solid #38bdf8;
-      border-radius: 6px; padding: 12px 16px; font-size: 13px; color: #cbd5e1;
-    }
-    .helper-title { color: #facc15; font-weight: bold; margin-bottom: 6px; }
-    .helper-sample {
-      margin-top: 6px; background: #0f172a; border: 1px dashed #475569; border-radius: 4px;
-      padding: 6px 10px; font-family: 'Consolas', monospace; color: #4ade80; font-weight: bold;
-    }
+    .gm-confirm-large:hover { background: rgba(249, 115, 22, 0.4); }
 
-    /* BẢNG ĐIỂM DƯỚI CÙNG */
-    .score-badge {
-      margin-top: 14px; padding: 7px 24px; border-radius: 25px;
-      background: rgba(15, 23, 42, 0.9); font-size: 14.5px; font-weight: bold; border: 1px solid #475569;
+    /* ================= NGĂN KÉO BÍ KÍP & BÀN PHÍM (CHEAT-SHEET DRAWER) ================= */
+    .drawer-overlay {
+      position: fixed; top: 0; right: -420px; width: 400px; height: 100vh;
+      background: rgba(15, 23, 42, 0.97); border-left: 2px solid #38bdf8;
+      box-shadow: -10px 0 30px rgba(0,0,0,0.8); transition: right 0.3s ease;
+      z-index: 100; padding: 20px; overflow-y: auto; backdrop-filter: blur(10px);
     }
-    .score-badge b { color: #facc15; }
+    .drawer-overlay.open { right: 0; }
+    .drawer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .drawer-title { font-size: 16px; font-weight: 900; color: #facc15; }
+    .btn-close-drawer { background: none; border: none; color: #94a3b8; font-size: 22px; cursor: pointer; }
+
+    .cheat-card {
+      background: #1e293b; border: 1px solid #475569; border-radius: 8px;
+      padding: 12px 14px; margin-bottom: 14px;
+    }
+    .cheat-card-title { font-size: 13.5px; font-weight: 800; color: #38bdf8; margin-bottom: 6px; }
+    .cheat-card-body { font-size: 12.5px; color: #cbd5e1; line-height: 1.5; }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes zoomIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
   </style>
 </head>
 <body>
 
-  <!-- Menu chọn 6 Captcha -->
-  <div class="hub-navbar">
-    <button class="nav-btn active" onclick="selectTab('SENTENCE')">📝 1. Chữ 15s (KMS)</button>
-    <button class="nav-btn" onclick="selectTab('IMAGE')">🔍 2. Ảnh Lie Detector</button>
-    <button class="nav-btn" onclick="selectTab('VIOLETTA')">🍄 3. Nấm Violetta</button>
-    <button class="nav-btn" onclick="selectTab('TRACK')">🎯 4. Bám hình mờ</button>
-    <button class="nav-btn" onclick="selectTab('CLICK_TYPE')">🫧 5. Bóng + Gõ chữ</button>
-    <button class="nav-btn" onclick="selectTab('GM_CHECK')">👨‍💼 6. Maple GM Check</button>
+  <!-- THANH ĐIỀU HÀNH TRÊN CÙNG -->
+  <div class="top-studio-bar">
+    <div class="studio-identity">
+      <span>👤 Nhân viên:</span>
+      <input type="text" class="user-tag-input" id="staffTag" value="Đạt_Maple01" title="Nhập tên nhân viên / mã máy">
+    </div>
+    <div class="studio-stats-group">
+      <span>Đúng: <b id="statScore">0</b></span>
+      <span>Chuỗi cao nhất: <b id="statStreak">0</b></span>
+      <span>Tốc độ: <b id="statReaction">0ms</b></span>
+    </div>
+    <div style="display: flex; gap: 8px;">
+      <button class="btn-action-tool" onclick="toggleCheatDrawer()">📖 Bí kíp (Cheat-Sheet)</button>
+      <button class="btn-action-tool" onclick="toggleMuteSound()" id="soundToggleBtn">🔊 Âm thanh: BẬT</button>
+    </div>
   </div>
 
-  <!-- MÀN HÌNH CHỜ TRƯỚC KHI BẮT ĐẦU -->
-  <div class="start-screen-card" id="startScreen">
-    <h2 id="startTitle">1. CÂU CHỮ TIẾNG HÀN 15 GIÂY</h2>
-    <p id="startDesc">Chọn đúng câu tiếng Hàn có nghĩa logic chuẩn xác trong 5 đáp án trước khi hết 15 giây. Đã nâng cấp các câu bẫy khó.</p>
-    <button class="btn-main-start" onclick="launchGame()">▶ BẮT ĐẦU KIỂM TRA (시작)</button>
-  </div>
+  <!-- 1. MÀN HÌNH SẢNH CHÍNH (LOBBY VIEW) -->
+  <div class="lobby-container" id="lobbyScreen">
+    <div class="lobby-banner">
+      <h1>HỆ THỐNG HUẤN LUYỆN LIE DETECTOR & CAPTCHA CHUYÊN SÂU</h1>
+      <p>Chọn 1 trong 6 chế độ để bước vào phòng thi đấu biệt lập. Hãy giữ sự tập trung cao độ!</p>
+    </div>
 
-  <!-- CONTAINER 1: CÂU CHỮ 15S -->
-  <div class="kms-blue-box" id="boxSentence" style="display: none;">
-    <div class="kms-timer-yellow" id="blueTimer">15</div>
-    <div class="kms-title">올바른 문장을 선택해 주세요</div>
-    <div class="kms-options-group" id="blueOptions"></div>
-  </div>
+    <div class="captcha-grid-selection">
+      <div class="captcha-card-select" onclick="openDedicatedArena('SENTENCE')">
+        <span class="card-badge-num">15 Giây</span>
+        <div class="card-title">📝 1. Câu chữ KMS 15s</div>
+        <div class="card-desc">Chọn câu tiếng Hàn có logic đúng ngữ pháp. Đã bổ sung bộ bẫy đảo nét chính tả nâng cao.</div>
+        <button class="btn-enter-mode">VÀO PHÒNG LUYỆN</button>
+      </div>
 
-  <!-- CONTAINER 2: HÌNH ẢNH LIE DETECTOR (CHUẨN ẢNH) -->
-  <div class="image-detector-card" id="boxImage" style="display: none;">
-    <div class="img-top-row">
-      <div class="clock-indicator">
-        <div class="clock-circle-green"></div>
-        <span id="imgClockText">01:50</span>
+      <div class="captcha-card-select" onclick="openDedicatedArena('IMAGE')">
+        <span class="card-badge-num">110 Giây</span>
+        <div class="card-title">🔍 2. Ảnh Lie Detector</div>
+        <div class="card-desc">Phân loại vật thể chuyển động, chớp tắt hoặc đứng yên. Đa dạng từ 2 đến 6 hình ngẫu nhiên.</div>
+        <button class="btn-enter-mode">VÀO PHÒNG LUYỆN</button>
+      </div>
+
+      <div class="captcha-card-select" onclick="openDedicatedArena('VIOLETTA')">
+        <span class="card-badge-num">14s Chờ</span>
+        <div class="card-title">🍄 3. Nấm Violetta Shuffle</div>
+        <div class="card-desc">Khóa mắt vào nấm trang điểm 2 giây đầu, theo dõi nấm tráo bài từ từ và bấm số 1 - 4.</div>
+        <button class="btn-enter-mode">VÀO PHÒNG LUYỆN</button>
+      </div>
+
+      <div class="captcha-card-select" onclick="openDedicatedArena('TRACK')">
+        <span class="card-badge-num">8s Chờ</span>
+        <div class="card-title">🎯 4. Bám hình tàng hình</div>
+        <div class="card-desc">Rê chuột bám sát mục tiêu tròn tâm ngắm xanh khi mờ dần trên nền caramel để nạp 100% thanh đo.</div>
+        <button class="btn-enter-mode">VÀO PHÒNG LUYỆN</button>
+      </div>
+
+      <div class="captcha-card-select" onclick="openDedicatedArena('CLICK_TYPE')">
+        <span class="card-badge-num">49 Giây</span>
+        <div class="card-title">🫧 5. Bóng + Gõ chữ Hangul</div>
+        <div class="card-desc">Click bóng 5 lần, sau đó gõ chữ thư pháp có dải kính mờ trượt qua lại chống tool quét OCR.</div>
+        <button class="btn-enter-mode">VÀO PHÒNG LUYỆN</button>
+      </div>
+
+      <div class="captcha-card-select" onclick="openDedicatedArena('GM_CHECK')">
+        <span class="card-badge-num">45 Giây</span>
+        <div class="card-title">👨‍💼 6. Maple GM Check</div>
+        <div class="card-desc">Khung thoại NPC Quản lý game: câu hỏi chữ dọc, tổ hợp dấu '/', chuỗi 10 chữ không lặp...</div>
+        <button class="btn-enter-mode">VÀO PHÒNG LUYỆN</button>
       </div>
     </div>
-    <div class="scene-dark-box" id="sceneDarkBox"></div>
-    <div class="question-prompt-row">
-      <span class="q-green-tag">Q.</span><span id="imgQuestionText">현재 움직이고 있는 물체는 무엇입니까?</span>
-    </div>
-    <div class="choice-rows-container" id="choiceRowsContainer"></div>
-    <button class="btn-image-confirm" id="confirmImageBtn">확인</button>
   </div>
 
-  <!-- CONTAINER 3: NẤM VIOLETTA -->
-  <div id="boxVioletta" style="display: none;">
-    <div class="notice-card" id="noticeModal">
-      <div class="notice-header">
-        <span class="notice-timer-yellow" id="noticeTimerText">14</span>
-        <span>초 후 거짓말 탐지 미니게임이 시작됩니다</span>
+  <!-- 2. MÀN HÌNH ĐẤU TRƯỜNG BIỆT LẬP (DEDICATED ARENA) -->
+  <div class="arena-container" id="arenaScreen">
+    <div class="arena-top-nav">
+      <button class="btn-back-lobby" onclick="returnToLobby()">◀ VỀ SẢNH CHÍNH (LOBBY)</button>
+      <div class="arena-stage-title" id="arenaTitleDisplay">ĐẤU TRƯỜNG LUYỆN TẬP</div>
+      <div style="width: 140px;"></div>
+    </div>
+
+    <!-- KHU VỰC NHÂN VẬT THOẠI & CHÂM BIẾM SÁT PHẠT -->
+    <div class="npc-speaker-bar">
+      <div class="npc-portrait-circle">
+        <!-- SVG Avatar cử động miệng -->
+        <svg width="68" height="68" viewBox="0 0 84 96" class="talking-avatar-svg">
+          <circle cx="42" cy="42" r="24" fill="#ffedd5" stroke="#ca8a04" stroke-width="2"/>
+          <circle cx="34" cy="40" r="2.8" fill="#1e293b"/>
+          <circle cx="50" cy="40" r="2.8" fill="#1e293b"/>
+          <!-- Miệng cử động khi nói -->
+          <ellipse cx="42" cy="50" rx="4.5" ry="3" fill="#ef4444" class="npc-mouth"/>
+          <path d="M 18 30 C 18 12, 66 12, 66 30 Z" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+          <path d="M 16 30 Q 42 33 68 30" stroke="#0284c7" stroke-width="4" fill="none"/>
+          <path d="M 36 20 L 39 26 L 42 21 L 45 26 L 48 20" stroke="#0284c7" stroke-width="2.5" fill="none"/>
+        </svg>
       </div>
-      <div class="notice-body">
-        <div class="notice-blue-box">
-          • <span class="hl">아름답게 화장한 비올레타</span>를 찾아주세요<br>
-          • 정답에 따라 테스트 통과 / 실패하게 됩니다
-        </div>
-        <div class="notice-dialog-box">
-          <div class="notice-dialog-text">
-            답을 입력하지 않으면<br>
-            거짓말 <span class="warn">탐지 테스트</span>에<br>
-            실패하니 주의해주세요!
+      <div class="npc-dialogue-bubble">
+        <div class="npc-speaker-name" id="npcSpeakerName">메이플 운영자 (Giám thị kiểm tra)</div>
+        <div class="npc-speech-content" id="npcSpeechText">Tập trung cao độ! Đừng để bị lừa đấy nhé.</div>
+      </div>
+    </div>
+
+    <!-- BÀN ĐẤU TRƯỜNG HIỂN THỊ CAPTCHA (LARGE SCALE) -->
+    <div class="arena-display-workspace">
+      <!-- 1. CÂU CHỮ 15S -->
+      <div class="kms-blue-box-large" id="arenaSentence" style="display:none;">
+        <div class="kms-timer-yellow" id="arenaBlueTimer">15</div>
+        <div class="kms-title">올바른 문장을 선택해 주세요</div>
+        <div class="kms-options-group-large" id="arenaBlueOptions"></div>
+      </div>
+
+      <!-- 2. HÌNH ẢNH LIE DETECTOR -->
+      <div class="image-detector-large" id="arenaImage" style="display:none;">
+        <div class="img-top-row-large">
+          <div class="clock-indicator-large">
+            <span id="arenaImgClock">01:50</span>
           </div>
-          <div id="noticeAvatar" style="width: 82px; height: 85px;"></div>
         </div>
-        <button class="btn-start-play" onclick="startStageImmediately()">바로 시작 (Bắt đầu ngay)</button>
+        <div class="scene-dark-box-large" id="arenaSceneBox"></div>
+        <div class="question-prompt-large">
+          <span style="color:#7cb342; font-weight:900;">Q.</span> <span id="arenaImgPrompt">...</span>
+        </div>
+        <div id="arenaChoiceList"></div>
+        <button class="btn-image-confirm-large" id="arenaImgConfirmBtn">확인</button>
       </div>
-    </div>
 
-    <div class="stage-card" id="stageModal">
-      <div class="stage-top-banner" id="stageBannerText">화장한 비올레타를 놓치지 말고 주목해주세요.</div>
-      <div class="stage-area">
-        <div class="stage-truss"></div>
-        <div class="curtain-l"></div>
-        <div class="curtain-r"></div>
-        <div class="stage-floor-rail"></div>
+      <!-- 3. NẤM VIOLETTA -->
+      <div class="stage-card-large" id="arenaVioletta" style="display:none;">
+        <div class="stage-top-banner-large" id="arenaViolettaBanner">화장한 비올레타를 놓치지 말고 주목해주세요.</div>
+        <div class="stage-area-large">
+          <div class="curtain-l-large"></div>
+          <div class="curtain-r-large"></div>
+          <div class="stage-floor-rail-large"></div>
 
-        <div class="shroom-lane" id="lane0"><div class="red-arrow-target" id="arrow0">▼</div><div id="shroomArt0"></div></div>
-        <div class="shroom-lane" id="lane1"><div class="red-arrow-target" id="arrow1">▼</div><div id="shroomArt1"></div></div>
-        <div class="shroom-lane" id="lane2"><div class="red-arrow-target" id="arrow2">▼</div><div id="shroomArt2"></div></div>
-        <div class="shroom-lane" id="lane3"><div class="red-arrow-target" id="arrow3">▼</div><div id="shroomArt3"></div></div>
+          <div class="shroom-lane-large" id="lane0"><div style="color:#ef4444; font-size:36px; display:none; position:absolute; top:-34px;" id="ar0">▼</div><div id="sh0"></div></div>
+          <div class="shroom-lane-large" id="lane1"><div style="color:#ef4444; font-size:36px; display:none; position:absolute; top:-34px;" id="ar1">▼</div><div id="sh1"></div></div>
+          <div class="shroom-lane-large" id="lane2"><div style="color:#ef4444; font-size:36px; display:none; position:absolute; top:-34px;" id="ar2">▼</div><div id="sh2"></div></div>
+          <div class="shroom-lane-large" id="lane3"><div style="color:#ef4444; font-size:36px; display:none; position:absolute; top:-34px;" id="ar3">▼</div><div id="sh3"></div></div>
+        </div>
+        <div class="stage-buttons-row-large">
+          <button class="num-btn-large" id="vbtn0" onclick="chooseViolettaSlot(0)">1</button>
+          <button class="num-btn-large" id="vbtn1" onclick="chooseViolettaSlot(1)">2</button>
+          <button class="num-btn-large" id="vbtn2" onclick="chooseViolettaSlot(2)">3</button>
+          <button class="num-btn-large" id="vbtn3" onclick="chooseViolettaSlot(3)">4</button>
+        </div>
       </div>
-      <div class="stage-buttons-row">
-        <button class="num-btn" id="btn0" onclick="chooseSlot(0)">1</button>
-        <button class="num-btn" id="btn1" onclick="chooseSlot(1)">2</button>
-        <button class="num-btn" id="btn2" onclick="chooseSlot(2)">3</button>
-        <button class="num-btn" id="btn3" onclick="chooseSlot(3)">4</button>
+
+      <!-- 4. BÁM HÌNH TÀNG HÌNH -->
+      <div class="game-window-large" id="arenaTrack" style="display:none;">
+        <div class="camo-arena-large" id="arenaCamoTrack">
+          <div class="tracking-orb-large" id="arenaOrb">
+            <div style="position:absolute; top:-40px; font-family:'Consolas',monospace; font-size:36px; font-weight:900; color:#67e8f9;" id="arenaTrackSec">7</div>
+            <div id="arenaReticleIcon" style="width:48px;height:48px;"></div>
+          </div>
+          <div style="position:absolute; bottom:14px; left:0; right:0; text-align:center; font-size:16px; font-weight:900; color:#fef08a;">
+            카운트다운 종료 후, 움직이는 도형에 커서를 올려두세요
+          </div>
+        </div>
+        <div style="background:#111827; padding:14px 24px; border-top:2px solid #334155;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:14px; font-weight:bold;">
+            <span>Tiến trình bám đuổi (Gauges)</span>
+            <span id="arenaTrackPercent">0%</span>
+          </div>
+          <div style="width:100%; height:20px; background:#1e293b; border-radius:10px; overflow:hidden; border:1px solid #475569;">
+            <div style="width:0%; height:100%; background:linear-gradient(90deg,#22c55e,#4ade80); transition:width 0.08s linear;" id="arenaTrackFill"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. BÓNG 5 LẦN + GÕ HANGUL -->
+      <div id="arenaClickType" style="display:none; flex-direction:column; align-items:center;">
+        <div class="bubble-stage-large" id="arenaBubbleBox">
+          <div style="padding:14px 20px; background:rgba(0,0,0,0.6); display:flex; justify-content:space-between; font-size:16px; font-weight:bold;">
+            <span>거짓말 탐지: 목표를 5회 클릭하세요</span>
+            <span>Số lần nhấp: <b style="color:#4ade80; font-size:22px;" id="arenaBubbleCount">0</b> / 5</span>
+          </div>
+          <div id="arenaMovingBall" style="position:absolute; width:80px; height:80px; border-radius:50%; background:radial-gradient(circle at 35% 35%, #fef08a, #84cc16 55%, #15803d); box-shadow:0 0 25px #bef264; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:36px;">🍀</div>
+          <div style="padding:10px; text-align:center; background:rgba(0,0,0,0.5); font-size:14px;">Bấm trúng quả bóng xanh lục 5 lần liên tiếp</div>
+        </div>
+
+        <div class="type-stage-large" id="arenaTypeBox" style="display:none;">
+          <div style="font-family:'Consolas',monospace; font-size:54px; font-weight:900; color:#38bdf8; text-align:center; margin-bottom:12px;" id="arenaTypeTimer">49</div>
+          <div style="text-align:center; color:#7dd3fc; font-size:15px; font-weight:700; margin-bottom:14px;">
+            아래 이미지 안의 한글을 보이는 대로 입력하세요
+            <span style="display:block; color:#93c5fd; font-size:14px; margin-top:4px;" id="arenaTypeLives">세번 남았습니다</span>
+          </div>
+          <div class="hangul-canvas-box-large">
+            <canvas id="arenaHangulCanvas" width="660" height="110"></canvas>
+            <div class="moving-blur-strip-large"></div>
+          </div>
+          <input type="text" id="arenaHangulInput" style="width:100%; height:46px; border:2px solid #0f172a; border-radius:6px; padding:6px 14px; font-size:18px; font-weight:bold; margin-bottom:12px;" placeholder="Nhập chữ tiếng Hàn và Enter..." autocomplete="off">
+          <div id="arenaHangulGuideKeys" style="background:#1e293b; border:1px dashed #38bdf8; padding:8px 12px; border-radius:6px; font-size:13px; color:#cbd5e1; display:flex; justify-content:space-between;">
+            <span>Gợi ý phím QWERTY:</span>
+            <span id="arenaKeyHintStr" style="font-family:'Consolas',monospace; font-weight:bold; color:#4ade80; font-size:15px; letter-spacing:2px;">...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. MAPLE PLANET GM CHECK -->
+      <div id="arenaGM" style="display:none;" class="gm-window-large">
+        <div class="gm-question-large" id="arenaGMQuestionBox">...</div>
+        <input type="text" class="gm-input-large" id="arenaGMInput" placeholder="Gõ tiếng Hàn..." autocomplete="off">
+        <button class="gm-confirm-large" onclick="submitArenaGM()"></button>
       </div>
     </div>
   </div>
 
-  <!-- CONTAINER 4: BÁM HÌNH TÀNG HÌNH -->
-  <div id="boxTrack" style="display: none;">
-    <div class="ld-window" id="noticeWindow">
-      <div class="ld-titlebar"><span>LIE DETECTOR :</span></div>
-      <div class="ld-body-upper">
-        <div class="ld-main-countdown"><span class="sec-highlight" id="prepTimer">8</span>초 후 거짓말 탐지 미니게임이 시작됩니다.</div>
-        <div class="ld-sub-warning">게임이 시작되기 전에 안전한 곳으로 이동해 주세요</div>
-      </div>
-      <div class="ld-body-lower">
-        <div class="ld-instructions">
-          점점 투명해지면서 움직이는 도형 위에<br>
-          마우스 커서가 위치하도록 마우스를 움직여주세요.<br><br>
-          마우스 커서가 도형에 위치한 시간에 따라 통과/실패가 결정됩니다
-        </div>
-        <div class="preview-steps-row">
-          <div class="preview-card"><div id="reticleP1" style="width:34px;height:34px;"></div></div>
-          <div style="color:#64748b; font-weight:900;">▶</div>
-          <div class="preview-card" style="opacity:0.5;"><div id="reticleP2" style="width:34px;height:34px;"></div></div>
-          <div style="color:#64748b; font-weight:900;">▶</div>
-          <div class="preview-card" style="opacity:0.15;"><div id="reticleP3" style="width:34px;height:34px;"></div></div>
-        </div>
-        <button class="btn-start-track" onclick="startTrackingGame()">바로 시작 (Bắt đầu ngay)</button>
+  <!-- NGĂN KÉO BÍ KÍP & BÀN PHÍM TRA CỨU (CHEAT-SHEET DRAWER) -->
+  <div class="drawer-overlay" id="cheatDrawer">
+    <div class="drawer-header">
+      <span class="drawer-title">📚 SỔ TAY BÍ KÍP THỰC CHIẾN</span>
+      <button class="btn-close-drawer" onclick="toggleCheatDrawer()">✕</button>
+    </div>
+
+    <div class="cheat-card">
+      <div class="cheat-card-title">🍄 Bí quyết bắt Nấm Violetta</div>
+      <div class="cheat-card-body">
+        Trong <b>2 giây đầu tiên</b>, chỉ khóa mắt vào con nấm có <b>má hồng đậm và lông mi cong</b> (con có mũi tên đỏ). Khi nấm nhắm mắt và tráo bài từ từ, di chuyển ánh mắt bám theo đúng con đó, không nhìn lan man!
       </div>
     </div>
 
-    <div class="game-window" id="gameWindow">
-      <div class="ld-titlebar"><span>LIE DETECTOR :</span></div>
-      <div class="camo-arena" id="camoArena">
-        <div class="camo-bubble" style="width: 90px; height: 90px; top: 30px; left: 60px;"></div>
-        <div class="camo-bubble" style="width: 120px; height: 120px; top: 180px; left: 70px;"></div>
-        <div class="camo-bubble" style="width: 110px; height: 110px; top: 40px; right: 80px;"></div>
-        <div class="camo-bubble" style="width: 140px; height: 140px; bottom: 30px; right: 100px;"></div>
-        <div class="tracking-orb" id="trackingOrb">
-          <div class="floating-timer-cyan" id="floatingTimer">7</div>
-          <div id="orbReticle" style="width: 38px; height: 38px;"></div>
-        </div>
-        <div class="bottom-game-prompt">카운트다운 종료 후, 움직이는 도형에 커서를 올려두세요</div>
+    <div class="cheat-card">
+      <div class="cheat-card-title">📜 Bí kíp chữ xếp dọc (GM Check)</div>
+      <div class="cheat-card-body">
+        Chữ xếp dọc đọc từ <b>TRÊN XUỐNG DƯỚI</b> của từng cột từ trái qua phải.<br>
+        Ví dụ: Cột 1 (현, 재) -> Cột 2 (사, 냥, 터, 의) -> Cột 3 (이, 름, 을, 입, 력, 해, 주, 세) -> Cột 4 (요).<br>
+        => Yêu cầu: Nhập tên bãi săn hiện tại (Gõ: <b>헤네시스</b> hoặc <b>개미굴</b>).
       </div>
-      <div class="progress-track-wrapper">
-        <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: bold; margin-bottom: 6px; color: #cbd5e1;">
-          <span>목표 유지 게이지 (Tiến trình bám đuổi)</span><span id="progressPercent">0%</span>
-        </div>
-        <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
+    </div>
+
+    <div class="cheat-card">
+      <div class="cheat-card-title">⌨️ Tra nhanh 10 chữ Hangul không trùng</div>
+      <div class="cheat-card-body">
+        Gõ cụm cố định sau (không dấu cách):<br>
+        <b style="color:#4ade80;">동서남북갑을병정무기</b><br>
+        Phím QWERTY bấm liên tục:<br>
+        <code style="color:#fde047; font-size:13px;">ehdtjsskabrkfdmfqudwjdanrl</code>
+      </div>
+    </div>
+
+    <div class="cheat-card">
+      <div class="cheat-card-title">🌲 Tả bãi săn tự do &ge; 8 chữ</div>
+      <div class="cheat-card-body">
+        Gõ câu cố định sau:<br>
+        <b style="color:#4ade80;">나무가많고시원한사냥터</b><br>
+        Phím QWERTY: <code style="color:#fde047;">skanrkaksehthldnjsgkstksidxj</code>
       </div>
     </div>
   </div>
-
-  <!-- CONTAINER 5: BÓNG 5 LẦN + GÕ CHỮ + DẢI MỜ CHẠY QUA -->
-  <div id="boxClickType" style="display: none;">
-    <div class="bubble-stage-card" id="bubbleStage">
-      <div class="green-blast-bg"></div>
-      <div class="distract-text-layer">
-        놓은 를을 베틱거나 히싣다.<br>
-        사냥터에서 몬스터를 처치하세요.<br>
-        인벤토리가 가득 찼습니다.
-      </div>
-      <div class="bubble-hud">
-        <span class="bubble-count-text">거짓말 탐지: 목표를 5회 클릭하세요</span>
-        <span class="bubble-count-text">클릭 수: <b id="bubbleHits">0</b> / 5</span>
-      </div>
-      <div class="bubble-target-ball" id="bubbleTarget">🍀</div>
-      <div style="padding: 10px; z-index: 20; text-align: center; font-size: 13px; color: #cbd5e1; background: rgba(0,0,0,0.5);">
-        Nhấp trúng quả bóng màu xanh lục 5 lần liên tiếp
-      </div>
-    </div>
-
-    <div class="type-stage-card" id="typeStage">
-      <div class="cyan-clock-display" id="cyanTimer">49</div>
-      <div class="korean-prompt-text">
-        아래 이미지 안의 한글을 보이는 대로 입력하세요
-        <span style="display: block; color: #93c5fd; font-size: 14px; margin-top: 4px;" id="livesText">세번 남았습니다</span>
-      </div>
-      
-      <!-- KHUNG CANVAS CÓ VỆT MỜ CHẠY QUA LẠI CHỐNG BOT/OCR -->
-      <div class="hangul-canvas-box">
-        <canvas id="hangulCanvas" width="510" height="95"></canvas>
-        <div class="moving-blur-strip"></div>
-        <div class="floating-blur-lens"></div>
-      </div>
-
-      <input type="text" class="hangul-input-bar" id="hangulInput" placeholder="Gõ chữ Hangul và bấm Enter..." autocomplete="off">
-      <div class="trainer-guide-panel">
-        <div class="trainer-header-row">
-          <span class="trainer-title">⌨️ HƯỚNG DẪN GÕ PHÍM CHO NHÂN VIÊN</span>
-          <button type="button" class="btn-toggle-hint" onclick="toggleHintView()" id="btnToggleHint">Ẩn gợi ý</button>
-        </div>
-        <div class="syllable-hints-grid" id="syllableHintsGrid"></div>
-        <div class="full-string-guide" id="fullStringGuide">
-          <span>Chuỗi phím gõ nhanh:</span>
-          <span class="full-keys-code" id="fullKeySequence"></span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- CONTAINER 6: MAPLE PLANET GM CHECK -->
-  <div id="boxGM" style="display: none;" class="gm-outer-wrap">
-    <div class="gm-window-frame">
-      <div class="question-overlay-panel" id="questionBox">Đang tải câu hỏi...</div>
-      <input type="text" class="input-overlay-field" id="answerInput" placeholder="Gõ tiếng Hàn..." autocomplete="off">
-      <button class="btn-overlay-confirm" id="confirmBtn" onclick="handleGMConfirm()" title="확인"></button>
-    </div>
-    <div class="helper-card">
-      <div class="helper-title">📋 HƯỚNG DẪN GIẢI DÀNH CHO NHÂN VIÊN</div>
-      <div id="guideText">Đang tải hướng dẫn...</div>
-      <div class="helper-sample" id="sampleAnswer">Đáp án mẫu: ...</div>
-    </div>
-  </div>
-
-  <!-- BẢNG ĐIỂM -->
-  <div class="score-badge">Đúng: <b id="scoreVal">0</b> | Chuỗi liên tiếp: <b id="streakVal">0</b></div>
 
   <script>
-    let activeTab = 'SENTENCE';
-    let score = 0, streak = 0;
-    let mainTimer = null;
+    // ================= HỆ THỐNG ÂM THANH GIẢ LẬP (WEB AUDIO SYNTH) =================
+    let audioCtx = null;
+    let isMuted = false;
 
-    const TAB_INFO = {
-      SENTENCE: { title: "1. CÂU CHỮ TIẾNG HÀN 15 GIÂY", desc: "Chọn đúng câu tiếng Hàn có nghĩa logic chuẩn xác trong 5 đáp án. Đã bổ sung ngân hàng câu bẫy khó về meso, boss và trang bị." },
-      IMAGE: { title: "2. LIE DETECTOR HÌNH ẢNH (KMS)", desc: "Nhận diện vật thể chuyển động, chớp tắt hoặc đứng yên. Đã bổ sung cơ chế số lượng hình ngẫu nhiên (từ 2-3 hình đến 5-6 hình)." },
-      VIOLETTA: { title: "3. TÌM NẤM VIOLETTA TRANG ĐIỂM", desc: "Nhận diện nấm trang điểm trong 2 giây đầu, theo dõi quá trình tráo đổi vị trí từ từ và bấm đúng số 1 - 4." },
-      TRACK: { title: "4. BÁM ĐUỔI HÌNH TÀNG HÌNH", desc: "Rê chuột liên tục bám sát khối tròn tâm ngắm xanh khi mờ dần trên nền caramel để nạp đầy 100% thanh đo." },
-      CLICK_TYPE: { title: "5. BÓNG 5 LẦN + GÕ CHỮ THƯ PHÁP", desc: "Click bóng 5 lần, sau đó gõ chữ thư pháp. Đã thêm vệt mờ trượt qua lại liên tục chống tool quét OCR." },
-      GM_CHECK: { title: "6. MAPLE PLANET GM CHECK", desc: "Đối thoại với Quản lý game trên phôi ảnh gốc. Bổ sung thêm nhiều biến thể câu hỏi ngẫu nhiên không trùng lặp." }
-    };
+    function initAudio() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    function playBeep(freq, type, duration) {
+      if (isMuted) return;
+      initAudio();
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch(e){}
+    }
+    function playAlarmSound() { playBeep(880, 'sawtooth', 0.25); setTimeout(()=>playBeep(660, 'sawtooth', 0.3), 150); }
+    function playPassSound() { playBeep(523.25, 'triangle', 0.15); setTimeout(()=>playBeep(659.25, 'triangle', 0.2), 120); setTimeout(()=>playBeep(783.99, 'triangle', 0.3), 240); }
+    function playFailSound() { playBeep(220, 'sawtooth', 0.35); setTimeout(()=>playBeep(180, 'sawtooth', 0.45), 200); }
 
-    function updateStats() {
-      document.getElementById('scoreVal').textContent = score;
-      document.getElementById('streakVal').textContent = streak;
+    function toggleMuteSound() {
+      isMuted = !isMuted;
+      document.getElementById('soundToggleBtn').textContent = isMuted ? '🔇 Âm thanh: TẮT' : '🔊 Âm thanh: BẬT';
     }
 
-    function hideAllContainers() {
-      ['boxSentence', 'boxImage', 'boxVioletta', 'boxTrack', 'boxClickType', 'boxGM'].forEach(id => {
-        document.getElementById(id).style.display = 'none';
-      });
-      document.getElementById('startScreen').style.display = 'none';
-    }
-
-    function selectTab(tab) {
-      clearInterval(mainTimer);
-      activeTab = tab;
-      const buttons = document.querySelectorAll('.nav-btn');
-      const tabs = ['SENTENCE', 'IMAGE', 'VIOLETTA', 'TRACK', 'CLICK_TYPE', 'GM_CHECK'];
-      buttons.forEach((b, idx) => b.classList.toggle('active', tabs[idx] === tab));
-
-      hideAllContainers();
-      document.getElementById('startScreen').style.display = 'block';
-      document.getElementById('startTitle').textContent = TAB_INFO[tab].title;
-      document.getElementById('startDesc').textContent = TAB_INFO[tab].desc;
-    }
-
-    function launchGame() {
-      hideAllContainers();
-      if (activeTab === 'SENTENCE') {
-        document.getElementById('boxSentence').style.display = 'flex';
-        initSentenceMode();
-      } else if (activeTab === 'IMAGE') {
-        document.getElementById('boxImage').style.display = 'block';
-        initImageMode();
-      } else if (activeTab === 'VIOLETTA') {
-        document.getElementById('boxVioletta').style.display = 'block';
-        initViolettaMode();
-      } else if (activeTab === 'TRACK') {
-        document.getElementById('boxTrack').style.display = 'block';
-        initTrackMode();
-      } else if (activeTab === 'CLICK_TYPE') {
-        document.getElementById('boxClickType').style.display = 'block';
-        initBubbleMode();
-      } else if (activeTab === 'GM_CHECK') {
-        document.getElementById('boxGM').style.display = 'flex';
-        initGMCheckMode();
-      }
-    }
-
-    /* ================= 1. CÂU HỎI TIẾNG HÀN 15S (NGÂN HÀNG CÂU BẪY KHÓ NÂNG CAO) ================= */
-    const ADVANCED_SENTENCE_POOL = [
-      {
-        c: "여기에 주차하시면 안 됩니다.",
-        w: ["역이에 주차하시면 안 뎁니다.", "여기에 주차하새면 안 됍니다.", "여기에 주차하시면 안 됩나다.", "여기에 주채하시면 안 됩니다."]
-      },
-      {
-        c: "사냥터에서 몬스터를 처치하세요.",
-        w: ["산앙터에서 먼스터를 저치헤새요.", "사냥터에서 몬스토를 처지하새요.", "사냥터애서 몬스터를 쳐치하새요.", "사냥터에서 몬스털를 처치해새요."]
-      },
-      {
-        c: "자유시장에서 아이템을 거래할 수 있습니다.",
-        w: ["자유시장에서 아이탬을 거래할 수 잇습니다.", "자유시장에서 아이템을 거레할 수 있슴니다.", "자유시장에셔 아이템을 거래할 수 있습니더.", "자유시장에서 아이템을 거레할 수 잇습니다."]
-      },
-      {
-        c: "주문의 흔적을 모아 장비를 강화하세요.",
-        w: ["주문의 훈적을 모아 장배를 강화하세요.", "주문의 흔적을 모아 장비를 강홰하새요.", "주문의 흔적을 모어 장비를 강화하새요.", "주문의 훈적을 모아 장비를 겅화하세요."]
-      },
-      {
-        c: "어제 친구와 함께 영화를 보러 갔어요.",
-        w: ["어재 친구와 함깨 영화를 보려 갰어요.", "어제 친고와 함께 영홰를 보러 갇어요.", "어제 친구와 함깨 영하를 보러 갔어오.", "어재 친구와 함께 영화를 보러 겄어요."]
-      },
-      {
-        c: "인벤토리가 가득 차서 주울 수 없습니다.",
-        w: ["인밴토리가 가득 차서 주울 수 엽습니다.", "인벤토리가 개득 차서 주울 수 없슴니다.", "인벤토리가 가둑 차서 주율 수 없습니다.", "인벤토리가 가득 찻서 주울 수 업습니다."]
-      },
-      {
-        c: "길드원들과 파티를 맺고 보스를 처치하세요.",
-        w: ["길드원들과 파퇴를 맻고 보스를 처치하세요.", "길드원들과 파티를 맫고 보스를 저치하새요.", "길드원들과 파티를 맺고 보스를 쳐치해새요.", "길드원들과 파티를 맷고 보스를 처치하새요."]
-      },
-      {
-        c: "메소 마켓에서 포인트를 환전할 수 있습니다.",
-        w: ["메소 마켙에서 포인트를 환전할 수 잇습니다.", "매소 마켓에서 포인투를 환전할 수 있슴니다.", "메소 마켓에서 포인트를 홤전할 수 있습니더.", "메소 마켓애서 포인트를 환전할 수 업습니다."]
-      }
+    // ================= KHO THOẠI CHÂM BIẾM SÁT PHẠT KHI THẤT BẠI =================
+    const ROAST_FAILS = [
+      "Mắt để dưới gót chân à mà bấm trượt? Cắt thưởng chuyên cần bây giờ!",
+      "Tay run như trúng gió thế này thì nghỉ về quê chăn vịt cho rồi!",
+      "Gõ phím kiểu mổ cò này thì gà nó mổ thóc còn nhanh hơn mày đấy!",
+      "Bấm có 1 cái Captcha mà cũng toang, tối nay rửa chén cho cả phòng nha em!",
+      "Phản xạ kiểu rùa bò này thì GM nó gõ đầu cho bay cả dàn máy!",
+      "Nhìn nấm trang điểm mà cũng hoa mắt, tối qua thức cày phim hay làm gì khai mau?!",
+      "Học việc 3 tháng mà bấm như người mù sờ voi, tính phá studio hả mạy?!",
+      "Có thế mà cũng sai, tí nữa mời cả ca uống nước chuộc tội đi nhé!",
+      "Chậm như sên! Con nít cấp 1 nó bấm còn lẹ hơn tốc độ của mày!"
     ];
 
-    function initSentenceMode() {
+    const CHEER_PASSES = [
+      "Hên thôi em ơi, tưởng gà thế nào! Câu sau coi chừng đấy.",
+      "Tạm được! Bấm nhanh như thế mới mong sống sót qua đợt quét.",
+      "Phản xạ tạm chấp nhận, tiếp tục giữ cái nhịp này xem nào!",
+      "Khá đấy! Tiếp tục phong độ này thì cuối tháng có thưởng."
+    ];
+
+    const URGENT_SHOUTS = [
+      "Còn có vài giây kìa, bấm lẹ cái tay lên!",
+      "Nó sắp đổi chỗ kìa, căng mắt ra mà nhìn!",
+      "Đừng có bấm bừa! Sai 1 cái là ăn chửi đấy!",
+      "Nhanh tay lên, thời gian không đợi người lề mề đâu!"
+    ];
+
+    function speakNPC(text, type) {
+      const speech = document.getElementById('npcSpeechText');
+      speech.className = 'npc-speech-content';
+      if (type === 'roast') {
+        speech.classList.add('roast');
+        playFailSound();
+      } else if (type === 'cheer') {
+        speech.classList.add('cheer');
+        playPassSound();
+      }
+      speech.textContent = text;
+    }
+
+    // ================= DỮ LIỆU & QUẢN LÝ ĐẤU TRƯỜNG =================
+    let currentMode = '';
+    let arenaTimer = null;
+    let score = 0, streak = 0;
+    let questionStartTime = 0;
+
+    function updateStudioStats() {
+      document.getElementById('statScore').textContent = score;
+      document.getElementById('statStreak').textContent = streak;
+    }
+
+    function toggleCheatDrawer() {
+      document.getElementById('cheatDrawer').classList.toggle('open');
+    }
+
+    function openDedicatedArena(mode) {
+      currentMode = mode;
+      document.getElementById('lobbyScreen').style.display = 'none';
+      document.getElementById('arenaScreen').style.display = 'flex';
+
+      const titles = {
+        SENTENCE: "1. CÂU CHỮ TIẾNG HÀN 15 GIÂY (KMS)",
+        IMAGE: "2. LIE DETECTOR HÌNH ẢNH (KMS)",
+        VIOLETTA: "3. TÌM NẤM VIOLETTA TRANG ĐIỂM",
+        TRACK: "4. BÁM ĐUỔI HÌNH TÀNG HÌNH",
+        CLICK_TYPE: "5. BÓNG 5 LẦN + GÕ CHỮ THƯ PHÁP",
+        GM_CHECK: "6. MAPLE PLANET GM CHECK"
+      };
+      document.getElementById('arenaTitleDisplay').textContent = titles[mode];
+      playAlarmSound();
+
+      // Ẩn toàn bộ bàn đấu
+      ['arenaSentence', 'arenaImage', 'arenaVioletta', 'arenaTrack', 'arenaClickType', 'arenaGM'].forEach(id => {
+        document.getElementById(id).style.display = 'none';
+      });
+
+      speakNPC("Tập trung vào màn hình! Chuẩn bị giải bài trong thời gian quy định.", "normal");
+
+      if (mode === 'SENTENCE') {
+        document.getElementById('arenaSentence').style.display = 'flex';
+        runSentenceArena();
+      } else if (mode === 'IMAGE') {
+        document.getElementById('arenaImage').style.display = 'block';
+        runImageArena();
+      } else if (mode === 'VIOLETTA') {
+        document.getElementById('arenaVioletta').style.display = 'block';
+        runViolettaArena();
+      } else if (mode === 'TRACK') {
+        document.getElementById('arenaTrack').style.display = 'block';
+        runTrackArena();
+      } else if (mode === 'CLICK_TYPE') {
+        document.getElementById('arenaClickType').style.display = 'flex';
+        runClickTypeArena();
+      } else if (mode === 'GM_CHECK') {
+        document.getElementById('arenaGM').style.display = 'block';
+        runGMArena();
+      }
+    }
+
+    function returnToLobby() {
+      clearInterval(arenaTimer);
+      document.getElementById('arenaScreen').style.display = 'none';
+      document.getElementById('lobbyScreen').style.display = 'flex';
+    }
+
+    function recordReactionTime() {
+      const elapsed = Date.now() - questionStartTime;
+      document.getElementById('statReaction').textContent = elapsed + 'ms';
+    }
+
+    function handleFailAction() {
+      streak = 0;
+      updateStudioStats();
+      const roast = ROAST_FAILS[Math.floor(Math.random() * ROAST_FAILS.length)];
+      speakNPC(roast, "roast");
+    }
+
+    function handlePassAction() {
+      score++;
+      streak++;
+      updateStudioStats();
+      recordReactionTime();
+      const cheer = CHEER_PASSES[Math.floor(Math.random() * CHEER_PASSES.length)];
+      speakNPC(cheer, "cheer");
+    }
+
+    /* ================= 1. CÂU CHỮ 15S KHỔNG LỒ ================= */
+    const KMS_ADVANCED_SENTENCES = [
+      { c: "여기에 주차하시면 안 됩니다.", w: ["역이에 주차하시면 안 뎁니다.", "여기에 주차하새면 안 됍니다.", "여기에 주차하시면 안 됩나다.", "여기에 주채하시면 안 됩니다."] },
+      { c: "사냥터에서 몬스터를 처치하세요.", w: ["산앙터에서 먼스터를 저치헤새요.", "사냥터에서 몬스토를 처지하새요.", "사냥터애서 몬스터를 쳐치하새요.", "사냥터에서 몬스털를 처치해새요."] },
+      { c: "자유시장에서 아이템을 거래할 수 있습니다.", w: ["자유시장에서 아이탬을 거래할 수 잇습니다.", "자유시장에서 아이템을 거레할 수 있슴니다.", "자유시장에셔 아이템을 거래할 수 있습니더.", "자유시장에서 아이템을 거레할 수 잇습니다."] },
+      { c: "주문의 흔적을 모아 장비를 강화하세요.", w: ["주문의 훈적을 모아 장배를 강화하세요.", "주문의 흔적을 모아 장비를 강홰하새요.", "주문의 흔적을 모어 장비를 강화하새요.", "주문의 훈적을 모아 장비를 겅화하세요."] },
+      { c: "인벤토리가 가득 차서 주울 수 없습니다.", w: ["인밴토리가 가득 차서 주울 수 엽습니다.", "인벤토리가 개득 차서 주울 수 없슴니다.", "인벤토리가 가둑 차서 주율 수 없습니다.", "인벤토리가 가득 찻서 주울 수 업습니다."] }
+    ];
+
+    function runSentenceArena() {
+      clearInterval(arenaTimer);
+      questionStartTime = Date.now();
       let timeLeft = 15;
-      const tEl = document.getElementById('blueTimer');
+      const tEl = document.getElementById('arenaBlueTimer');
       tEl.textContent = timeLeft;
 
-      mainTimer = setInterval(() => {
+      arenaTimer = setInterval(() => {
         timeLeft--;
         tEl.textContent = timeLeft;
+        if (timeLeft === 5) speakNPC(URGENT_SHOUTS[Math.floor(Math.random()*URGENT_SHOUTS.length)], "urgent");
         if (timeLeft <= 0) {
-          clearInterval(mainTimer);
-          streak = 0; updateStats(); initSentenceMode();
+          clearInterval(arenaTimer);
+          handleFailAction();
+          setTimeout(runSentenceArena, 1400);
         }
       }, 1000);
 
-      const q = ADVANCED_SENTENCE_POOL[Math.floor(Math.random() * ADVANCED_SENTENCE_POOL.length)];
-      const list = [{ t: q.c, ok: true }, ...q.w.map(wStr => ({ t: wStr, ok: false }))].sort(() => Math.random() - 0.5);
+      const q = KMS_ADVANCED_SENTENCES[Math.floor(Math.random() * KMS_ADVANCED_SENTENCES.length)];
+      const list = [{ t: q.c, ok: true }, ...q.w.map(w => ({ t: w, ok: false }))].sort(() => Math.random() - 0.5);
 
-      const wrap = document.getElementById('blueOptions');
-      wrap.innerHTML = '';
+      const box = document.getElementById('arenaBlueOptions');
+      box.innerHTML = '';
       list.forEach(it => {
         const btn = document.createElement('button');
-        btn.className = 'kms-opt-btn';
+        btn.className = 'kms-opt-btn-large';
         btn.textContent = it.t;
         btn.onclick = () => {
-          clearInterval(mainTimer);
-          if (it.ok) { btn.classList.add('correct'); score++; streak++; }
-          else { btn.classList.add('wrong'); streak = 0; }
-          updateStats();
-          setTimeout(initSentenceMode, 550);
+          clearInterval(arenaTimer);
+          if (it.ok) {
+            btn.classList.add('correct');
+            handlePassAction();
+          } else {
+            btn.classList.add('wrong');
+            handleFailAction();
+          }
+          setTimeout(runSentenceArena, 1200);
         };
-        wrap.appendChild(btn);
+        box.appendChild(btn);
       });
     }
 
-    /* ================= 2. ẢNH LIE DETECTOR (SỐ LƯỢNG HÌNH NGẪU NHIÊN 2-6 HÌNH) ================= */
-    const SPRITE_DICTIONARY = [
+    /* ================= 2. HÌNH ẢNH LIE DETECTOR KHỔNG LỒ ================= */
+    const SPRITES = [
       { s: "💍", n: "반지" }, { s: "🦀", n: "꽃게" }, { s: "🍎", n: "사과" }, { s: "🍓", n: "딸기" },
-      { s: "🍌", n: "바나나" }, { s: "🍰", n: "케이크" }, { s: "🍕", n: "피자" }, { s: "💎", n: "보석" },
-      { s: "👓", n: "안경" }, { s: "💊", n: "알약" }, { s: "🍍", n: "파인애플" }, { s: "🍇", n: "포도" },
-      { s: "🍑", n: "복숭아" }, { s: "👒", n: "모자" }, { s: "🥾", n: "신발" }, { s: "🍄", n: "버섯" },
-      { s: "⚔️", n: "검" }, { s: "🛡️", n: "방패" }, { s: "🧪", n: "물약" }, { s: "🏹", n: "활" },
-      { s: "🗝️", n: "열쇠" }, { s: "⭐", n: "별" }
+      { s: "🍌", n: "바나나" }, { s: "🍰", n: "케이크" }, { s: "💎", n: "보석" }, { s: "👓", n: "안경" },
+      { s: "💊", n: "알약" }, { s: "🍍", n: "파인애플" }, { s: "🍇", n: "포도" }, { s: "🍑", n: "복숭아" }
     ];
+    let selectedImageOpt = null;
+    let targetImageName = null;
 
-    let selectedImgChoice = null;
-    let targetImgAnswer = null;
-
-    function initImageMode() {
-      selectedImgChoice = null;
-      targetImgAnswer = null;
+    function runImageArena() {
+      clearInterval(arenaTimer);
+      questionStartTime = Date.now();
+      selectedImageOpt = null;
+      targetImageName = null;
       let timeLeft = 110;
 
-      const clockText = document.getElementById('imgClockText');
-      const sceneBox = document.getElementById('sceneDarkBox');
-      const questionText = document.getElementById('imgQuestionText');
-      const choiceContainer = document.getElementById('choiceRowsContainer');
-      const confirmBtn = document.getElementById('confirmImageBtn');
+      const clock = document.getElementById('arenaImgClock');
+      const scene = document.getElementById('arenaSceneBox');
+      const prompt = document.getElementById('arenaImgPrompt');
+      const list = document.getElementById('arenaChoiceList');
+      const btn = document.getElementById('arenaImgConfirmBtn');
 
-      confirmBtn.classList.remove('active');
-      sceneBox.innerHTML = '';
-      choiceContainer.innerHTML = '';
+      btn.classList.remove('active');
+      scene.innerHTML = '';
+      list.innerHTML = '';
 
-      // 1. Số lượng hình ngẫu nhiên: từ 2, 3 hình (ít) đến 4, 5, 6 hình (nhiều)
-      const itemCount = [2, 3, 4, 4, 5, 6][Math.floor(Math.random() * 6)];
-      const shuffledSprites = [...SPRITE_DICTIONARY].sort(() => Math.random() - 0.5);
-      const currentItems = shuffledSprites.slice(0, itemCount);
+      // Random từ 2 đến 5 hình
+      const count = [2, 3, 4, 5][Math.floor(Math.random() * 4)];
+      const picked = [...SPRITES].sort(() => Math.random() - 0.5).slice(0, count);
 
-      // 2. Chọn dạng câu hỏi:
-      // 0: Di chuyển, 1: Chớp tắt, 2: Đứng yên, 3: Vật ngoài cùng bên trái, 4: Vật ngoài cùng bên phải
-      const qKind = Math.floor(Math.random() * 5);
-      let targetIdx = 0;
+      const qType = Math.floor(Math.random() * 3); // 0: Move, 1: Blink, 2: Still
+      const targetIdx = Math.floor(Math.random() * count);
+      targetImageName = picked[targetIdx].n;
 
-      if (qKind === 0) {
-        // Có 1 vật di chuyển, các vật khác đứng yên
-        targetIdx = Math.floor(Math.random() * itemCount);
-        questionText.textContent = "현재 움직이고 있는 물체는 무엇입니까?";
-        targetImgAnswer = currentItems[targetIdx].n;
-
-        currentItems.forEach((item, idx) => {
-          const el = document.createElement('span');
-          el.className = 'game-sprite-item';
-          el.textContent = item.s;
-          if (idx === targetIdx) {
-            el.classList.add(Math.random() > 0.5 ? 'anim-move-v' : 'anim-move-h');
-          }
-          sceneBox.appendChild(el);
+      if (qType === 0) {
+        prompt.textContent = "현재 움직이고 있는 물체는 무엇입니까?";
+        picked.forEach((item, idx) => {
+          const sp = document.createElement('span');
+          sp.className = 'game-sprite-large';
+          sp.textContent = item.s;
+          if (idx === targetIdx) sp.style.animation = 'moveVertical 1.2s ease-in-out infinite alternate';
+          scene.appendChild(sp);
         });
-      } else if (qKind === 1) {
-        // Có 1 vật chớp tắt, các vật khác đứng yên
-        targetIdx = Math.floor(Math.random() * itemCount);
-        questionText.textContent = "현재 깜빡이고 있는 물체는 무엇입니까?";
-        targetImgAnswer = currentItems[targetIdx].n;
-
-        currentItems.forEach((item, idx) => {
-          const el = document.createElement('span');
-          el.className = 'game-sprite-item';
-          el.textContent = item.s;
-          if (idx === targetIdx) {
-            el.classList.add('anim-blink');
-          }
-          sceneBox.appendChild(el);
-        });
-      } else if (qKind === 2) {
-        // Các vật khác chuyển động/chớp tắt, chỉ DUY NHẤT 1 vật đứng yên
-        targetIdx = Math.floor(Math.random() * itemCount);
-        questionText.textContent = "제자리에 멈춰 있는 물체는 무엇입니까?";
-        targetImgAnswer = currentItems[targetIdx].n;
-
-        currentItems.forEach((item, idx) => {
-          const el = document.createElement('span');
-          el.className = 'game-sprite-item';
-          el.textContent = item.s;
-          if (idx !== targetIdx) {
-            el.classList.add(idx % 2 === 0 ? 'anim-move-h' : 'anim-blink');
-          }
-          sceneBox.appendChild(el);
-        });
-      } else if (qKind === 3) {
-        // Hỏi vật ngoài cùng bên trái
-        targetImgAnswer = currentItems[0].n;
-        questionText.textContent = "가장 왼쪽에 위치한 물체는 무엇입니까?";
-        currentItems.forEach(item => {
-          const el = document.createElement('span');
-          el.className = 'game-sprite-item';
-          el.textContent = item.s;
-          sceneBox.appendChild(el);
+      } else if (qType === 1) {
+        prompt.textContent = "현재 깜빡이고 있는 물체는 무엇입니까?";
+        picked.forEach((item, idx) => {
+          const sp = document.createElement('span');
+          sp.className = 'game-sprite-large';
+          sp.textContent = item.s;
+          if (idx === targetIdx) sp.style.animation = 'blinkVisibility 0.6s steps(2,start) infinite';
+          scene.appendChild(sp);
         });
       } else {
-        // Hỏi vật ngoài cùng bên phải
-        targetImgAnswer = currentItems[currentItems.length - 1].n;
-        questionText.textContent = "가장 오른쪽에 위치한 물체는 무엇입니까?";
-        currentItems.forEach(item => {
-          const el = document.createElement('span');
-          el.className = 'game-sprite-item';
-          el.textContent = item.s;
-          sceneBox.appendChild(el);
+        prompt.textContent = "제자리에 멈춰 있는 물체는 무엇입니까?";
+        picked.forEach((item, idx) => {
+          const sp = document.createElement('span');
+          sp.className = 'game-sprite-large';
+          sp.textContent = item.s;
+          if (idx !== targetIdx) sp.style.animation = 'moveVertical 1.2s ease-in-out infinite alternate';
+          scene.appendChild(sp);
         });
       }
 
-      // 3. Tạo 4 hàng lựa chọn (1 hàng đúng + 3 hàng bẫy)
-      let choiceOptions = [targetImgAnswer];
-      const otherNames = SPRITE_DICTIONARY.map(it => it.n).filter(name => name !== targetImgAnswer);
-      const shuffledOtherNames = otherNames.sort(() => Math.random() - 0.5);
+      let opts = [targetImageName];
+      const others = SPRITES.map(s => s.n).filter(n => n !== targetImageName).sort(() => Math.random() - 0.5);
+      opts.push(others[0], others[1], others[2]);
+      opts.sort(() => Math.random() - 0.5);
 
-      choiceOptions.push(shuffledOtherNames[0], shuffledOtherNames[1], shuffledOtherNames[2]);
-      choiceOptions.sort(() => Math.random() - 0.5);
-
-      choiceOptions.forEach((optName, idx) => {
+      opts.forEach((optText, idx) => {
         const row = document.createElement('div');
-        row.className = 'choice-row-item';
-        row.innerHTML = `<span class="choice-num-badge">${idx + 1}</span><span>${optName}</span>`;
+        row.className = 'choice-row-large';
+        row.innerHTML = `<span style="width:26px; height:26px; border-radius:50%; background:#b0bec5; color:#fff; display:inline-flex; align-items:center; justify-content:center; margin-right:12px;">${idx + 1}</span><span>${optText}</span>`;
         row.onclick = () => {
-          document.querySelectorAll('.choice-row-item').forEach(r => r.classList.remove('selected'));
+          document.querySelectorAll('.choice-row-large').forEach(r => r.classList.remove('selected'));
           row.classList.add('selected');
-          selectedImgChoice = optName;
-          confirmBtn.classList.add('active');
+          selectedImageOpt = optText;
+          btn.classList.add('active');
         };
-        choiceContainer.appendChild(row);
+        list.appendChild(row);
       });
 
-      // 4. Đồng hồ đếm ngược
-      confirmBtn.onclick = () => {
-        if (!selectedImgChoice) return;
-        clearInterval(mainTimer);
-        if (selectedImgChoice === targetImgAnswer) {
-          score++; streak++;
-        } else {
-          streak = 0;
-        }
-        updateStats();
-        initImageMode();
+      btn.onclick = () => {
+        if (!selectedImageOpt) return;
+        clearInterval(arenaTimer);
+        if (selectedImageOpt === targetImageName) handlePassAction();
+        else handleFailAction();
+        setTimeout(runImageArena, 1400);
       };
 
-      mainTimer = setInterval(() => {
+      arenaTimer = setInterval(() => {
         timeLeft--;
         const m = String(Math.floor(timeLeft / 60)).padStart(2, '0');
         const s = String(timeLeft % 60).padStart(2, '0');
-        clockText.textContent = `${m}:${s}`;
+        clock.textContent = `${m}:${s}`;
         if (timeLeft <= 0) {
-          clearInterval(mainTimer);
-          streak = 0; updateStats(); initImageMode();
+          clearInterval(arenaTimer);
+          handleFailAction();
+          setTimeout(runImageArena, 1400);
         }
       }, 1000);
     }
 
-    /* ================= 3. TRÁO NẤM VIOLETTA ================= */
-    function getViolettaSVG(isMakeup, isClosedEyes) {
-      let faceElements = '';
+    /* ================= 3. NẤM VIOLETTA KHỔNG LỒ ================= */
+    function getViolettaSVGLarge(isMakeup, isClosedEyes) {
+      let face = '';
       if (isClosedEyes) {
-        faceElements = `
-          <path d="M 28 42 Q 33 46 38 42" stroke="#422006" stroke-width="2.6" fill="none" stroke-linecap="round"/>
-          <path d="M 52 42 Q 57 46 62 42" stroke="#422006" stroke-width="2.6" fill="none" stroke-linecap="round"/>
-          <ellipse cx="25" cy="45" rx="4" ry="2.2" fill="#f43f5e" opacity="0.6"/>
-          <ellipse cx="65" cy="45" rx="4" ry="2.2" fill="#f43f5e" opacity="0.6"/>
-          <path d="M 43 49 Q 45 51 47 49" stroke="#b91c1c" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        face = `
+          <path d="M 32 46 Q 38 52 44 46" stroke="#422006" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M 64 46 Q 70 52 76 46" stroke="#422006" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <ellipse cx="28" cy="50" rx="5" ry="3" fill="#f43f5e" opacity="0.6"/>
+          <ellipse cx="80" cy="50" rx="5" ry="3" fill="#f43f5e" opacity="0.6"/>
         `;
       } else if (isMakeup) {
-        faceElements = `
-          <ellipse cx="32" cy="39" rx="8" ry="5.5" fill="#f472b6" opacity="0.4"/>
-          <ellipse cx="58" cy="39" rx="8" ry="5.5" fill="#f472b6" opacity="0.4"/>
-          <ellipse cx="33" cy="41" rx="5.5" ry="7.5" fill="#1c1917"/>
-          <circle cx="31" cy="38" r="2.4" fill="#ffffff"/>
-          <circle cx="35" cy="44" r="1.3" fill="#ffffff"/>
-          <path d="M 27 35 Q 29 30 33 32" stroke="#1c1917" stroke-width="2.2" fill="none"/>
-          <path d="M 32 31 Q 35 28 38 31" stroke="#1c1917" stroke-width="2.2" fill="none"/>
-          <ellipse cx="23" cy="46" rx="5" ry="2.8" fill="#e11d48" opacity="0.8"/>
-          <ellipse cx="57" cy="41" rx="5.5" ry="7.5" fill="#1c1917"/>
-          <circle cx="55" cy="38" r="2.4" fill="#ffffff"/>
-          <circle cx="59" cy="44" r="1.3" fill="#ffffff"/>
-          <path d="M 63 35 Q 61 30 57 32" stroke="#1c1917" stroke-width="2.2" fill="none"/>
-          <path d="M 58 31 Q 55 28 52 31" stroke="#1c1917" stroke-width="2.2" fill="none"/>
-          <ellipse cx="67" cy="46" rx="5" ry="2.8" fill="#e11d48" opacity="0.8"/>
-          <path d="M 43 49 Q 45 52 47 49" stroke="#be123c" stroke-width="2.4" fill="none"/>
+        face = `
+          <ellipse cx="38" cy="44" rx="7" ry="9" fill="#1c1917"/>
+          <circle cx="36" cy="40" r="2.8" fill="#ffffff"/>
+          <ellipse cx="70" cy="44" rx="7" ry="9" fill="#1c1917"/>
+          <circle cx="68" cy="40" r="2.8" fill="#ffffff"/>
+          <path d="M 30 38 Q 34 32 40 35" stroke="#1c1917" stroke-width="2.5" fill="none"/>
+          <path d="M 78 38 Q 74 32 68 35" stroke="#1c1917" stroke-width="2.5" fill="none"/>
+          <ellipse cx="26" cy="52" rx="6" ry="3.5" fill="#e11d48"/>
+          <ellipse cx="82" cy="52" rx="6" ry="3.5" fill="#e11d48"/>
+          <path d="M 50 56 Q 54 60 58 56" stroke="#be123c" stroke-width="2.6" fill="none"/>
         `;
       } else {
-        faceElements = `
-          <ellipse cx="33" cy="42" rx="4" ry="4.8" fill="#292524"/><circle cx="32" cy="40" r="1.4" fill="#ffffff"/>
-          <ellipse cx="57" cy="42" rx="4" ry="4.8" fill="#292524"/><circle cx="56" cy="40" r="1.4" fill="#ffffff"/>
-          <ellipse cx="25" cy="46" rx="3.5" ry="1.8" fill="#fb7185" opacity="0.5"/>
-          <ellipse cx="65" cy="46" rx="3.5" ry="1.8" fill="#fb7185" opacity="0.5"/>
-          <path d="M 43 49 Q 45 51 47 49" stroke="#b91c1c" stroke-width="2" fill="none"/>
+        face = `
+          <ellipse cx="38" cy="46" rx="5" ry="6" fill="#292524"/><circle cx="37" cy="44" r="1.6" fill="#ffffff"/>
+          <ellipse cx="70" cy="46" rx="5" ry="6" fill="#292524"/><circle cx="69" cy="44" r="1.6" fill="#ffffff"/>
+          <ellipse cx="28" cy="52" rx="4" ry="2.2" fill="#fb7185" opacity="0.5"/>
+          <ellipse cx="80" cy="52" rx="4" ry="2.2" fill="#fb7185" opacity="0.5"/>
         `;
       }
-
       return `
-        <svg width="90" height="98" viewBox="0 0 90 98">
-          <path d="M 64 26 C 78 22, 85 36, 75 48 C 82 58, 70 66, 60 56 Z" fill="#facc15" stroke="#b45309" stroke-width="2.2"/>
-          <circle cx="72" cy="42" r="3" fill="#ea580c"/>
-          <path d="M 18 36 C 14 62, 76 62, 72 36 Z" fill="#fef3c7" stroke="#b45309" stroke-width="2.5"/>
-          <path d="M 6 36 C 6 8, 84 8, 84 36 C 84 41, 6 41, 6 36 Z" fill="#f43f5e" stroke="#881337" stroke-width="2.6"/>
-          <ellipse cx="24" cy="22" rx="7.5" ry="5.5" fill="#ffffff"/>
-          <ellipse cx="66" cy="22" rx="7" ry="5" fill="#ffffff"/>
-          <ellipse cx="45" cy="16" rx="6" ry="4.2" fill="#ffffff"/>
-          <ellipse cx="45" cy="30" rx="7.5" ry="4.5" fill="#ffffff"/>
-          <path d="M 52 10 L 59 1 L 64 9 L 71 3 L 72 16 Z" fill="#f59e0b" stroke="#78350f" stroke-width="2"/>
-          <circle cx="61" cy="11" r="2.2" fill="#ef4444"/>
-          ${faceElements}
+        <svg width="115" height="125" viewBox="0 0 110 120">
+          <path d="M 78 32 C 96 28, 104 44, 92 60 C 100 72, 86 82, 74 70 Z" fill="#facc15" stroke="#b45309" stroke-width="2.5"/>
+          <path d="M 22 44 C 18 76, 92 76, 88 44 Z" fill="#fef3c7" stroke="#b45309" stroke-width="3"/>
+          <path d="M 8 44 C 8 10, 102 10, 102 44 C 102 50, 8 50, 8 44 Z" fill="#f43f5e" stroke="#881337" stroke-width="3"/>
+          <ellipse cx="30" cy="26" rx="9" ry="6.5" fill="#ffffff"/>
+          <ellipse cx="80" cy="26" rx="9" ry="6.5" fill="#ffffff"/>
+          <path d="M 64 12 L 72 2 L 78 11 L 86 4 L 88 20 Z" fill="#f59e0b" stroke="#78350f" stroke-width="2"/>
+          ${face}
         </svg>
       `;
     }
 
-    let noticeSec = 14;
-    let targetShroom = 0;
-    let currentSlots = [0, 1, 2, 3];
-    const X_LANES = [80, 215, 350, 485];
+    let targetViolettaShroom = 0;
+    let violettaCurrentSlots = [0, 1, 2, 3];
+    const X_LANES_LARGE = [110, 290, 470, 650];
 
-    function initViolettaMode() {
-      document.getElementById('noticeModal').style.display = 'block';
-      document.getElementById('stageModal').style.display = 'none';
-      document.getElementById('noticeAvatar').innerHTML = getViolettaSVG(true, false);
-
-      clearInterval(mainTimer);
-      noticeSec = 14;
-      document.getElementById('noticeTimerText').textContent = noticeSec;
-      mainTimer = setInterval(() => {
-        noticeSec--;
-        document.getElementById('noticeTimerText').textContent = noticeSec;
-        if (noticeSec <= 0) {
-          clearInterval(mainTimer);
-          startStageImmediately();
-        }
-      }, 1000);
-    }
-
-    function startStageImmediately() {
-      clearInterval(mainTimer);
-      document.getElementById('noticeModal').style.display = 'none';
-      document.getElementById('stageModal').style.display = 'block';
+    function runViolettaArena() {
+      clearInterval(arenaTimer);
+      questionStartTime = Date.now();
+      targetViolettaShroom = Math.floor(Math.random() * 4);
+      violettaCurrentSlots = [0, 1, 2, 3];
 
       for (let i = 0; i < 4; i++) {
-        document.getElementById(`btn${i}`).classList.remove('ready');
-        document.getElementById(`arrow${i}`).style.display = 'none';
-      }
-
-      targetShroom = Math.floor(Math.random() * 4);
-      currentSlots = [0, 1, 2, 3];
-
-      for (let i = 0; i < 4; i++) {
+        document.getElementById(`vbtn${i}`).classList.remove('ready');
+        document.getElementById(`ar${i}`).style.display = 'none';
         const lane = document.getElementById(`lane${i}`);
         lane.style.transition = 'none';
-        lane.style.transform = `translateX(${X_LANES[i]}px)`;
-        document.getElementById(`shroomArt${i}`).innerHTML = getViolettaSVG(i === targetShroom, false);
+        lane.style.transform = `translateX(${X_LANES_LARGE[i]}px)`;
+        document.getElementById(`sh${i}`).innerHTML = getViolettaSVGLarge(i === targetViolettaShroom, false);
       }
 
-      document.getElementById(`arrow${targetShroom}`).style.display = 'block';
-      document.getElementById('stageBannerText').textContent = "화장한 비올레타를 놓치지 말고 주목해주세요.";
+      document.getElementById(`ar${targetViolettaShroom}`).style.display = 'block';
+      document.getElementById('arenaViolettaBanner').textContent = "화장한 비올레타를 놓치지 말고 주목해주세요. (Khóa chặt mục tiêu!)";
+      speakNPC("Khóa chặt mắt vào con nấm trang điểm có má hồng trong 2 giây đầu!", "normal");
 
       setTimeout(() => {
-        document.getElementById(`arrow${targetShroom}`).style.display = 'none';
+        document.getElementById(`ar${targetViolettaShroom}`).style.display = 'none';
+        document.getElementById('arenaViolettaBanner').textContent = "눈을 감고 이동하기 시작합니다... (Đang tráo đổi từ từ)";
+        speakNPC("Nó bắt đầu nhắm mắt tráo chỗ kìa! Đừng chớp mắt!", "urgent");
+
         for (let i = 0; i < 4; i++) {
-          document.getElementById(`shroomArt${i}`).innerHTML = getViolettaSVG(i === targetShroom, true);
+          document.getElementById(`sh${i}`).innerHTML = getViolettaSVGLarge(i === targetViolettaShroom, true);
           document.getElementById(`lane${i}`).style.transition = 'transform 0.85s cubic-bezier(0.45, 0.05, 0.55, 0.95)';
         }
 
         let step = 0;
-        const shuffleTimer = setInterval(() => {
+        arenaTimer = setInterval(() => {
           let a = Math.floor(Math.random() * 4);
           let b = Math.floor(Math.random() * 4);
           while (b === a) b = Math.floor(Math.random() * 4);
 
-          let temp = currentSlots[a];
-          currentSlots[a] = currentSlots[b];
-          currentSlots[b] = temp;
+          let temp = violettaCurrentSlots[a];
+          violettaCurrentSlots[a] = violettaCurrentSlots[b];
+          violettaCurrentSlots[b] = temp;
 
-          document.getElementById(`lane${currentSlots[a]}`).style.zIndex = '15';
-          document.getElementById(`lane${currentSlots[b]}`).style.zIndex = '12';
-          document.getElementById(`lane${currentSlots[a]}`).style.transform = `translateX(${X_LANES[a]}px)`;
-          document.getElementById(`lane${currentSlots[b]}`).style.transform = `translateX(${X_LANES[b]}px)`;
+          document.getElementById(`lane${violettaCurrentSlots[a]}`).style.zIndex = '15';
+          document.getElementById(`lane${violettaCurrentSlots[b]}`).style.zIndex = '12';
+          document.getElementById(`lane${violettaCurrentSlots[a]}`).style.transform = `translateX(${X_LANES_LARGE[a]}px)`;
+          document.getElementById(`lane${violettaCurrentSlots[b]}`).style.transform = `translateX(${X_LANES_LARGE[b]}px)`;
 
           step++;
           if (step >= 6) {
-            clearInterval(shuffleTimer);
+            clearInterval(arenaTimer);
             setTimeout(() => {
-              for (let i = 0; i < 4; i++) document.getElementById(`btn${i}`).classList.add('ready');
+              for (let i = 0; i < 4; i++) document.getElementById(`vbtn${i}`).classList.add('ready');
+              document.getElementById('arenaViolettaBanner').textContent = "화장한 비올레타가 위치한 번호를 누르세요! (Chọn số 1 - 4)";
+              speakNPC("Dừng rồi! Bấm số vị trí của nó ngay!", "urgent");
             }, 880);
           }
         }, 980);
       }, 2000);
     }
 
-    function chooseSlot(userChoice) {
-      if (!document.getElementById('btn0').classList.contains('ready')) return;
+    function chooseViolettaSlot(choice) {
+      if (!document.getElementById('vbtn0').classList.contains('ready')) return;
       for (let i = 0; i < 4; i++) {
-        document.getElementById(`btn${i}`).classList.remove('ready');
-        document.getElementById(`shroomArt${i}`).innerHTML = getViolettaSVG(i === targetShroom, false);
+        document.getElementById(`vbtn${i}`).classList.remove('ready');
+        document.getElementById(`sh${i}`).innerHTML = getViolettaSVGLarge(i === targetViolettaShroom, false);
       }
-      const correctSlot = currentSlots.indexOf(targetShroom);
-      if (userChoice === correctSlot) {
-        score++; streak++;
-        document.getElementById('stageBannerText').textContent = "★ 통과 (Chính xác!)";
+      const correctSlot = violettaCurrentSlots.indexOf(targetViolettaShroom);
+      if (choice === correctSlot) {
+        handlePassAction();
       } else {
-        streak = 0;
-        document.getElementById('stageBannerText').textContent = `✖ 실패 (Violetta ở vị trí ${correctSlot + 1})`;
+        handleFailAction();
       }
-      updateStats();
-      setTimeout(initViolettaMode, 2200);
+      setTimeout(runViolettaArena, 2000);
     }
 
-    /* ================= 4. BÁM HÌNH TÀNG HÌNH ================= */
-    function getGreenReticleSVG() {
-      return `
+    /* ================= 4. BÁM HÌNH TÀNG HÌNH KHỔNG LỒ ================= */
+    let trackProgress = 0;
+    let isTrackingCursor = false;
+    let trackX = 350, trackY = 180, tVelX = 3.0, tVelY = 2.4;
+    let trackSecRemain = 7;
+
+    function runTrackArena() {
+      clearInterval(arenaTimer);
+      questionStartTime = Date.now();
+      trackProgress = 0;
+      isTrackingCursor = false;
+      trackSecRemain = 7;
+
+      document.getElementById('arenaTrackFill').style.width = '0%';
+      document.getElementById('arenaTrackPercent').textContent = '0%';
+      document.getElementById('arenaTrackSec').textContent = trackSecRemain;
+      document.getElementById('arenaReticleIcon').innerHTML = `
         <svg width="100%" height="100%" viewBox="0 0 36 36">
-          <circle cx="18" cy="18" r="14" fill="none" stroke="#15803d" stroke-width="2.5"/>
-          <circle cx="18" cy="18" r="7" fill="none" stroke="#16a34a" stroke-width="2"/>
-          <line x1="18" y1="2" x2="18" y2="10" stroke="#15803d" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="18" y1="26" x2="18" y2="34" stroke="#15803d" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="2" y1="18" x2="10" y2="18" stroke="#15803d" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="26" y1="18" x2="34" y2="18" stroke="#15803d" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="18" cy="18" r="2.5" fill="#22c55e"/>
+          <circle cx="18" cy="18" r="14" fill="none" stroke="#15803d" stroke-width="3"/>
+          <circle cx="18" cy="18" r="7" fill="none" stroke="#16a34a" stroke-width="2.5"/>
+          <line x1="18" y1="2" x2="18" y2="10" stroke="#15803d" stroke-width="3"/>
+          <line x1="18" y1="26" x2="18" y2="34" stroke="#15803d" stroke-width="3"/>
+          <line x1="2" y1="18" x2="10" y2="18" stroke="#15803d" stroke-width="3"/>
+          <line x1="26" y1="18" x2="34" y2="18" stroke="#15803d" stroke-width="3"/>
         </svg>
       `;
-    }
 
-    let prepSec = 8;
-    let trackProgress = 0;
-    let isCursorOverTarget = false;
-    let posX = 260, posY = 140, velX = 2.4, velY = 2.0;
-    let remainingGameSec = 7;
-
-    function initTrackMode() {
-      document.getElementById('noticeWindow').style.display = 'block';
-      document.getElementById('gameWindow').style.display = 'none';
-      document.getElementById('reticleP1').innerHTML = getGreenReticleSVG();
-      document.getElementById('reticleP2').innerHTML = getGreenReticleSVG();
-      document.getElementById('reticleP3').innerHTML = getGreenReticleSVG();
-      document.getElementById('orbReticle').innerHTML = getGreenReticleSVG();
-
-      clearInterval(mainTimer);
-      prepSec = 8;
-      document.getElementById('prepTimer').textContent = prepSec;
-      mainTimer = setInterval(() => {
-        prepSec--;
-        document.getElementById('prepTimer').textContent = prepSec;
-        if (prepSec <= 0) {
-          clearInterval(mainTimer);
-          startTrackingGame();
-        }
-      }, 1000);
-    }
-
-    function startTrackingGame() {
-      clearInterval(mainTimer);
-      document.getElementById('noticeWindow').style.display = 'none';
-      document.getElementById('gameWindow').style.display = 'block';
-
-      trackProgress = 0;
-      isCursorOverTarget = false;
-      remainingGameSec = 7;
-      document.getElementById('progressFill').style.width = '0%';
-      document.getElementById('progressPercent').textContent = '0%';
-      document.getElementById('floatingTimer').textContent = remainingGameSec;
-
-      const orb = document.getElementById('trackingOrb');
+      const orb = document.getElementById('arenaOrb');
       orb.style.opacity = '1';
-      orb.onmouseenter = () => { isCursorOverTarget = true; };
-      orb.onmouseleave = () => { isCursorOverTarget = false; };
+      orb.onmouseenter = () => { isTrackingCursor = true; };
+      orb.onmouseleave = () => { isTrackingCursor = false; };
 
-      posX = 150 + Math.random() * 320;
-      posY = 80 + Math.random() * 180;
-      velX = (Math.random() > 0.5 ? 2.5 : -2.5);
-      velY = (Math.random() > 0.5 ? 2.1 : -2.1);
+      trackX = 200 + Math.random() * 400;
+      trackY = 100 + Math.random() * 200;
+      tVelX = Math.random() > 0.5 ? 3.0 : -3.0;
+      tVelY = Math.random() > 0.5 ? 2.5 : -2.5;
 
-      let elapsedTime = 0;
-      mainTimer = setInterval(() => {
-        elapsedTime += 25;
-        if (elapsedTime % 1000 < 25 && remainingGameSec > 0) {
-          remainingGameSec--;
-          document.getElementById('floatingTimer').textContent = remainingGameSec;
+      speakNPC("Rê chuột đè lên khối tròn và bám theo liên tục khi nó mờ dần!", "normal");
+
+      let elapsed = 0;
+      arenaTimer = setInterval(() => {
+        elapsed += 25;
+        if (elapsed % 1000 < 25 && trackSecRemain > 0) {
+          trackSecRemain--;
+          document.getElementById('arenaTrackSec').textContent = trackSecRemain;
         }
 
-        const currentOpacity = Math.max(0.15, 1.0 - (elapsedTime / 6500));
-        orb.style.opacity = currentOpacity;
+        orb.style.opacity = Math.max(0.15, 1.0 - (elapsed / 6500));
+        trackX += tVelX; trackY += tVelY;
+        if (trackX <= 10 || trackX >= 790) tVelX *= -1;
+        if (trackY <= 10 || trackY >= 350) tVelY *= -1;
+        orb.style.left = trackX + 'px';
+        orb.style.top = trackY + 'px';
 
-        posX += velX; posY += velY;
-        if (posX <= 10 || posX >= 588) velX *= -1;
-        if (posY <= 10 || posY >= 308) velY *= -1;
-        orb.style.left = posX + 'px';
-        orb.style.top = posY + 'px';
-
-        if (isCursorOverTarget) {
-          trackProgress = Math.min(100, trackProgress + 0.6);
-          document.getElementById('progressFill').style.width = trackProgress + '%';
-          document.getElementById('progressPercent').textContent = Math.floor(trackProgress) + '%';
+        if (isTrackingCursor) {
+          trackProgress = Math.min(100, trackProgress + 0.65);
+          document.getElementById('arenaTrackFill').style.width = trackProgress + '%';
+          document.getElementById('arenaTrackPercent').textContent = Math.floor(trackProgress) + '%';
           if (trackProgress >= 100) {
-            clearInterval(mainTimer);
-            score++; streak++; updateStats();
-            alert("★ 통과 (Bám mục tiêu tàng hình thành công!)");
-            initTrackMode();
+            clearInterval(arenaTimer);
+            handlePassAction();
+            setTimeout(runTrackArena, 1400);
           }
         }
 
-        if (elapsedTime >= 7000 && trackProgress < 100) {
-          clearInterval(mainTimer);
-          streak = 0; updateStats();
-          alert("✖ 실패 (Chưa đủ 100% thời gian giữ chuột!)");
-          initTrackMode();
+        if (elapsed >= 7000 && trackProgress < 100) {
+          clearInterval(arenaTimer);
+          handleFailAction();
+          setTimeout(runTrackArena, 1400);
         }
       }, 25);
     }
 
-    /* ================= 5. BÓNG 5 LẦN + GÕ CHỮ + GUIDE PHÍM ================= */
-    const CHOSEONG = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
-    const CHOSEONG_KEY = ['r','R','s','e','E','f','a','q','Q','t','T','d','w','W','c','z','x','v','g'];
-    const JUNGSEONG = ['ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ'];
-    const JUNGSEONG_KEY = ['k','o','i','O','j','p','u','P','h','hk','ho','hl','y','n','nj','np','nl','b','m','ml','l'];
-    const JONGSEONG = ['','ㄱ','ㄲ','ㄳ','ㄴ','ㄵ','ㄶ','ㄷ','ㄹ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ','ㅁ','ㅂ','ㅄ','ㅅ','ㅆ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
-    const JONGSEONG_KEY = ['','r','R','rt','s','sw','sg','e','f','fr','fa','fq','ft','fx','fv','fg','a','q','qt','t','T','d','w','c','z','x','v','g'];
-
-    function decomposeHangul(char) {
-      const code = char.charCodeAt(0);
-      if (code < 0xAC00 || code > 0xD7A3) return null;
-      const index = code - 0xAC00;
-      const l = Math.floor(index / (21 * 28));
-      const v = Math.floor((index % (21 * 28)) / 28);
-      const t = index % 28;
-      const jamos = [CHOSEONG[l], JUNGSEONG[v]];
-      const keys = [CHOSEONG_KEY[l], JUNGSEONG_KEY[v]];
-      if (t > 0) { jamos.push(JONGSEONG[t]); keys.push(JONGSEONG_KEY[t]); }
-      return { char, jamoText: jamos.join(' + '), keys, combinedKeys: keys.join('') };
-    }
-
-    function generateRandomHangulWord() {
-      let word = "";
-      for (let i = 0; i < 5; i++) {
-        const l = Math.floor(Math.random() * CHOSEONG.length);
-        const v = Math.floor(Math.random() * 10);
-        const t = Math.floor(Math.random() * 8);
-        const unicode = 0xAC00 + (l * 21 * 28) + (v * 28) + t;
-        word += String.fromCharCode(unicode);
-      }
-      return word;
-    }
-
-    let bubbleClicks = 0;
-    let typeLives = 3;
-    let remainingTime = 49;
+    /* ================= 5. BÓNG 5 LẦN + GÕ HANGUL ================= */
+    let bubbleHits = 0;
+    let typeLivesLeft = 3;
+    let typeSec = 49;
     let currentTargetWord = "";
-    let hintsVisible = true;
 
-    function initBubbleMode() {
-      clearInterval(mainTimer);
-      bubbleClicks = 0;
-      document.getElementById('bubbleHits').textContent = bubbleClicks;
-      document.getElementById('bubbleStage').style.display = 'flex';
-      document.getElementById('typeStage').style.display = 'none';
+    function runClickTypeArena() {
+      clearInterval(arenaTimer);
+      questionStartTime = Date.now();
+      bubbleHits = 0;
+      document.getElementById('arenaBubbleCount').textContent = bubbleHits;
+      document.getElementById('arenaBubbleBox').style.display = 'flex';
+      document.getElementById('arenaTypeBox').style.display = 'none';
 
-      moveBubbleRandom();
-      document.getElementById('bubbleTarget').onclick = () => {
-        bubbleClicks++;
-        document.getElementById('bubbleHits').textContent = bubbleClicks;
-        if (bubbleClicks >= 5) {
-          document.getElementById('bubbleStage').style.display = 'none';
-          document.getElementById('typeStage').style.display = 'block';
-          startTypePhase();
+      const ball = document.getElementById('arenaMovingBall');
+      function moveBall() {
+        ball.style.left = (40 + Math.random() * 750) + 'px';
+        ball.style.top = (80 + Math.random() * 300) + 'px';
+      }
+      moveBall();
+
+      ball.onclick = () => {
+        bubbleHits++;
+        document.getElementById('arenaBubbleCount').textContent = bubbleHits;
+        playBeep(440 + bubbleHits * 80, 'triangle', 0.1);
+        if (bubbleHits >= 5) {
+          document.getElementById('arenaBubbleBox').style.display = 'none';
+          document.getElementById('arenaTypeBox').style.display = 'block';
+          startHangulTypingPhase();
         } else {
-          moveBubbleRandom();
+          moveBall();
         }
       };
+      speakNPC("Bấm nhanh vào quả bóng xanh lục 5 lần để mở khóa hộp gõ chữ!", "normal");
     }
 
-    function moveBubbleRandom() {
-      const b = document.getElementById('bubbleTarget');
-      b.style.left = (30 + Math.random() * 510) + 'px';
-      b.style.top = (70 + Math.random() * 260) + 'px';
-    }
+    const HANGUL_PRESETS = [
+      { w: "애가형영것", k: "d o  r k  g u d  d u d  r j t" },
+      { w: "단풍잎바람", k: "e k s  v n d  d l v  q k  f k a" },
+      { w: "자쿰의투구", k: "w k  z n a  d m l  x n  r n" },
+      { w: "헤네시스숲", k: "g p  s p  t l  t m  t n v" },
+      { w: "루디브리엄", k: "f n  e l  q m  f l  d j a" }
+    ];
 
-    function toggleHintView() {
-      hintsVisible = !hintsVisible;
-      document.getElementById('syllableHintsGrid').style.display = hintsVisible ? 'grid' : 'none';
-      document.getElementById('fullStringGuide').style.display = hintsVisible ? 'flex' : 'none';
-      document.getElementById('btnToggleHint').textContent = hintsVisible ? 'Ẩn gợi ý' : 'Hiện gợi ý';
-    }
+    function startHangulTypingPhase() {
+      typeLivesLeft = 3;
+      typeSec = 49;
+      document.getElementById('arenaTypeTimer').textContent = typeSec;
+      document.getElementById('arenaTypeLives').textContent = "세번 남았습니다";
 
-    function startTypePhase() {
-      typeLives = 3;
-      remainingTime = 49;
-      document.getElementById('cyanTimer').textContent = remainingTime;
-      document.getElementById('livesText').textContent = "세번 남았습니다";
-
-      const inp = document.getElementById('hangulInput');
+      const inp = document.getElementById('arenaHangulInput');
       inp.value = '';
       inp.focus();
 
-      currentTargetWord = generateRandomHangulWord();
-      renderDistortedHangul(currentTargetWord);
-      buildKeystrokeGuide(currentTargetWord);
+      const item = HANGUL_PRESETS[Math.floor(Math.random() * HANGUL_PRESETS.length)];
+      currentTargetWord = item.w;
+      document.getElementById('arenaKeyHintStr').textContent = item.k;
 
-      mainTimer = setInterval(() => {
-        remainingTime--;
-        document.getElementById('cyanTimer').textContent = remainingTime;
-        if (remainingTime <= 0) {
-          clearInterval(mainTimer);
-          streak = 0; updateStats();
-          alert("✖ 실패: Hết thời gian!");
-          initBubbleMode();
-        }
-      }, 1000);
-
-      inp.onkeydown = (e) => {
-        if (e.key === 'Enter') {
-          if (inp.value.trim() === currentTargetWord) {
-            clearInterval(mainTimer);
-            score++; streak++; updateStats();
-            alert("★ 통과 (Chính xác!)");
-            initBubbleMode();
-          } else {
-            typeLives--;
-            if (typeLives === 2) document.getElementById('livesText').textContent = "두번 남았습니다";
-            else if (typeLives === 1) document.getElementById('livesText').textContent = "한번 남았습니다";
-            else {
-              clearInterval(mainTimer);
-              streak = 0; updateStats();
-              alert("✖ 실패: Nhập sai 3 lần!");
-              initBubbleMode();
-            }
-            inp.value = '';
-          }
-        }
-      };
-    }
-
-    function buildKeystrokeGuide(word) {
-      const grid = document.getElementById('syllableHintsGrid');
-      grid.innerHTML = '';
-      let fullKeys = '';
-      for (let i = 0; i < word.length; i++) {
-        const item = decomposeHangul(word[i]);
-        if (!item) continue;
-        fullKeys += item.combinedKeys + ' ';
-        const col = document.createElement('div');
-        col.className = 'syllable-col';
-        let kbdHtml = '';
-        item.keys.forEach(k => {
-          for (let char of k) {
-            const isShift = (char === char.toUpperCase() && char !== char.toLowerCase());
-            kbdHtml += `<kbd class="${isShift ? 'shift-key' : ''}">${char}</kbd>`;
-          }
-        });
-        col.innerHTML = `
-          <span class="hangul-char-badge">${item.char}</span>
-          <span class="jamo-split-text">${item.jamoText}</span>
-          <div>${kbdHtml}</div>
-        `;
-        grid.appendChild(col);
-      }
-      document.getElementById('fullKeySequence').textContent = fullKeys.trim();
-    }
-
-    function renderDistortedHangul(text) {
-      const canvas = document.getElementById('hangulCanvas');
+      // Vẽ chữ Canvas
+      const canvas = document.getElementById('arenaHangulCanvas');
       const ctx = canvas.getContext('2d');
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = "#fafafa";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       const colors = ["#451a03", "#0f172a", "#581c87", "#701a75", "#1c1917"];
-      for (let i = 0; i < text.length; i++) {
+      for (let i = 0; i < currentTargetWord.length; i++) {
         ctx.save();
         ctx.fillStyle = colors[i % colors.length];
-        ctx.font = "900 46px 'Batang', 'Gungsuh', serif";
-        ctx.translate(45 + i * 85, 62 + (Math.random() * 8 - 4));
+        ctx.font = "900 52px 'Batang', serif";
+        ctx.translate(55 + i * 120, 75 + (Math.random()*10 - 5));
         ctx.rotate(Math.random() * 0.2 - 0.1);
-        ctx.fillText(text[i], 0, 0);
+        ctx.fillText(currentTargetWord[i], 0, 0);
         ctx.restore();
       }
-      for (let i = 0; i < 7; i++) {
-        ctx.beginPath();
-        ctx.strokeStyle = (i % 2 === 0) ? "rgba(15, 23, 42, 0.65)" : "rgba(185, 28, 28, 0.45)";
-        ctx.lineWidth = 1.2 + Math.random() * 1.5;
-        ctx.moveTo(Math.random() * 50, Math.random() * canvas.height);
-        ctx.bezierCurveTo(140, Math.random() * canvas.height, 300, Math.random() * canvas.height, canvas.width - 20, Math.random() * canvas.height);
-        ctx.stroke();
-      }
-      for (let i = 0; i < 700; i++) {
-        ctx.fillStyle = Math.random() > 0.5 ? "rgba(0,0,0,0.7)" : "rgba(120,53,15,0.6)";
-        ctx.fillRect(Math.random() * canvas.width, Math.random() * canvas.height, 1.5, 1.5);
-      }
+
+      arenaTimer = setInterval(() => {
+        typeSec--;
+        document.getElementById('arenaTypeTimer').textContent = typeSec;
+        if (typeSec <= 0) {
+          clearInterval(arenaTimer);
+          handleFailAction();
+          setTimeout(runClickTypeArena, 1400);
+        }
+      }, 1000);
+
+      inp.onkeydown = (e) => {
+        if (e.key === 'Enter') {
+          if (inp.value.trim() === currentTargetWord) {
+            clearInterval(arenaTimer);
+            handlePassAction();
+            setTimeout(runClickTypeArena, 1400);
+          } else {
+            typeLivesLeft--;
+            if (typeLivesLeft === 2) document.getElementById('arenaTypeLives').textContent = "두번 남았습니다";
+            else if (typeLivesLeft === 1) document.getElementById('arenaTypeLives').textContent = "한번 남았습니다";
+            else {
+              clearInterval(arenaTimer);
+              handleFailAction();
+              setTimeout(runClickTypeArena, 1400);
+            }
+            inp.value = '';
+          }
+        }
+      };
+      speakNPC("Nhìn chữ thư pháp và gõ theo phím gợi ý bên dưới thật nhanh!", "normal");
     }
 
-    /* ================= 6. MAPLE PLANET GM CHECK (ĐA DẠNG HÓA CÂU HỎI) ================= */
-    const MAP_NAMES = ["헤네시스", "엘리니아", "페리온", "커닝시티", "루디브리엄", "오르비스", "개미굴", "골렘의사원", "남나무숲", "슬리피우드", "와일드보어의땅"];
-    const BOSS_NAMES = ["자쿰", "혼테일", "핑크빈", "파풀라투스", "피아누스", "발록", "벨룸", "시그너스"];
-    const CLASS_NAMES = ["전사", "마법사", "궁수", "도적", "해적", "썬콜", "나이트로드", "섀도어", "비숍", "보우마스터"];
-    const REVERSE_WORDS = [
-      { orig: "주황버섯", rev: "섯버황주" },
-      { orig: "루디브리엄", rev: "엄리브디루" },
-      { orig: "슬라임방울", rev: "울방임라슬" },
-      { orig: "헤네시스숲", rev: "숲스시네헤" }
+    /* ================= 6. MAPLE PLANET GM CHECK ================= */
+    let currentGMObj = null;
+    const GM_QUESTIONS = [
+      {
+        render: () => `
+          <div style="color:#dc2626; font-weight:bold; margin-bottom:4px;">[ 요 청 사 항 ]</div>
+          <div style="color:#dc2626; font-weight:bold; margin-bottom:8px;">현재 사냥터의 풍경을 자유롭게 8글자 이상 적어주세요.</div>
+          <div style="color:#2563eb; font-size:12px;">※ 한글로 입력 → 숫자, 영문, 공백, 특수문자는 제외</div>
+        `,
+        val: (v) => v.replace(/\s+/g, '').length >= 8 && /^[가-힣]+$/.test(v.replace(/\s+/g, ''))
+      },
+      {
+        render: () => `
+          <div style="color:#dc2626; font-weight:bold; margin-bottom:6px;">[ 보안 문자 확인 ] 세로로 읽고 사냥터 이름을 입력하세요:</div>
+          <div style="display:flex; gap:20px; font-weight:900; font-size:16px;">
+            <div style="display:flex; flex-direction:column;"><span>현</span><span>재</span></div>
+            <div style="display:flex; flex-direction:column;"><span>사</span><span>냥</span><span>터</span><span>의</span></div>
+            <div style="display:flex; flex-direction:column;"><span>이</span><span>름</span><span>을</span><span>입</span><span>력</span><span>해</span><span>주</span><span>세</span></div>
+            <div style="display:flex; flex-direction:column;"><span>요</span></div>
+          </div>
+        `,
+        val: (v) => v.trim().length >= 2 && /^[가-힣]+$/.test(v.replace(/\s+/g, ''))
+      },
+      {
+        render: () => `
+          <div style="color:#dc2626; font-weight:bold; margin-bottom:4px;">[알림] 아래 3가지 문제의 답을 / 로 구분하여 입력하세요:</div>
+          <div style="font-size:13px; line-height:1.5;">
+            1. 우리나라 국가명은?<br>2. 생각나는 보스 몬스터 이름은?<br>3. 접속중인 내 캐릭터 이름은?
+          </div>
+          <div style="color:#dc2626; font-size:12px; margin-top:6px;">예시: 대한민국 / 자쿰 / 홍길동</div>
+        `,
+        val: (v) => v.split('/').length === 3 && v.split('/').every(s => s.trim().length > 0)
+      }
     ];
 
-    function generateRandomGMQuestion() {
-      const type = Math.floor(Math.random() * 7);
-
-      if (type === 0) {
-        // Tả bãi săn >= 8 ký tự
-        return {
-          render: () => `
-            <div style="color: #dc2626; font-weight: bold; margin-bottom: 3px;">[ 요 청 사 항 ]</div>
-            <div style="color: #dc2626; font-weight: bold; margin-bottom: 8px;">현재 사냥터의 풍경을 자유롭게 8글자 이상 적어주세요.</div>
-            <div style="color: #2563eb; font-weight: bold; margin-bottom: 3px;">[ 규 칙 안 내 ]</div>
-            <div style="color: #2563eb; font-size: 11.5px; line-height: 1.4;">
-              ※ 한글로 입력 → 숫자, 영문, 공백, 특수문자는 제외<br>
-              ※ 캐릭터명, 닉네임, 몬스터명 입력은 제외해 주세요.
-            </div>
-          `,
-          guide: "Miêu tả tự do về bãi săn bằng tiếng Hàn từ <b>8 ký tự trở lên</b>. Không khoảng trắng, không số.",
-          sample: "나무가많고시원한사냥터",
-          validate: (val) => {
-            const clean = val.replace(/\s+/g, '');
-            return clean.length >= 8 && /^[가-힣]+$/.test(clean);
-          }
-        };
-      } else if (type === 1) {
-        // Chữ xếp dọc
-        return {
-          render: () => `
-            <div style="color: #dc2626; font-weight: bold; margin-bottom: 4px;">[ 보 안 문 자 ] 세로로 읽고 사냥터 이름을 입력하세요:</div>
-            <div class="vertical-grid-wrap">
-              <div class="vert-col"><span>현</span><span>재</span></div>
-              <div class="vert-col"><span>사</span><span>냥</span><span>터</span><span>의</span></div>
-              <div class="vert-col"><span>이</span><span>름</span><span>을</span><span>입</span><span>력</span><span>해</span><span>주</span><span>세</span></div>
-              <div class="vert-col"><span>요</span></div>
-            </div>
-          `,
-          guide: "Đọc 4 cột dọc từ trên xuống: <b>현재 사냥터의 이름을 입력해 주세요</b> (Hãy nhập tên bãi săn hiện tại).",
-          sample: MAP_NAMES[Math.floor(Math.random() * MAP_NAMES.length)],
-          validate: (val) => val.trim().length >= 2 && /^[가-힣]+$/.test(val.replace(/\s+/g, ''))
-        };
-      } else if (type === 2) {
-        // 3 câu hỏi ngăn cách bởi dấu /
-        const boss = BOSS_NAMES[Math.floor(Math.random() * BOSS_NAMES.length)];
-        return {
-          render: () => `
-            <div style="color: #dc2626; font-weight: bold; margin-bottom: 4px;">[알림] 아래의 3가지 문제를 풀어주세요.</div>
-            <div style="font-size: 12px; line-height: 1.4;">
-              <b>[1번]</b> 우리나라의 국가명은?<br>
-              <b>[2번]</b> 생각나는 보스 몬스터 이름은?<br>
-              <b>[3번]</b> 현재 접속중인 내 캐릭터의 이름은?
-            </div>
-            <div style="color: #dc2626; font-size: 11.5px; font-weight: bold; margin-top: 6px;">
-              답변 예시 : 대한민국 / 자쿰 / 홍길동
-            </div>
-          `,
-          guide: "Trả lời đúng 3 phần ngăn cách bởi dấu gạch chéo <b>/</b>: Quốc gia / Tên Boss / Tên nhân vật.",
-          sample: `대한민국 / ${boss} / 진안대군파보`,
-          validate: (val) => {
-            const parts = val.split('/');
-            return parts.length === 3 && parts.every(p => p.trim().length > 0);
-          }
-        };
-      } else if (type === 3) {
-        // 10 chữ Hangul không lặp
-        return {
-          render: () => `
-            <div style="color: #dc2626; font-weight: bold; margin-bottom: 4px;">[ 요 청 사 항 ]</div>
-            <div style="font-weight: bold; margin-bottom: 6px;">서로 다른 한글 10글자를 임의로 입력해 주세요.</div>
-            <div style="color: #2563eb; font-size: 11.5px; line-height: 1.4;">
-              ※ 같은 글자 반복 및 가나다라 순차 입력은 제외<br>
-              ※ 숫자, 영문, 공백, 특수문자는 제외
-            </div>
-          `,
-          guide: "Nhập đúng <b>10 chữ Hangul khác nhau hoàn toàn</b>, không có khoảng trắng, không số.",
-          sample: "동서남북갑을병정무기",
-          validate: (val) => {
-            const clean = val.replace(/\s+/g, '');
-            const set = new Set(clean);
-            return clean.length >= 10 && set.size >= 10 && /^[가-힣]+$/.test(clean);
-          }
-        };
-      } else if (type === 4) {
-        // Tên nhân vật + nghề
-        const job = CLASS_NAMES[Math.floor(Math.random() * CLASS_NAMES.length)];
-        return {
-          render: () => `
-            <div style="font-weight: bold; margin-bottom: 6px;">안녕하세요. 메이플 플레이어 확인 진행중입니다.</div>
-            <div style="font-weight: bold; margin-bottom: 8px;">아래 칸에 자신의 캐릭터 이름과 직업을 입력하세요.</div>
-            <div style="color: #2563eb; font-size: 11.5px;">※ 현재 접속중인 캐릭터 이름과 직업입니다.</div>
-          `,
-          guide: "Nhập tên nhân vật kèm nghề nghiệp đang chơi (ví dụ: Tên + Nghề).",
-          sample: `진안대군파보 ${job}`,
-          validate: (val) => val.trim().length >= 4
-        };
-      } else if (type === 5) {
-        // Viết ngược từ (Reverse text)
-        const pair = REVERSE_WORDS[Math.floor(Math.random() * REVERSE_WORDS.length)];
-        return {
-          render: () => `
-            <div style="color: #dc2626; font-weight: bold; margin-bottom: 6px;">[ 보안 단어 거꾸로 입력 ]</div>
-            <div style="font-size: 13.5px; margin-bottom: 8px;">제시된 단어를 <b>거꾸로</b> 정확히 입력해 주세요:</div>
-            <div style="font-size: 16px; font-weight: 900; color: #1e40af; margin-bottom: 6px;">${pair.orig}</div>
-          `,
-          guide: `Gõ ngược lại từ được hiển thị (Từ gốc: <b>${pair.orig}</b> -> Gõ ngược: <b>${pair.rev}</b>).`,
-          sample: pair.rev,
-          validate: (val) => val.trim() === pair.rev
-        };
-      } else {
-        // Chuỗi kết hợp 3 chữ Hàn + 3 chữ Anh/Số
-        return {
-          render: () => `
-            <div style="color: #dc2626; font-weight: bold; margin-bottom: 4px;">[ 복합 문자 입력 ]</div>
-            <div style="font-size: 13px; line-height: 1.5; margin-bottom: 6px;">
-              한글 3글자와 영어/숫자 3글자를 조합하여 총 6글자를 공백 없이 입력하세요.
-            </div>
-            <div style="color: #64748b; font-size: 11.5px;">※ 예시: 가나다abc 또는 단풍잎123</div>
-          `,
-          guide: "Nhập tổ hợp gồm <b>3 chữ Hangul</b> và <b>3 ký tự tiếng Anh hoặc Số</b> liền nhau không khoảng trắng.",
-          sample: "가나다abc",
-          validate: (val) => {
-            const clean = val.replace(/\s+/g, '');
-            return clean.length >= 6 && /[가-힣]{3}/.test(clean) && /[a-zA-Z0-9]{3}/.test(clean);
-          }
-        };
-      }
-    }
-
-    let currentGMQuestion = null;
-    function initGMCheckMode() {
-      const inp = document.getElementById('answerInput');
+    function runGMArena() {
+      questionStartTime = Date.now();
+      const inp = document.getElementById('arenaGMInput');
       inp.value = '';
       inp.focus();
 
-      currentGMQuestion = generateRandomGMQuestion();
-      document.getElementById('questionBox').innerHTML = currentGMQuestion.render();
-      document.getElementById('guideText').innerHTML = currentGMQuestion.guide;
-      document.getElementById('sampleAnswer').textContent = "Đáp án mẫu: " + currentGMQuestion.sample;
+      currentGMObj = GM_QUESTIONS[Math.floor(Math.random() * GM_QUESTIONS.length)];
+      document.getElementById('arenaGMQuestionBox').innerHTML = currentGMObj.render();
 
       inp.onkeydown = (e) => {
-        if (e.key === 'Enter') handleGMConfirm();
+        if (e.key === 'Enter') submitArenaGM();
       };
+      speakNPC("GM đang kiểm tra tài khoản! Đọc kỹ câu hỏi và làm theo quy tắc!", "normal");
     }
 
-    function handleGMConfirm() {
-      const val = document.getElementById('answerInput').value;
-      if (currentGMQuestion && currentGMQuestion.validate(val)) {
-        score++; streak++; updateStats();
-        alert("★ 통과 (Chính xác!)");
+    function submitArenaGM() {
+      const val = document.getElementById('arenaGMInput').value;
+      if (currentGMObj && currentGMObj.val(val)) {
+        handlePassAction();
       } else {
-        streak = 0; updateStats();
-        alert("✖ 실패 (Đáp án không đúng quy tắc!)");
+        handleFailAction();
       }
-      initGMCheckMode();
+      setTimeout(runGMArena, 1400);
     }
-
-    // Bắt đầu tại tab đầu tiên
-    selectTab('SENTENCE');
   </script>
 </body>
 </html>
