@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MapleStory KMS - 화장한 비올레타를 찾아라</title>
+  <title>MapleStory KMS - 도형 추적 Lie Detector</title>
   <style>
-    * { box-sizing: border-box; user-select: none; font-family: "Malgun Gothic", "Dotum", sans-serif; }
+    * { box-sizing: border-box; user-select: none; font-family: "Malgun Gothic", Dotum, sans-serif; }
 
     body {
       margin: 0;
@@ -20,453 +20,467 @@
       color: #fff;
     }
 
-    /* ================= 1. CỬA SỔ POP-UP THÔNG BÁO (CHUẨN ẢNH 1) ================= */
-    .notice-card {
-      width: 440px;
-      background: #232731;
-      border: 2px solid #5a6475;
+    /* ================= 1. MÀN HÌNH THÔNG BÁO CHUẨN BỊ (CHUẨN ẢNH 1) ================= */
+    .ld-window {
+      width: 530px;
+      background: #ffffff;
+      border: 3px solid #334155;
       border-radius: 8px;
-      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.85);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
       overflow: hidden;
       display: block;
     }
-    .notice-header {
-      background: #181a20;
-      padding: 10px 14px;
-      font-size: 14px;
-      font-weight: bold;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      border-bottom: 2px solid #353b49;
-    }
-    .notice-timer-yellow {
-      color: #facc15;
-      font-size: 22px;
-      font-family: 'Consolas', monospace;
-      font-weight: 800;
-      text-shadow: 0 0 6px rgba(250, 204, 21, 0.5);
-    }
-    .notice-body {
-      padding: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .notice-blue-box {
-      background: #0284c7;
-      border: 1px solid #38bdf8;
-      border-radius: 6px;
-      padding: 10px 12px;
+    .ld-titlebar {
+      background: #1e2530;
+      padding: 6px 14px;
       font-size: 13px;
-      line-height: 1.6;
-      color: #ffffff;
-      font-weight: bold;
-    }
-    .notice-blue-box .hl {
-      color: #fef08a;
-    }
-    .notice-dialog-box {
-      background: #333945;
-      border: 1px solid #485263;
-      border-radius: 6px;
-      padding: 12px 14px;
+      font-weight: 800;
+      color: #facc15;
+      letter-spacing: 0.5px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      border-bottom: 2px solid #0f172a;
     }
-    .notice-dialog-text {
-      font-size: 12.5px;
-      color: #f1f5f9;
+    .ld-body-upper {
+      padding: 24px 20px 18px;
+      text-align: center;
+      background: #ffffff;
+      color: #1e293b;
+    }
+    .ld-main-countdown {
+      font-size: 18px;
+      font-weight: 800;
       line-height: 1.5;
+    }
+    .ld-main-countdown .sec-highlight {
+      font-size: 26px;
+      color: #0284c7;
+      font-family: 'Consolas', monospace;
+      font-weight: 900;
+    }
+    .ld-sub-warning {
+      margin-top: 6px;
+      font-size: 14px;
+      color: #64748b;
       font-weight: 600;
     }
-    .notice-dialog-text .warn {
-      color: #facc15;
-    }
-    .btn-start-play {
-      margin: 6px auto 2px;
-      padding: 8px 28px;
-      background: #ea580c;
-      border: 1px solid #f97316;
-      border-radius: 4px;
-      color: #ffffff;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 14px;
-      transition: background 0.15s;
-    }
-    .btn-start-play:hover { background: #c2410c; }
 
-    /* ================= 2. SÂN KHẤU RÈM ĐỎ (CHUẨN ẢNH 2) ================= */
-    .stage-card {
-      width: 580px;
-      background: #1c2028;
-      border: 3px solid #64748b;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 20px 55px rgba(0, 0, 0, 0.9);
-      display: none;
-    }
-    .stage-top-banner {
-      background: #0284c7;
-      padding: 8px 14px;
-      color: #ffffff;
-      font-size: 14px;
-      font-weight: 700;
+    .ld-body-lower {
+      background: #e2e8f0;
+      border-top: 1px solid #cbd5e1;
+      padding: 16px 20px;
       text-align: center;
-      border-bottom: 2px solid #0369a1;
-      letter-spacing: -0.3px;
+      color: #334155;
     }
-    .stage-area {
-      width: 100%;
-      height: 230px;
-      background: linear-gradient(180deg, #1e2530 0%, #334155 75%, #475569 100%);
+    .ld-instructions {
+      font-size: 13px;
+      line-height: 1.6;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    /* 3 Ô xem trước quá trình mờ dần */
+    .preview-steps-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .preview-card {
+      width: 95px;
+      height: 95px;
+      background: radial-gradient(circle, #eab308 15%, #b45309 90%);
+      border: 2px solid #78350f;
+      border-radius: 6px;
       position: relative;
       overflow: hidden;
-      border-bottom: 3px solid #14171d;
-    }
-
-    /* Rèm nhung đỏ 2 bên */
-    .curtain-l, .curtain-r {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 60px;
-      z-index: 20;
-      box-shadow: inset 0 0 12px rgba(0,0,0,0.6);
-    }
-    .curtain-l {
-      left: 0;
-      background: repeating-linear-gradient(90deg, #991b1b, #b91c1c 12px, #7f1d1d 24px);
-      border-right: 2px solid #450a0a;
-    }
-    .curtain-r {
-      right: 0;
-      background: repeating-linear-gradient(90deg, #7f1d1d, #b91c1c 12px, #991b1b 24px);
-      border-left: 2px solid #450a0a;
-    }
-    .stage-floor-rail {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 42px;
-      background: linear-gradient(180deg, #f8fafc 0%, #cbd5e1 100%);
-      border-top: 2px solid #94a3b8;
-      box-shadow: 0 -2px 6px rgba(0,0,0,0.2);
-    }
-
-    /* Vị trí nấm trượt */
-    .shroom-lane {
-      position: absolute;
-      bottom: 22px;
-      width: 90px;
-      height: 120px;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: flex-end;
-      transition: transform 0.8s cubic-bezier(0.45, 0.05, 0.55, 0.95);
-      z-index: 10;
+      justify-content: center;
+      box-shadow: inset 0 0 8px rgba(0,0,0,0.4);
     }
-    .red-arrow-target {
+    .preview-target-icon {
       position: absolute;
-      top: -24px;
-      font-size: 28px;
-      color: #ef4444;
-      animation: bounceArrow 0.45s infinite alternate;
-      display: none;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+      bottom: 8px;
+      right: 8px;
+      width: 28px;
+      height: 28px;
     }
-    @keyframes bounceArrow {
-      from { transform: translateY(0); }
-      to { transform: translateY(-7px); }
-    }
-
-    /* 4 nút xám 1, 2, 3, 4 ở dưới */
-    .stage-buttons-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      padding: 14px 22px 18px;
-      background: #14171e;
-    }
-    .num-btn {
-      height: 46px;
-      background: linear-gradient(180deg, #475569 0%, #334155 100%);
+    .preview-arrow {
       color: #94a3b8;
-      border: 1px solid #1e293b;
-      border-radius: 6px;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 900;
-      cursor: not-allowed;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.15);
-      transition: all 0.15s;
-    }
-    .num-btn.ready {
-      background: linear-gradient(180deg, #64748b 0%, #475569 100%);
-      color: #ffffff;
-      border-color: #64748b;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    }
-    .num-btn.ready:hover {
-      background: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%);
-      border-color: #38bdf8;
     }
 
-    .score-toast {
+    .btn-start-track {
+      padding: 9px 34px;
+      background: linear-gradient(180deg, #f97316 0%, #ea580c 100%);
+      border: 1px solid #c2410c;
+      border-radius: 4px;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(234, 88, 12, 0.4);
+    }
+    .btn-start-track:hover { background: #c2410c; }
+
+    /* ================= 2. SÂN CHƠI BÁM ĐUỔI THỰC CHIẾN (CHUẨN ẢNH 2) ================= */
+    .game-window {
+      width: 650px;
+      background: #1e2430;
+      border: 3px solid #475569;
+      border-radius: 10px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.95);
+      overflow: hidden;
+      display: none;
+    }
+
+    /* Nền ngụy trang mật ong/caramel honeycomb lồi lõm */
+    .camo-arena {
+      width: 100%;
+      height: 380px;
+      background-color: #b87a14;
+      background-image: 
+        radial-gradient(circle at 20% 30%, #fcd34d 0%, #d97706 35%, transparent 60%),
+        radial-gradient(circle at 75% 25%, #fbbf24 0%, #b45309 40%, transparent 65%),
+        radial-gradient(circle at 40% 70%, #fde68a 0%, #92400e 45%, transparent 60%),
+        radial-gradient(circle at 85% 75%, #f59e0b 0%, #78350f 45%, transparent 65%),
+        radial-gradient(circle at 50% 40%, #b45309 10%, #78350f 70%);
+      background-size: 160px 160px;
+      position: relative;
+      overflow: hidden;
+      cursor: crosshair;
+    }
+
+    /* Vòng tròn bong bóng ngụy trang gây nhiễu */
+    .camo-bubble {
+      position: absolute;
+      border: 3px solid rgba(254, 240, 138, 0.45);
+      border-radius: 50%;
+      box-shadow: inset 0 0 14px rgba(69, 26, 3, 0.6), 0 4px 8px rgba(0,0,0,0.3);
+      pointer-events: none;
+    }
+
+    /* Mục tiêu tròn trắng chứa tâm ngắm xanh lá */
+    .tracking-orb {
+      position: absolute;
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 0 16px rgba(255, 255, 255, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s;
+      z-index: 20;
+    }
+
+    /* Số đếm cyan trên đầu mục tiêu */
+    .floating-timer-cyan {
+      position: absolute;
+      top: -38px;
+      font-family: 'Consolas', monospace;
+      font-size: 34px;
+      font-weight: 900;
+      color: #67e8f9;
+      text-shadow: 0 0 8px #0891b2, 0 2px 4px #000;
+      pointer-events: none;
+    }
+
+    /* Dòng phụ đề game góc dưới */
+    .bottom-game-prompt {
+      position: absolute;
+      bottom: 12px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 900;
+      color: #fef08a;
+      text-shadow: 0 2px 4px #000, 0 0 6px #b45309;
+      letter-spacing: -0.3px;
+      pointer-events: none;
+      z-index: 30;
+    }
+
+    /* Thanh tiến trình tích lũy thời gian giữ chuột */
+    .progress-track-wrapper {
+      background: #111827;
+      padding: 12px 20px 14px;
+      border-top: 2px solid #334155;
+    }
+    .progress-bar-bg {
+      width: 100%;
+      height: 18px;
+      background: #1e293b;
+      border-radius: 9px;
+      overflow: hidden;
+      border: 1px solid #475569;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+    }
+    .progress-bar-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #22c55e 0%, #4ade80 100%);
+      box-shadow: 0 0 10px #22c55e;
+      transition: width 0.08s linear;
+    }
+
+    .score-banner {
       margin-top: 16px;
-      padding: 6px 20px;
+      padding: 8px 24px;
       border-radius: 20px;
-      background: rgba(0,0,0,0.75);
+      background: rgba(15, 23, 42, 0.85);
       font-weight: 700;
-      font-size: 14.5px;
+      font-size: 15px;
       border: 1px solid #475569;
     }
-    .score-toast b { color: #facc15; }
+    .score-banner b { color: #facc15; }
   </style>
 </head>
 <body>
 
-  <div class="notice-card" id="noticeModal">
-    <div class="notice-header">
-      <span class="notice-timer-yellow" id="noticeTimerText">14</span>
-      <span>초 후 거짓말 탐지 미니게임이 시작됩니다</span>
+  <!-- 1. POP-UP THÔNG BÁO CHUẨN BỊ (Chuẩn ảnh 1) -->
+  <div class="ld-window" id="noticeWindow">
+    <div class="ld-titlebar">
+      <span>LIE DETECTOR :</span>
     </div>
-    <div class="notice-body">
-      <div class="notice-blue-box">
-        • <span class="hl">아름답게 화장한 비올레타</span>를 찾아주세요<br>
-        • 정답에 따라 테스트 통과 / 실패하게 됩니다
+    <div class="ld-body-upper">
+      <div class="ld-main-countdown">
+        <span class="sec-highlight" id="prepTimer">8</span>초 후 거짓말 탐지 미니게임이 시작됩니다.
       </div>
-      <div class="notice-dialog-box">
-        <div class="notice-dialog-text">
-          답을 입력하지 않으면<br>
-          거짓말 <span class="warn">탐지 테스트</span>에<br>
-          실패하니 주의해주세요!
+      <div class="ld-sub-warning">
+        게임이 시작되기 전에 안전한 곳으로 이동해 주세요
+      </div>
+    </div>
+    <div class="ld-body-lower">
+      <div class="ld-instructions">
+        점점 투명해지면서 움직이는 도형 위에<br>
+        마우스 커서가 위치하도록 마우스를 움직여주세요.<br><br>
+        마우스 커서가 도형에 위치한 시간에 따라<br>
+        통과/실패가 결정됩니다
+      </div>
+
+      <!-- 3 Ảnh xem trước quá trình tàng hình -->
+      <div class="preview-steps-row">
+        <!-- Bước 1: Trắng rõ -->
+        <div class="preview-card">
+          <svg width="60" height="60" viewBox="0 0 60 60">
+            <path d="M 30 5 L 37 20 L 53 23 L 42 34 L 44 50 L 30 42 L 16 50 L 18 34 L 7 23 L 23 20 Z" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+          </svg>
+          <div class="preview-target-icon" id="reticleP1"></div>
         </div>
-        <div id="noticeAvatar" style="width: 72px; height: 78px;"></div>
+
+        <div class="preview-arrow">▶</div>
+
+        <!-- Bước 2: Bán trong suốt -->
+        <div class="preview-card">
+          <svg width="60" height="60" viewBox="0 0 60 60" style="opacity: 0.5;">
+            <path d="M 30 5 L 37 20 L 53 23 L 42 34 L 44 50 L 30 42 L 16 50 L 18 34 L 7 23 L 23 20 Z" fill="#ffffff"/>
+          </svg>
+          <div class="preview-target-icon" id="reticleP2"></div>
+        </div>
+
+        <div class="preview-arrow">▶</div>
+
+        <!-- Bước 3: Gần như tàng hình -->
+        <div class="preview-card">
+          <svg width="60" height="60" viewBox="0 0 60 60" style="opacity: 0.15;">
+            <path d="M 30 5 L 37 20 L 53 23 L 42 34 L 44 50 L 30 42 L 16 50 L 18 34 L 7 23 L 23 20 Z" fill="#ffffff"/>
+          </svg>
+          <div class="preview-target-icon" id="reticleP3"></div>
+        </div>
       </div>
-      <button class="btn-start-play" onclick="startStageImmediately()">Bắt đầu ngay (시작)</button>
+
+      <button class="btn-start-track" onclick="startTrackingGame()">바로 시작 (Bắt đầu ngay)</button>
     </div>
   </div>
 
-  <div class="stage-card" id="stageModal">
-    <div class="stage-top-banner" id="stageBannerText">
-      화장한 비올레타를 놓치지 말고 주목해주세요.
+  <!-- 2. SÂN CHƠI BÁM ĐUỔI THỰC CHIẾN (Chuẩn ảnh 2) -->
+  <div class="game-window" id="gameWindow">
+    <div class="ld-titlebar">
+      <span>LIE DETECTOR :</span>
     </div>
-    <div class="stage-area">
-      <div class="curtain-l"></div>
-      <div class="curtain-r"></div>
-      <div class="stage-floor-rail"></div>
+    
+    <div class="camo-arena" id="camoArena">
+      <!-- Bong bóng ngụy trang -->
+      <div class="camo-bubble" style="width: 90px; height: 90px; top: 30px; left: 60px;"></div>
+      <div class="camo-bubble" style="width: 120px; height: 120px; top: 180px; left: 70px;"></div>
+      <div class="camo-bubble" style="width: 110px; height: 110px; top: 40px; right: 80px;"></div>
+      <div class="camo-bubble" style="width: 140px; height: 140px; bottom: 30px; right: 100px;"></div>
+      <div class="camo-bubble" style="width: 80px; height: 80px; top: 150px; left: 320px;"></div>
 
-      <div class="shroom-lane" id="lane0"><div class="red-arrow-target" id="arrow0">▼</div><div id="shroomArt0"></div></div>
-      <div class="shroom-lane" id="lane1"><div class="red-arrow-target" id="arrow1">▼</div><div id="shroomArt1"></div></div>
-      <div class="shroom-lane" id="lane2"><div class="red-arrow-target" id="arrow2">▼</div><div id="shroomArt2"></div></div>
-      <div class="shroom-lane" id="lane3"><div class="red-arrow-target" id="arrow3">▼</div><div id="shroomArt3"></div></div>
+      <!-- Mục tiêu bám đuổi -->
+      <div class="tracking-orb" id="trackingOrb">
+        <div class="floating-timer-cyan" id="floatingTimer">7</div>
+        <div id="orbReticle" style="width: 38px; height: 38px;"></div>
+      </div>
+
+      <div class="bottom-game-prompt">
+        카운트다운 종료 후, 움직이는 도형에 커서를 올려두세요
+      </div>
     </div>
 
-    <div class="stage-buttons-row">
-      <button class="num-btn" id="btn0" onclick="chooseSlot(0)">1</button>
-      <button class="num-btn" id="btn1" onclick="chooseSlot(1)">2</button>
-      <button class="num-btn" id="btn2" onclick="chooseSlot(2)">3</button>
-      <button class="num-btn" id="btn3" onclick="chooseSlot(3)">4</button>
+    <!-- Thanh tiến trình giữ chuột -->
+    <div class="progress-track-wrapper">
+      <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: bold; margin-bottom: 6px; color: #cbd5e1;">
+        <span>목표 유지 게이지 (Tiến trình bám đuổi)</span>
+        <span id="progressPercent">0%</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressFill"></div>
+      </div>
     </div>
   </div>
 
-  <div class="score-toast" id="scoreBar">Đúng: <b>0</b> | Chuỗi liên tiếp: <b>0</b></div>
+  <div class="score-banner" id="scoreBanner">Đúng: <b>0</b> | Chuỗi liên tiếp: <b>0</b></div>
 
   <script>
-    // Hàm vẽ chi tiết nhân vật nấm Violetta theo đúng chuẩn MapleStory
-    function getViolettaSVG(isMakeup, isClosedEyes) {
-      let faceFeatures = '';
-
-      if (isClosedEyes) {
-        // Mắt nhắm ngủ khi di chuyển
-        faceFeatures = `
-          <path d="M 23 37 Q 27 41 31 37" stroke="#2b2d42" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <path d="M 43 37 Q 47 41 51 37" stroke="#2b2d42" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <ellipse cx="21" cy="39" rx="3.5" ry="2" fill="#fb7185" opacity="0.6"/>
-          <ellipse cx="53" cy="39" rx="3.5" ry="2" fill="#fb7185" opacity="0.6"/>
-        `;
-      } else if (isMakeup) {
-        // Nấm trang điểm: mắt to long lanh, mi cong, má hồng phấn
-        faceFeatures = `
-          <ellipse cx="26" cy="35" rx="4.5" ry="6" fill="#18181b"/>
-          <circle cx="25" cy="33" r="1.8" fill="#ffffff"/>
-          <circle cx="28" cy="37" r="0.9" fill="#ffffff"/>
-          <path d="M 21 30 Q 23 27 26 28" stroke="#18181b" stroke-width="2" fill="none"/>
-          <path d="M 24 27 Q 27 25 29 27" stroke="#18181b" stroke-width="2" fill="none"/>
-          <ellipse cx="20" cy="39" rx="4" ry="2.2" fill="#f43f5e" opacity="0.8"/>
-
-          <ellipse cx="48" cy="35" rx="4.5" ry="6" fill="#18181b"/>
-          <circle cx="47" cy="33" r="1.8" fill="#ffffff"/>
-          <circle cx="50" cy="37" r="0.9" fill="#ffffff"/>
-          <path d="M 53 30 Q 51 27 48 28" stroke="#18181b" stroke-width="2" fill="none"/>
-          <path d="M 50 27 Q 47 25 45 27" stroke="#18181b" stroke-width="2" fill="none"/>
-          <ellipse cx="54" cy="39" rx="4" ry="2.2" fill="#f43f5e" opacity="0.8"/>
-        `;
-      } else {
-        // Nấm thường: mắt chấm tròn đơn giản
-        faceFeatures = `
-          <ellipse cx="27" cy="36" rx="3.5" ry="4" fill="#27272a"/>
-          <circle cx="26" cy="34" r="1.2" fill="#ffffff"/>
-          <ellipse cx="47" cy="36" rx="3.5" ry="4" fill="#27272a"/>
-          <circle cx="46" cy="34" r="1.2" fill="#ffffff"/>
-        `;
-      }
-
+    // Hàm tạo biểu tượng tâm ngắm xanh lá chuẩn xác (Green reticle crosshair)
+    function getGreenReticleSVG() {
       return `
-        <svg width="74" height="84" viewBox="0 0 74 84">
-          <path d="M 45 9 L 51 2 L 55 9 L 61 4 L 62 16 Z" fill="#f59e0b" stroke="#b45309" stroke-width="1.5"/>
-          <circle cx="53" cy="11" r="1.5" fill="#ef4444"/>
-
-          <ellipse cx="37" cy="26" rx="35" ry="23" fill="#fb7185" stroke="#be123c" stroke-width="2"/>
-          <ellipse cx="19" cy="18" rx="6.5" ry="4.5" fill="#ffffff" opacity="0.95"/>
-          <ellipse cx="54" cy="18" rx="5.5" ry="4" fill="#ffffff" opacity="0.95"/>
-          <ellipse cx="37" cy="13" rx="4.5" ry="3" fill="#ffffff" opacity="0.95"/>
-          <ellipse cx="37" cy="27" rx="5.5" ry="3.5" fill="#ffffff" opacity="0.95"/>
-
-          <path d="M 15 31 C 15 50, 59 50, 59 31 Z" fill="#fef08a" stroke="#ca8a04" stroke-width="2"/>
-          
-          <path d="M 35 42 Q 37 44 39 42" stroke="#e11d48" stroke-width="2" fill="none" stroke-linecap="round"/>
-
-          ${faceFeatures}
+        <svg width="100%" height="100%" viewBox="0 0 36 36">
+          <circle cx="18" cy="18" r="14" fill="none" stroke="#15803d" stroke-width="2.5"/>
+          <circle cx="18" cy="18" r="7" fill="none" stroke="#16a34a" stroke-width="2"/>
+          <line x1="18" y1="2" x2="18" y2="10" stroke="#15803d" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="18" y1="26" x2="18" y2="34" stroke="#15803d" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="2" y1="18" x2="10" y2="18" stroke="#15803d" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="26" y1="18" x2="34" y2="18" stroke="#15803d" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="18" cy="18" r="2.5" fill="#22c55e"/>
         </svg>
       `;
     }
 
-    document.getElementById('noticeAvatar').innerHTML = getViolettaSVG(true, false);
+    // Nhúng tâm ngắm vào 3 ô preview
+    document.getElementById('reticleP1').innerHTML = getGreenReticleSVG();
+    document.getElementById('reticleP2').innerHTML = getGreenReticleSVG();
+    document.getElementById('reticleP3').innerHTML = getGreenReticleSVG();
+    document.getElementById('orbReticle').innerHTML = getGreenReticleSVG();
 
-    let noticeSec = 14;
-    let noticeInterval = null;
-    let targetShroom = 0; // Con nào là nấm trang điểm (0 - 3)
-    let currentSlots = [0, 1, 2, 3]; // Lưu vị trí thực tế
+    let prepSec = 8;
+    let prepInterval = null;
+    let gameLoop = null;
+
     let score = 0, streak = 0;
-    const X_LANES = [65, 190, 315, 440]; // Tọa độ X trên sân khấu
+    let progress = 0;
+    let isCursorOverTarget = false;
 
-    function startNotice() {
-      clearInterval(noticeInterval);
-      noticeSec = 14;
-      document.getElementById('noticeTimerText').textContent = noticeSec;
-      noticeInterval = setInterval(() => {
-        noticeSec--;
-        document.getElementById('noticeTimerText').textContent = noticeSec;
-        if (noticeSec <= 0) {
-          clearInterval(noticeInterval);
-          startStageImmediately();
+    // Tọa độ và vận tốc của mục tiêu
+    let posX = 260, posY = 140;
+    let velX = 2.4, velY = 2.0;
+    let remainingGameSec = 7;
+
+    function startPrepCountdown() {
+      clearInterval(prepInterval);
+      prepSec = 8;
+      document.getElementById('prepTimer').textContent = prepSec;
+      prepInterval = setInterval(() => {
+        prepSec--;
+        document.getElementById('prepTimer').textContent = prepSec;
+        if (prepSec <= 0) {
+          clearInterval(prepInterval);
+          startTrackingGame();
         }
       }, 1000);
     }
 
-    function startStageImmediately() {
-      clearInterval(noticeInterval);
-      document.getElementById('noticeModal').style.display = 'none';
-      document.getElementById('stageModal').style.display = 'block';
+    function startTrackingGame() {
+      clearInterval(prepInterval);
+      document.getElementById('noticeWindow').style.display = 'none';
+      document.getElementById('gameWindow').style.display = 'block';
 
-      for (let i = 0; i < 4; i++) {
-        document.getElementById(`btn${i}`).classList.remove('ready');
-        document.getElementById(`arrow${i}`).style.display = 'none';
-      }
+      // Khởi tạo thông số
+      progress = 0;
+      isCursorOverTarget = false;
+      remainingGameSec = 7;
+      document.getElementById('progressFill').style.width = '0%';
+      document.getElementById('progressPercent').textContent = '0%';
+      document.getElementById('floatingTimer').textContent = remainingGameSec;
 
-      // Chọn ngẫu nhiên nấm trang điểm
-      targetShroom = Math.floor(Math.random() * 4);
-      currentSlots = [0, 1, 2, 3];
+      const orb = document.getElementById('trackingOrb');
+      orb.style.opacity = '1';
 
-      // Đặt vị trí ban đầu và mở mắt nhận diện
-      for (let i = 0; i < 4; i++) {
-        const lane = document.getElementById(`lane${i}`);
-        lane.style.transition = 'none';
-        lane.style.transform = `translateX(${X_LANES[i]}px)`;
-        document.getElementById(`shroomArt${i}`).innerHTML = getViolettaSVG(i === targetShroom, false);
-      }
+      // Lắng nghe sự kiện chuột vào/ra khỏi mục tiêu
+      orb.onmouseenter = () => { isCursorOverTarget = true; };
+      orb.onmouseleave = () => { isCursorOverTarget = false; };
 
-      // Mũi tên đỏ chỉ vào nấm trang điểm trong 2 giây đầu
-      document.getElementById(`arrow${targetShroom}`).style.display = 'block';
-      document.getElementById('stageBannerText').textContent = "화장한 비올레타를 놓치지 말고 주목해주세요.";
+      // Đặt vị trí ngẫu nhiên ban đầu
+      posX = 150 + Math.random() * 300;
+      posY = 80 + Math.random() * 180;
+      velX = (Math.random() > 0.5 ? 2.4 : -2.4);
+      velY = (Math.random() > 0.5 ? 2.0 : -2.0);
 
-      // Sau 2 giây: Nhắm mắt và bắt đầu chạy từ từ qua lại
-      setTimeout(() => {
-        document.getElementById(`arrow${targetShroom}`).style.display = 'none';
-        document.getElementById('stageBannerText').textContent = "눈을 감고 이동하기 시작합니다... (Đang di chuyển qua lại)";
+      let elapsedTime = 0;
 
-        // Cả 4 con nhắm mắt lại
-        for (let i = 0; i < 4; i++) {
-          document.getElementById(`shroomArt${i}`).innerHTML = getViolettaSVG(i === targetShroom, true);
+      // Vòng lặp chuyển động & tính điểm
+      gameLoop = setInterval(() => {
+        elapsedTime += 25;
+
+        // Cập nhật số đếm ngược cyan (mỗi giây)
+        if (elapsedTime % 1000 < 25 && remainingGameSec > 0) {
+          remainingGameSec--;
+          document.getElementById('floatingTimer').textContent = remainingGameSec;
         }
 
-        // Bật chuyển động mượt 0.8 giây
-        for (let i = 0; i < 4; i++) {
-          document.getElementById(`lane${i}`).style.transition = 'transform 0.8s cubic-bezier(0.45, 0.05, 0.55, 0.95)';
-        }
+        // Độ mờ tàng hình dần (từ 1.0 xuống 0.15 trong 7 giây)
+        const currentOpacity = Math.max(0.15, 1.0 - (elapsedTime / 6500));
+        orb.style.opacity = currentOpacity;
 
-        // Thực hiện 6 lượt tráo từ từ
-        let step = 0;
-        const shuffleTimer = setInterval(() => {
-          let a = Math.floor(Math.random() * 4);
-          let b = Math.floor(Math.random() * 4);
-          while (b === a) b = Math.floor(Math.random() * 4);
+        // Di chuyển nảy góc trong khung (kích thước khung: 650 x 380, kích thước orb: 62)
+        posX += velX;
+        posY += velY;
 
-          // Hoán đổi vị trí hiển thị
-          let temp = currentSlots[a];
-          currentSlots[a] = currentSlots[b];
-          currentSlots[b] = temp;
+        if (posX <= 10 || posX >= 578) velX *= -1;
+        if (posY <= 10 || posY >= 308) velY *= -1;
 
-          // Điều chỉnh độ nổi (z-index) để khi trượt ngang không bị đè lỗi
-          document.getElementById(`lane${currentSlots[a]}`).style.zIndex = '15';
-          document.getElementById(`lane${currentSlots[b]}`).style.zIndex = '12';
+        orb.style.left = posX + 'px';
+        orb.style.top = posY + 'px';
 
-          document.getElementById(`lane${currentSlots[a]}`).style.transform = `translateX(${X_LANES[a]}px)`;
-          document.getElementById(`lane${currentSlots[b]}`).style.transform = `translateX(${X_LANES[b]}px)`;
+        // Nếu giữ chuột trúng mục tiêu -> Tăng thanh tiến trình
+        if (isCursorOverTarget) {
+          progress = Math.min(100, progress + 0.55);
+          document.getElementById('progressFill').style.width = progress + '%';
+          document.getElementById('progressPercent').textContent = Math.floor(progress) + '%';
 
-          step++;
-          if (step >= 6) {
-            clearInterval(shuffleTimer);
-            setTimeout(() => {
-              document.getElementById('stageBannerText').textContent = "화장한 비올레타가 위치한 번호를 누르세요! (Chọn số 1 - 4)";
-              for (let i = 0; i < 4; i++) {
-                document.getElementById(`btn${i}`).classList.add('ready');
-              }
-            }, 850);
+          // Đạt 100% -> THÀNH CÔNG
+          if (progress >= 100) {
+            endGame(true);
           }
-        }, 950); // Mỗi lượt tráo cách nhau gần 1 giây để mắt người theo kịp
-      }, 2000);
+        }
+
+        // Hết 7 giây mà chưa đạt 100% -> THẤT BẠI
+        if (elapsedTime >= 7000 && progress < 100) {
+          endGame(false);
+        }
+      }, 25);
     }
 
-    function chooseSlot(userChoice) {
-      if (!document.getElementById('btn0').classList.contains('ready')) return;
+    function endGame(isSuccess) {
+      clearInterval(gameLoop);
 
-      for (let i = 0; i < 4; i++) {
-        document.getElementById(`btn${i}`).classList.remove('ready');
-        // Mở mắt lại toàn bộ để kiểm chứng
-        document.getElementById(`shroomArt${i}`).innerHTML = getViolettaSVG(i === targetShroom, false);
-      }
-
-      // Vị trí slot thực tế của nấm trang điểm
-      const correctSlot = currentSlots.indexOf(targetShroom);
-
-      if (userChoice === correctSlot) {
+      if (isSuccess) {
         score++;
         streak++;
-        document.getElementById('stageBannerText').textContent = "★ 통과 (Chính xác! Bạn đã bắt trúng Violetta)";
+        alert("★ 통과 (Chính xác! Bạn đã bám sát mục tiêu tàng hình thành công)");
       } else {
         streak = 0;
-        document.getElementById('stageBannerText').textContent = `✖ 실패 (Sai rồi! Violetta nằm ở vị trí số ${correctSlot + 1})`;
+        alert("✖ 실패 (Thất bại! Bạn chưa tích lũy đủ 100% thời gian giữ chuột trên mục tiêu)");
       }
 
-      document.getElementById('scoreBar').innerHTML = `Đúng: <b>${score}</b> | Chuỗi liên tiếp: <b>${streak}</b>`;
+      document.getElementById('scoreBanner').innerHTML = `Đúng: <b>${score}</b> | Chuỗi liên tiếp: <b>${streak}</b>`;
 
-      setTimeout(() => {
-        document.getElementById('stageModal').style.display = 'none';
-        document.getElementById('noticeModal').style.display = 'block';
-        startNotice();
-      }, 2400);
+      // Quay lại màn hình thông báo chuẩn bị
+      document.getElementById('gameWindow').style.display = 'none';
+      document.getElementById('noticeWindow').style.display = 'block';
+      startPrepCountdown();
     }
 
     // Bắt đầu
-    startNotice();
+    startPrepCountdown();
   </script>
 </body>
 </html>
