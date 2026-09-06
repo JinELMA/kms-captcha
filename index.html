@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MapleStory KMS Captcha Practice</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      user-select: none;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at center, #1b2838 0%, #0d131a 100%);
+      font-family: "Malgun Gothic", "Dotum", -apple-system, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      color: #fff;
+    }
+
+    /* Khung giả lập Captcha KMS */
+    .kms-window {
+      width: 280px;
+      background: linear-gradient(180deg, #205096 0%, #153b75 100%);
+      border: 2px solid #3c6eb4;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 15px rgba(45, 105, 195, 0.3);
+      padding: 18px 16px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Đồng hồ số đếm ngược vàng */
+    .timer-display {
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 38px;
+      font-weight: 800;
+      color: #ffe837;
+      text-shadow: 0 0 8px rgba(255, 232, 55, 0.6);
+      margin-bottom: 6px;
+      line-height: 1;
+    }
+
+    /* Tiêu đề tiếng Hàn */
+    .title-text {
+      font-size: 13.5px;
+      color: #e5f0ff;
+      letter-spacing: -0.5px;
+      margin-bottom: 14px;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    /* Danh sách câu lựa chọn */
+    .options-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .option-btn {
+      width: 100%;
+      min-height: 38px;
+      background-color: #bad3eb;
+      border: 1px solid #7c9fbe;
+      border-radius: 4px;
+      color: #1a222a;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0 10px;
+      cursor: pointer;
+      transition: background-color 0.1s, transform 0.05s;
+    }
+
+    .option-btn:hover {
+      background-color: #d1e5f8;
+    }
+
+    .option-btn:active {
+      transform: scale(0.99);
+    }
+
+    /* Trạng thái khi bấm kiểm tra */
+    .option-btn.correct {
+      background-color: #55d475 !important;
+      border-color: #2e8b45 !important;
+      color: #0d3815 !important;
+    }
+
+    .option-btn.wrong {
+      background-color: #ff6b6b !important;
+      border-color: #c92a2a !important;
+      color: #fff !important;
+    }
+
+    /* Bảng thống kê điểm */
+    .stats-bar {
+      margin-top: 18px;
+      display: flex;
+      gap: 16px;
+      font-size: 13px;
+      color: #8da4be;
+    }
+
+    .stats-bar span b {
+      color: #ffe837;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="kms-window">
+    <div class="timer-display" id="timer">15</div>
+    <div class="title-text">올바른 문장을 선택해 주세요</div>
+
+    <div class="options-container" id="optionsContainer">
+      <!-- Các nút bấm câu hỏi sẽ render ngẫu nhiên tại đây -->
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <span>Số câu đúng: <b id="score">0</b></span>
+    <span>Chuỗi đúng liên tiếp: <b id="streak">0</b></span>
+  </div>
+
+  <script>
+    // Ngân hàng câu hỏi thực tế trong MapleStory KMS
+    const QUESTION_BANK = [
+      {
+        correct: "여기에서 타시면 돼요.",
+        wrongs: [
+          "놓은 를을 베틱거나 히싣다.",
+          "알창 미정을 시내다.",
+          "서시해서 나기면 돼요.",
+          "뜻에 씌게 항펀죄다."
+        ]
+      },
+      {
+        correct: "내일 비가 올 것 같아요.",
+        wrongs: [
+          "내일 비가 옷 같 것애요.",
+          "비가 올 개 갓내요.",
+          "나일 피가 옫 겄가타요.",
+          "냬일 비가 올 켯같애요."
+        ]
+      },
+      {
+        correct: "사냥터에서 몬스터를 처치하세요.",
+        wrongs: [
+          "산앙터에서 먼스터를 저치헤새요.",
+          "사냥텨애서 몬스토를 처지하새요.",
+          "사냥터애셔 몬스터를 쳐치하새요.",
+          "샤냥터에서 몬스털를 처치해새요."
+        ]
+      },
+      {
+        correct: "오늘 날씨가 정말 좋습니다.",
+        wrongs: [
+          "오눌 날시가 정발 죻슴니다.",
+          "오늘 낟씨가 졍말 좃습니다.",
+          "오늘 날씨가 점말 좋습니댜.",
+          "오늩 날씨개 정말 졷슴니다."
+        ]
+      },
+      {
+        correct: "게임을 종료하시겠습니까?",
+        wrongs: [
+          "게임을 죵료하시갰습니까?",
+          "개임을 종료화시겠슴니까?",
+          "게임을 종뇨하시갰슴닉까?",
+          "계임을 종료하시겠습니까?"
+        ]
+      },
+      {
+        correct: "인벤토리가 가득 찼습니다.",
+        wrongs: [
+          "인벤토리과 가둑 찻슴니다.",
+          "인벤토리가 가득 찾습니다.",
+          "임벤토리가 가득 찻슴니다.",
+          "인벤토리개 가득 챳습니다."
+        ]
+      },
+      {
+        correct: "친구에게 메시지를 보냈습니다.",
+        wrongs: [
+          "칭구에게 메세지를 보넷습니다.",
+          "친구애게 매시지를 보냇슴니다.",
+          "친구에게 매시쥐를 보냤습니다.",
+          "친규에게 메시지를 보냈슴니다."
+        ]
+      },
+      {
+        correct: "마을로 이동하시겠습니까?",
+        wrongs: [
+          "마을로 이덩하시갰습니까?",
+          "마을로 이동화시겠슴니까?",
+          "마을로 이둉하시겠슴니까?",
+          "마을로 이동하시갯습닉까?"
+        ]
+      }
+    ];
+
+    let score = 0;
+    let streak = 0;
+    let timeLeft = 15;
+    let timerInterval = null;
+    let isProcessing = false;
+
+    const timerEl = document.getElementById("timer");
+    const containerEl = document.getElementById("optionsContainer");
+    const scoreEl = document.getElementById("score");
+    const streakEl = document.getElementById("streak");
+
+    // Xáo trộn ngẫu nhiên mảng
+    function shuffle(arr) {
+      return arr.slice().sort(() => Math.random() - 0.5);
+    }
+
+    function startTimer() {
+      clearInterval(timerInterval);
+      timeLeft = 15;
+      timerEl.textContent = timeLeft;
+
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        timerEl.textContent = timeLeft;
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          handleTimeOut();
+        }
+      }, 1000);
+    }
+
+    function handleTimeOut() {
+      if (isProcessing) return;
+      streak = 0;
+      streakEl.textContent = streak;
+      loadNextQuestion();
+    }
+
+    function loadNextQuestion() {
+      isProcessing = false;
+      startTimer();
+
+      // Bốc ngẫu nhiên 1 bộ câu hỏi
+      const current = QUESTION_BANK[Math.floor(Math.random() * QUESTION_BANK.length)];
+      
+      // Gộp 1 câu đúng và 4 câu sai rồi trộn đều vị trí
+      const list = shuffle([
+        { text: current.correct, isCorrect: true },
+        ...current.wrongs.map(w => ({ text: w, isCorrect: false }))
+      ]);
+
+      containerEl.innerHTML = "";
+      list.forEach(item => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
+        btn.textContent = item.text;
+
+        btn.onclick = () => {
+          if (isProcessing) return;
+          isProcessing = true;
+          clearInterval(timerInterval);
+
+          if (item.isCorrect) {
+            btn.classList.add("correct");
+            score++;
+            streak++;
+          } else {
+            btn.classList.add("wrong");
+            streak = 0;
+            // Làm nổi bật câu đúng để người chơi nhận biết
+            const allBtns = containerEl.querySelectorAll(".option-btn");
+            allBtns.forEach(b => {
+              if (b.textContent === current.correct) {
+                b.classList.add("correct");
+              }
+            });
+          }
+
+          scoreEl.textContent = score;
+          streakEl.textContent = streak;
+
+          setTimeout(loadNextQuestion, 700);
+        };
+
+        containerEl.appendChild(btn);
+      });
+    }
+
+    loadNextQuestion();
+  </script>
+</body>
+</html>
