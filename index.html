@@ -331,4 +331,142 @@
 
           <path d="M 15 31 C 15 50, 59 50, 59 31 Z" fill="#fef08a" stroke="#ca8a04" stroke-width="2"/>
           
-          <path d="M 35 42 Q 37 44 3
+          <path d="M 35 42 Q 37 44 39 42" stroke="#e11d48" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+          ${faceFeatures}
+        </svg>
+      `;
+    }
+
+    document.getElementById('noticeAvatar').innerHTML = getViolettaSVG(true, false);
+
+    let noticeSec = 14;
+    let noticeInterval = null;
+    let targetShroom = 0; // Con nào là nấm trang điểm (0 - 3)
+    let currentSlots = [0, 1, 2, 3]; // Lưu vị trí thực tế
+    let score = 0, streak = 0;
+    const X_LANES = [65, 190, 315, 440]; // Tọa độ X trên sân khấu
+
+    function startNotice() {
+      clearInterval(noticeInterval);
+      noticeSec = 14;
+      document.getElementById('noticeTimerText').textContent = noticeSec;
+      noticeInterval = setInterval(() => {
+        noticeSec--;
+        document.getElementById('noticeTimerText').textContent = noticeSec;
+        if (noticeSec <= 0) {
+          clearInterval(noticeInterval);
+          startStageImmediately();
+        }
+      }, 1000);
+    }
+
+    function startStageImmediately() {
+      clearInterval(noticeInterval);
+      document.getElementById('noticeModal').style.display = 'none';
+      document.getElementById('stageModal').style.display = 'block';
+
+      for (let i = 0; i < 4; i++) {
+        document.getElementById(`btn${i}`).classList.remove('ready');
+        document.getElementById(`arrow${i}`).style.display = 'none';
+      }
+
+      // Chọn ngẫu nhiên nấm trang điểm
+      targetShroom = Math.floor(Math.random() * 4);
+      currentSlots = [0, 1, 2, 3];
+
+      // Đặt vị trí ban đầu và mở mắt nhận diện
+      for (let i = 0; i < 4; i++) {
+        const lane = document.getElementById(`lane${i}`);
+        lane.style.transition = 'none';
+        lane.style.transform = `translateX(${X_LANES[i]}px)`;
+        document.getElementById(`shroomArt${i}`).innerHTML = getViolettaSVG(i === targetShroom, false);
+      }
+
+      // Mũi tên đỏ chỉ vào nấm trang điểm trong 2 giây đầu
+      document.getElementById(`arrow${targetShroom}`).style.display = 'block';
+      document.getElementById('stageBannerText').textContent = "화장한 비올레타를 놓치지 말고 주목해주세요.";
+
+      // Sau 2 giây: Nhắm mắt và bắt đầu chạy từ từ qua lại
+      setTimeout(() => {
+        document.getElementById(`arrow${targetShroom}`).style.display = 'none';
+        document.getElementById('stageBannerText').textContent = "눈을 감고 이동하기 시작합니다... (Đang di chuyển qua lại)";
+
+        // Cả 4 con nhắm mắt lại
+        for (let i = 0; i < 4; i++) {
+          document.getElementById(`shroomArt${i}`).innerHTML = getViolettaSVG(i === targetShroom, true);
+        }
+
+        // Bật chuyển động mượt 0.8 giây
+        for (let i = 0; i < 4; i++) {
+          document.getElementById(`lane${i}`).style.transition = 'transform 0.8s cubic-bezier(0.45, 0.05, 0.55, 0.95)';
+        }
+
+        // Thực hiện 6 lượt tráo từ từ
+        let step = 0;
+        const shuffleTimer = setInterval(() => {
+          let a = Math.floor(Math.random() * 4);
+          let b = Math.floor(Math.random() * 4);
+          while (b === a) b = Math.floor(Math.random() * 4);
+
+          // Hoán đổi vị trí hiển thị
+          let temp = currentSlots[a];
+          currentSlots[a] = currentSlots[b];
+          currentSlots[b] = temp;
+
+          // Điều chỉnh độ nổi (z-index) để khi trượt ngang không bị đè lỗi
+          document.getElementById(`lane${currentSlots[a]}`).style.zIndex = '15';
+          document.getElementById(`lane${currentSlots[b]}`).style.zIndex = '12';
+
+          document.getElementById(`lane${currentSlots[a]}`).style.transform = `translateX(${X_LANES[a]}px)`;
+          document.getElementById(`lane${currentSlots[b]}`).style.transform = `translateX(${X_LANES[b]}px)`;
+
+          step++;
+          if (step >= 6) {
+            clearInterval(shuffleTimer);
+            setTimeout(() => {
+              document.getElementById('stageBannerText').textContent = "화장한 비올레타가 위치한 번호를 누르세요! (Chọn số 1 - 4)";
+              for (let i = 0; i < 4; i++) {
+                document.getElementById(`btn${i}`).classList.add('ready');
+              }
+            }, 850);
+          }
+        }, 950); // Mỗi lượt tráo cách nhau gần 1 giây để mắt người theo kịp
+      }, 2000);
+    }
+
+    function chooseSlot(userChoice) {
+      if (!document.getElementById('btn0').classList.contains('ready')) return;
+
+      for (let i = 0; i < 4; i++) {
+        document.getElementById(`btn${i}`).classList.remove('ready');
+        // Mở mắt lại toàn bộ để kiểm chứng
+        document.getElementById(`shroomArt${i}`).innerHTML = getViolettaSVG(i === targetShroom, false);
+      }
+
+      // Vị trí slot thực tế của nấm trang điểm
+      const correctSlot = currentSlots.indexOf(targetShroom);
+
+      if (userChoice === correctSlot) {
+        score++;
+        streak++;
+        document.getElementById('stageBannerText').textContent = "★ 통과 (Chính xác! Bạn đã bắt trúng Violetta)";
+      } else {
+        streak = 0;
+        document.getElementById('stageBannerText').textContent = `✖ 실패 (Sai rồi! Violetta nằm ở vị trí số ${correctSlot + 1})`;
+      }
+
+      document.getElementById('scoreBar').innerHTML = `Đúng: <b>${score}</b> | Chuỗi liên tiếp: <b>${streak}</b>`;
+
+      setTimeout(() => {
+        document.getElementById('stageModal').style.display = 'none';
+        document.getElementById('noticeModal').style.display = 'block';
+        startNotice();
+      }, 2400);
+    }
+
+    // Bắt đầu
+    startNotice();
+  </script>
+</body>
+</html>
