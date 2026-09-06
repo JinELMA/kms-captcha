@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MapleStory KMS Captcha Hub</title>
+  <title>MapleStory KMS Lie Detector Simulator</title>
   <style>
     * {
       box-sizing: border-box;
@@ -11,12 +11,11 @@
       font-family: "Malgun Gothic", "Dotum", -apple-system, sans-serif;
     }
 
-    /* Nền bên ngoài là bối cảnh MapleStory */
     body {
       margin: 0;
-      padding: 15px;
+      padding: 20px;
       min-height: 100vh;
-      background: linear-gradient(rgba(10, 25, 45, 0.45), rgba(10, 25, 45, 0.65)),
+      background: linear-gradient(rgba(12, 26, 46, 0.45), rgba(12, 26, 46, 0.65)),
                   url('https://images.alphacoders.com/279/279287.jpg') center/cover no-repeat fixed;
       display: flex;
       flex-direction: column;
@@ -25,11 +24,10 @@
       color: #fff;
     }
 
-    /* Thanh điều hướng chọn chế độ ở trên cùng */
     .hub-navbar {
-      width: 480px;
+      width: 580px;
       margin-bottom: 16px;
-      background: rgba(14, 23, 38, 0.92);
+      background: rgba(15, 23, 42, 0.95);
       border: 1px solid #3b82f6;
       border-radius: 8px;
       padding: 8px;
@@ -40,7 +38,7 @@
 
     .nav-btn {
       flex: 1;
-      padding: 9px 8px;
+      padding: 10px;
       background: #1e293b;
       color: #cbd5e1;
       border: 1px solid #334155;
@@ -58,25 +56,21 @@
       border-color: #f59e0b;
     }
 
-    /* ========================================================
-       1. GIAO DIỆN CAPTCHA 15S CHUẨN ẢNH GỐC (BLUE BOX)
-       ======================================================== */
+    /* 1. KHUNG CÂU CHỮ 15S */
     .kms-blue-box {
       width: 275px;
       background: #18488e;
       border: 2px solid #2b67be;
       border-radius: 6px;
       padding: 18px 14px 20px;
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8), 0 0 15px rgba(27, 86, 173, 0.5);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8);
       display: flex;
       flex-direction: column;
       align-items: center;
-      position: relative;
     }
 
-    /* Đồng hồ số vàng đếm ngược */
     .kms-timer-yellow {
-      font-family: 'Consolas', 'Courier New', monospace;
+      font-family: 'Consolas', monospace;
       font-size: 42px;
       font-weight: 800;
       color: #ffe600;
@@ -85,17 +79,14 @@
       margin-bottom: 8px;
     }
 
-    /* Tiêu đề tiếng Hàn */
     .kms-title {
       font-size: 13.5px;
       color: #ffffff;
       margin-bottom: 14px;
       font-weight: 500;
       letter-spacing: -0.5px;
-      text-align: center;
     }
 
-    /* Danh sách 5 dòng đáp án màu xám xanh */
     .kms-options-group {
       width: 100%;
       display: flex;
@@ -115,194 +106,216 @@
       letter-spacing: -0.5px;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
       padding: 4px 10px;
       cursor: pointer;
-      transition: background-color 0.1s;
     }
 
-    .kms-opt-btn:hover {
-      background-color: #d1e5f8;
-    }
+    .kms-opt-btn:hover { background-color: #d1e5f8; }
+    .kms-opt-btn.correct { background-color: #4ade80 !important; border-color: #16a34a !important; color: #052e16 !important; }
+    .kms-opt-btn.wrong { background-color: #f87171 !important; border-color: #dc2626 !important; color: #fff !important; }
 
-    .kms-opt-btn.correct {
-      background-color: #4ade80 !important;
-      border-color: #16a34a !important;
-      color: #052e16 !important;
-    }
-
-    .kms-opt-btn.wrong {
-      background-color: #f87171 !important;
-      border-color: #dc2626 !important;
-      color: #fff !important;
-    }
-
-    /* ========================================================
-       2. GIAO DIỆN CAPTCHA HÌNH ẢNH (KHUNG TRẮNG KMS)
-       ======================================================== */
-    .kms-white-card {
-      width: 480px;
-      background: #ffffff;
+    /* 2. KHUNG HÌNH ẢNH LIE DETECTOR */
+    .kms-card-modal {
+      width: 580px;
+      background: #f7f9fa;
+      border: 1.5px solid #d5dbdb;
       border-radius: 12px;
-      padding: 16px 20px 22px;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+      padding: 20px 24px 16px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+      color: #333;
       position: relative;
     }
 
-    .timer-badge-white {
+    .green-clock-badge {
       display: flex;
       align-items: center;
-      justify-content: flex-end;
       gap: 6px;
-      color: #333;
+      color: #222;
       font-size: 20px;
-      font-weight: 700;
+      font-weight: 800;
       font-family: 'Consolas', monospace;
-      margin-bottom: 8px;
     }
 
-    .timer-icon {
-      width: 18px;
-      height: 18px;
-      border: 3px solid #7bc52c;
+    .clock-icon {
+      width: 20px;
+      height: 20px;
+      border: 3px solid #7cb342;
       border-radius: 50%;
       position: relative;
     }
-    .timer-icon::after {
+    .clock-icon::after {
       content: '';
       position: absolute;
       width: 2px;
-      height: 5px;
-      background: #7bc52c;
+      height: 6px;
+      background: #7cb342;
       top: 2px;
-      left: 5px;
+      left: 6px;
     }
 
-    .stage-area {
-      width: 100%;
-      height: 180px;
-      background: #23272d;
+    .scene-box {
+      background: #1e242d;
       border-radius: 6px;
       position: relative;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: space-around;
-      padding: 0 20px;
-      box-shadow: inset 0 0 12px rgba(0,0,0,0.7);
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.7);
     }
 
     .game-item {
       display: inline-block;
-      font-size: 42px;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
+      font-size: 40px;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6));
     }
 
     /* Hiệu ứng chuyển động */
-    @keyframes moveH { 0%, 100% { transform: translateX(-18px); } 50% { transform: translateX(18px); } }
-    @keyframes moveV { 0%, 100% { transform: translateY(-16px); } 50% { transform: translateY(16px); } }
-    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.15; } }
-    @keyframes pulse { 0%, 100% { transform: scale(0.8); } 50% { transform: scale(1.3); } }
+    @keyframes moveH { 0%, 100% { transform: translateX(-16px); } 50% { transform: translateX(16px); } }
+    @keyframes moveV { 0%, 100% { transform: translateY(-14px); } 50% { transform: translateY(14px); } }
+    @keyframes blinkEffect { 0%, 100% { opacity: 1; } 50% { opacity: 0.08; } }
+    @keyframes pulseEffect { 0%, 100% { transform: scale(0.75); } 50% { transform: scale(1.35); } }
 
-    .anim-h { animation: moveH var(--s, 1.5s) ease-in-out infinite alternate; }
-    .anim-v { animation: moveV var(--s, 1.4s) ease-in-out infinite alternate; }
-    .anim-blink { animation: blink var(--s, 0.8s) steps(2, start) infinite; }
-    .anim-pulse { animation: pulse var(--s, 1.2s) ease-in-out infinite alternate; }
+    .anim-h { animation: moveH var(--s, 1.4s) ease-in-out infinite alternate; }
+    .anim-v { animation: moveV var(--s, 1.3s) ease-in-out infinite alternate; }
+    .anim-blink { animation: blinkEffect var(--s, 0.7s) steps(2, start) infinite; }
+    .anim-pulse { animation: pulseEffect var(--s, 1.1s) ease-in-out infinite alternate; }
 
-    .question-box {
-      margin: 14px 0 10px;
+    .question-title {
       font-size: 15px;
       font-weight: 700;
       color: #222;
       line-height: 1.4;
-      min-height: 42px;
     }
-    .question-box span.q-tag {
-      color: #7bc52c;
-      font-weight: 800;
+    .question-title .q-tag {
+      color: #8bc34a;
+      font-weight: 900;
       margin-right: 4px;
     }
 
-    .ox-container {
+    /* BỐ CỤC O / X */
+    .layout-ox .top-bar-ox {
       display: flex;
-      gap: 20px;
-      justify-content: center;
-      margin: 14px 0;
+      justify-content: flex-end;
+      margin-bottom: 8px;
     }
-    .ox-btn {
+    .layout-ox .scene-box {
+      width: 330px;
+      height: 190px;
+      margin: 0 auto 14px;
+    }
+    .layout-ox .question-title {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+    .layout-ox .ox-container {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+    .ox-card-btn {
       width: 88px;
       height: 88px;
-      border: 2px solid #e1e6eb;
-      background: #fdfdfd;
+      border: 2px solid #e1e5e8;
+      background: #ffffff;
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 48px;
+      font-size: 50px;
       font-weight: 900;
       cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      transition: all 0.15s;
     }
-    .ox-btn.o { color: #38b6c8; }
-    .ox-btn.x { color: #eb547c; }
-    .ox-btn:hover { background: #f0f7f9; }
-    .ox-btn.selected { border-color: #333; background: #eaf1f5; }
+    .ox-card-btn.o { color: #38b6c8; }
+    .ox-card-btn.x { color: #eb547c; }
+    .ox-card-btn:hover { background: #f1f5f9; }
+    .ox-card-btn.selected { border-color: #334155; background: #eaf1f5; }
 
-    .choices-container {
+    /* BỐ CỤC 4 LỰA CHỌN */
+    .layout-choice .choice-header-split {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 14px;
+      align-items: flex-start;
+    }
+    .layout-choice .scene-box {
+      width: 290px;
+      height: 165px;
+      flex-shrink: 0;
+    }
+    .layout-choice .right-question-box {
+      flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 7px;
-      margin: 10px 0;
+      justify-content: space-between;
+      min-height: 165px;
     }
-    .choice-row {
+    .layout-choice .right-top-clock {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .choices-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .choice-item-bar {
       display: flex;
       align-items: center;
       background: #ffffff;
-      border: 1px solid #dcdfe3;
+      border: 1px solid #e2e5e8;
       border-radius: 6px;
-      padding: 9px 12px;
+      padding: 9px 14px;
       cursor: pointer;
       font-size: 13.5px;
-      color: #444;
+      color: #333;
       font-weight: 600;
+      transition: all 0.1s;
     }
-    .choice-row:hover { background: #f6f8fa; }
-    .choice-row.selected { background: #eef7e6; border-color: #8bc34a; }
-    .choice-num {
+    .choice-item-bar:hover { background: #f8fafc; }
+    .choice-item-bar.selected { border-color: #8bc34a; background: #f4faed; }
+    
+    .choice-round-num {
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background: #bac2cb;
+      background: #b0bec5;
       color: #fff;
-      font-size: 12px;
-      display: flex;
+      font-size: 11.5px;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      margin-right: 10px;
-      font-weight: 700;
+      margin-right: 12px;
+      font-weight: bold;
     }
-    .choice-row.selected .choice-num { background: #7bc52c; }
+    .choice-item-bar.selected .choice-round-num { background: #8bc34a; }
 
-    .confirm-btn {
-      width: 100px;
+    .btn-confirm-action {
+      width: 110px;
       height: 36px;
-      background: #b5bcc4;
+      background: #b0bec5;
       color: #fff;
       border: none;
       border-radius: 4px;
       font-weight: 700;
       font-size: 14px;
-      margin: 12px auto 0;
+      margin: 0 auto;
       display: block;
       cursor: not-allowed;
+      transition: background 0.15s;
     }
-    .confirm-btn.active {
+    .btn-confirm-action.active {
       background: #8bc34a;
       cursor: pointer;
     }
 
-    /* Bảng điểm dưới cùng */
     .score-footer {
-      margin-top: 14px;
+      margin-top: 15px;
       font-size: 14px;
       font-weight: 600;
       color: #f1f5f9;
@@ -313,40 +326,24 @@
 </head>
 <body>
 
-  <!-- Menu chọn qua lại giữa 2 dạng Captcha -->
   <div class="hub-navbar">
     <button class="nav-btn active" id="tabSentence" onclick="changeMode('SENTENCE')">
       📝 Dạng 1: Câu chữ tiếng Hàn (15 Giây)
     </button>
     <button class="nav-btn" id="tabImage" onclick="changeMode('IMAGE')">
-      🖼️ Dạng 2: Hình ảnh Lie Detector (O/X & 4 Câu)
+      🖼️ Dạng 2: Lie Detector Hình ảnh (O/X & 4 Câu)
     </button>
   </div>
 
-  <!-- KHUNG 1: CÂU HỎI TIẾNG HÀN 15S (GIAO DIỆN CHUẨN ẢNH BẠN GỬI) -->
   <div class="kms-blue-box" id="sentenceBox">
     <div class="kms-timer-yellow" id="blueTimer">15</div>
     <div class="kms-title">올바른 문장을 선택해 주세요</div>
-    <div class="kms-options-group" id="blueOptions">
-      <!-- 5 dòng đáp án sẽ tự động sinh ngẫu nhiên ở đây -->
-    </div>
+    <div class="kms-options-group" id="blueOptions"></div>
   </div>
 
-  <!-- KHUNG 2: LIE DETECTOR HÌNH ẢNH ĐỘNG -->
-  <div class="kms-white-card" id="imageBox" style="display: none;">
-    <div class="timer-badge-white">
-      <div class="timer-icon"></div>
-      <span id="whiteTimerText">01:52</span>
-    </div>
-
-    <div class="stage-area" id="sceneContainer"></div>
-
-    <div class="question-box">
-      <span class="q-tag">Q.</span><span id="questionText">Đang tải...</span>
-    </div>
-
-    <div id="answerArea"></div>
-    <button class="confirm-btn" id="confirmBtn">확인</button>
+  <div class="kms-card-modal" id="imageBox" style="display: none;">
+    <div id="dynamicContainer"></div>
+    <button class="btn-confirm-action" id="confirmBtn">확인</button>
   </div>
 
   <div class="score-footer">
@@ -354,70 +351,80 @@
   </div>
 
   <script>
-    // DỮ LIỆU CÂU HỎI 15S (CHỌN CÂU CÓ NGHĨA)
     const SENTENCE_BANK = [
       {
         correct: "여기에서 타시면 돼요.",
-        wrongs: [
-          "놓은 를을 베틱거나 히싣다.",
-          "알창 미정을 시내다.",
-          "서시해서 나기면 돼요.",
-          "뜻에 씌게 항펀죄다."
-        ]
+        wrongs: ["놓은 를을 베틱거나 히싣다.", "알창 미정을 시내다.", "서시해서 나기면 돼요.", "뜻에 씌게 항펀죄다."]
       },
       {
         correct: "내일 비가 올 것 같아요.",
-        wrongs: [
-          "내일 비가 옷 같 것애요.",
-          "비가 올 개 갓내요.",
-          "나일 피가 옫 겄가타요.",
-          "냬일 비가 올 켯같애요."
-        ]
+        wrongs: ["내일 비가 옷 같 것애요.", "비가 올 개 갓내요.", "나일 피가 옫 겄가타요.", "냬일 비가 올 켯같애요."]
       },
       {
         correct: "사냥터에서 몬스터를 처치하세요.",
-        wrongs: [
-          "산앙터에서 먼스터를 저치헤새요.",
-          "사냥텨애서 몬스토를 처지하새요.",
-          "사냥터애셔 몬스터를 쳐치하새요.",
-          "샤냥터에서 몬스털를 처치해새요."
-        ]
-      },
-      {
-        correct: "오늘 날씨가 정말 좋습니다.",
-        wrongs: [
-          "오눌 날시가 정발 죻슴니다.",
-          "오늘 낟씨가 졍말 좃습니다.",
-          "오늘 날씨가 점말 좋습니댜.",
-          "오늩 날씨개 정말 졷슴니다."
-        ]
+        wrongs: ["산앙터에서 먼스터를 저치헤새요.", "사냥텨애서 몬스토를 처지하새요.", "사냥터애셔 몬스터를 쳐치하새요.", "샤냥터에서 몬스털를 처치해새요."]
       },
       {
         correct: "인벤토리가 가득 찼습니다.",
-        wrongs: [
-          "인벤토리과 가둑 찻슴니다.",
-          "인벤토리가 가득 찾습니다.",
-          "임벤토리가 가득 찻슴니다.",
-          "인벤토리개 가득 챳습니다."
-        ]
+        wrongs: ["인벤토리과 가둑 찻슴니다.", "인벤토리가 가득 찾습니다.", "임벤토리가 가득 찻슴니다.", "인벤토리개 가득 챳습니다."]
       }
     ];
 
-    // DỮ LIỆU 8 DẠNG ẢNH BẠN GỬI
+    /* 
+      KHO CÂU HỎI HÌNH ẢNH:
+      - animationMode:
+        + "NONE": Ảnh đứng yên hoàn toàn.
+        + "DISTRACT": Hiệu ứng làm nhiễu ngẫu nhiên, câu hỏi không hỏi về chuyển động.
+        + "TARGET_BLINK": Chỉ 1 vật thể chớp tắt, câu hỏi hỏi trực tiếp về vật thể chớp tắt.
+        + "TARGET_MOVE": Chỉ 1 vật thể di chuyển, câu hỏi hỏi trực tiếp về vật thể di chuyển.
+    */
     const IMAGE_BANK = [
+      // 1. Câu hỏi trực tiếp: Cái gì đang chớp tắt? (TARGET_BLINK)
+      {
+        type: "CHOICE",
+        scene: ["🍎", "🍰", "💎", "🍇"],
+        question: "현재 깜빡이고 있는 물체는 무엇입니까?", // Vật thể nào đang chớp tắt?
+        choices: ["사과 (Táo)", "케이크 (Bánh kem)", "보석 (Kim cương)", "포도 (Nho)"],
+        ans: 1,
+        animationMode: "TARGET_BLINK",
+        targetIndex: 1 // Chiếc bánh kem sẽ chớp tắt
+      },
+      // 2. Câu hỏi trực tiếp: Cái gì đang di chuyển? (TARGET_MOVE)
+      {
+        type: "CHOICE",
+        scene: ["🍌", "💍", "🍕", "👓"],
+        question: "현재 움직이고 있는 물체는 무엇입니까?", // Vật thể nào đang di chuyển?
+        choices: ["바나나 (Chuối)", "반지 (Nhẫn)", "피자 (Pizza)", "안경 (Kính)"],
+        ans: 0,
+        animationMode: "TARGET_MOVE",
+        targetIndex: 0 // Quả chuối sẽ di chuyển
+      },
+      // 3. Dạng O/X có chuyển động làm nhiễu (DISTRACT)
       {
         type: "OX",
         scene: ["🍑", "🍰", "🍍", "🍑"],
         question: "파인애플은 케이크 바로 옆에 보입니다",
-        ans: "O"
+        ans: "O",
+        animationMode: "DISTRACT"
       },
+      // 4. Dạng O/X đứng yên hoàn toàn (NONE)
+      {
+        type: "OX",
+        scene: ["🍕", "🍎", "🍎", "👒", "🔘", "🍇"],
+        question: "오렌지와 장갑 사이에 있는 물체는 모자입니다",
+        ans: "X",
+        animationMode: "NONE"
+      },
+      // 5. Dạng 4 câu đứng yên hoàn toàn (NONE)
       {
         type: "CHOICE",
         scene: ["🍜", "⬆️", "🔦", "🍓"],
         question: "적어도 1개의 화살표는 _____ 방향을 향하고 있습니다",
         choices: ["하단", "위쪽", "왼쪽", "정답 없음"],
-        ans: 1
+        ans: 1,
+        animationMode: "NONE"
       },
+      // 6. Dạng 4 câu chuyển động làm nhiễu (DISTRACT)
       {
         type: "CHOICE",
         scene: ["🍇", "🔄", "💍", "💊", "🦑"],
@@ -428,55 +435,30 @@
           "왼쪽에서 두 번째 위치에 화살표가 있습니다",
           "정답 없음"
         ],
-        ans: 2
+        ans: 2,
+        animationMode: "DISTRACT"
       },
-      {
-        type: "OX",
-        scene: ["🍕", "🍎", "🍎", "👒", "🔘", "🍇"],
-        question: "오렌지와 장갑 사이에 있는 물체는 모자입니다",
-        ans: "X"
-      },
+      // 7. Dạng 4 câu đứng yên (NONE)
       {
         type: "CHOICE",
         scene: ["👓", "🥾", "🍌", "🥾", "🍉", "🍉"],
         question: "안경의 개수가 [ ]보다 더 적습니다",
         choices: ["신발", "오렌지", "컵라면", "정답 없음"],
-        ans: 0
+        ans: 0,
+        animationMode: "NONE"
       },
-      {
-        type: "CHOICE",
-        scene: ["🍌", "💊", "🧦", "🍌"],
-        question: "그림과 관련된 설명 중 알맞은 것을 1개 찾아 주세요",
-        choices: [
-          "이미지 안에 두 개 있는 물체는 사과입니다",
-          "그림 안에서 찾을 수 있는 물체는 바나나입니다",
-          "그림에서 트로피는 가장 개수가 많습니다",
-          "정답 없음"
-        ],
-        ans: 1
-      },
-      {
-        type: "CHOICE",
-        scene: ["🍧", "🔦", "👆", "🔦", "🍔"],
-        question: "다음의 그림과 관련된 문장 중 정확한 것을 1개 선택해 주세요",
-        choices: [
-          "삼각김밥은 햄버거보다 개수가 더 많습니다",
-          "햄버거는 위쪽부터 네 번째 순서에 놓여 있습니다",
-          "그림에서 찾을 수 있는 손전등의 개수는 홀수입니다",
-          "정답 없음"
-        ],
-        ans: 1
-      },
+      // 8. Dạng 4 câu chuyển động làm nhiễu (DISTRACT)
       {
         type: "CHOICE",
         scene: ["💍", "💊", "🍍", "👓"],
         question: "알약은 [ ] 바로 옆에 나타나 있습니다",
         choices: ["장갑", "수박", "반지", "정답 없음"],
-        ans: 2
+        ans: 2,
+        animationMode: "DISTRACT"
       }
     ];
 
-    const ANIMATIONS = ["anim-h", "anim-v", "anim-blink", "anim-pulse", ""];
+    const DISTRACT_ANIMATIONS = ["anim-h", "anim-v", "anim-blink", "anim-pulse"];
 
     let currentMode = "SENTENCE";
     let score = 0;
@@ -492,6 +474,8 @@
     const imageBox = document.getElementById("imageBox");
     const tabSentence = document.getElementById("tabSentence");
     const tabImage = document.getElementById("tabImage");
+    const dynamicContainer = document.getElementById("dynamicContainer");
+    const confirmBtn = document.getElementById("confirmBtn");
 
     function changeMode(mode) {
       currentMode = mode;
@@ -512,6 +496,7 @@
     function loadQuestion() {
       clearInterval(timerId);
       isLocked = false;
+      confirmBtn.classList.remove("active");
 
       if (currentMode === "SENTENCE") {
         loadSentenceQuestion();
@@ -520,7 +505,7 @@
       }
     }
 
-    // ================= XỬ LÝ DẠNG CÂU 15S =================
+    // 1. CÂU HỎI TIẾNG HÀN 15S
     function loadSentenceQuestion() {
       timeLeft = 15;
       const timerEl = document.getElementById("blueTimer");
@@ -563,7 +548,6 @@
           } else {
             btn.classList.add("wrong");
             streak = 0;
-            // Làm nổi bật câu đúng
             optionsWrap.querySelectorAll(".kms-opt-btn").forEach(b => {
               if (b.textContent === qData.correct) b.classList.add("correct");
             });
@@ -576,24 +560,112 @@
       });
     }
 
-    // ================= XỬ LÝ DẠNG HÌNH ẢNH =================
+    // 2. LIE DETECTOR HÌNH ẢNH
     function loadImageQuestion() {
       selectedAns = null;
-      timeLeft = 112; // 01:52
-      const timerText = document.getElementById("whiteTimerText");
-      const confirmBtn = document.getElementById("confirmBtn");
-      confirmBtn.classList.remove("active");
+      timeLeft = 110;
+      dynamicContainer.innerHTML = "";
 
-      function renderWhiteTime() {
+      const q = IMAGE_BANK[Math.floor(Math.random() * IMAGE_BANK.length)];
+
+      function getClockHtml() {
         const m = String(Math.floor(timeLeft / 60)).padStart(2, '0');
         const s = String(timeLeft % 60).padStart(2, '0');
-        timerText.textContent = `${m}:${s}`;
+        return `
+          <div class="green-clock-badge">
+            <div class="clock-icon"></div>
+            <span class="clock-time-val">${m}:${s}</span>
+          </div>
+        `;
       }
-      renderWhiteTime();
+
+      function populateScene(parentEl) {
+        q.scene.forEach((it, idx) => {
+          const sp = document.createElement("span");
+          sp.className = "game-item";
+          sp.textContent = it;
+
+          // Xử lý hiệu ứng theo chế độ
+          if (q.animationMode === "TARGET_BLINK" && idx === q.targetIndex) {
+            sp.classList.add("anim-blink");
+            sp.style.setProperty("--s", "0.6s");
+          } else if (q.animationMode === "TARGET_MOVE" && idx === q.targetIndex) {
+            sp.classList.add("anim-v");
+            sp.style.setProperty("--s", "1.2s");
+          } else if (q.animationMode === "DISTRACT") {
+            // Chuyển động ngẫu nhiên làm nhiễu
+            const anim = DISTRACT_ANIMATIONS[Math.floor(Math.random() * DISTRACT_ANIMATIONS.length)];
+            sp.classList.add(anim);
+            sp.style.setProperty("--s", (0.8 + Math.random() * 1.3).toFixed(2) + "s");
+          } // Nếu "NONE" thì không thêm animation
+
+          parentEl.appendChild(sp);
+        });
+      }
+
+      if (q.type === "OX") {
+        imageBox.className = "kms-card-modal layout-ox";
+        dynamicContainer.innerHTML = `
+          <div class="top-bar-ox">${getClockHtml()}</div>
+          <div class="scene-box" id="sceneTarget"></div>
+          <div class="question-title">
+            <span class="q-tag">Q.</span>${q.question}
+          </div>
+          <div class="ox-container">
+            <div class="ox-card-btn o" data-val="O">O</div>
+            <div class="ox-card-btn x" data-val="X">X</div>
+          </div>
+        `;
+
+        populateScene(document.getElementById("sceneTarget"));
+
+        document.querySelectorAll(".ox-card-btn").forEach(btn => {
+          btn.onclick = () => {
+            document.querySelectorAll(".ox-card-btn").forEach(b => b.classList.remove("selected"));
+            btn.classList.add("selected");
+            selectedAns = btn.dataset.val;
+            confirmBtn.classList.add("active");
+          };
+        });
+      } else if (q.type === "CHOICE") {
+        imageBox.className = "kms-card-modal layout-choice";
+        dynamicContainer.innerHTML = `
+          <div class="choice-header-split">
+            <div class="scene-box" id="sceneTarget"></div>
+            <div class="right-question-box">
+              <div class="right-top-clock">${getClockHtml()}</div>
+              <div class="question-title">
+                <span class="q-tag">Q.</span>${q.question}
+              </div>
+            </div>
+          </div>
+          <div class="choices-list" id="choicesTarget"></div>
+        `;
+
+        populateScene(document.getElementById("sceneTarget"));
+
+        const choicesWrap = document.getElementById("choicesTarget");
+        q.choices.forEach((txt, idx) => {
+          const bar = document.createElement("div");
+          bar.className = "choice-item-bar";
+          bar.innerHTML = `<span class="choice-round-num">${idx + 1}</span> <span>${txt}</span>`;
+          bar.onclick = () => {
+            document.querySelectorAll(".choice-item-bar").forEach(b => b.classList.remove("selected"));
+            bar.classList.add("selected");
+            selectedAns = idx;
+            confirmBtn.classList.add("active");
+          };
+          choicesWrap.appendChild(bar);
+        });
+      }
 
       timerId = setInterval(() => {
         timeLeft--;
-        renderWhiteTime();
+        const m = String(Math.floor(timeLeft / 60)).padStart(2, '0');
+        const s = String(timeLeft % 60).padStart(2, '0');
+        const clockValEl = document.querySelector(".clock-time-val");
+        if (clockValEl) clockValEl.textContent = `${m}:${s}`;
+
         if (timeLeft <= 0) {
           clearInterval(timerId);
           streak = 0;
@@ -602,78 +674,23 @@
         }
       }, 1000);
 
-      const data = IMAGE_BANK[Math.floor(Math.random() * IMAGE_BANK.length)];
-      const scene = document.getElementById("sceneContainer");
-      const questionText = document.getElementById("questionText");
-      const answerArea = document.getElementById("answerArea");
-
-      scene.innerHTML = "";
-      data.scene.forEach(it => {
-        const sp = document.createElement("span");
-        sp.className = "game-item";
-        sp.textContent = it;
-        const anim = ANIMATIONS[Math.floor(Math.random() * ANIMATIONS.length)];
-        if (anim) {
-          sp.classList.add(anim);
-          sp.style.setProperty("--s", (0.8 + Math.random() * 1.3).toFixed(2) + "s");
-        }
-        scene.appendChild(sp);
-      });
-
-      questionText.textContent = data.question;
-      answerArea.innerHTML = "";
-
-      if (data.type === "OX") {
-        const wrap = document.createElement("div");
-        wrap.className = "ox-container";
-        ["O", "X"].forEach(val => {
-          const btn = document.createElement("div");
-          btn.className = `ox-btn ${val.toLowerCase()}`;
-          btn.textContent = val;
-          btn.onclick = () => {
-            wrap.querySelectorAll(".ox-btn").forEach(b => b.classList.remove("selected"));
-            btn.classList.add("selected");
-            selectedAns = val;
-            confirmBtn.classList.add("active");
-          };
-          wrap.appendChild(btn);
-        });
-        answerArea.appendChild(wrap);
-      } else {
-        const wrap = document.createElement("div");
-        wrap.className = "choices-container";
-        data.choices.forEach((txt, idx) => {
-          const row = document.createElement("div");
-          row.className = "choice-row";
-          row.innerHTML = `<span class="choice-num">${idx + 1}</span> ${txt}`;
-          row.onclick = () => {
-            wrap.querySelectorAll(".choice-row").forEach(r => r.classList.remove("selected"));
-            row.classList.add("selected");
-            selectedAns = idx;
-            confirmBtn.classList.add("active");
-          };
-          wrap.appendChild(row);
-        });
-        answerArea.appendChild(wrap);
-      }
-
       confirmBtn.onclick = () => {
         if (selectedAns === null) return;
         clearInterval(timerId);
 
-        let ok = (data.type === "OX") ? (selectedAns === data.ans) : (selectedAns === data.ans);
-        if (ok) {
+        let isCorrect = (selectedAns === q.ans);
+        if (isCorrect) {
           score++;
           streak++;
         } else {
           streak = 0;
         }
+
         updateScore();
         loadQuestion();
       };
     }
 
-    // Khởi chạy
     loadQuestion();
   </script>
 </body>
