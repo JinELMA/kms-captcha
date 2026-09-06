@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MapleStory KMS & Worlds Captcha HQ</title>
+  <title>MapleStory KMS & Worlds Captcha Training HQ</title>
   <style>
     * { box-sizing: border-box; user-select: none; font-family: "Malgun Gothic", Dotum, -apple-system, sans-serif; }
 
@@ -50,7 +50,7 @@
     }
     .btn-action-tool:hover { background: #475569; color: #fff; }
 
-    /* ================= 1. MÀN HÌNH SẢNH CHÍNH (LOBBY) ================= */
+    /* ================= LOBBY SCREEN ================= */
     .lobby-container {
       width: 100%; max-width: 1100px; display: flex; flex-direction: column; align-items: center;
     }
@@ -85,7 +85,7 @@
     }
     .captcha-card-select:hover .btn-enter-mode { background: #f59e0b; color: #0f172a; }
 
-    /* ================= 2. MÀN HÌNH ĐẤU TRƯỜNG RIÊNG BIỆT (ARENA) ================= */
+    /* ================= ARENA SCREEN ================= */
     .arena-container {
       width: 100%; max-width: 1100px; display: none; flex-direction: column; align-items: center;
     }
@@ -98,7 +98,6 @@
     }
     .arena-stage-title { font-size: 20px; font-weight: 900; color: #facc15; }
 
-    /* KHU VỰC THOẠI CỬ ĐỘNG CỦA NPC GM & CHÂM BIẾM */
     .npc-speaker-bar {
       width: 100%; background: rgba(15, 23, 42, 0.95); border: 2px solid #eab308;
       border-radius: 12px; padding: 12px 18px; display: flex; align-items: center;
@@ -126,7 +125,7 @@
       width: 100%; min-height: 520px; display: flex; justify-content: center; align-items: center;
     }
 
-    /* ================= 1. CÂU CHỮ 15S KHỔNG LỒ ================= */
+    /* 1. CÂU CHỮ 15S */
     .kms-blue-box-large {
       width: 540px; background: #18488e; border: 4px solid #2b67be; border-radius: 12px;
       padding: 24px 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.85); display: flex; flex-direction: column; align-items: center;
@@ -146,7 +145,7 @@
     .kms-opt-btn-large.correct { background-color: #4ade80 !important; border-color: #16a34a !important; color: #052e16 !important; }
     .kms-opt-btn-large.wrong { background-color: #f87171 !important; border-color: #dc2626 !important; color: #fff !important; }
 
-    /* ================= 2. HÌNH ẢNH LIE DETECTOR KHỔNG LỒ (1-20 HÌNH) ================= */
+    /* 2. HÌNH ẢNH LIE DETECTOR (1-12 HÌNH) */
     .image-detector-large {
       width: 960px; background: #ffffff; border: 3px solid #cbd5e1; border-radius: 14px;
       padding: 24px 28px; box-shadow: 0 22px 55px rgba(0,0,0,0.85); color: #333;
@@ -161,11 +160,10 @@
 
     .scene-dark-box-large {
       width: 100%; min-height: 220px; max-height: 280px; background: #1e242d; border-radius: 10px;
-      display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 16px;
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px;
       padding: 16px; margin-bottom: 16px; box-shadow: inset 0 0 18px rgba(0,0,0,0.85); overflow: hidden;
     }
 
-    /* ANIMATION CHUYỂN ĐỘNG CHUẨN CỦA VẬT THỂ */
     @keyframes animMoveUpDown { 0%, 100% { transform: translateY(-16px); } 50% { transform: translateY(16px); } }
     @keyframes animMoveLeftRight { 0%, 100% { transform: translateX(-18px); } 50% { transform: translateX(18px); } }
     @keyframes animBlinkFlash { 0%, 100% { opacity: 1; } 50% { opacity: 0.05; } }
@@ -193,7 +191,7 @@
     }
     .btn-image-confirm-large.active { background: #7cb342; cursor: pointer; }
 
-    /* ================= 3. NẤM VIOLETTA KHỔNG LỒ ================= */
+    /* 3. NẤM VIOLETTA KHỔNG LỒ */
     .stage-card-large {
       width: 900px; background: #171a22; border: 4px solid #525f75; border-radius: 12px;
       overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,0.95);
@@ -235,7 +233,7 @@
     }
     .num-btn-large.ready:hover { background: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%); border-color: #38bdf8; }
 
-    /* ================= 4. BÁM ĐUỔI HÌNH TÀNG HÌNH (LIA CHUỘT) KHỔNG LỒ ================= */
+    /* 4. BÁM ĐUỔI HÌNH TÀNG HÌNH */
     .game-window-large {
       width: 900px; background: #1e2430; border: 4px solid #475569; border-radius: 12px;
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.95); overflow: hidden;
@@ -255,7 +253,7 @@
       display: flex; align-items: center; justify-content: center; z-index: 20;
     }
 
-    /* ================= 5. BÓNG 5 LẦN + GÕ HANGUL + HƯỚNG DẪN CHI TIẾT BẢN CŨ ================= */
+    /* 5. BÓNG 5 LẦN + GÕ HANGUL */
     .bubble-stage-large {
       width: 900px; height: 480px; background: radial-gradient(circle at center, #15803d 0%, #064e3b 40%, #091e17 100%);
       border: 4px solid #4ade80; border-radius: 14px; position: relative; overflow: hidden;
@@ -278,7 +276,6 @@
       0% { left: -120px; transform: skewX(-16deg); } 100% { left: calc(100% + 40px); transform: skewX(-16deg); }
     }
 
-    /* BẢNG HƯỚNG DẪN TÁCH NÉT & PHÍM QWERTY CHI TIẾT (KHÔI PHỤC HOÀN CHỈNH) */
     .trainer-guide-panel {
       background: #1e293b; border: 1.5px solid #38bdf8; border-radius: 8px; padding: 12px 14px; margin-top: 10px;
     }
@@ -299,7 +296,7 @@
     }
     .full-keys-code { font-family: 'Consolas', monospace; font-size: 15px; font-weight: 900; color: #4ade80; letter-spacing: 2px; }
 
-    /* ================= 6. MAPLE PLANET GM CHECK KHỔNG LỒ ================= */
+    /* 6. MAPLE PLANET GM CHECK */
     .gm-window-large {
       position: relative; width: 900px; height: 410px; background-color: #d1d5db;
       background-image: url('gm_box.png'); background-size: 100% 100%;
@@ -320,7 +317,7 @@
     }
     .gm-confirm-large:hover { background: rgba(249, 115, 22, 0.4); }
 
-    /* NGĂN KÉO BÍ KÍP (DRAWER) */
+    /* DRAWER */
     .drawer-overlay {
       position: fixed; top: 0; right: -420px; width: 400px; height: 100vh;
       background: rgba(15, 23, 42, 0.98); border-left: 2px solid #38bdf8;
@@ -354,25 +351,25 @@
     </div>
   </div>
 
-  <!-- 1. SẢNH CHÍNH (LOBBY) -->
+  <!-- 1. LOBBY -->
   <div class="lobby-container" id="lobbyScreen">
     <div class="lobby-banner">
       <h1>HỆ THỐNG HUẤN LUYỆN LIE DETECTOR & CAPTCHA CHUYÊN SÂU</h1>
-      <p>Chọn 1 trong 6 chế độ để bước vào phòng thi đấu biệt lập. Hãy giữ sự tập trung cao độ!</p>
+      <p>Chọn 1 trong 6 chế độ để bước vào phòng thi đấu biệt lập. Cơ chế câu hỏi chống lặp vô tận!</p>
     </div>
 
     <div class="captcha-grid-selection">
       <div class="captcha-card-select" onclick="openArena('SENTENCE')">
         <span class="card-badge-num">15 Giây</span>
         <div class="card-title">📝 1. Câu chữ KMS 15s</div>
-        <div class="card-desc">Chọn câu tiếng Hàn có logic đúng ngữ pháp. Đã bổ sung bộ bẫy đảo nét chính tả nâng cao.</div>
+        <div class="card-desc">Chọn câu tiếng Hàn đúng ngữ pháp. Đổi mới liên tục khi sai hoặc đúng, không lặp lại.</div>
         <button class="btn-enter-mode">VÀO PHÒNG LUYỆN</button>
       </div>
 
       <div class="captcha-card-select" onclick="openArena('IMAGE')">
         <span class="card-badge-num">110 Giây</span>
         <div class="card-title">🔍 2. Ảnh Lie Detector</div>
-        <div class="card-desc">Phân loại vật thể chuyển động, chớp tắt hoặc đứng yên. Ngẫu nhiên từ 1 đến 20 hình nguyên bản.</div>
+        <div class="card-desc">Ngẫu nhiên từ 1 đến 12 hình pixel-art nguyên bản, phân loại vật thể chuyển động/chớp tắt chính xác.</div>
         <button class="btn-enter-mode">VÀO PHÒNG LUYỆN</button>
       </div>
 
@@ -393,20 +390,20 @@
       <div class="captcha-card-select" onclick="openArena('CLICK_TYPE')">
         <span class="card-badge-num">49 Giây</span>
         <div class="card-title">🫧 5. Bóng + Gõ chữ Hangul</div>
-        <div class="card-desc">Click bóng 5 lần, sau đó gõ chữ thư pháp có dải kính mờ trượt qua lại kèm bảng tách phím QWERTY.</div>
+        <div class="card-desc">Click bóng 5 lần, gõ chữ thư pháp kèm bảng tách phím QWERTY chi tiết từng âm tiết bản cũ.</div>
         <button class="btn-enter-mode">VÀO PHÒNG LUYỆN</button>
       </div>
 
       <div class="captcha-card-select" onclick="openArena('GM_CHECK')">
         <span class="card-badge-num">45 Giây</span>
         <div class="card-title">👨‍💼 6. Maple GM Check</div>
-        <div class="card-desc">Khung thoại NPC Quản lý game: câu hỏi chữ dọc, tổ hợp dấu '/', chuỗi 10 chữ không lặp...</div>
+        <div class="card-desc">Khung thoại NPC: câu hỏi chữ dọc, tổ hợp dấu '/', đổi mới liên tục không bao giờ trùng lặp.</div>
         <button class="btn-enter-mode">VÀO PHÒNG LUYỆN</button>
       </div>
     </div>
   </div>
 
-  <!-- 2. ĐẤU TRƯỜNG BIỆT LẬP (ARENA) -->
+  <!-- 2. ARENA -->
   <div class="arena-container" id="arenaScreen">
     <div class="arena-top-nav">
       <button class="btn-back-lobby" onclick="returnToLobby()">◀ VỀ SẢNH CHÍNH (LOBBY)</button>
@@ -414,7 +411,7 @@
       <div style="width: 140px;"></div>
     </div>
 
-    <!-- NPC THOẠI & CHÂM BIẾM -->
+    <!-- NPC THOẠI & SÁT PHẠT -->
     <div class="npc-speaker-bar">
       <div class="npc-portrait-circle">
         <svg width="68" height="68" viewBox="0 0 84 96" class="talking-avatar-svg">
@@ -433,7 +430,6 @@
       </div>
     </div>
 
-    <!-- KHU VỰC CHỨA CÁC CAPTCHA LỚN -->
     <div class="arena-display-workspace">
       <!-- 1. CÂU CHỮ 15S -->
       <div class="kms-blue-box-large" id="arenaSentence" style="display:none;">
@@ -442,7 +438,7 @@
         <div class="kms-options-group-large" id="arenaBlueOptions"></div>
       </div>
 
-      <!-- 2. HÌNH ẢNH LIE DETECTOR KHỔNG LỒ (1 - 20 HÌNH) -->
+      <!-- 2. HÌNH ẢNH (1-12 HÌNH) -->
       <div class="image-detector-large" id="arenaImage" style="display:none;">
         <div class="img-top-row-large">
           <div class="clock-indicator-large">
@@ -458,7 +454,7 @@
         <button class="btn-image-confirm-large" id="arenaImgConfirmBtn">확인</button>
       </div>
 
-      <!-- 3. NẤM VIOLETTA KHỔNG LỒ -->
+      <!-- 3. NẤM VIOLETTA -->
       <div class="stage-card-large" id="arenaVioletta" style="display:none;">
         <div class="stage-top-banner-large" id="arenaViolettaBanner">화장한 비올레타를 놓치지 말고 주목해주세요.</div>
         <div class="stage-area-large">
@@ -479,7 +475,7 @@
         </div>
       </div>
 
-      <!-- 4. BÁM ĐUỔI HÌNH TÀNG HÌNH (LIA CHUỘT) -->
+      <!-- 4. LIA CHUỘT TÀNG HÌNH -->
       <div class="game-window-large" id="arenaTrack" style="display:none;">
         <div class="camo-arena-large" id="arenaCamoTrack">
           <div class="tracking-orb-large" id="arenaOrb">
@@ -501,7 +497,7 @@
         </div>
       </div>
 
-      <!-- 5. BÓNG 5 LẦN + GÕ HANGUL + HƯỚNG DẪN CHI TIẾT -->
+      <!-- 5. BÓNG 5 LẦN + GÕ HANGUL + HƯỚNG DẪN CHI TIẾT BẢN CŨ -->
       <div id="arenaClickType" style="display:none; flex-direction:column; align-items:center;">
         <div class="bubble-stage-large" id="arenaBubbleBox">
           <div style="padding:14px 20px; background:rgba(0,0,0,0.6); display:flex; justify-content:space-between; font-size:16px; font-weight:bold;">
@@ -524,7 +520,6 @@
           </div>
           <input type="text" id="arenaHangulInput" style="width:100%; height:46px; border:2px solid #0f172a; border-radius:6px; padding:6px 14px; font-size:18px; font-weight:bold; margin-bottom:12px;" placeholder="Nhập chữ tiếng Hàn và Enter..." autocomplete="off">
           
-          <!-- BẢNG HƯỚNG DẪN TÁCH NÉT & PHÍM BẢN CŨ -->
           <div class="trainer-guide-panel">
             <div class="trainer-header-row">
               <span class="trainer-title">⌨️ HƯỚNG DẪN GÕ PHÍM CHO NHÂN VIÊN</span>
@@ -567,15 +562,6 @@
         => Yêu cầu: Nhập tên bãi săn hiện tại (Gõ: <b>헤네시스</b> hoặc <b>개미굴</b>).
       </div>
     </div>
-    <div class="cheat-card">
-      <div class="cheat-card-title">⌨️ Tra nhanh 10 chữ Hangul không trùng</div>
-      <div class="cheat-card-body">
-        Gõ cụm cố định sau (không dấu cách):<br>
-        <b style="color:#4ade80;">동서남북갑을병정무기</b><br>
-        Phím QWERTY bấm liên tục:<br>
-        <code style="color:#fde047; font-size:13px;">ehdtjsskabrkfdmfqudwjdanrl</code>
-      </div>
-    </div>
   </div>
 
   <script>
@@ -607,21 +593,16 @@
       document.getElementById('soundToggleBtn').textContent = isMuted ? '🔇 Âm thanh: TẮT' : '🔊 Âm thanh: BẬT';
     }
 
-    // ================= KHO THOẠI CHÂM BIẾM (SÁT PHẠT) =================
     const ROAST_FAILS = [
       "Mắt để dưới gót chân à mà bấm trượt? Cắt thưởng chuyên cần bây giờ!",
       "Tay run như trúng gió thế này thì nghỉ về quê chăn vịt cho rồi!",
       "Gõ phím kiểu mổ cò này thì gà nó mổ thóc còn nhanh hơn mày đấy!",
       "Bấm có 1 cái Captcha mà cũng toang, tối nay rửa chén cho cả phòng nha em!",
-      "Phản xạ kiểu rùa bò này thì GM nó gõ đầu cho bay cả dàn máy!",
-      "Nhìn nấm trang điểm mà cũng hoa mắt, tối qua thức cày phim hay làm gì khai mau?!",
-      "Học việc 3 tháng mà bấm như người mù sờ voi, tính phá studio hả mạy?!",
-      "Có thế mà cũng sai, tí nữa mời cả ca uống nước chuộc tội đi nhé!"
+      "Phản xạ kiểu rùa bò này thì GM nó gõ đầu cho bay cả dàn máy!"
     ];
     const CHEER_PASSES = [
       "Hên thôi em ơi, tưởng gà thế nào! Câu sau coi chừng đấy.",
-      "Tạm được! Bấm nhanh như thế mới mong sống sót qua đợt quét.",
-      "Phản xạ tạm chấp nhận, tiếp tục giữ cái nhịp này xem nào!"
+      "Tạm được! Bấm nhanh như thế mới mong sống sót qua đợt quét."
     ];
 
     function speakNPC(text, type) {
@@ -630,6 +611,21 @@
       if (type === 'roast') { el.classList.add('roast'); playFailSound(); }
       else if (type === 'cheer') { el.classList.add('cheer'); playPassSound(); }
       el.textContent = text;
+    }
+
+    // ================= HỆ THỐNG XÁO TRỘN KHÔNG LẶP (SHUFFLE POOL) =================
+    function createShuffleQueue(array) {
+      let pool = [...array].sort(() => Math.random() - 0.5);
+      let index = 0;
+      return {
+        next: function() {
+          if (index >= pool.length) {
+            pool = [...array].sort(() => Math.random() - 0.5);
+            index = 0;
+          }
+          return pool[index++];
+        }
+      };
     }
 
     // ================= QUẢN LÝ ĐẤU TRƯỜNG =================
@@ -692,7 +688,7 @@
       speakNPC(CHEER_PASSES[Math.floor(Math.random() * CHEER_PASSES.length)], "cheer");
     }
 
-    /* ================= 1. CÂU CHỮ 15S KHỔNG LỒ ================= */
+    /* ================= 1. CÂU CHỮ 15S (KHÔNG LẶP) ================= */
     const KMS_ADVANCED_SENTENCES = [
       { c: "여기에 주차하시면 안 됩니다.", w: ["역이에 주차하시면 안 뎁니다.", "여기에 주차하새면 안 됍니다.", "여기에 주차하시면 안 됩나다.", "여기에 주채하시면 안 됩니다."] },
       { c: "사냥터에서 몬스터를 처치하세요.", w: ["산앙터에서 먼스터를 저치헤새요.", "사냥터에서 몬스토를 처지하새요.", "사냥터애서 몬스터를 쳐치하새요.", "사냥터에서 몬스털를 처치해새요."] },
@@ -700,6 +696,7 @@
       { c: "주문의 흔적을 모아 장비를 강화하세요.", w: ["주문의 훈적을 모아 장배를 강화하세요.", "주문의 흔적을 모아 장비를 강홰하새요.", "주문의 흔적을 모어 장비를 강화하새요.", "주문의 훈적을 모아 장비를 겅화하세요."] },
       { c: "인벤토리가 가득 차서 주울 수 없습니다.", w: ["인밴토리가 가득 차서 주울 수 엽습니다.", "인벤토리가 개득 차서 주울 수 없슴니다.", "인벤토리가 가둑 차서 주율 수 없습니다.", "인벤토리가 가득 찻서 주울 수 업습니다."] }
     ];
+    const sentenceQueue = createShuffleQueue(KMS_ADVANCED_SENTENCES);
 
     function runSentenceArena() {
       clearInterval(arenaTimer);
@@ -714,11 +711,11 @@
         if (timeLeft <= 0) {
           clearInterval(arenaTimer);
           handleFailAction();
-          setTimeout(runSentenceArena, 1400);
+          setTimeout(runSentenceArena, 1400); // Đổi câu mới ngay khi sai/hết giờ
         }
       }, 1000);
 
-      const q = KMS_ADVANCED_SENTENCES[Math.floor(Math.random() * KMS_ADVANCED_SENTENCES.length)];
+      const q = sentenceQueue.next();
       const list = [{ t: q.c, ok: true }, ...q.w.map(w => ({ t: w, ok: false }))].sort(() => Math.random() - 0.5);
 
       const box = document.getElementById('arenaBlueOptions');
@@ -731,34 +728,23 @@
           clearInterval(arenaTimer);
           if (it.ok) { btn.classList.add('correct'); handlePassAction(); }
           else { btn.classList.add('wrong'); handleFailAction(); }
-          setTimeout(runSentenceArena, 1200);
+          setTimeout(runSentenceArena, 1200); // Đổi câu mới ngay
         };
         box.appendChild(btn);
       });
     }
 
-    /* ================= 2. HÌNH ẢNH LIE DETECTOR KHỔNG LỒ (NGẪU NHIÊN 1 ĐẾN 20 HÌNH) ================= */
-    // SVG Pixel-art chuẩn nguyên bản của 12 vật thể kinh điển trong MapleStory
+    /* ================= 2. HÌNH ẢNH (1-12 HÌNH, KHÔNG LẶP CẤU HÌNH) ================= */
     function getMapleItemSVG(type) {
-      if (type === "RING") { // Nhẫn ngọc (반지)
-        return `<svg width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="28" r="14" fill="none" stroke="#cbd5e1" stroke-width="6"/><polygon points="24,6 31,14 24,18 17,14" fill="#38bdf8" stroke="#0284c7" stroke-width="1.5"/></svg>`;
-      } else if (type === "CRAB") { // Cua đỏ (꽃게)
-        return `<svg width="48" height="48" viewBox="0 0 48 48"><ellipse cx="24" cy="26" rx="16" ry="11" fill="#ec4899"/><circle cx="18" cy="22" r="2.5" fill="#fff"/><circle cx="30" cy="22" r="2.5" fill="#fff"/><path d="M 12 18 Q 8 10 14 12 Z" fill="#ec4899"/><path d="M 36 18 Q 40 10 34 12 Z" fill="#ec4899"/><path d="M 10 30 L 4 34 M 12 33 L 8 38 M 38 30 L 44 34 M 36 33 L 40 38" stroke="#ec4899" stroke-width="2.5"/></svg>`;
-      } else if (type === "APPLE") { // Táo đỏ (사과)
-        return `<svg width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="26" r="15" fill="#ef4444"/><path d="M 24 11 Q 25 6 28 8" stroke="#78350f" stroke-width="3" fill="none"/><ellipse cx="29" cy="11" rx="4" ry="2" fill="#22c55e"/></svg>`;
-      } else if (type === "STRAWBERRY") { // Dâu tây (딸기)
-        return `<svg width="48" height="48" viewBox="0 0 48 48"><polygon points="24,38 12,20 36,20" fill="#f43f5e"/><polygon points="24,14 18,20 30,20" fill="#22c55e"/><circle cx="20" cy="25" r="1" fill="#fef08a"/><circle cx="28" cy="25" r="1" fill="#fef08a"/><circle cx="24" cy="31" r="1" fill="#fef08a"/></svg>`;
-      } else if (type === "BANANA") { // Chuối vàng (바나나)
-        return `<svg width="48" height="48" viewBox="0 0 48 48"><path d="M 14 14 Q 38 16 34 36 Q 24 24 14 14 Z" fill="#facc15" stroke="#ca8a04" stroke-width="1.5"/></svg>`;
-      } else if (type === "POTION") { // Bình máu (물약)
-        return `<svg width="48" height="48" viewBox="0 0 48 48"><rect x="20" y="8" width="8" height="6" fill="#94a3b8"/><circle cx="24" cy="28" r="14" fill="#ef4444"/><circle cx="20" cy="24" r="3" fill="#ffffff" opacity="0.6"/></svg>`;
-      } else if (type === "DIAMOND") { // Kim cương (보석)
-        return `<svg width="48" height="48" viewBox="0 0 48 48"><polygon points="24,8 36,18 24,38 12,18" fill="#38bdf8" stroke="#0284c7" stroke-width="2"/></svg>`;
-      } else { // Nấm cam (버섯)
-        return `<svg width="48" height="48" viewBox="0 0 48 48"><path d="M 10 26 C 10 12 38 12 38 26 Z" fill="#f97316"/><path d="M 18 26 C 18 36 30 36 30 26 Z" fill="#fef08a"/><circle cx="21" cy="28" r="1.5" fill="#000"/><circle cx="27" cy="28" r="1.5" fill="#000"/></svg>`;
-      }
+      if (type === "RING") return `<svg width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="28" r="14" fill="none" stroke="#cbd5e1" stroke-width="6"/><polygon points="24,6 31,14 24,18 17,14" fill="#38bdf8" stroke="#0284c7" stroke-width="1.5"/></svg>`;
+      if (type === "CRAB") return `<svg width="48" height="48" viewBox="0 0 48 48"><ellipse cx="24" cy="26" rx="16" ry="11" fill="#ec4899"/><circle cx="18" cy="22" r="2.5" fill="#fff"/><circle cx="30" cy="22" r="2.5" fill="#fff"/><path d="M 12 18 Q 8 10 14 12 Z" fill="#ec4899"/><path d="M 36 18 Q 40 10 34 12 Z" fill="#ec4899"/><path d="M 10 30 L 4 34 M 12 33 L 8 38 M 38 30 L 44 34 M 36 33 L 40 38" stroke="#ec4899" stroke-width="2.5"/></svg>`;
+      if (type === "APPLE") return `<svg width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="26" r="15" fill="#ef4444"/><path d="M 24 11 Q 25 6 28 8" stroke="#78350f" stroke-width="3" fill="none"/><ellipse cx="29" cy="11" rx="4" ry="2" fill="#22c55e"/></svg>`;
+      if (type === "STRAWBERRY") return `<svg width="48" height="48" viewBox="0 0 48 48"><polygon points="24,38 12,20 36,20" fill="#f43f5e"/><polygon points="24,14 18,20 30,20" fill="#22c55e"/><circle cx="20" cy="25" r="1" fill="#fef08a"/><circle cx="28" cy="25" r="1" fill="#fef08a"/><circle cx="24" cy="31" r="1" fill="#fef08a"/></svg>`;
+      if (type === "BANANA") return `<svg width="48" height="48" viewBox="0 0 48 48"><path d="M 14 14 Q 38 16 34 36 Q 24 24 14 14 Z" fill="#facc15" stroke="#ca8a04" stroke-width="1.5"/></svg>`;
+      if (type === "POTION") return `<svg width="48" height="48" viewBox="0 0 48 48"><rect x="20" y="8" width="8" height="6" fill="#94a3b8"/><circle cx="24" cy="28" r="14" fill="#ef4444"/><circle cx="20" cy="24" r="3" fill="#ffffff" opacity="0.6"/></svg>`;
+      if (type === "DIAMOND") return `<svg width="48" height="48" viewBox="0 0 48 48"><polygon points="24,8 36,18 24,38 12,18" fill="#38bdf8" stroke="#0284c7" stroke-width="2"/></svg>`;
+      return `<svg width="48" height="48" viewBox="0 0 48 48"><path d="M 10 26 C 10 12 38 12 38 26 Z" fill="#f97316"/><path d="M 18 26 C 18 36 30 36 30 26 Z" fill="#fef08a"/><circle cx="21" cy="28" r="1.5" fill="#000"/><circle cx="27" cy="28" r="1.5" fill="#000"/></svg>`;
     }
-
     const MAPLE_RAW_ITEMS = [
       { id: "RING", n: "반지" }, { id: "CRAB", n: "꽃게" }, { id: "APPLE", n: "사과" },
       { id: "STRAWBERRY", n: "딸기" }, { id: "BANANA", n: "바나나" }, { id: "POTION", n: "물약" },
@@ -785,27 +771,21 @@
       scene.innerHTML = '';
       list.innerHTML = '';
 
-      // NGẪU NHIÊN TỪ 1 ĐẾN 20 HÌNH (Đúng yêu cầu của bạn)
-      const count = Math.floor(Math.random() * 20) + 1; // 1 đến 20 hình
+      // NGẪU NHIÊN TỪ 1 ĐẾN 12 HÌNH
+      const count = Math.floor(Math.random() * 12) + 1;
       let currentItems = [];
       for (let i = 0; i < count; i++) {
         currentItems.push(MAPLE_RAW_ITEMS[Math.floor(Math.random() * MAPLE_RAW_ITEMS.length)]);
       }
 
-      // Chọn dạng câu hỏi: 0: Chuyển động, 1: Chớp tắt, 2: Đứng yên
       const qType = Math.floor(Math.random() * 3);
       const targetIdx = Math.floor(Math.random() * count);
       targetImageName = currentItems[targetIdx].n;
 
-      if (qType === 0) {
-        prompt.textContent = "현재 움직이고 있는 물체는 무엇입니까?";
-      } else if (qType === 1) {
-        prompt.textContent = "현재 깜빡이고 있는 물체는 무엇입니까?";
-      } else {
-        prompt.textContent = "제자리에 멈춰 있는 물체는 무엇입니까?";
-      }
+      if (qType === 0) prompt.textContent = "현재 움직이고 있는 물체는 무엇입니까?";
+      else if (qType === 1) prompt.textContent = "현재 깜빡이고 있는 물체는 무엇입니까?";
+      else prompt.textContent = "제자리에 멈춰 있는 물체는 무엇입니까?";
 
-      // Vẽ các vật phẩm vào khung và GẮN CLASS CỬ ĐỘNG
       currentItems.forEach((item, idx) => {
         const wrap = document.createElement('div');
         wrap.className = 'game-sprite-unit';
@@ -816,15 +796,11 @@
         } else if (qType === 1) {
           if (idx === targetIdx) wrap.classList.add('obj-anim-blink');
         } else {
-          // Các con khác chuyển động/chớp tắt, DUY NHẤT con đích đứng yên
-          if (idx !== targetIdx) {
-            wrap.classList.add(idx % 2 === 0 ? 'obj-anim-v' : 'obj-anim-blink');
-          }
+          if (idx !== targetIdx) wrap.classList.add(idx % 2 === 0 ? 'obj-anim-v' : 'obj-anim-blink');
         }
         scene.appendChild(wrap);
       });
 
-      // Tạo 4 phương án lựa chọn
       let opts = [targetImageName];
       const others = MAPLE_RAW_ITEMS.map(s => s.n).filter(n => n !== targetImageName).sort(() => Math.random() - 0.5);
       opts.push(others[0], others[1], others[2]);
@@ -848,7 +824,7 @@
         clearInterval(arenaTimer);
         if (selectedImageOpt === targetImageName) handlePassAction();
         else handleFailAction();
-        setTimeout(runImageArena, 1400);
+        setTimeout(runImageArena, 1400); // Đổi câu mới ngay
       };
 
       arenaTimer = setInterval(() => {
@@ -864,7 +840,7 @@
       }, 1000);
     }
 
-    /* ================= 3. NẤM VIOLETTA KHỔNG LỒ ================= */
+    /* ================= 3. NẤM VIOLETTA ================= */
     function getViolettaSVGLarge(isMakeup, isClosedEyes) {
       let face = '';
       if (isClosedEyes) {
@@ -927,11 +903,11 @@
       }
 
       document.getElementById(`ar${targetViolettaShroom}`).style.display = 'block';
-      document.getElementById('arenaViolettaBanner').textContent = "화장한 비올레타를 놓치지 말고 주목해주세요. (Khóa chặt mục tiêu!)";
+      document.getElementById('arenaViolettaBanner').textContent = "화장한 비올레타를 놓치지 말고 주목해주세요.";
 
       setTimeout(() => {
         document.getElementById(`ar${targetViolettaShroom}`).style.display = 'none';
-        document.getElementById('arenaViolettaBanner').textContent = "눈을 감고 이동하기 시작합니다... (Đang tráo đổi từ từ)";
+        document.getElementById('arenaViolettaBanner').textContent = "눈을 감고 이동하기 시작합니다...";
 
         for (let i = 0; i < 4; i++) {
           document.getElementById(`sh${i}`).innerHTML = getViolettaSVGLarge(i === targetViolettaShroom, true);
@@ -958,7 +934,7 @@
             clearInterval(arenaTimer);
             setTimeout(() => {
               for (let i = 0; i < 4; i++) document.getElementById(`vbtn${i}`).classList.add('ready');
-              document.getElementById('arenaViolettaBanner').textContent = "화장한 비올레타가 위치한 번호를 누르세요! (Chọn số 1 - 4)";
+              document.getElementById('arenaViolettaBanner').textContent = "화장한 비올레타가 위치한 번호를 누르세요!";
             }, 880);
           }
         }, 980);
@@ -977,7 +953,7 @@
       setTimeout(runViolettaArena, 2000);
     }
 
-    /* ================= 4. BÁM ĐUỔI HÌNH TÀNG HÌNH (LIA CHUỘT) SỬA LỖI ================= */
+    /* ================= 4. LIA CHUỘT TÀNG HÌNH ================= */
     let trackProgress = 0;
     let isTrackingCursor = false;
     let trackX = 350, trackY = 180, tVelX = 3.2, tVelY = 2.6;
@@ -1048,7 +1024,7 @@
       }, 25);
     }
 
-    /* ================= 5. BÓNG 5 LẦN + GÕ HANGUL + HƯỚNG DẪN CHI TIẾT BẢN CŨ ================= */
+    /* ================= 5. BÓNG 5 LẦN + GÕ HANGUL (BẢN CŨ ĐẦY ĐỦ TÁCH NÉT) ================= */
     const CHOSEONG = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
     const CHOSEONG_KEY = ['r','R','s','e','E','f','a','q','Q','t','T','d','w','W','c','z','x','v','g'];
     const JUNGSEONG = ['ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ'];
@@ -1073,6 +1049,7 @@
       "애가형영것", "단풍잎바람", "자쿰의투구", "헤네시스숲", "루디브리엄",
       "엘리니아꽃", "시그너스궁", "오르비스탑", "혼테일날개", "핑크빈인형"
     ];
+    const hangulQueue = createShuffleQueue(HANGUL_WORDS_POOL);
 
     let bubbleHits = 0;
     let typeLivesLeft = 3;
@@ -1118,7 +1095,7 @@
       inp.value = '';
       inp.focus();
 
-      currentTargetWord = HANGUL_WORDS_POOL[Math.floor(Math.random() * HANGUL_WORDS_POOL.length)];
+      currentTargetWord = hangulQueue.next(); // Không lặp
       buildDetailedKeystrokeGuide(currentTargetWord);
       renderHangulCanvas(currentTargetWord);
 
@@ -1153,7 +1130,6 @@
       };
     }
 
-    // TÁI DỰNG BẢNG TRA PHÍM QWERTY TỪNG ÂM TIẾT CỦA BẢN CŨ
     function buildDetailedKeystrokeGuide(word) {
       const grid = document.getElementById('arenaSyllableHintsGrid');
       grid.innerHTML = '';
@@ -1211,8 +1187,7 @@
       }
     }
 
-    /* ================= 6. MAPLE PLANET GM CHECK ================= */
-    let currentGMObj = null;
+    /* ================= 6. MAPLE PLANET GM CHECK (KHÔNG LẶP) ================= */
     const GM_QUESTIONS = [
       {
         render: () => `
@@ -1245,14 +1220,16 @@
         val: (v) => v.split('/').length === 3 && v.split('/').every(s => s.trim().length > 0)
       }
     ];
+    const gmQueue = createShuffleQueue(GM_QUESTIONS);
 
+    let currentGMObj = null;
     function runGMArena() {
       questionStartTime = Date.now();
       const inp = document.getElementById('arenaGMInput');
       inp.value = '';
       inp.focus();
 
-      currentGMObj = GM_QUESTIONS[Math.floor(Math.random() * GM_QUESTIONS.length)];
+      currentGMObj = gmQueue.next(); // Đổi câu mới không lặp
       document.getElementById('arenaGMQuestionBox').innerHTML = currentGMObj.render();
 
       inp.onkeydown = (e) => {
@@ -1264,7 +1241,7 @@
       const val = document.getElementById('arenaGMInput').value;
       if (currentGMObj && currentGMObj.val(val)) handlePassAction();
       else handleFailAction();
-      setTimeout(runGMArena, 1400);
+      setTimeout(runGMArena, 1400); // Đổi câu mới ngay
     }
   </script>
 </body>
