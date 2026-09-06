@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MapleStory KMS - Violetta Lie Detector</title>
+  <title>MapleStory KMS - 화장한 비올레타를 찾아라</title>
   <style>
-    * { box-sizing: border-box; user-select: none; font-family: "Malgun Gothic", Dotum, sans-serif; }
+    * { box-sizing: border-box; user-select: none; font-family: "Malgun Gothic", "Dotum", sans-serif; }
+
     body {
       margin: 0;
       min-height: 100vh;
-      background: linear-gradient(rgba(10, 18, 30, 0.4), rgba(10, 18, 30, 0.65)),
-                  url('bg.jpg'),
+      background: linear-gradient(rgba(10, 18, 30, 0.45), rgba(10, 18, 30, 0.65)),
+                  url('bg.jpg.jpg'), url('bg.jpg'),
                   url('https://images.alphacoders.com/279/279287.jpg') center/cover no-repeat fixed;
       display: flex;
       flex-direction: column;
@@ -19,221 +20,225 @@
       color: #fff;
     }
 
-    /* ================= GIAI ĐOẠN 1: MÀN HÌNH CẢNH BÁO ================= */
-    .notice-modal {
-      width: 500px;
-      background: #252830;
-      border: 2px solid #5a6578;
+    /* ================= 1. CỬA SỔ POP-UP THÔNG BÁO (CHUẨN ẢNH 1) ================= */
+    .notice-card {
+      width: 440px;
+      background: #232731;
+      border: 2px solid #5a6475;
       border-radius: 8px;
-      box-shadow: 0 16px 45px rgba(0,0,0,0.85);
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.85);
       overflow: hidden;
       display: block;
     }
     .notice-header {
-      background: #1b1d24;
+      background: #181a20;
       padding: 10px 14px;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: bold;
-      color: #fff;
+      color: #ffffff;
       display: flex;
       align-items: center;
       gap: 6px;
-      border-bottom: 2px solid #383e4d;
+      border-bottom: 2px solid #353b49;
     }
-    .notice-timer-num {
+    .notice-timer-yellow {
       color: #facc15;
-      font-size: 20px;
+      font-size: 22px;
       font-family: 'Consolas', monospace;
+      font-weight: 800;
+      text-shadow: 0 0 6px rgba(250, 204, 21, 0.5);
     }
     .notice-body {
-      padding: 16px;
+      padding: 14px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
     .notice-blue-box {
       background: #0284c7;
       border: 1px solid #38bdf8;
       border-radius: 6px;
-      padding: 12px 14px;
-      font-size: 13.5px;
+      padding: 10px 12px;
+      font-size: 13px;
       line-height: 1.6;
       color: #ffffff;
       font-weight: bold;
     }
-    .notice-blue-box span.highlight {
+    .notice-blue-box .hl {
       color: #fef08a;
     }
     .notice-dialog-box {
-      background: #383f4d;
-      border: 1px solid #4f5869;
+      background: #333945;
+      border: 1px solid #485263;
       border-radius: 6px;
-      padding: 12px;
+      padding: 12px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      position: relative;
     }
     .notice-dialog-text {
-      font-size: 13px;
-      color: #e2e8f0;
+      font-size: 12.5px;
+      color: #f1f5f9;
       line-height: 1.5;
-      max-width: 320px;
       font-weight: 600;
     }
-    .notice-dialog-text span.warn {
+    .notice-dialog-text .warn {
       color: #facc15;
     }
-    .btn-start-now {
-      margin: 4px auto 0;
-      padding: 8px 24px;
+    .btn-start-play {
+      margin: 6px auto 2px;
+      padding: 8px 28px;
       background: #ea580c;
       border: 1px solid #f97316;
       border-radius: 4px;
-      color: #fff;
+      color: #ffffff;
       font-weight: bold;
       cursor: pointer;
-      font-size: 13.5px;
+      font-size: 14px;
+      transition: background 0.15s;
     }
-    .btn-start-now:hover { background: #c2410c; }
+    .btn-start-play:hover { background: #c2410c; }
 
-    /* ================= GIAI ĐOẠN 2: SÂN KHẤU BIỂU DIỄN ================= */
-    .stage-modal {
+    /* ================= 2. SÂN KHẤU RÈM ĐỎ (CHUẨN ẢNH 2) ================= */
+    .stage-card {
       width: 580px;
-      background: #252830;
+      background: #1c2028;
       border: 3px solid #64748b;
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+      box-shadow: 0 20px 55px rgba(0, 0, 0, 0.9);
       display: none;
     }
-    .stage-top-bar {
+    .stage-top-banner {
       background: #0284c7;
-      padding: 8px 12px;
+      padding: 8px 14px;
       color: #ffffff;
-      font-size: 13.5px;
-      font-weight: bold;
+      font-size: 14px;
+      font-weight: 700;
       text-align: center;
-      letter-spacing: -0.3px;
       border-bottom: 2px solid #0369a1;
+      letter-spacing: -0.3px;
     }
-    .stage-viewport {
+    .stage-area {
       width: 100%;
-      height: 220px;
-      background: #f1f5f9;
+      height: 230px;
+      background: linear-gradient(180deg, #1e2530 0%, #334155 75%, #475569 100%);
       position: relative;
       overflow: hidden;
-      border-bottom: 3px solid #1e242d;
+      border-bottom: 3px solid #14171d;
     }
 
-    /* Rèm nhung đỏ hai bên sân khấu */
-    .curtain-left, .curtain-right {
+    /* Rèm nhung đỏ 2 bên */
+    .curtain-l, .curtain-r {
       position: absolute;
       top: 0;
       bottom: 0;
-      width: 55px;
-      z-index: 10;
-      box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+      width: 60px;
+      z-index: 20;
+      box-shadow: inset 0 0 12px rgba(0,0,0,0.6);
     }
-    .curtain-left {
+    .curtain-l {
       left: 0;
       background: repeating-linear-gradient(90deg, #991b1b, #b91c1c 12px, #7f1d1d 24px);
       border-right: 2px solid #450a0a;
     }
-    .curtain-right {
+    .curtain-r {
       right: 0;
       background: repeating-linear-gradient(90deg, #7f1d1d, #b91c1c 12px, #991b1b 24px);
       border-left: 2px solid #450a0a;
     }
-    .stage-floor-board {
+    .stage-floor-rail {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      height: 35px;
-      background: #cbd5e1;
+      height: 42px;
+      background: linear-gradient(180deg, #f8fafc 0%, #cbd5e1 100%);
       border-top: 2px solid #94a3b8;
+      box-shadow: 0 -2px 6px rgba(0,0,0,0.2);
     }
 
-    /* Khối nấm Violetta */
-    .v-slot {
+    /* Vị trí nấm trượt */
+    .shroom-lane {
       position: absolute;
       bottom: 22px;
       width: 90px;
-      height: 110px;
+      height: 120px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-end;
-      transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 5;
+      transition: transform 0.8s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+      z-index: 10;
     }
-    .down-arrow-tag {
+    .red-arrow-target {
       position: absolute;
       top: -24px;
-      font-size: 26px;
+      font-size: 28px;
       color: #ef4444;
-      animation: bounce 0.5s infinite alternate;
+      animation: bounceArrow 0.45s infinite alternate;
       display: none;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
     }
-    @keyframes bounce {
+    @keyframes bounceArrow {
       from { transform: translateY(0); }
-      to { transform: translateY(-8px); }
+      to { transform: translateY(-7px); }
     }
 
-    /* 4 nút bấm số 1, 2, 3, 4 */
-    .stage-btn-grid {
+    /* 4 nút xám 1, 2, 3, 4 ở dưới */
+    .stage-buttons-row {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      padding: 14px 20px 16px;
-      background: #1b1d24;
+      gap: 12px;
+      padding: 14px 22px 18px;
+      background: #14171e;
     }
-    .choice-btn {
-      height: 44px;
+    .num-btn {
+      height: 46px;
       background: linear-gradient(180deg, #475569 0%, #334155 100%);
       color: #94a3b8;
       border: 1px solid #1e293b;
       border-radius: 6px;
-      font-size: 18px;
-      font-weight: 800;
+      font-size: 20px;
+      font-weight: 900;
       cursor: not-allowed;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.15);
+      transition: all 0.15s;
     }
-    .choice-btn.active {
+    .num-btn.ready {
       background: linear-gradient(180deg, #64748b 0%, #475569 100%);
       color: #ffffff;
       border-color: #64748b;
       cursor: pointer;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
-    .choice-btn.active:hover {
+    .num-btn.ready:hover {
       background: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%);
       border-color: #38bdf8;
     }
 
-    /* Bảng trạng thái */
-    .status-toast {
-      margin-top: 15px;
-      padding: 6px 18px;
+    .score-toast {
+      margin-top: 16px;
+      padding: 6px 20px;
       border-radius: 20px;
-      background: rgba(0,0,0,0.7);
-      font-weight: bold;
-      font-size: 14px;
+      background: rgba(0,0,0,0.75);
+      font-weight: 700;
+      font-size: 14.5px;
+      border: 1px solid #475569;
     }
+    .score-toast b { color: #facc15; }
   </style>
 </head>
 <body>
 
-  <!-- 1. CỬA SỔ POP-UP CẢNH BÁO (Ảnh 1) -->
-  <div class="notice-modal" id="noticeModal">
+  <div class="notice-card" id="noticeModal">
     <div class="notice-header">
-      <span class="notice-timer-num" id="noticeCount">14</span>
+      <span class="notice-timer-yellow" id="noticeTimerText">14</span>
       <span>초 후 거짓말 탐지 미니게임이 시작됩니다</span>
     </div>
     <div class="notice-body">
       <div class="notice-blue-box">
-        • <span class="highlight">아름답게 화장한 비올레타</span>를 찾아주세요<br>
+        • <span class="hl">아름답게 화장한 비올레타</span>를 찾아주세요<br>
         • 정답에 따라 테스트 통과 / 실패하게 됩니다
       </div>
       <div class="notice-dialog-box">
@@ -242,212 +247,88 @@
           거짓말 <span class="warn">탐지 테스트</span>에<br>
           실패하니 주의해주세요!
         </div>
-        <!-- Avatar Violetta góc dưới -->
-        <div id="violettaAvatar" style="width: 70px; height: 70px;"></div>
+        <div id="noticeAvatar" style="width: 72px; height: 78px;"></div>
       </div>
-      <button class="btn-start-now" onclick="startStageGame()">Bắt đầu ngay (시작)</button>
+      <button class="btn-start-play" onclick="startStageImmediately()">Bắt đầu ngay (시작)</button>
     </div>
   </div>
 
-  <!-- 2. SÂN KHẤU TRÁO VỊ TRÍ (Ảnh 2) -->
-  <div class="stage-modal" id="stageModal">
-    <div class="stage-top-bar" id="stageStatusText">
+  <div class="stage-card" id="stageModal">
+    <div class="stage-top-banner" id="stageBannerText">
       화장한 비올레타를 놓치지 말고 주목해주세요.
     </div>
-    <div class="stage-viewport">
-      <div class="curtain-left"></div>
-      <div class="curtain-right"></div>
-      <div class="stage-floor-board"></div>
+    <div class="stage-area">
+      <div class="curtain-l"></div>
+      <div class="curtain-r"></div>
+      <div class="stage-floor-rail"></div>
 
-      <!-- 4 Slot nấm -->
-      <div class="v-slot" id="slot0"><div class="down-arrow-tag" id="arrow0">▼</div><div class="v-sprite" id="sprite0"></div></div>
-      <div class="v-slot" id="slot1"><div class="down-arrow-tag" id="arrow1">▼</div><div class="v-sprite" id="sprite1"></div></div>
-      <div class="v-slot" id="slot2"><div class="down-arrow-tag" id="arrow2">▼</div><div class="v-sprite" id="sprite2"></div></div>
-      <div class="v-slot" id="slot3"><div class="down-arrow-tag" id="arrow3">▼</div><div class="v-sprite" id="sprite3"></div></div>
+      <div class="shroom-lane" id="lane0"><div class="red-arrow-target" id="arrow0">▼</div><div id="shroomArt0"></div></div>
+      <div class="shroom-lane" id="lane1"><div class="red-arrow-target" id="arrow1">▼</div><div id="shroomArt1"></div></div>
+      <div class="shroom-lane" id="lane2"><div class="red-arrow-target" id="arrow2">▼</div><div id="shroomArt2"></div></div>
+      <div class="shroom-lane" id="lane3"><div class="red-arrow-target" id="arrow3">▼</div><div id="shroomArt3"></div></div>
     </div>
 
-    <!-- 4 Nút bấm lựa chọn -->
-    <div class="stage-btn-grid">
-      <button class="choice-btn" id="btn0" onclick="makeChoice(0)">1</button>
-      <button class="choice-btn" id="btn1" onclick="makeChoice(1)">2</button>
-      <button class="choice-btn" id="btn2" onclick="makeChoice(2)">3</button>
-      <button class="choice-btn" id="btn3" onclick="makeChoice(3)">4</button>
+    <div class="stage-buttons-row">
+      <button class="num-btn" id="btn0" onclick="chooseSlot(0)">1</button>
+      <button class="num-btn" id="btn1" onclick="chooseSlot(1)">2</button>
+      <button class="num-btn" id="btn2" onclick="chooseSlot(2)">3</button>
+      <button class="num-btn" id="btn3" onclick="chooseSlot(3)">4</button>
     </div>
   </div>
 
-  <div class="status-toast" id="statsBar">Đúng: 0 | Sai: 0</div>
+  <div class="score-toast" id="scoreBar">Đúng: <b>0</b> | Chuỗi liên tiếp: <b>0</b></div>
 
   <script>
-    // Hàm dựng hình ảnh vector chi tiết của Violetta
-    function renderViolettaSVG(isMakeup, isClosedEyes) {
-      const eyeDetails = isClosedEyes
-        ? `<path d="M 24 38 Q 28 42 32 38" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-           <path d="M 44 38 Q 48 42 52 38" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>`
-        : (isMakeup
-            ? `<!-- Mắt trang điểm có mi cong & má hồng phấn -->
-               <ellipse cx="28" cy="36" rx="4.5" ry="5.5" fill="#1e1e24"/>
-               <circle cx="27" cy="34" r="1.8" fill="#fff"/>
-               <path d="M 23 32 Q 25 29 27 30" stroke="#000" stroke-width="2" fill="none"/>
-               <path d="M 26 29 Q 29 27 31 29" stroke="#000" stroke-width="2" fill="none"/>
-               <ellipse cx="23" cy="40" rx="4" ry="2" fill="#fb7185" opacity="0.8"/>
-               
-               <ellipse cx="48" cy="36" rx="4.5" ry="5.5" fill="#1e1e24"/>
-               <circle cx="47" cy="34" r="1.8" fill="#fff"/>
-               <path d="M 53 32 Q 51 29 49 30" stroke="#000" stroke-width="2" fill="none"/>
-               <path d="M 50 29 Q 47 27 45 29" stroke="#000" stroke-width="2" fill="none"/>
-               <ellipse cx="53" cy="40" rx="4" ry="2" fill="#fb7185" opacity="0.8"/>`
-            : `<!-- Mắt thường -->
-               <ellipse cx="28" cy="37" rx="3.5" ry="4" fill="#333"/>
-               <circle cx="27" cy="35" r="1.2" fill="#fff"/>
-               <ellipse cx="48" cy="37" rx="3.5" ry="4" fill="#333"/>
-               <circle cx="47" cy="35" r="1.2" fill="#fff"/>`);
+    // Hàm vẽ chi tiết nhân vật nấm Violetta theo đúng chuẩn MapleStory
+    function getViolettaSVG(isMakeup, isClosedEyes) {
+      let faceFeatures = '';
+
+      if (isClosedEyes) {
+        // Mắt nhắm ngủ khi di chuyển
+        faceFeatures = `
+          <path d="M 23 37 Q 27 41 31 37" stroke="#2b2d42" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M 43 37 Q 47 41 51 37" stroke="#2b2d42" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <ellipse cx="21" cy="39" rx="3.5" ry="2" fill="#fb7185" opacity="0.6"/>
+          <ellipse cx="53" cy="39" rx="3.5" ry="2" fill="#fb7185" opacity="0.6"/>
+        `;
+      } else if (isMakeup) {
+        // Nấm trang điểm: mắt to long lanh, mi cong, má hồng phấn
+        faceFeatures = `
+          <ellipse cx="26" cy="35" rx="4.5" ry="6" fill="#18181b"/>
+          <circle cx="25" cy="33" r="1.8" fill="#ffffff"/>
+          <circle cx="28" cy="37" r="0.9" fill="#ffffff"/>
+          <path d="M 21 30 Q 23 27 26 28" stroke="#18181b" stroke-width="2" fill="none"/>
+          <path d="M 24 27 Q 27 25 29 27" stroke="#18181b" stroke-width="2" fill="none"/>
+          <ellipse cx="20" cy="39" rx="4" ry="2.2" fill="#f43f5e" opacity="0.8"/>
+
+          <ellipse cx="48" cy="35" rx="4.5" ry="6" fill="#18181b"/>
+          <circle cx="47" cy="33" r="1.8" fill="#ffffff"/>
+          <circle cx="50" cy="37" r="0.9" fill="#ffffff"/>
+          <path d="M 53 30 Q 51 27 48 28" stroke="#18181b" stroke-width="2" fill="none"/>
+          <path d="M 50 27 Q 47 25 45 27" stroke="#18181b" stroke-width="2" fill="none"/>
+          <ellipse cx="54" cy="39" rx="4" ry="2.2" fill="#f43f5e" opacity="0.8"/>
+        `;
+      } else {
+        // Nấm thường: mắt chấm tròn đơn giản
+        faceFeatures = `
+          <ellipse cx="27" cy="36" rx="3.5" ry="4" fill="#27272a"/>
+          <circle cx="26" cy="34" r="1.2" fill="#ffffff"/>
+          <ellipse cx="47" cy="36" rx="3.5" ry="4" fill="#27272a"/>
+          <circle cx="46" cy="34" r="1.2" fill="#ffffff"/>
+        `;
+      }
 
       return `
-        <svg width="76" height="85" viewBox="0 0 76 85">
-          <!-- Vương miện vàng bên góc -->
-          <path d="M 46 8 L 52 2 L 56 9 L 62 4 L 63 15 Z" fill="#fbbf24" stroke="#d97706" stroke-width="1.5"/>
+        <svg width="74" height="84" viewBox="0 0 74 84">
+          <path d="M 45 9 L 51 2 L 55 9 L 61 4 L 62 16 Z" fill="#f59e0b" stroke="#b45309" stroke-width="1.5"/>
+          <circle cx="53" cy="11" r="1.5" fill="#ef4444"/>
+
+          <ellipse cx="37" cy="26" rx="35" ry="23" fill="#fb7185" stroke="#be123c" stroke-width="2"/>
+          <ellipse cx="19" cy="18" rx="6.5" ry="4.5" fill="#ffffff" opacity="0.95"/>
+          <ellipse cx="54" cy="18" rx="5.5" ry="4" fill="#ffffff" opacity="0.95"/>
+          <ellipse cx="37" cy="13" rx="4.5" ry="3" fill="#ffffff" opacity="0.95"/>
+          <ellipse cx="37" cy="27" rx="5.5" ry="3.5" fill="#ffffff" opacity="0.95"/>
+
+          <path d="M 15 31 C 15 50, 59 50, 59 31 Z" fill="#fef08a" stroke="#ca8a04" stroke-width="2"/>
           
-          <!-- Mũ nấm hồng chấm trắng -->
-          <ellipse cx="38" cy="26" rx="36" ry="24" fill="#f43f5e" stroke="#be123c" stroke-width="2"/>
-          <ellipse cx="20" cy="18" rx="7" ry="5" fill="#fff" opacity="0.9"/>
-          <ellipse cx="56" cy="18" rx="6" ry="4.5" fill="#fff" opacity="0.9"/>
-          <ellipse cx="38" cy="12" rx="5" ry="3.5" fill="#fff" opacity="0.9"/>
-          <ellipse cx="38" cy="27" rx="6" ry="4" fill="#fff" opacity="0.9"/>
-
-          <!-- Thân & Khuôn mặt nấm -->
-          <path d="M 16 32 C 16 52, 60 52, 60 32 Z" fill="#fef08a" stroke="#ca8a04" stroke-width="2"/>
-          
-          <!-- Miệng chúm chím -->
-          <path d="M 36 43 Q 38 45 40 43" stroke="#e11d48" stroke-width="2" fill="none" stroke-linecap="round"/>
-
-          <!-- Mắt & Trang điểm -->
-          ${eyeDetails}
-        </svg>
-      `;
-    }
-
-    // Render avatar ở màn hình 1
-    document.getElementById('violettaAvatar').innerHTML = renderViolettaSVG(true, false);
-
-    let noticeTimer = 14;
-    let noticeInterval = null;
-    let targetIndex = 0; // Con nào được trang điểm (0 - 3)
-    let positions = [0, 1, 2, 3]; // Lưu vị trí tọa độ hiện thời
-    let scoreCount = 0, failCount = 0;
-    const X_SLOTS = [70, 190, 310, 430]; // 4 vị trí trên sân khấu (px)
-
-    function startNoticeCountdown() {
-      clearInterval(noticeInterval);
-      noticeTimer = 14;
-      document.getElementById('noticeCount').textContent = noticeTimer;
-      noticeInterval = setInterval(() => {
-        noticeTimer--;
-        document.getElementById('noticeCount').textContent = noticeTimer;
-        if (noticeTimer <= 0) {
-          clearInterval(noticeInterval);
-          startStageGame();
-        }
-      }, 1000);
-    }
-
-    function startStageGame() {
-      clearInterval(noticeInterval);
-      document.getElementById('noticeModal').style.display = 'none';
-      document.getElementById('stageModal').style.display = 'block';
-
-      // Khóa nút bấm
-      for (let i = 0; i < 4; i++) {
-        document.getElementById(`btn${i}`).classList.remove('active');
-        document.getElementById(`arrow${i}`).style.display = 'none';
-      }
-
-      // Chọn ngẫu nhiên con nấm trang điểm
-      targetIndex = Math.floor(Math.random() * 4);
-      positions = [0, 1, 2, 3];
-
-      // Đặt vị trí ban đầu
-      for (let i = 0; i < 4; i++) {
-        const slot = document.getElementById(`slot${i}`);
-        slot.style.transform = `translateX(${X_SLOTS[i]}px)`;
-        // Vẽ nấm mở mắt (con target có trang điểm)
-        document.getElementById(`sprite${i}`).innerHTML = renderViolettaSVG(i === targetIndex, false);
-      }
-
-      // Bật mũi tên đỏ chỉ vào con trang điểm
-      document.getElementById(`arrow${targetIndex}`).style.display = 'block';
-      document.getElementById('stageStatusText').textContent = "화장한 비올레타를 놓치지 말고 주목해주세요!";
-
-      // Sau 2 giây: Nhắm mắt và bắt đầu tráo bài
-      setTimeout(() => {
-        document.getElementById(`arrow${targetIndex}`).style.display = 'none';
-        document.getElementById('stageStatusText').textContent = "눈을 감고 이동하기 시작합니다... (Đang tráo đổi vị trí)";
-
-        // Cả 4 con nhắm mắt lại
-        for (let i = 0; i < 4; i++) {
-          document.getElementById(`sprite${i}`).innerHTML = renderViolettaSVG(i === targetIndex, true);
-        }
-
-        // Bắt đầu tráo vị trí 9 lần
-        let swapSteps = 0;
-        const shuffleInterval = setInterval(() => {
-          let a = Math.floor(Math.random() * 4);
-          let b = Math.floor(Math.random() * 4);
-          while (b === a) b = Math.floor(Math.random() * 4);
-
-          // Hoán đổi vị trí
-          let temp = positions[a];
-          positions[a] = positions[b];
-          positions[b] = temp;
-
-          document.getElementById(`slot${positions[a]}`).style.transform = `translateX(${X_SLOTS[a]}px)`;
-          document.getElementById(`slot${positions[b]}`).style.transform = `translateX(${X_SLOTS[b]}px)`;
-
-          swapSteps++;
-          if (swapSteps >= 9) {
-            clearInterval(shuffleInterval);
-            // Mở khóa các nút 1, 2, 3, 4
-            document.getElementById('stageStatusText').textContent = "화장한 비올레타가 위치한 번호를 누르세요! (Hãy chọn vị trí)";
-            for (let i = 0; i < 4; i++) {
-              document.getElementById(`btn${i}`).classList.add('active');
-            }
-          }
-        }, 280);
-      }, 2000);
-    }
-
-    function makeChoice(chosenSlot) {
-      if (!document.getElementById('btn0').classList.contains('active')) return;
-
-      // Khóa nút
-      for (let i = 0; i < 4; i++) {
-        document.getElementById(`btn${i}`).classList.remove('active');
-        // Mở mắt toàn bộ để kiểm tra
-        document.getElementById(`sprite${i}`).innerHTML = renderViolettaSVG(i === targetIndex, false);
-      }
-
-      // Con mục tiêu hiện đang nằm ở slot nào
-      const correctSlot = positions.indexOf(targetIndex);
-
-      if (chosenSlot === correctSlot) {
-        scoreCount++;
-        document.getElementById('stageStatusText').textContent = "★ 통과 (Chính xác! Bạn đã tìm đúng Violetta)";
-      } else {
-        failCount++;
-        document.getElementById('stageStatusText').textContent = `✖ 실패 (Sai rồi! Violetta nằm ở vị trí số ${correctSlot + 1})`;
-      }
-
-      document.getElementById('statsBar').textContent = `Đúng: ${scoreCount} | Sai: ${failCount}`;
-
-      // 2 giây sau quay lại màn hình cảnh báo lượt mới
-      setTimeout(() => {
-        document.getElementById('stageModal').style.display = 'none';
-        document.getElementById('noticeModal').style.display = 'block';
-        startNoticeCountdown();
-      }, 2200);
-    }
-
-    // Bắt đầu
-    startNoticeCountdown();
-  </script>
-</body>
-</html>
+          <path d="M 35 42 Q 37 44 3
