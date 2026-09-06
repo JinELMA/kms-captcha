@@ -3,19 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MapleStory KMS Lie Detector Simulator</title>
+  <title>MapleStory Ultimate Captcha Simulator</title>
   <style>
-    * {
-      box-sizing: border-box;
-      user-select: none;
-      font-family: "Malgun Gothic", "Dotum", -apple-system, sans-serif;
-    }
-
+    * { box-sizing: border-box; user-select: none; font-family: "Malgun Gothic", Dotum, sans-serif; }
+    
     body {
       margin: 0;
-      padding: 20px;
+      padding: 15px;
       min-height: 100vh;
-      background: linear-gradient(rgba(12, 26, 46, 0.45), rgba(12, 26, 46, 0.65)),
+      background: linear-gradient(rgba(10, 20, 35, 0.4), rgba(10, 20, 35, 0.65)),
+                  url('bg.jpg') center/cover no-repeat fixed,
                   url('https://images.alphacoders.com/279/279287.jpg') center/cover no-repeat fixed;
       display: flex;
       flex-direction: column;
@@ -24,51 +21,62 @@
       color: #fff;
     }
 
+    /* Menu điều hướng 6 chế độ */
     .hub-navbar {
-      width: 580px;
-      margin-bottom: 16px;
+      width: 640px;
+      margin-bottom: 15px;
       background: rgba(15, 23, 42, 0.95);
-      border: 1px solid #3b82f6;
-      border-radius: 8px;
+      border: 2px solid #f59e0b;
+      border-radius: 10px;
       padding: 8px;
-      display: flex;
-      gap: 8px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
     }
-
     .nav-btn {
-      flex: 1;
-      padding: 10px;
+      padding: 8px 6px;
       background: #1e293b;
       color: #cbd5e1;
       border: 1px solid #334155;
       border-radius: 6px;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       cursor: pointer;
-      transition: all 0.2s;
       text-align: center;
+      transition: all 0.2s;
     }
-
     .nav-btn.active {
       background: #f59e0b;
       color: #0f172a;
       border-color: #f59e0b;
     }
 
-    /* 1. KHUNG CÂU CHỮ 15S */
+    /* Bảng điểm dưới cùng */
+    .score-footer {
+      margin-top: 14px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+      background: rgba(0,0,0,0.6);
+      padding: 6px 16px;
+      border-radius: 20px;
+    }
+    .score-footer b { color: #facc15; }
+
+    /* ================= 1. DẠNG 15S KHUNG XANH BIỂN ================= */
     .kms-blue-box {
-      width: 275px;
+      width: 280px;
       background: #18488e;
       border: 2px solid #2b67be;
       border-radius: 6px;
       padding: 18px 14px 20px;
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 12px 35px rgba(0,0,0,0.8);
       display: flex;
       flex-direction: column;
       align-items: center;
     }
-
     .kms-timer-yellow {
       font-family: 'Consolas', monospace;
       font-size: 42px;
@@ -78,7 +86,6 @@
       line-height: 1;
       margin-bottom: 8px;
     }
-
     .kms-title {
       font-size: 13.5px;
       color: #ffffff;
@@ -86,612 +93,718 @@
       font-weight: 500;
       letter-spacing: -0.5px;
     }
-
-    .kms-options-group {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
+    .kms-options-group { width: 100%; display: flex; flex-direction: column; gap: 6px; }
     .kms-opt-btn {
-      width: 100%;
-      min-height: 38px;
+      width: 100%; min-height: 38px;
       background-color: #bad3eb;
       border: 1px solid #7c9fbe;
       border-radius: 3px;
       color: #1a222a;
       font-size: 14px;
       font-weight: 600;
-      letter-spacing: -0.5px;
-      display: flex;
-      align-items: center;
+      display: flex; align-items: center;
       padding: 4px 10px;
       cursor: pointer;
     }
-
     .kms-opt-btn:hover { background-color: #d1e5f8; }
     .kms-opt-btn.correct { background-color: #4ade80 !important; border-color: #16a34a !important; color: #052e16 !important; }
     .kms-opt-btn.wrong { background-color: #f87171 !important; border-color: #dc2626 !important; color: #fff !important; }
 
-    /* 2. KHUNG HÌNH ẢNH LIE DETECTOR */
+    /* ================= 2. DẠNG HÌNH ẢNH (KHUNG TRẮNG) ================= */
     .kms-card-modal {
       width: 580px;
       background: #f7f9fa;
       border: 1.5px solid #d5dbdb;
       border-radius: 12px;
       padding: 20px 24px 16px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
       color: #333;
       position: relative;
     }
-
     .green-clock-badge {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      color: #222;
-      font-size: 20px;
-      font-weight: 800;
-      font-family: 'Consolas', monospace;
+      display: flex; align-items: center; gap: 6px;
+      color: #222; font-size: 20px; font-weight: 800; font-family: 'Consolas', monospace;
     }
-
     .clock-icon {
-      width: 20px;
-      height: 20px;
-      border: 3px solid #7cb342;
-      border-radius: 50%;
-      position: relative;
+      width: 20px; height: 20px; border: 3px solid #7cb342; border-radius: 50%; position: relative;
     }
     .clock-icon::after {
-      content: '';
-      position: absolute;
-      width: 2px;
-      height: 6px;
-      background: #7cb342;
-      top: 2px;
-      left: 6px;
+      content: ''; position: absolute; width: 2px; height: 6px; background: #7cb342; top: 2px; left: 6px;
     }
-
     .scene-box {
-      background: #1e242d;
-      border-radius: 6px;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
+      background: #1e242d; border-radius: 6px; position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: space-around;
       box-shadow: inset 0 0 10px rgba(0,0,0,0.7);
     }
+    .game-item { display: inline-block; font-size: 40px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6)); }
 
-    .game-item {
-      display: inline-block;
-      font-size: 40px;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6));
-    }
-
-    /* Hiệu ứng chuyển động */
     @keyframes moveH { 0%, 100% { transform: translateX(-16px); } 50% { transform: translateX(16px); } }
     @keyframes moveV { 0%, 100% { transform: translateY(-14px); } 50% { transform: translateY(14px); } }
     @keyframes blinkEffect { 0%, 100% { opacity: 1; } 50% { opacity: 0.08; } }
     @keyframes pulseEffect { 0%, 100% { transform: scale(0.75); } 50% { transform: scale(1.35); } }
-
     .anim-h { animation: moveH var(--s, 1.4s) ease-in-out infinite alternate; }
     .anim-v { animation: moveV var(--s, 1.3s) ease-in-out infinite alternate; }
-    .anim-blink { animation: blinkEffect var(--s, 0.7s) steps(2, start) infinite; }
+    .anim-blink { animation: blinkEffect var(--s, 0.6s) steps(2, start) infinite; }
     .anim-pulse { animation: pulseEffect var(--s, 1.1s) ease-in-out infinite alternate; }
 
-    .question-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: #222;
-      line-height: 1.4;
-    }
-    .question-title .q-tag {
-      color: #8bc34a;
-      font-weight: 900;
-      margin-right: 4px;
-    }
+    .question-title { font-size: 15px; font-weight: 700; color: #222; line-height: 1.4; }
+    .question-title .q-tag { color: #8bc34a; font-weight: 900; margin-right: 4px; }
 
-    /* BỐ CỤC O / X */
-    .layout-ox .top-bar-ox {
-      display: flex;
-      justify-content: flex-end;
-      margin-bottom: 8px;
-    }
-    .layout-ox .scene-box {
-      width: 330px;
-      height: 190px;
-      margin: 0 auto 14px;
-    }
-    .layout-ox .question-title {
-      text-align: center;
-      margin-bottom: 18px;
-    }
-    .layout-ox .ox-container {
-      display: flex;
-      gap: 24px;
-      justify-content: center;
-      margin-bottom: 18px;
-    }
+    /* Layout O/X */
+    .layout-ox .top-bar-ox { display: flex; justify-content: flex-end; margin-bottom: 8px; }
+    .layout-ox .scene-box { width: 330px; height: 190px; margin: 0 auto 14px; }
+    .layout-ox .question-title { text-align: center; margin-bottom: 18px; }
+    .layout-ox .ox-container { display: flex; gap: 24px; justify-content: center; margin-bottom: 18px; }
     .ox-card-btn {
-      width: 88px;
-      height: 88px;
-      border: 2px solid #e1e5e8;
-      background: #ffffff;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 50px;
-      font-weight: 900;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-      transition: all 0.15s;
+      width: 88px; height: 88px; border: 2px solid #e1e5e8; background: #ffffff;
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      font-size: 50px; font-weight: 900; cursor: pointer;
     }
     .ox-card-btn.o { color: #38b6c8; }
     .ox-card-btn.x { color: #eb547c; }
-    .ox-card-btn:hover { background: #f1f5f9; }
     .ox-card-btn.selected { border-color: #334155; background: #eaf1f5; }
 
-    /* BỐ CỤC 4 LỰA CHỌN */
-    .layout-choice .choice-header-split {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 14px;
-      align-items: flex-start;
-    }
-    .layout-choice .scene-box {
-      width: 290px;
-      height: 165px;
-      flex-shrink: 0;
-    }
-    .layout-choice .right-question-box {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 165px;
-    }
-    .layout-choice .right-top-clock {
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    .choices-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
+    /* Layout Choice */
+    .layout-choice .choice-header-split { display: flex; gap: 16px; margin-bottom: 14px; align-items: flex-start; }
+    .layout-choice .scene-box { width: 290px; height: 165px; flex-shrink: 0; }
+    .layout-choice .right-question-box { flex: 1; display: flex; flex-direction: column; justify-content: space-between; min-height: 165px; }
+    .layout-choice .right-top-clock { display: flex; justify-content: flex-end; }
+    .choices-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
     .choice-item-bar {
-      display: flex;
-      align-items: center;
-      background: #ffffff;
-      border: 1px solid #e2e5e8;
-      border-radius: 6px;
-      padding: 9px 14px;
-      cursor: pointer;
-      font-size: 13.5px;
-      color: #333;
-      font-weight: 600;
-      transition: all 0.1s;
+      display: flex; align-items: center; background: #ffffff; border: 1px solid #e2e5e8;
+      border-radius: 6px; padding: 9px 14px; cursor: pointer; font-size: 13.5px; font-weight: 600;
     }
-    .choice-item-bar:hover { background: #f8fafc; }
     .choice-item-bar.selected { border-color: #8bc34a; background: #f4faed; }
-    
     .choice-round-num {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: #b0bec5;
-      color: #fff;
-      font-size: 11.5px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 12px;
-      font-weight: bold;
+      width: 20px; height: 20px; border-radius: 50%; background: #b0bec5; color: #fff;
+      font-size: 11.5px; display: inline-flex; align-items: center; justify-content: center;
+      margin-right: 12px; font-weight: bold;
     }
     .choice-item-bar.selected .choice-round-num { background: #8bc34a; }
 
-    .btn-confirm-action {
-      width: 110px;
-      height: 36px;
-      background: #b0bec5;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      font-weight: 700;
-      font-size: 14px;
-      margin: 0 auto;
-      display: block;
-      cursor: not-allowed;
-      transition: background 0.15s;
+    .btn-confirm-green {
+      width: 110px; height: 36px; background: #b0bec5; color: #fff; border: none;
+      border-radius: 4px; font-weight: 700; font-size: 14px; margin: 0 auto; display: block; cursor: not-allowed;
     }
-    .btn-confirm-action.active {
-      background: #8bc34a;
-      cursor: pointer;
+    .btn-confirm-green.active { background: #8bc34a; cursor: pointer; }
+
+    /* ================= 3. MINIGAME VIOLETTA ================= */
+    .violetta-stage {
+      width: 540px; background: #262930; border: 3px solid #e11d48; border-radius: 10px;
+      overflow: hidden; box-shadow: 0 16px 40px rgba(0,0,0,0.7); position: relative;
+    }
+    .curtain-top {
+      background: linear-gradient(180deg, #991b1b 0%, #dc2626 100%);
+      padding: 10px; text-align: center; color: #fff; font-weight: bold; font-size: 14px;
+    }
+    .stage-floor {
+      height: 180px; background: #3b4252; position: relative;
+      display: flex; align-items: center; justify-content: space-around; padding: 0 20px;
+    }
+    .shroom-box {
+      width: 80px; height: 90px; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; position: absolute; transition: transform 0.25s ease-in-out;
+    }
+    .shroom-icon { font-size: 50px; position: relative; }
+    .shroom-icon.target-mark::after {
+      content: '🌸'; position: absolute; top: -14px; right: -8px; font-size: 24px;
+    }
+    .v-buttons {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 12px 20px 16px; background: #1f232b;
+    }
+    .v-btn {
+      height: 42px; background: #475569; color: #fff; font-size: 18px; font-weight: 800;
+      border: 1px solid #64748b; border-radius: 6px; cursor: not-allowed; opacity: 0.6;
+    }
+    .v-btn.unlocked { cursor: pointer; opacity: 1; background: #3b82f6; border-color: #60a5fa; }
+
+    /* ================= 4. BÁM ĐUỔI HÌNH TÀNG HÌNH ================= */
+    .track-window {
+      width: 520px; background: #b48a3c; border: 3px solid #8d621f; border-radius: 10px;
+      padding: 14px; box-shadow: 0 16px 40px rgba(0,0,0,0.8);
+    }
+    .track-canvas-area {
+      width: 100%; height: 260px;
+      background: radial-gradient(circle, #e6b85c 10%, #a67c2e 90%);
+      border: 2px solid #5c3e0e; border-radius: 6px; position: relative; overflow: hidden;
+      cursor: crosshair;
+    }
+    .stealth-target {
+      width: 48px; height: 48px; position: absolute; border-radius: 50%;
+      background: #ffffff; display: flex; align-items: center; justify-content: center;
+      font-size: 26px; box-shadow: 0 0 15px rgba(255,255,255,0.8);
+      transition: opacity 0.5s;
+    }
+    .track-progress-wrap {
+      margin-top: 10px; height: 16px; background: #332205; border-radius: 8px; overflow: hidden;
+    }
+    .track-progress-bar { width: 0%; height: 100%; background: #22c55e; transition: width 0.1s; }
+
+    /* ================= 5. CLICK BÓNG + GÕ CHỮ THƯ PHÁP ================= */
+    .click-field {
+      width: 520px; height: 320px; background: #111827; border: 2px solid #3b82f6; border-radius: 8px;
+      position: relative; overflow: hidden;
+    }
+    .bubble-target {
+      width: 54px; height: 54px; background: radial-gradient(circle, #60a5fa 0%, #1d4ed8 100%);
+      border: 2px solid #93c5fd; border-radius: 50%; position: absolute;
+      display: flex; align-items: center; justify-content: center; font-size: 24px;
+      cursor: pointer; box-shadow: 0 0 14px #38bdf8;
+    }
+    .type-modal {
+      width: 380px; background: #2d1820; border: 2px solid #be185d; border-radius: 8px;
+      padding: 16px; text-align: center; box-shadow: 0 16px 40px rgba(0,0,0,0.8);
+    }
+    .type-timer-cyan { font-family: 'Consolas', monospace; font-size: 34px; font-weight: 800; color: #38bdf8; }
+    .distort-canvas-wrap {
+      width: 100%; height: 75px; background: #fff; border: 2px solid #475569;
+      margin: 12px 0; border-radius: 4px; overflow: hidden; position: relative;
+    }
+    .distort-text-drift {
+      font-family: 'Batang', 'Gungsuh', serif; font-size: 36px; font-weight: 900;
+      color: #111; line-height: 75px; white-space: nowrap; letter-spacing: 6px;
+      animation: moveH 2s ease-in-out infinite alternate;
+    }
+    .type-input {
+      width: 100%; height: 36px; padding: 4px 10px; font-size: 16px;
+      border: 1px solid #cbd5e1; border-radius: 4px; outline: none;
     }
 
-    .score-footer {
-      margin-top: 15px;
-      font-size: 14px;
-      font-weight: 600;
-      color: #f1f5f9;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+    /* ================= 6. MAPLE PLANET GM CHECK ================= */
+    .gm-window {
+      width: 560px; background: #e2e8f0; border: 3px solid #64748b; border-radius: 8px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.7); color: #1e293b; overflow: hidden;
     }
-    .score-footer b { color: #facc15; }
+    .gm-wood-clock {
+      background: #47331e; border-bottom: 2px solid #2d1e0f; padding: 6px 14px;
+      display: flex; justify-content: center; align-items: center;
+      color: #fde047; font-family: 'Consolas', monospace; font-size: 22px; font-weight: 800;
+    }
+    .gm-body-split { display: flex; padding: 16px 14px; gap: 14px; }
+    .gm-npc-side {
+      width: 120px; display: flex; flex-direction: column; align-items: center;
+      border-right: 1px solid #cbd5e1; padding-right: 12px;
+    }
+    .gm-npc-avatar {
+      width: 65px; height: 75px; background: #94a3b8; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center; font-size: 34px; margin-bottom: 6px;
+    }
+    .gm-npc-name {
+      background: #334155; color: #fff; font-size: 11px; padding: 2px 8px; border-radius: 3px; font-weight: bold;
+    }
+    .gm-content-side { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .gm-question-text { font-size: 13px; line-height: 1.5; font-weight: 600; min-height: 90px; }
+    .gm-input-box {
+      width: 100%; height: 32px; border: 1px solid #475569; padding: 4px 8px; font-size: 13.5px;
+    }
+    .gm-footer-action {
+      background: #cbd5e1; padding: 8px 14px; display: flex; justify-content: flex-end;
+    }
+    .gm-btn-confirm {
+      padding: 4px 20px; background: #ea580c; color: #fff; border: 1px solid #c2410c;
+      border-radius: 4px; font-weight: bold; font-size: 13px; cursor: pointer;
+    }
   </style>
 </head>
 <body>
 
+  <!-- Menu chọn 6 chế độ -->
   <div class="hub-navbar">
-    <button class="nav-btn active" id="tabSentence" onclick="changeMode('SENTENCE')">
-      📝 Dạng 1: Câu chữ tiếng Hàn (15 Giây)
-    </button>
-    <button class="nav-btn" id="tabImage" onclick="changeMode('IMAGE')">
-      🖼️ Dạng 2: Lie Detector Hình ảnh (O/X & 4 Câu)
-    </button>
+    <button class="nav-btn active" onclick="switchMode('SENTENCE')">📝 1. Chữ 15s (KMS)</button>
+    <button class="nav-btn" onclick="switchMode('IMAGE')">🔍 2. Ảnh Lie Detector</button>
+    <button class="nav-btn" onclick="switchMode('VIOLETTA')">🍄 3. Nấm Violetta</button>
+    <button class="nav-btn" onclick="switchMode('TRACK')">🎯 4. Bám hình mờ</button>
+    <button class="nav-btn" onclick="switchMode('CLICK_TYPE')">🫧 5. Bóng 5 lần + Gõ</button>
+    <button class="nav-btn" onclick="switchMode('GM_CHECK')">👨‍💼 6. Maple GM Check</button>
   </div>
 
-  <div class="kms-blue-box" id="sentenceBox">
+  <!-- CONTAINER 1: CÂU HỎI TIẾNG HÀN 15S -->
+  <div class="kms-blue-box" id="boxSentence">
     <div class="kms-timer-yellow" id="blueTimer">15</div>
     <div class="kms-title">올바른 문장을 선택해 주세요</div>
     <div class="kms-options-group" id="blueOptions"></div>
   </div>
 
-  <div class="kms-card-modal" id="imageBox" style="display: none;">
-    <div id="dynamicContainer"></div>
-    <button class="btn-confirm-action" id="confirmBtn">확인</button>
+  <!-- CONTAINER 2: HÌNH ẢNH LIE DETECTOR -->
+  <div class="kms-card-modal" id="boxImage" style="display: none;">
+    <div id="dynamicImageContent"></div>
+    <button class="btn-confirm-green" id="confirmImageBtn">확인</button>
   </div>
 
+  <!-- CONTAINER 3: MINIGAME VIOLETTA -->
+  <div class="violetta-stage" id="boxVioletta" style="display: none;">
+    <div class="curtain-top">화장한 비올레타를 놓치지 말고 주목해주세요!</div>
+    <div class="stage-floor" id="vFloor">
+      <div class="shroom-box" id="shroom0"><div class="shroom-icon" id="sIcon0">🍄</div></div>
+      <div class="shroom-box" id="shroom1"><div class="shroom-icon" id="sIcon1">🍄</div></div>
+      <div class="shroom-box" id="shroom2"><div class="shroom-icon" id="sIcon2">🍄</div></div>
+      <div class="shroom-box" id="shroom3"><div class="shroom-icon" id="sIcon3">🍄</div></div>
+    </div>
+    <div class="v-buttons">
+      <button class="v-btn" onclick="guessVioletta(0)">1</button>
+      <button class="v-btn" onclick="guessVioletta(1)">2</button>
+      <button class="v-btn" onclick="guessVioletta(2)">3</button>
+      <button class="v-btn" onclick="guessVioletta(3)">4</button>
+    </div>
+  </div>
+
+  <!-- CONTAINER 4: BÁM ĐUỔI HÌNH TÀNG HÌNH -->
+  <div class="track-window" id="boxTrack" style="display: none;">
+    <div style="font-weight: 700; color: #fff; margin-bottom: 6px; font-size: 13px;">
+      도형 위에 마우스 커서를 유지하세요 (Giữ chuột vào mục tiêu để tích lũy 100%)
+    </div>
+    <div class="track-canvas-area" id="trackArea">
+      <div class="stealth-target" id="stealthTarget">⭐</div>
+    </div>
+    <div class="track-progress-wrap">
+      <div class="track-progress-bar" id="trackBar"></div>
+    </div>
+  </div>
+
+  <!-- CONTAINER 5: BÓNG 5 LẦN + GÕ THƯ PHÁP -->
+  <div id="boxClickType" style="display: none;">
+    <div class="click-field" id="bubbleField">
+      <div style="padding: 10px; color: #93c5fd; font-size: 13px; font-weight: bold;">
+        Bong bóng di chuyển: Hãy click trúng 5 lần (<span id="bubbleHits">0</span>/5)
+      </div>
+      <div class="bubble-target" id="bubbleObj">🫧</div>
+    </div>
+
+    <div class="type-modal" id="typeModal" style="display: none;">
+      <div class="type-timer-cyan" id="typeTimer">60</div>
+      <div style="color: #cbd5e1; font-size: 12px; margin-top: 4px;">
+        아래 이미지 안의 한글을 보이는 대로 입력하세요<br>
+        <span style="color: #f43f5e;" id="livesText">세번 남았습니다</span>
+      </div>
+      <div class="distort-canvas-wrap">
+        <div class="distort-text-drift" id="captchaWord">단풍잎바람</div>
+      </div>
+      <input type="text" class="type-input" id="typeInput" placeholder="Nhập chữ Hangul và bấm Enter" autofocus>
+    </div>
+  </div>
+
+  <!-- CONTAINER 6: MAPLE PLANET GM CHECK -->
+  <div class="gm-window" id="boxGM" style="display: none;">
+    <div class="gm-wood-clock">
+      ● 남은시간 [ 00 : <span id="gmTimerText">45</span> ]
+    </div>
+    <div class="gm-body-split">
+      <div class="gm-npc-side">
+        <div class="gm-npc-avatar">👮‍♂️</div>
+        <div class="gm-npc-name">메이플 운영자</div>
+      </div>
+      <div class="gm-content-side">
+        <div class="gm-question-text" id="gmQuestionText">Đang tải câu hỏi...</div>
+        <input type="text" class="gm-input-box" id="gmInput" placeholder="Nhập câu trả lời...">
+      </div>
+    </div>
+    <div class="gm-footer-action">
+      <button class="gm-btn-confirm" onclick="submitGMAnswer()">확인</button>
+    </div>
+  </div>
+
+  <!-- BẢNG ĐIỂM -->
   <div class="score-footer">
-    Số câu đúng: <b id="scoreVal">0</b> | Chuỗi liên tiếp: <b id="streakVal">0</b>
+    Số câu đúng: <b id="scoreVal">0</b> | Chuỗi đúng liên tiếp: <b id="streakVal">0</b>
   </div>
 
   <script>
-    const SENTENCE_BANK = [
-      {
-        correct: "여기에서 타시면 돼요.",
-        wrongs: ["놓은 를을 베틱거나 히싣다.", "알창 미정을 시내다.", "서시해서 나기면 돼요.", "뜻에 씌게 항펀죄다."]
-      },
-      {
-        correct: "내일 비가 올 것 같아요.",
-        wrongs: ["내일 비가 옷 같 것애요.", "비가 올 개 갓내요.", "나일 피가 옫 겄가타요.", "냬일 비가 올 켯같애요."]
-      },
-      {
-        correct: "사냥터에서 몬스터를 처치하세요.",
-        wrongs: ["산앙터에서 먼스터를 저치헤새요.", "사냥텨애서 몬스토를 처지하새요.", "사냥터애셔 몬스터를 쳐치하새요.", "샤냥터에서 몬스털를 처치해새요."]
-      },
-      {
-        correct: "인벤토리가 가득 찼습니다.",
-        wrongs: ["인벤토리과 가둑 찻슴니다.", "인벤토리가 가득 찾습니다.", "임벤토리가 가득 찻슴니다.", "인벤토리개 가득 챳습니다."]
-      }
-    ];
+    let currentMode = 'SENTENCE';
+    let score = 0, streak = 0;
+    let mainTimer = null;
 
-    /* 
-      KHO CÂU HỎI HÌNH ẢNH:
-      - animationMode:
-        + "NONE": Ảnh đứng yên hoàn toàn.
-        + "DISTRACT": Hiệu ứng làm nhiễu ngẫu nhiên, câu hỏi không hỏi về chuyển động.
-        + "TARGET_BLINK": Chỉ 1 vật thể chớp tắt, câu hỏi hỏi trực tiếp về vật thể chớp tắt.
-        + "TARGET_MOVE": Chỉ 1 vật thể di chuyển, câu hỏi hỏi trực tiếp về vật thể di chuyển.
-    */
-    const IMAGE_BANK = [
-      // 1. Câu hỏi trực tiếp: Cái gì đang chớp tắt? (TARGET_BLINK)
-      {
-        type: "CHOICE",
-        scene: ["🍎", "🍰", "💎", "🍇"],
-        question: "현재 깜빡이고 있는 물체는 무엇입니까?", // Vật thể nào đang chớp tắt?
-        choices: ["사과 (Táo)", "케이크 (Bánh kem)", "보석 (Kim cương)", "포도 (Nho)"],
-        ans: 1,
-        animationMode: "TARGET_BLINK",
-        targetIndex: 1 // Chiếc bánh kem sẽ chớp tắt
-      },
-      // 2. Câu hỏi trực tiếp: Cái gì đang di chuyển? (TARGET_MOVE)
-      {
-        type: "CHOICE",
-        scene: ["🍌", "💍", "🍕", "👓"],
-        question: "현재 움직이고 있는 물체는 무엇입니까?", // Vật thể nào đang di chuyển?
-        choices: ["바나나 (Chuối)", "반지 (Nhẫn)", "피자 (Pizza)", "안경 (Kính)"],
-        ans: 0,
-        animationMode: "TARGET_MOVE",
-        targetIndex: 0 // Quả chuối sẽ di chuyển
-      },
-      // 3. Dạng O/X có chuyển động làm nhiễu (DISTRACT)
-      {
-        type: "OX",
-        scene: ["🍑", "🍰", "🍍", "🍑"],
-        question: "파인애플은 케이크 바로 옆에 보입니다",
-        ans: "O",
-        animationMode: "DISTRACT"
-      },
-      // 4. Dạng O/X đứng yên hoàn toàn (NONE)
-      {
-        type: "OX",
-        scene: ["🍕", "🍎", "🍎", "👒", "🔘", "🍇"],
-        question: "오렌지와 장갑 사이에 있는 물체는 모자입니다",
-        ans: "X",
-        animationMode: "NONE"
-      },
-      // 5. Dạng 4 câu đứng yên hoàn toàn (NONE)
-      {
-        type: "CHOICE",
-        scene: ["🍜", "⬆️", "🔦", "🍓"],
-        question: "적어도 1개의 화살표는 _____ 방향을 향하고 있습니다",
-        choices: ["하단", "위쪽", "왼쪽", "정답 없음"],
-        ans: 1,
-        animationMode: "NONE"
-      },
-      // 6. Dạng 4 câu chuyển động làm nhiễu (DISTRACT)
-      {
-        type: "CHOICE",
-        scene: ["🍇", "🔄", "💍", "💊", "🦑"],
-        question: "다음 화면과 관련된 문장 중 정확한 것을 한 개 찾아 주세요",
-        choices: [
-          "그림 안에 팥빙수가 존재합니다",
-          "반지는 이미지에 위치해 있습니다",
-          "왼쪽에서 두 번째 위치에 화살표가 있습니다",
-          "정답 없음"
-        ],
-        ans: 2,
-        animationMode: "DISTRACT"
-      },
-      // 7. Dạng 4 câu đứng yên (NONE)
-      {
-        type: "CHOICE",
-        scene: ["👓", "🥾", "🍌", "🥾", "🍉", "🍉"],
-        question: "안경의 개수가 [ ]보다 더 적습니다",
-        choices: ["신발", "오렌지", "컵라면", "정답 없음"],
-        ans: 0,
-        animationMode: "NONE"
-      },
-      // 8. Dạng 4 câu chuyển động làm nhiễu (DISTRACT)
-      {
-        type: "CHOICE",
-        scene: ["💍", "💊", "🍍", "👓"],
-        question: "알약은 [ ] 바로 옆에 나타나 있습니다",
-        choices: ["장갑", "수박", "반지", "정답 없음"],
-        ans: 2,
-        animationMode: "DISTRACT"
-      }
-    ];
+    function updateStats() {
+      document.getElementById('scoreVal').textContent = score;
+      document.getElementById('streakVal').textContent = streak;
+    }
 
-    const DISTRACT_ANIMATIONS = ["anim-h", "anim-v", "anim-blink", "anim-pulse"];
-
-    let currentMode = "SENTENCE";
-    let score = 0;
-    let streak = 0;
-    let timerId = null;
-    let timeLeft = 15;
-    let selectedAns = null;
-    let isLocked = false;
-
-    const scoreVal = document.getElementById("scoreVal");
-    const streakVal = document.getElementById("streakVal");
-    const sentenceBox = document.getElementById("sentenceBox");
-    const imageBox = document.getElementById("imageBox");
-    const tabSentence = document.getElementById("tabSentence");
-    const tabImage = document.getElementById("tabImage");
-    const dynamicContainer = document.getElementById("dynamicContainer");
-    const confirmBtn = document.getElementById("confirmBtn");
-
-    function changeMode(mode) {
+    function switchMode(mode) {
+      clearInterval(mainTimer);
       currentMode = mode;
-      tabSentence.classList.toggle("active", mode === "SENTENCE");
-      tabImage.classList.toggle("active", mode === "IMAGE");
+      
+      const buttons = document.querySelectorAll('.nav-btn');
+      const modes = ['SENTENCE', 'IMAGE', 'VIOLETTA', 'TRACK', 'CLICK_TYPE', 'GM_CHECK'];
+      buttons.forEach((b, idx) => b.classList.toggle('active', modes[idx] === mode));
 
-      sentenceBox.style.display = (mode === "SENTENCE") ? "flex" : "none";
-      imageBox.style.display = (mode === "IMAGE") ? "block" : "none";
+      document.getElementById('boxSentence').style.display = (mode === 'SENTENCE') ? 'flex' : 'none';
+      document.getElementById('boxImage').style.display = (mode === 'IMAGE') ? 'block' : 'none';
+      document.getElementById('boxVioletta').style.display = (mode === 'VIOLETTA') ? 'block' : 'none';
+      document.getElementById('boxTrack').style.display = (mode === 'TRACK') ? 'block' : 'none';
+      document.getElementById('boxClickType').style.display = (mode === 'CLICK_TYPE') ? 'block' : 'none';
+      document.getElementById('boxGM').style.display = (mode === 'GM_CHECK') ? 'block' : 'none';
 
-      loadQuestion();
+      initCurrentMode();
     }
 
-    function updateScore() {
-      scoreVal.textContent = score;
-      streakVal.textContent = streak;
+    function initCurrentMode() {
+      if (currentMode === 'SENTENCE') initSentenceMode();
+      if (currentMode === 'IMAGE') initImageMode();
+      if (currentMode === 'VIOLETTA') initViolettaMode();
+      if (currentMode === 'TRACK') initTrackMode();
+      if (currentMode === 'CLICK_TYPE') initBubbleMode();
+      if (currentMode === 'GM_CHECK') initGMCheckMode();
     }
 
-    function loadQuestion() {
-      clearInterval(timerId);
-      isLocked = false;
-      confirmBtn.classList.remove("active");
+    /* ================= 1. CÂU HỎI TIẾNG HÀN 15S ================= */
+    const SENTENCE_BANK = [
+      { correct: "여기에서 타시면 돼요.", wrongs: ["놓은 를을 베틱거나 히싣다.", "알창 미정을 시내다.", "서시해서 나기면 돼요.", "뜻에 씌게 항펀죄다."] },
+      { correct: "내일 비가 올 것 같아요.", wrongs: ["내일 비가 옷 같 것애요.", "비가 올 개 갓내요.", "나일 피가 옫 겄가타요.", "냬일 비가 올 켯같애요."] },
+      { correct: "사냥터에서 몬스터를 처치하세요.", wrongs: ["산앙터에서 먼스터를 저치헤새요.", "사냥텨애서 몬스토를 처지하새요.", "사냥터애셔 몬스터를 쳐치하새요.", "샤냥터에서 몬스털를 처치해새요."] },
+      { correct: "인벤토리가 가득 찼습니다.", wrongs: ["인벤토리과 가둑 찻슴니다.", "인벤토리가 가득 찾습니다.", "임벤토리가 가득 찻슴니다.", "인벤토리개 가득 챳습니다."] }
+    ];
 
-      if (currentMode === "SENTENCE") {
-        loadSentenceQuestion();
-      } else {
-        loadImageQuestion();
-      }
-    }
+    function initSentenceMode() {
+      let timeLeft = 15;
+      const tEl = document.getElementById('blueTimer');
+      tEl.textContent = timeLeft;
 
-    // 1. CÂU HỎI TIẾNG HÀN 15S
-    function loadSentenceQuestion() {
-      timeLeft = 15;
-      const timerEl = document.getElementById("blueTimer");
-      timerEl.textContent = timeLeft;
-
-      timerId = setInterval(() => {
+      mainTimer = setInterval(() => {
         timeLeft--;
-        timerEl.textContent = timeLeft;
+        tEl.textContent = timeLeft;
         if (timeLeft <= 0) {
-          clearInterval(timerId);
-          streak = 0;
-          updateScore();
-          loadQuestion();
+          clearInterval(mainTimer);
+          streak = 0; updateStats(); initSentenceMode();
         }
       }, 1000);
 
-      const qData = SENTENCE_BANK[Math.floor(Math.random() * SENTENCE_BANK.length)];
-      const list = [
-        { text: qData.correct, isOk: true },
-        ...qData.wrongs.map(w => ({ text: w, isOk: false }))
-      ].sort(() => Math.random() - 0.5);
+      const q = SENTENCE_BANK[Math.floor(Math.random() * SENTENCE_BANK.length)];
+      const list = [{ t: q.correct, ok: true }, ...q.wrongs.map(w => ({ t: w, ok: false }))].sort(() => Math.random() - 0.5);
 
-      const optionsWrap = document.getElementById("blueOptions");
-      optionsWrap.innerHTML = "";
-
-      list.forEach(item => {
-        const btn = document.createElement("button");
-        btn.className = "kms-opt-btn";
-        btn.textContent = item.text;
-
+      const wrap = document.getElementById('blueOptions');
+      wrap.innerHTML = '';
+      list.forEach(it => {
+        const btn = document.createElement('button');
+        btn.className = 'kms-opt-btn';
+        btn.textContent = it.t;
         btn.onclick = () => {
-          if (isLocked) return;
-          isLocked = true;
-          clearInterval(timerId);
-
-          if (item.isOk) {
-            btn.classList.add("correct");
-            score++;
-            streak++;
-          } else {
-            btn.classList.add("wrong");
-            streak = 0;
-            optionsWrap.querySelectorAll(".kms-opt-btn").forEach(b => {
-              if (b.textContent === qData.correct) b.classList.add("correct");
-            });
-          }
-
-          updateScore();
-          setTimeout(loadQuestion, 700);
+          clearInterval(mainTimer);
+          if (it.ok) { btn.classList.add('correct'); score++; streak++; }
+          else { btn.classList.add('wrong'); streak = 0; }
+          updateStats();
+          setTimeout(initSentenceMode, 600);
         };
-        optionsWrap.appendChild(btn);
+        wrap.appendChild(btn);
       });
     }
 
-    // 2. LIE DETECTOR HÌNH ẢNH
-    function loadImageQuestion() {
-      selectedAns = null;
-      timeLeft = 110;
-      dynamicContainer.innerHTML = "";
+    /* ================= 2. ẢNH LIE DETECTOR (O/X & 4 ĐÁP ÁN) ================= */
+    const IMAGE_BANK = [
+      { type: "CHOICE", scene: ["🍎", "🍰", "💎", "🍇"], question: "현재 깜빡이고 있는 물체는 무엇입니까?", choices: ["사과", "케이크", "보석", "포도"], ans: 1, mode: "BLINK", target: 1 },
+      { type: "CHOICE", scene: ["🍌", "💍", "🍕", "👓"], question: "현재 움직이고 있는 물체는 무엇입니까?", choices: ["바나나", "반지", "피자", "안경"], ans: 0, mode: "MOVE", target: 0 },
+      { type: "OX", scene: ["🍑", "🍰", "🍍", "🍑"], question: "파인애플은 케이크 바로 옆에 보입니다", ans: "O", mode: "DISTRACT" },
+      { type: "OX", scene: ["🍕", "🍎", "🍎", "👒", "🔘", "🍇"], question: "오렌지와 장갑 사이에 있는 물체는 모자입니다", ans: "X", mode: "NONE" },
+      { type: "CHOICE", scene: ["🍜", "⬆️", "🔦", "🍓"], question: "적어도 1개의 화살표는 _____ 방향을 향하고 있습니다", choices: ["하단", "위쪽", "왼쪽", "정답 없음"], ans: 1, mode: "NONE" },
+      { type: "CHOICE", scene: ["💍", "💊", "🍍", "👓"], question: "알약은 [ ] 바로 옆에 나타나 있습니다", choices: ["장갑", "수박", "반지", "정답 없음"], ans: 2, mode: "DISTRACT" }
+    ];
+
+    let selectedImgAns = null;
+    function initImageMode() {
+      selectedImgAns = null;
+      let timeLeft = 110;
+      const card = document.getElementById('boxImage');
+      const content = document.getElementById('dynamicImageContent');
+      const confirmBtn = document.getElementById('confirmImageBtn');
+      confirmBtn.classList.remove('active');
 
       const q = IMAGE_BANK[Math.floor(Math.random() * IMAGE_BANK.length)];
 
-      function getClockHtml() {
+      function renderClock() {
         const m = String(Math.floor(timeLeft / 60)).padStart(2, '0');
         const s = String(timeLeft % 60).padStart(2, '0');
-        return `
-          <div class="green-clock-badge">
-            <div class="clock-icon"></div>
-            <span class="clock-time-val">${m}:${s}</span>
-          </div>
-        `;
+        return `<div class="green-clock-badge"><div class="clock-icon"></div><span>${m}:${s}</span></div>`;
       }
 
-      function populateScene(parentEl) {
-        q.scene.forEach((it, idx) => {
-          const sp = document.createElement("span");
-          sp.className = "game-item";
-          sp.textContent = it;
-
-          // Xử lý hiệu ứng theo chế độ
-          if (q.animationMode === "TARGET_BLINK" && idx === q.targetIndex) {
-            sp.classList.add("anim-blink");
-            sp.style.setProperty("--s", "0.6s");
-          } else if (q.animationMode === "TARGET_MOVE" && idx === q.targetIndex) {
-            sp.classList.add("anim-v");
-            sp.style.setProperty("--s", "1.2s");
-          } else if (q.animationMode === "DISTRACT") {
-            // Chuyển động ngẫu nhiên làm nhiễu
-            const anim = DISTRACT_ANIMATIONS[Math.floor(Math.random() * DISTRACT_ANIMATIONS.length)];
-            sp.classList.add(anim);
-            sp.style.setProperty("--s", (0.8 + Math.random() * 1.3).toFixed(2) + "s");
-          } // Nếu "NONE" thì không thêm animation
-
-          parentEl.appendChild(sp);
+      function fillScene(parent) {
+        q.scene.forEach((item, idx) => {
+          const sp = document.createElement('span');
+          sp.className = 'game-item';
+          sp.textContent = item;
+          if (q.mode === "BLINK" && idx === q.target) { sp.classList.add('anim-blink'); sp.style.setProperty('--s', '0.6s'); }
+          else if (q.mode === "MOVE" && idx === q.target) { sp.classList.add('anim-v'); sp.style.setProperty('--s', '1.2s'); }
+          else if (q.mode === "DISTRACT") {
+            const a = ['anim-h', 'anim-v', 'anim-pulse'][Math.floor(Math.random() * 3)];
+            sp.classList.add(a); sp.style.setProperty('--s', '1.3s');
+          }
+          parent.appendChild(sp);
         });
       }
 
-      if (q.type === "OX") {
-        imageBox.className = "kms-card-modal layout-ox";
-        dynamicContainer.innerHTML = `
-          <div class="top-bar-ox">${getClockHtml()}</div>
-          <div class="scene-box" id="sceneTarget"></div>
-          <div class="question-title">
-            <span class="q-tag">Q.</span>${q.question}
-          </div>
+      if (q.type === 'OX') {
+        card.className = 'kms-card-modal layout-ox';
+        content.innerHTML = `
+          <div class="top-bar-ox">${renderClock()}</div>
+          <div class="scene-box" id="imgScene"></div>
+          <div class="question-title"><span class="q-tag">Q.</span>${q.question}</div>
           <div class="ox-container">
-            <div class="ox-card-btn o" data-val="O">O</div>
-            <div class="ox-card-btn x" data-val="X">X</div>
+            <div class="ox-card-btn o" onclick="setImgAns('O', this)">O</div>
+            <div class="ox-card-btn x" onclick="setImgAns('X', this)">X</div>
           </div>
         `;
-
-        populateScene(document.getElementById("sceneTarget"));
-
-        document.querySelectorAll(".ox-card-btn").forEach(btn => {
-          btn.onclick = () => {
-            document.querySelectorAll(".ox-card-btn").forEach(b => b.classList.remove("selected"));
-            btn.classList.add("selected");
-            selectedAns = btn.dataset.val;
-            confirmBtn.classList.add("active");
-          };
-        });
-      } else if (q.type === "CHOICE") {
-        imageBox.className = "kms-card-modal layout-choice";
-        dynamicContainer.innerHTML = `
+        fillScene(document.getElementById('imgScene'));
+      } else {
+        card.className = 'kms-card-modal layout-choice';
+        content.innerHTML = `
           <div class="choice-header-split">
-            <div class="scene-box" id="sceneTarget"></div>
+            <div class="scene-box" id="imgScene"></div>
             <div class="right-question-box">
-              <div class="right-top-clock">${getClockHtml()}</div>
-              <div class="question-title">
-                <span class="q-tag">Q.</span>${q.question}
-              </div>
+              <div class="right-top-clock">${renderClock()}</div>
+              <div class="question-title"><span class="q-tag">Q.</span>${q.question}</div>
             </div>
           </div>
-          <div class="choices-list" id="choicesTarget"></div>
+          <div class="choices-list" id="choicesList"></div>
         `;
-
-        populateScene(document.getElementById("sceneTarget"));
-
-        const choicesWrap = document.getElementById("choicesTarget");
+        fillScene(document.getElementById('imgScene'));
+        const cl = document.getElementById('choicesList');
         q.choices.forEach((txt, idx) => {
-          const bar = document.createElement("div");
-          bar.className = "choice-item-bar";
-          bar.innerHTML = `<span class="choice-round-num">${idx + 1}</span> <span>${txt}</span>`;
+          const bar = document.createElement('div');
+          bar.className = 'choice-item-bar';
+          bar.innerHTML = `<span class="choice-round-num">${idx + 1}</span><span>${txt}</span>`;
           bar.onclick = () => {
-            document.querySelectorAll(".choice-item-bar").forEach(b => b.classList.remove("selected"));
-            bar.classList.add("selected");
-            selectedAns = idx;
-            confirmBtn.classList.add("active");
+            document.querySelectorAll('.choice-item-bar').forEach(b => b.classList.remove('selected'));
+            bar.classList.add('selected');
+            selectedImgAns = idx;
+            confirmBtn.classList.add('active');
           };
-          choicesWrap.appendChild(bar);
+          cl.appendChild(bar);
         });
       }
 
-      timerId = setInterval(() => {
-        timeLeft--;
-        const m = String(Math.floor(timeLeft / 60)).padStart(2, '0');
-        const s = String(timeLeft % 60).padStart(2, '0');
-        const clockValEl = document.querySelector(".clock-time-val");
-        if (clockValEl) clockValEl.textContent = `${m}:${s}`;
-
-        if (timeLeft <= 0) {
-          clearInterval(timerId);
-          streak = 0;
-          updateScore();
-          loadQuestion();
-        }
-      }, 1000);
-
       confirmBtn.onclick = () => {
-        if (selectedAns === null) return;
-        clearInterval(timerId);
+        if (selectedImgAns === null) return;
+        clearInterval(mainTimer);
+        if (selectedImgAns === q.ans) { score++; streak++; } else { streak = 0; }
+        updateStats();
+        initImageMode();
+      };
 
-        let isCorrect = (selectedAns === q.ans);
-        if (isCorrect) {
-          score++;
-          streak++;
-        } else {
-          streak = 0;
+      mainTimer = setInterval(() => {
+        timeLeft--;
+        if (timeLeft <= 0) { clearInterval(mainTimer); streak = 0; updateStats(); initImageMode(); }
+      }, 1000);
+    }
+
+    function setImgAns(val, el) {
+      document.querySelectorAll('.ox-card-btn').forEach(b => b.classList.remove('selected'));
+      el.classList.add('selected');
+      selectedImgAns = val;
+      document.getElementById('confirmImageBtn').classList.add('active');
+    }
+
+    /* ================= 3. TRÁO NẤM VIOLETTA ================= */
+    let violettaPos = [0, 1, 2, 3];
+    let targetShroom = 0;
+
+    function initViolettaMode() {
+      violettaPos = [0, 1, 2, 3];
+      targetShroom = Math.floor(Math.random() * 4);
+      document.querySelectorAll('.v-btn').forEach(b => b.classList.remove('unlocked'));
+
+      for (let i = 0; i < 4; i++) {
+        const box = document.getElementById(`shroom${i}`);
+        box.style.transform = `translateX(${i * 125}px)`;
+        const icon = document.getElementById(`sIcon${i}`);
+        icon.classList.toggle('target-mark', i === targetShroom);
+      }
+
+      setTimeout(() => {
+        // Bắt đầu tráo sau 1.5s
+        document.getElementById(`sIcon${targetShroom}`).classList.remove('target-mark');
+        let swaps = 0;
+        const interval = setInterval(() => {
+          const idxA = Math.floor(Math.random() * 4);
+          let idxB = Math.floor(Math.random() * 4);
+          while (idxB === idxA) idxB = Math.floor(Math.random() * 4);
+
+          const temp = violettaPos[idxA];
+          violettaPos[idxA] = violettaPos[idxB];
+          violettaPos[idxB] = temp;
+
+          document.getElementById(`shroom${violettaPos[idxA]}`).style.transform = `translateX(${idxA * 125}px)`;
+          document.getElementById(`shroom${violettaPos[idxB]}`).style.transform = `translateX(${idxB * 125}px)`;
+
+          swaps++;
+          if (swaps >= 8) {
+            clearInterval(interval);
+            document.querySelectorAll('.v-btn').forEach(b => b.classList.add('unlocked'));
+          }
+        }, 320);
+      }, 1500);
+    }
+
+    function guessVioletta(btnIdx) {
+      if (!document.querySelectorAll('.v-btn')[0].classList.contains('unlocked')) return;
+      if (violettaPos[btnIdx] === targetShroom) {
+        score++; streak++;
+      } else {
+        streak = 0;
+      }
+      updateStats();
+      initViolettaMode();
+    }
+
+    /* ================= 4. BÁM ĐUỔI HÌNH TÀNG HÌNH ================= */
+    let trackProgress = 0;
+    let trackHovered = false;
+    let shapePos = { x: 50, y: 50, dx: 3, dy: 2.5 };
+
+    function initTrackMode() {
+      trackProgress = 0;
+      document.getElementById('trackBar').style.width = '0%';
+      const target = document.getElementById('stealthTarget');
+      target.style.opacity = '1';
+
+      target.onmouseenter = () => { trackHovered = true; };
+      target.onmouseleave = () => { trackHovered = false; };
+
+      let lifeTime = 0;
+      mainTimer = setInterval(() => {
+        lifeTime += 30;
+        // Mờ dần theo thời gian
+        const op = Math.max(0.12, 1 - (lifeTime / 9000));
+        target.style.opacity = op;
+
+        // Di chuyển nảy góc
+        shapePos.x += shapePos.dx;
+        shapePos.y += shapePos.dy;
+        if (shapePos.x <= 0 || shapePos.x >= 460) shapePos.dx *= -1;
+        if (shapePos.y <= 0 || shapePos.y >= 210) shapePos.dy *= -1;
+
+        target.style.left = shapePos.x + 'px';
+        target.style.top = shapePos.y + 'px';
+
+        if (trackHovered) {
+          trackProgress = Math.min(100, trackProgress + 0.8);
+          document.getElementById('trackBar').style.width = trackProgress + '%';
+          if (trackProgress >= 100) {
+            clearInterval(mainTimer);
+            score++; streak++; updateStats(); initTrackMode();
+          }
         }
+      }, 30);
+    }
 
-        updateScore();
-        loadQuestion();
+    /* ================= 5. BÓNG 5 LẦN + GÕ CHỮ ================= */
+    let bubbleCount = 0;
+    let typeLives = 3;
+    const CAPTCHA_WORDS = ["단풍잎바람", "자쿰의투구", "헤네시스마을", "엘리니아숲", "루디브리엄"];
+    let currentWord = "";
+
+    function initBubbleMode() {
+      bubbleCount = 0;
+      document.getElementById('bubbleHits').textContent = bubbleCount;
+      document.getElementById('bubbleField').style.display = 'block';
+      document.getElementById('typeModal').style.display = 'none';
+      moveBubble();
+
+      document.getElementById('bubbleObj').onclick = () => {
+        bubbleCount++;
+        document.getElementById('bubbleHits').textContent = bubbleCount;
+        if (bubbleCount >= 5) {
+          document.getElementById('bubbleField').style.display = 'none';
+          openHangulTypeModal();
+        } else {
+          moveBubble();
+        }
       };
     }
 
-    loadQuestion();
+    function moveBubble() {
+      const b = document.getElementById('bubbleObj');
+      b.style.left = (20 + Math.random() * 420) + 'px';
+      b.style.top = (40 + Math.random() * 220) + 'px';
+    }
+
+    function openHangulTypeModal() {
+      typeLives = 3;
+      document.getElementById('typeModal').style.display = 'block';
+      document.getElementById('livesText').textContent = "세번 남았습니다";
+      currentWord = CAPTCHA_WORDS[Math.floor(Math.random() * CAPTCHA_WORDS.length)];
+      document.getElementById('captchaWord').textContent = currentWord;
+      const inp = document.getElementById('typeInput');
+      inp.value = '';
+      inp.focus();
+
+      inp.onkeydown = (e) => {
+        if (e.key === 'Enter') {
+          if (inp.value.trim() === currentWord) {
+            score++; streak++; updateStats(); initBubbleMode();
+          } else {
+            typeLives--;
+            if (typeLives === 2) document.getElementById('livesText').textContent = "두번 남았습니다";
+            else if (typeLives === 1) document.getElementById('livesText').textContent = "한번 남았습니다";
+            else {
+              streak = 0; updateStats(); initBubbleMode();
+            }
+            inp.value = '';
+          }
+        }
+      };
+    }
+
+    /* ================= 6. MAPLE PLANET GM CHECK ================= */
+    const GM_BANK = [
+      {
+        q: "<b>[보안 확인]</b><br>당신의 캐릭터 직업(클래스)은 무엇인가요?",
+        check: (val) => val.length >= 2
+      },
+      {
+        q: "<b>[알림]</b> 아래의 3가지 문제를 풀어주세요.<br>[1번문제] 우리나라의 국가명은?<br>[2번문제] 생각나는 보스 몬스터 이름은?<br>[3번문제] 현재 접속중인 내 캐릭터의 이름은?<br><span style='color:red;'>답변 예시: 대한민국 / 자쿰 / 홍길동</span>",
+        check: (val) => val.includes('/') && val.split('/').length === 3
+      },
+      {
+        q: "<div style='letter-spacing:6px; font-weight:bold;'>현&nbsp;사&nbsp;이&nbsp;요<br>재&nbsp;냥&nbsp;름<br>&nbsp;&nbsp;터&nbsp;을<br>&nbsp;&nbsp;의&nbsp;입<br>&nbsp;&nbsp;&nbsp;&nbsp;력<br>&nbsp;&nbsp;&nbsp;&nbsp;해<br>&nbsp;&nbsp;&nbsp;&nbsp;주<br>&nbsp;&nbsp;&nbsp;&nbsp;세</div><br>(Hãy đọc theo cột dọc và nhập câu trả lời)",
+        check: (val) => val.length >= 2
+      },
+      {
+        q: "<b>[요청 사항]</b><br>서로 다른 한글 10글자를 임의로 입력해 주세요.<br><small>* 같은 글자 반복 및 숫자, 영어, 공백 제외</small>",
+        check: (val) => {
+          const clean = val.replace(/\s+/g, '');
+          const unique = new Set(clean);
+          return unique.size >= 10 && /^[가-힣]+$/.test(clean);
+        }
+      },
+      {
+        q: "<b>[요청 사항]</b><br>현재 사냥터의 풍경을 자유롭게 8글자 이상 적어주세요.<br><small>* 한글로 입력, 공백/숫자/특수문자 제외</small>",
+        check: (val) => val.replace(/\s+/g, '').length >= 8 && /^[가-힣]+$/.test(val.replace(/\s+/g, ''))
+      }
+    ];
+
+    let currentGM = null;
+    function initGMCheckMode() {
+      let timeLeft = 45;
+      const tEl = document.getElementById('gmTimerText');
+      tEl.textContent = timeLeft;
+
+      currentGM = GM_BANK[Math.floor(Math.random() * GM_BANK.length)];
+      document.getElementById('gmQuestionText').innerHTML = currentGM.q;
+      const inp = document.getElementById('gmInput');
+      inp.value = '';
+      inp.focus();
+
+      mainTimer = setInterval(() => {
+        timeLeft--;
+        tEl.textContent = String(timeLeft).padStart(2, '0');
+        if (timeLeft <= 0) {
+          clearInterval(mainTimer);
+          streak = 0; updateStats(); initGMCheckMode();
+        }
+      }, 1000);
+    }
+
+    function submitGMAnswer() {
+      const val = document.getElementById('gmInput').value.trim();
+      clearInterval(mainTimer);
+      if (currentGM && currentGM.check(val)) {
+        score++; streak++;
+      } else {
+        streak = 0;
+      }
+      updateStats();
+      initGMCheckMode();
+    }
+
+    // Khởi chạy mặc định
+    switchMode('SENTENCE');
   </script>
 </body>
 </html>
