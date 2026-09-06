@@ -3,303 +3,704 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MapleStory KMS Captcha Practice</title>
+  <title>MapleStory KMS Captcha Hub</title>
   <style>
     * {
       box-sizing: border-box;
       user-select: none;
+      font-family: "Malgun Gothic", "Dotum", -apple-system, sans-serif;
     }
+
     body {
       margin: 0;
-      padding: 0;
-      background: radial-gradient(circle at center, #1b2838 0%, #0d131a 100%);
-      font-family: "Malgun Gothic", "Dotum", -apple-system, sans-serif;
+      padding: 20px;
+      min-height: 100vh;
+      background: linear-gradient(rgba(10, 20, 35, 0.72), rgba(10, 20, 35, 0.82)),
+                  url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat fixed;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
       color: #fff;
     }
 
-    /* Khung giả lập Captcha KMS */
-    .kms-window {
-      width: 280px;
-      background: linear-gradient(180deg, #205096 0%, #153b75 100%);
-      border: 2px solid #3c6eb4;
-      border-radius: 8px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 15px rgba(45, 105, 195, 0.3);
-      padding: 18px 16px 20px;
+    /* Thanh điều hướng chọn danh mục Captcha */
+    .hub-container {
+      width: 580px;
+      margin-bottom: 14px;
+      background: rgba(18, 26, 38, 0.9);
+      border: 1px solid #3d5a80;
+      border-radius: 10px;
+      padding: 12px 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    }
+
+    .category-tabs {
       display: flex;
-      flex-direction: column;
+      gap: 10px;
+      border-bottom: 2px solid #29384d;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+    }
+
+    .cat-btn {
+      flex: 1;
+      padding: 8px 12px;
+      background: #1e293b;
+      color: #94a3b8;
+      border: 1px solid #334155;
+      border-radius: 6px;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
       align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .cat-btn.active {
+      background: #f59e0b;
+      color: #0f172a;
+      border-color: #f59e0b;
+    }
+
+    .sub-modes {
+      display: flex;
+      gap: 8px;
+    }
+
+    .mode-pill {
+      padding: 6px 14px;
+      background: #273549;
+      color: #e2e8f0;
+      border: 1px solid #3b4d66;
+      border-radius: 20px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .mode-pill:hover {
+      background: #384c66;
+    }
+
+    .mode-pill.active {
+      background: #38bdf8;
+      color: #082f49;
+      border-color: #38bdf8;
+    }
+
+    /* Cửa sổ Game phong cách MapleStory */
+    .maple-window {
+      width: 580px;
+      background: #ffffff;
+      border-radius: 12px;
+      border: 3px solid #f6ad55;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
       position: relative;
     }
 
-    /* Đồng hồ số đếm ngược vàng */
-    .timer-display {
-      font-family: 'Consolas', 'Courier New', monospace;
-      font-size: 38px;
-      font-weight: 800;
-      color: #ffe837;
-      text-shadow: 0 0 8px rgba(255, 232, 55, 0.6);
-      margin-bottom: 6px;
-      line-height: 1;
-    }
-
-    /* Tiêu đề tiếng Hàn */
-    .title-text {
+    .maple-titlebar {
+      background: linear-gradient(180deg, #fbb040 0%, #f15a24 100%);
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #fff;
+      font-weight: bold;
       font-size: 13.5px;
-      color: #e5f0ff;
-      letter-spacing: -0.5px;
-      margin-bottom: 14px;
-      font-weight: 500;
-      text-align: center;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.4);
     }
 
-    /* Danh sách câu lựa chọn */
-    .options-container {
+    .window-body {
+      padding: 16px 20px 20px;
+      color: #333;
+    }
+
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .mode-badge {
+      font-size: 13px;
+      font-weight: 700;
+      color: #d97706;
+      background: #fef3c7;
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+
+    .timer-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 20px;
+      font-weight: 800;
+      font-family: 'Consolas', monospace;
+      color: #e11d48;
+    }
+
+    /* Màn hình hiển thị sân khấu mini */
+    .stage-area {
       width: 100%;
+      height: 180px;
+      background: #1e2530;
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 20px;
+      box-shadow: inset 0 0 14px rgba(0,0,0,0.8);
+      border: 1px solid #334155;
+    }
+
+    .game-item {
+      display: inline-block;
+      font-size: 44px;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6));
+    }
+
+    /* Hiệu ứng chuyển động Captcha động */
+    @keyframes moveH { 0%, 100% { transform: translateX(-18px); } 50% { transform: translateX(18px); } }
+    @keyframes moveV { 0%, 100% { transform: translateY(-16px); } 50% { transform: translateY(16px); } }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.1; } }
+    @keyframes pulse { 0%, 100% { transform: scale(0.75); } 50% { transform: scale(1.35); } }
+
+    .anim-h { animation: moveH var(--s, 1.5s) ease-in-out infinite alternate; }
+    .anim-v { animation: moveV var(--s, 1.4s) ease-in-out infinite alternate; }
+    .anim-blink { animation: blink var(--s, 0.8s) steps(2, start) infinite; }
+    .anim-pulse { animation: pulse var(--s, 1.2s) ease-in-out infinite alternate; }
+
+    /* Câu hỏi & lựa chọn */
+    .question-box {
+      margin: 14px 0 12px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #1f2937;
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+    }
+    .question-box span.q-tag {
+      color: #10b981;
+      font-weight: 900;
+      margin-right: 6px;
+      font-size: 17px;
+    }
+
+    .options-list {
       display: flex;
       flex-direction: column;
       gap: 7px;
     }
 
-    .option-btn {
-      width: 100%;
-      min-height: 38px;
-      background-color: #bad3eb;
-      border: 1px solid #7c9fbe;
-      border-radius: 4px;
-      color: #1a222a;
-      font-size: 14px;
+    .opt-btn {
+      padding: 10px 14px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      color: #1e293b;
+      font-size: 13.5px;
       font-weight: 600;
-      letter-spacing: -0.5px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.1s;
+    }
+    .opt-btn:hover { background: #e2e8f0; border-color: #94a3b8; }
+    .opt-btn.selected { background: #fef08a; border-color: #eab308; }
+    .opt-btn.correct { background: #86efac !important; border-color: #22c55e !important; color: #064e3b; }
+    .opt-btn.wrong { background: #fca5a5 !important; border-color: #ef4444 !important; color: #7f1d1d; }
+
+    /* Giao diện O / X */
+    .ox-grid {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      margin: 10px 0;
+    }
+    .ox-button {
+      width: 90px;
+      height: 90px;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
-      padding: 0 10px;
+      justify-content: center;
+      font-size: 50px;
+      font-weight: 900;
       cursor: pointer;
-      transition: background-color 0.1s, transform 0.05s;
+      background: #fafafa;
     }
+    .ox-button.o { color: #0284c7; }
+    .ox-button.x { color: #e11d48; }
+    .ox-button.selected { border-color: #0f172a; background: #e0f2fe; }
 
-    .option-btn:hover {
-      background-color: #d1e5f8;
-    }
-
-    .option-btn:active {
-      transform: scale(0.99);
-    }
-
-    /* Trạng thái khi bấm kiểm tra */
-    .option-btn.correct {
-      background-color: #55d475 !important;
-      border-color: #2e8b45 !important;
-      color: #0d3815 !important;
-    }
-
-    .option-btn.wrong {
-      background-color: #ff6b6b !important;
-      border-color: #c92a2a !important;
-      color: #fff !important;
-    }
-
-    /* Bảng thống kê điểm */
-    .stats-bar {
-      margin-top: 18px;
+    /* Giao diện Rune 4 phím */
+    .rune-container {
       display: flex;
       gap: 16px;
-      font-size: 13px;
-      color: #8da4be;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .rune-arrow {
+      width: 65px;
+      height: 65px;
+      border: 2px solid #64748b;
+      background: #334155;
+      color: #fff;
+      font-size: 32px;
+      font-weight: bold;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .rune-arrow.active { border-color: #facc15; background: #475569; }
+    .rune-arrow.done { border-color: #22c55e; color: #22c55e; }
+    .rune-arrow.err { border-color: #ef4444; color: #ef4444; }
+
+    .confirm-btn {
+      width: 120px;
+      height: 38px;
+      margin: 14px auto 0;
+      display: block;
+      background: #94a3b8;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: not-allowed;
+    }
+    .confirm-btn.active {
+      background: #f97316;
+      cursor: pointer;
     }
 
-    .stats-bar span b {
-      color: #ffe837;
+    /* Bảng điểm */
+    .score-panel {
+      margin-top: 14px;
+      display: flex;
+      gap: 20px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #cbd5e1;
     }
+    .score-panel b { color: #f59e0b; }
   </style>
 </head>
 <body>
 
-  <div class="kms-window">
-    <div class="timer-display" id="timer">15</div>
-    <div class="title-text">올바른 문장을 선택해 주세요</div>
+  <!-- Menu chọn danh mục & loại Captcha -->
+  <div class="hub-container">
+    <div class="category-tabs">
+      <button class="cat-btn active" onclick="switchCategory('TEXT_OPS')">
+        <span>📝</span> MỤC 1: Ngôn ngữ & Thao tác
+      </button>
+      <button class="cat-btn" onclick="switchCategory('IMAGE_OBS')">
+        <span>🔍</span> MỤC 2: Quan sát hình ảnh
+      </button>
+    </div>
 
-    <div class="options-container" id="optionsContainer">
-      <!-- Các nút bấm câu hỏi sẽ render ngẫu nhiên tại đây -->
+    <!-- Phân loại chi tiết mục 1 -->
+    <div class="sub-modes" id="subModesText">
+      <button class="mode-pill active" onclick="setMode('KOREAN_SENTENCE')">1. Chọn câu tiếng Hàn đúng (15s)</button>
+      <button class="mode-pill" onclick="setMode('RUNE_ARROW')">2. Giải Rune 4 Mũi tên (↑↓←→)</button>
+    </div>
+
+    <!-- Phân loại chi tiết mục 2 -->
+    <div class="sub-modes" id="subModesImage" style="display: none;">
+      <button class="mode-pill" onclick="setMode('IMAGE_OX')">1. Hình ảnh động (O / X)</button>
+      <button class="mode-pill" onclick="setMode('IMAGE_CHOICE')">2. Trắc nghiệm vị trí / số lượng</button>
     </div>
   </div>
 
-  <div class="stats-bar">
-    <span>Số câu đúng: <b id="score">0</b></span>
-    <span>Chuỗi đúng liên tiếp: <b id="streak">0</b></span>
+  <!-- Cửa sổ trò chơi phong cách MapleStory -->
+  <div class="maple-window">
+    <div class="maple-titlebar">
+      <span>MapleStory Lie Detector Simulator</span>
+      <span>KMS Ver</span>
+    </div>
+
+    <div class="window-body">
+      <div class="header-bar">
+        <span class="mode-badge" id="modeName">올바른 문장을 선택해 주세요</span>
+        <div class="timer-badge">
+          <span>⏱</span>
+          <span id="timerText">00:15</span>
+        </div>
+      </div>
+
+      <!-- Sân khấu hiển thị hình ảnh / mũi tên -->
+      <div class="stage-area" id="stageArea"></div>
+
+      <div class="question-box">
+        <span class="q-tag">Q.</span>
+        <span id="questionText">Đang tải dữ liệu...</span>
+      </div>
+
+      <div id="interactiveArea"></div>
+
+      <button class="confirm-btn" id="confirmBtn" style="display: none;">확인 (Xác nhận)</button>
+    </div>
+  </div>
+
+  <div class="score-panel">
+    <span>Số câu hoàn thành: <b id="totalScore">0</b></span>
+    <span>Chuỗi đúng liên tiếp: <b id="streakCount">0</b></span>
   </div>
 
   <script>
-    // Ngân hàng câu hỏi thực tế trong MapleStory KMS
-    const QUESTION_BANK = [
+    // Ngân hàng câu hỏi Tiếng Hàn
+    const SENTENCE_BANK = [
       {
+        q: "다음 중 올바른 문장을 선택해 주세요.",
         correct: "여기에서 타시면 돼요.",
-        wrongs: [
-          "놓은 를을 베틱거나 히싣다.",
-          "알창 미정을 시내다.",
-          "서시해서 나기면 돼요.",
-          "뜻에 씌게 항펀죄다."
-        ]
+        wrongs: ["놓은 를을 베틱거나 히싣다.", "알창 미정을 시내다.", "서시해서 나기면 돼요.", "뜻에 씌게 항펀죄다."]
       },
       {
-        correct: "내일 비가 올 것 같아요.",
-        wrongs: [
-          "내일 비가 옷 같 것애요.",
-          "비가 올 개 갓내요.",
-          "나일 피가 옫 겄가타요.",
-          "냬일 비가 올 켯같애요."
-        ]
-      },
-      {
+        q: "다음 중 올바른 문장을 선택해 주세요.",
         correct: "사냥터에서 몬스터를 처치하세요.",
-        wrongs: [
-          "산앙터에서 먼스터를 저치헤새요.",
-          "사냥텨애서 몬스토를 처지하새요.",
-          "사냥터애셔 몬스터를 쳐치하새요.",
-          "샤냥터에서 몬스털를 처치해새요."
-        ]
+        wrongs: ["산앙터에서 먼스터를 저치헤새요.", "사냥텨애서 몬스토를 처지하새요.", "사냥터애셔 몬스터를 쳐치하새요.", "샤냥터에서 몬스털를 처치해새요."]
       },
       {
-        correct: "오늘 날씨가 정말 좋습니다.",
-        wrongs: [
-          "오눌 날시가 정발 죻슴니다.",
-          "오늘 낟씨가 졍말 좃습니다.",
-          "오늘 날씨가 점말 좋습니댜.",
-          "오늩 날씨개 정말 졷슴니다."
-        ]
+        q: "다음 중 올바른 문장을 선택해 주세요.",
+        correct: "내일 비가 올 것 같아요.",
+        wrongs: ["내일 비가 옷 같 것애요.", "비가 올 개 갓내요.", "나일 피가 옫 겄가타요.", "냬일 비가 올 켯같애요."]
       },
       {
-        correct: "게임을 종료하시겠습니까?",
-        wrongs: [
-          "게임을 죵료하시갰습니까?",
-          "개임을 종료화시겠슴니까?",
-          "게임을 종뇨하시갰슴닉까?",
-          "계임을 종료하시겠습니까?"
-        ]
-      },
-      {
+        q: "다음 중 올바른 문장을 선택해 주세요.",
         correct: "인벤토리가 가득 찼습니다.",
-        wrongs: [
-          "인벤토리과 가둑 찻슴니다.",
-          "인벤토리가 가득 찾습니다.",
-          "임벤토리가 가득 찻슴니다.",
-          "인벤토리개 가득 챳습니다."
-        ]
-      },
-      {
-        correct: "친구에게 메시지를 보냈습니다.",
-        wrongs: [
-          "칭구에게 메세지를 보넷습니다.",
-          "친구애게 매시지를 보냇슴니다.",
-          "친구에게 매시쥐를 보냤습니다.",
-          "친규에게 메시지를 보냈슴니다."
-        ]
-      },
-      {
-        correct: "마을로 이동하시겠습니까?",
-        wrongs: [
-          "마을로 이덩하시갰습니까?",
-          "마을로 이동화시겠슴니까?",
-          "마을로 이둉하시겠슴니까?",
-          "마을로 이동하시갯습닉까?"
-        ]
+        wrongs: ["인벤토리과 가둑 찻슴니다.", "인벤토리가 가득 찾습니다.", "임벤토리가 가득 찻슴니다.", "인벤토리개 가득 챳습니다."]
       }
     ];
 
+    // Ngân hàng hình ảnh O/X và Trắc nghiệm
+    const IMAGE_OX_BANK = [
+      { scene: ["🍑", "🍰", "🍍", "🍑"], q: "파인애플은 케이크 바로 옆에 보입니다.", ans: "O" },
+      { scene: ["🍕", "🍎", "🍎", "👒", "🔘", "🍇"], q: "오렌지와 장갑 사이에 있는 물체는 모자입니다.", ans: "X" },
+      { scene: ["🍔", "🔦", "🔦", "🍔", "🔦"], q: "그림에서 찾을 수 있는 손전등의 개수는 홀수입니다.", ans: "O" },
+      { scene: ["🍓", "🍎", "🍉", "🍇"], q: "화면에 노란색 바나나가 1개 포함되어 있습니다.", ans: "X" }
+    ];
+
+    const IMAGE_CHOICE_BANK = [
+      {
+        scene: ["🍜", "⬆️", "🔦", "🍓"],
+        q: "적어도 1개의 화살표는 _____ 방향을 향하고 있습니다.",
+        choices: ["하단", "위쪽", "왼쪽", "정답 없음"],
+        ans: 1
+      },
+      {
+        scene: ["👓", "🥾", "🍌", "🥾", "🍉", "🍉"],
+        q: "안경의 개수가 [ ]보다 더 적습니다.",
+        choices: ["신발", "오렌지", "컵라면", "정답 없음"],
+        ans: 0
+      },
+      {
+        scene: ["💍", "💊", "🍍", "👓"],
+        q: "알약은 [ ] 바로 옆에 나타나 있습니다.",
+        choices: ["장갑", "수박", "반지", "정답 없음"],
+        ans: 2
+      },
+      {
+        scene: ["🍌", "💊", "🧦", "🍌"],
+        q: "그림과 관련된 설명 중 알맞은 것을 1개 찾아 주세요.",
+        choices: ["이미지 안에 두 개 있는 물체는 사과입니다", "그림 안에서 찾을 수 있는 물체는 바나나입니다", "그림에서 트로피는 가장 많습니다", "정답 없음"],
+        ans: 1
+      }
+    ];
+
+    const RUNE_KEYS = [
+      { key: 'ArrowUp', icon: '↑' },
+      { key: 'ArrowDown', icon: '↓' },
+      { key: 'ArrowLeft', icon: '←' },
+      { key: 'ArrowRight', icon: '→' }
+    ];
+
+    const ANIMATIONS = ["anim-h", "anim-v", "anim-blink", "anim-pulse", ""];
+
+    let currentMode = "KOREAN_SENTENCE";
+    let timeLeft = 15;
+    let timerId = null;
     let score = 0;
     let streak = 0;
-    let timeLeft = 15;
-    let timerInterval = null;
-    let isProcessing = false;
+    let selectedAnswer = null;
+    let currentRune = [];
+    let runeStep = 0;
 
-    const timerEl = document.getElementById("timer");
-    const containerEl = document.getElementById("optionsContainer");
-    const scoreEl = document.getElementById("score");
-    const streakEl = document.getElementById("streak");
+    const modeNameEl = document.getElementById("modeName");
+    const timerTextEl = document.getElementById("timerText");
+    const stageEl = document.getElementById("stageArea");
+    const questionTextEl = document.getElementById("questionText");
+    const interactiveArea = document.getElementById("interactiveArea");
+    const confirmBtn = document.getElementById("confirmBtn");
+    const totalScoreEl = document.getElementById("totalScore");
+    const streakCountEl = document.getElementById("streakCount");
 
-    // Xáo trộn ngẫu nhiên mảng
-    function shuffle(arr) {
-      return arr.slice().sort(() => Math.random() - 0.5);
+    function switchCategory(cat) {
+      document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("active"));
+      event.currentTarget.classList.add("active");
+
+      const textSubs = document.getElementById("subModesText");
+      const imgSubs = document.getElementById("subModesImage");
+
+      if (cat === "TEXT_OPS") {
+        textSubs.style.display = "flex";
+        imgSubs.style.display = "none";
+        setMode("KOREAN_SENTENCE");
+      } else {
+        textSubs.style.display = "none";
+        imgSubs.style.display = "flex";
+        setMode("IMAGE_OX");
+      }
     }
 
-    function startTimer() {
-      clearInterval(timerInterval);
-      timeLeft = 15;
-      timerEl.textContent = timeLeft;
+    function setMode(mode) {
+      currentMode = mode;
+      document.querySelectorAll(".mode-pill").forEach(p => {
+        p.classList.toggle("active", p.getAttribute("onclick").includes(mode));
+      });
+      loadGame();
+    }
 
-      timerInterval = setInterval(() => {
+    function startTimer(seconds) {
+      clearInterval(timerId);
+      timeLeft = seconds;
+      renderTime();
+      timerId = setInterval(() => {
         timeLeft--;
-        timerEl.textContent = timeLeft;
+        renderTime();
         if (timeLeft <= 0) {
-          clearInterval(timerInterval);
-          handleTimeOut();
+          clearInterval(timerId);
+          streak = 0;
+          updateScore();
+          loadGame();
         }
       }, 1000);
     }
 
-    function handleTimeOut() {
-      if (isProcessing) return;
-      streak = 0;
-      streakEl.textContent = streak;
-      loadNextQuestion();
+    function renderTime() {
+      const m = String(Math.floor(timeLeft / 60)).padStart(2, '0');
+      const s = String(timeLeft % 60).padStart(2, '0');
+      timerTextEl.textContent = `${m}:${s}`;
     }
 
-    function loadNextQuestion() {
-      isProcessing = false;
-      startTimer();
+    function updateScore() {
+      totalScoreEl.textContent = score;
+      streakCountEl.textContent = streak;
+    }
 
-      // Bốc ngẫu nhiên 1 bộ câu hỏi
-      const current = QUESTION_BANK[Math.floor(Math.random() * QUESTION_BANK.length)];
-      
-      // Gộp 1 câu đúng và 4 câu sai rồi trộn đều vị trí
-      const list = shuffle([
-        { text: current.correct, isCorrect: true },
-        ...current.wrongs.map(w => ({ text: w, isCorrect: false }))
-      ]);
+    function loadGame() {
+      clearInterval(timerId);
+      selectedAnswer = null;
+      confirmBtn.style.display = "none";
+      confirmBtn.classList.remove("active");
+      interactiveArea.innerHTML = "";
+      stageEl.innerHTML = "";
 
-      containerEl.innerHTML = "";
-      list.forEach(item => {
-        const btn = document.createElement("button");
-        btn.className = "option-btn";
-        btn.textContent = item.text;
+      if (currentMode === "KOREAN_SENTENCE") {
+        modeNameEl.textContent = "올바른 문장을 선택해 주세요";
+        startTimer(15);
+        renderKoreanSentence();
+      } else if (currentMode === "RUNE_ARROW") {
+        modeNameEl.textContent = "룬 화살표를 입력하세요 (Bàn phím)";
+        startTimer(10);
+        renderRuneArrows();
+      } else if (currentMode === "IMAGE_OX") {
+        modeNameEl.textContent = "그림 거짓말 탐지기 (O / X)";
+        confirmBtn.style.display = "block";
+        startTimer(120);
+        renderImageOX();
+      } else if (currentMode === "IMAGE_CHOICE") {
+        modeNameEl.textContent = "그림 탐지기 (객관식 4지선다)";
+        confirmBtn.style.display = "block";
+        startTimer(120);
+        renderImageChoice();
+      }
+    }
 
-        btn.onclick = () => {
-          if (isProcessing) return;
-          isProcessing = true;
-          clearInterval(timerInterval);
+    // 1. Dạng câu tiếng Hàn
+    function renderKoreanSentence() {
+      const item = SENTENCE_BANK[Math.floor(Math.random() * SENTENCE_BANK.length)];
+      stageEl.innerHTML = `<span style="font-size: 15px; color: #94a3b8;">텍스트를 읽고 가장 자연스럽고 올바른 문장을 고르세요</span>`;
+      questionTextEl.textContent = item.q;
 
-          if (item.isCorrect) {
-            btn.classList.add("correct");
-            score++;
-            streak++;
+      const opts = [...item.wrongs.map(w => ({ text: w, ok: false })), { text: item.correct, ok: true }]
+                   .sort(() => Math.random() - 0.5);
+
+      const list = document.createElement("div");
+      list.className = "options-list";
+      opts.forEach(o => {
+        const b = document.createElement("button");
+        b.className = "opt-btn";
+        b.textContent = o.text;
+        b.onclick = () => {
+          clearInterval(timerId);
+          if (o.ok) {
+            b.classList.add("correct");
+            score++; streak++;
           } else {
-            btn.classList.add("wrong");
+            b.classList.add("wrong");
             streak = 0;
-            // Làm nổi bật câu đúng để người chơi nhận biết
-            const allBtns = containerEl.querySelectorAll(".option-btn");
-            allBtns.forEach(b => {
-              if (b.textContent === current.correct) {
-                b.classList.add("correct");
-              }
-            });
           }
-
-          scoreEl.textContent = score;
-          streakEl.textContent = streak;
-
-          setTimeout(loadNextQuestion, 700);
+          updateScore();
+          setTimeout(loadGame, 700);
         };
+        list.appendChild(b);
+      });
+      interactiveArea.appendChild(list);
+    }
 
-        containerEl.appendChild(btn);
+    // 2. Dạng 4 Mũi tên Rune
+    function renderRuneArrows() {
+      currentRune = [];
+      runeStep = 0;
+      stageEl.innerHTML = "";
+      questionTextEl.textContent = "Bấm lần lượt 4 phím mũi tên [ ↑, ↓, ←, → ] theo đúng thứ tự hiển thị:";
+
+      const runeWrap = document.createElement("div");
+      runeWrap.className = "rune-container";
+
+      for (let i = 0; i < 4; i++) {
+        const rand = RUNE_KEYS[Math.floor(Math.random() * RUNE_KEYS.length)];
+        currentRune.push(rand);
+        const div = document.createElement("div");
+        div.className = "rune-arrow";
+        div.id = `rune-${i}`;
+        div.textContent = rand.icon;
+        runeWrap.appendChild(div);
+      }
+      interactiveArea.appendChild(runeWrap);
+      highlightRune();
+    }
+
+    function highlightRune() {
+      document.querySelectorAll(".rune-arrow").forEach((el, idx) => {
+        el.classList.toggle("active", idx === runeStep);
       });
     }
 
-    loadNextQuestion();
+    window.onkeydown = (e) => {
+      if (currentMode !== "RUNE_ARROW" || runeStep >= 4) return;
+      if (!['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) return;
+
+      const targetEl = document.getElementById(`rune-${runeStep}`);
+      if (e.key === currentRune[runeStep].key) {
+        targetEl.classList.remove("active");
+        targetEl.classList.add("done");
+        runeStep++;
+        if (runeStep === 4) {
+          clearInterval(timerId);
+          score++; streak++;
+          updateScore();
+          setTimeout(loadGame, 300);
+        } else {
+          highlightRune();
+        }
+      } else {
+        targetEl.classList.add("err");
+        streak = 0;
+        updateScore();
+        setTimeout(loadGame, 400);
+      }
+    };
+
+    // Hàm sinh chuyển động ngẫu nhiên cho vật thể
+    function populateStage(scene) {
+      stageEl.innerHTML = "";
+      scene.forEach(s => {
+        const sp = document.createElement("span");
+        sp.className = "game-item";
+        sp.textContent = s;
+        const anim = ANIMATIONS[Math.floor(Math.random() * ANIMATIONS.length)];
+        if (anim) {
+          sp.classList.add(anim);
+          sp.style.setProperty("--s", (0.7 + Math.random() * 1.3).toFixed(2) + "s");
+        }
+        stageEl.appendChild(sp);
+      });
+    }
+
+    // 3. Dạng ảnh O / X
+    function renderImageOX() {
+      const q = IMAGE_OX_BANK[Math.floor(Math.random() * IMAGE_OX_BANK.length)];
+      populateStage(q.scene);
+      questionTextEl.textContent = q.q;
+
+      const grid = document.createElement("div");
+      grid.className = "ox-grid";
+      ["O", "X"].forEach(val => {
+        const btn = document.createElement("div");
+        btn.className = `ox-button ${val.toLowerCase()}`;
+        btn.textContent = val;
+        btn.onclick = () => {
+          document.querySelectorAll(".ox-button").forEach(b => b.classList.remove("selected"));
+          btn.classList.add("selected");
+          selectedAnswer = val;
+          confirmBtn.classList.add("active");
+        };
+        grid.appendChild(btn);
+      });
+      interactiveArea.appendChild(grid);
+
+      confirmBtn.onclick = () => {
+        if (!selectedAnswer) return;
+        clearInterval(timerId);
+        if (selectedAnswer === q.ans) {
+          score++; streak++;
+        } else {
+          streak = 0;
+        }
+        updateScore();
+        loadGame();
+      };
+    }
+
+    // 4. Dạng ảnh Trắc nghiệm 4 câu
+    function renderImageChoice() {
+      const q = IMAGE_CHOICE_BANK[Math.floor(Math.random() * IMAGE_CHOICE_BANK.length)];
+      populateStage(q.scene);
+      questionTextEl.textContent = q.q;
+
+      const list = document.createElement("div");
+      list.className = "options-list";
+      q.choices.forEach((text, idx) => {
+        const b = document.createElement("button");
+        b.className = "opt-btn";
+        b.textContent = `${idx + 1}. ${text}`;
+        b.onclick = () => {
+          document.querySelectorAll(".opt-btn").forEach(el => el.classList.remove("selected"));
+          b.classList.add("selected");
+          selectedAnswer = idx;
+          confirmBtn.classList.add("active");
+        };
+        list.appendChild(b);
+      });
+      interactiveArea.appendChild(list);
+
+      confirmBtn.onclick = () => {
+        if (selectedAnswer === null) return;
+        clearInterval(timerId);
+        if (selectedAnswer === q.ans) {
+          score++; streak++;
+        } else {
+          streak = 0;
+        }
+        updateScore();
+        loadGame();
+      };
+    }
+
+    loadGame();
   </script>
 </body>
 </html>
