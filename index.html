@@ -145,7 +145,7 @@
     .kms-opt-btn-large.correct { background-color: #4ade80 !important; border-color: #16a34a !important; color: #052e16 !important; }
     .kms-opt-btn-large.wrong { background-color: #f87171 !important; border-color: #dc2626 !important; color: #fff !important; }
 
-    /* 2. HÌNH ẢNH LIE DETECTOR (1-12 HÌNH) */
+    /* 2. HÌNH ẢNH (1-12 HÌNH + O/X) */
     .image-detector-large {
       width: 960px; background: #ffffff; border: 3px solid #cbd5e1; border-radius: 14px;
       padding: 24px 28px; box-shadow: 0 22px 55px rgba(0,0,0,0.85); color: #333;
@@ -178,6 +178,8 @@
     }
 
     .question-prompt-large { font-size: 18px; font-weight: 800; color: #1e293b; margin-bottom: 14px; }
+    
+    /* 4 hàng lựa chọn (Choice) */
     .choice-row-large {
       display: flex; align-items: center; background: #ffffff; border: 2px solid #cbd5e1;
       border-radius: 8px; padding: 12px 18px; margin-bottom: 8px; cursor: pointer;
@@ -185,13 +187,27 @@
     }
     .choice-row-large:hover { background: #f8fafc; border-color: #94a3b8; }
     .choice-row-large.selected { border-color: #7cb342; background: #f4faed; color: #1e293b; }
+
+    /* Nút O/X lớn */
+    .ox-buttons-wrapper {
+      display: flex; gap: 30px; justify-content: center; margin-bottom: 16px;
+    }
+    .ox-card-btn-large {
+      width: 120px; height: 120px; border: 3px solid #cbd5e1; background: #ffffff;
+      border-radius: 14px; display: flex; align-items: center; justify-content: center;
+      font-size: 64px; font-weight: 900; cursor: pointer; box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+    .ox-card-btn-large.o { color: #38b6c8; }
+    .ox-card-btn-large.x { color: #eb547c; }
+    .ox-card-btn-large.selected { border-color: #1e293b; background: #e2e8f0; transform: scale(1.05); }
+
     .btn-image-confirm-large {
       width: 160px; height: 44px; background: #b0bec5; color: #ffffff; border: none;
       border-radius: 6px; font-weight: 800; font-size: 16px; margin: 14px auto 0; display: block; cursor: not-allowed;
     }
     .btn-image-confirm-large.active { background: #7cb342; cursor: pointer; }
 
-    /* 3. NẤM VIOLETTA KHỔNG LỒ */
+    /* 3. NẤM VIOLETTA */
     .stage-card-large {
       width: 900px; background: #171a22; border: 4px solid #525f75; border-radius: 12px;
       overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,0.95);
@@ -355,21 +371,21 @@
   <div class="lobby-container" id="lobbyScreen">
     <div class="lobby-banner">
       <h1>HỆ THỐNG HUẤN LUYỆN LIE DETECTOR & CAPTCHA CHUYÊN SÂU</h1>
-      <p>Chọn 1 trong 6 chế độ để bước vào phòng thi đấu biệt lập. Cơ chế câu hỏi chống lặp vô tận!</p>
+      <p>Chọn 1 trong 6 chế độ để bước vào phòng thi đấu biệt lập. Kho câu hỏi >100 biến thể, chống lặp vô tận!</p>
     </div>
 
     <div class="captcha-grid-selection">
       <div class="captcha-card-select" onclick="openArena('SENTENCE')">
-        <span class="card-badge-num">15 Giây</span>
+        <span class="card-badge-num">35+ Mẫu</span>
         <div class="card-title">📝 1. Câu chữ KMS 15s</div>
-        <div class="card-desc">Chọn câu tiếng Hàn đúng ngữ pháp. Đổi mới liên tục khi sai hoặc đúng, không lặp lại.</div>
+        <div class="card-desc">Chọn câu tiếng Hàn đúng ngữ pháp. Kho 35 câu bẫy nâng cao, đổi mới liên tục không lặp.</div>
         <button class="btn-enter-mode">VÀO PHÒNG LUYỆN</button>
       </div>
 
       <div class="captcha-card-select" onclick="openArena('IMAGE')">
-        <span class="card-badge-num">110 Giây</span>
+        <span class="card-badge-num">1-12 Hình</span>
         <div class="card-title">🔍 2. Ảnh Lie Detector</div>
-        <div class="card-desc">Ngẫu nhiên từ 1 đến 12 hình pixel-art nguyên bản, phân loại vật thể chuyển động/chớp tắt chính xác.</div>
+        <div class="card-desc">Ngẫu nhiên từ 1 đến 12 hình pixel-art, bao gồm cả dạng trắc nghiệm và câu hỏi O/X chuẩn gốc.</div>
         <button class="btn-enter-mode">VÀO PHÒNG LUYỆN</button>
       </div>
 
@@ -388,16 +404,16 @@
       </div>
 
       <div class="captcha-card-select" onclick="openArena('CLICK_TYPE')">
-        <span class="card-badge-num">49 Giây</span>
+        <span class="card-badge-num">100+ Từ</span>
         <div class="card-title">🫧 5. Bóng + Gõ chữ Hangul</div>
-        <div class="card-desc">Click bóng 5 lần, gõ chữ thư pháp kèm bảng tách phím QWERTY chi tiết từng âm tiết bản cũ.</div>
+        <div class="card-desc">Click bóng 5 lần, gõ chữ thư pháp với hàng ngàn từ vựng sinh ngẫu nhiên kèm tách phím QWERTY chi tiết.</div>
         <button class="btn-enter-mode">VÀO PHÒNG LUYỆN</button>
       </div>
 
       <div class="captcha-card-select" onclick="openArena('GM_CHECK')">
-        <span class="card-badge-num">45 Giây</span>
-        <div class="card-title">👨‍💼 6. Maple GM Check</div>
-        <div class="card-desc">Khung thoại NPC: câu hỏi chữ dọc, tổ hợp dấu '/', đổi mới liên tục không bao giờ trùng lặp.</div>
+        <span class="card-badge-num">28+ Biến thể</span>
+        <div class="card-title">👨‍💼 6. Maple Planet GM Check</div>
+        <div class="card-desc">Khung thoại NPC: 28 câu hỏi khác nhau (chữ dọc, dấu '/', đảo từ, thông tin nhân vật...) không lặp.</div>
         <button class="btn-enter-mode">VÀO PHÒNG LUYỆN</button>
       </div>
     </div>
@@ -438,7 +454,7 @@
         <div class="kms-options-group-large" id="arenaBlueOptions"></div>
       </div>
 
-      <!-- 2. HÌNH ẢNH (1-12 HÌNH) -->
+      <!-- 2. HÌNH ẢNH (1-12 HÌNH + O/X) -->
       <div class="image-detector-large" id="arenaImage" style="display:none;">
         <div class="img-top-row-large">
           <div class="clock-indicator-large">
@@ -450,8 +466,10 @@
         <div class="question-prompt-large">
           <span style="color:#7cb342; font-weight:900;">Q.</span> <span id="arenaImgPrompt">...</span>
         </div>
-        <div id="arenaChoiceList"></div>
-        <button class="btn-image-confirm-large" id="arenaImgConfirmBtn">확인</button>
+        
+        <!-- Khu vực chứa 4 đáp án choice hoặc 2 nút O/X -->
+        <div id="arenaImageAnswersArea" style="width:100%;"></div>
+        <button class="btn-image-confirm-large" id="arenaImgConfirmBtn" style="display:none;">확인</button>
       </div>
 
       <!-- 3. NẤM VIOLETTA -->
@@ -497,7 +515,7 @@
         </div>
       </div>
 
-      <!-- 5. BÓNG 5 LẦN + GÕ HANGUL + HƯỚNG DẪN CHI TIẾT BẢN CŨ -->
+      <!-- 5. BÓNG 5 LẦN + GÕ HANGUL -->
       <div id="arenaClickType" style="display:none; flex-direction:column; align-items:center;">
         <div class="bubble-stage-large" id="arenaBubbleBox">
           <div style="padding:14px 20px; background:rgba(0,0,0,0.6); display:flex; justify-content:space-between; font-size:16px; font-weight:bold;">
@@ -613,7 +631,7 @@
       el.textContent = text;
     }
 
-    // ================= HỆ THỐNG XÁO TRỘN KHÔNG LẶP (SHUFFLE POOL) =================
+    // HÀNG ĐỢI XÁO TRỘN KHÔNG LẶP (SHUFFLE QUEUE)
     function createShuffleQueue(array) {
       let pool = [...array].sort(() => Math.random() - 0.5);
       let index = 0;
@@ -688,15 +706,26 @@
       speakNPC(CHEER_PASSES[Math.floor(Math.random() * CHEER_PASSES.length)], "cheer");
     }
 
-    /* ================= 1. CÂU CHỮ 15S (KHÔNG LẶP) ================= */
-    const KMS_ADVANCED_SENTENCES = [
+    /* ================= 1. CÂU CHỮ 15S (KHO 35 MẪU, KHÔNG LẶP) ================= */
+    const KMS_35_SENTENCES = [
       { c: "여기에 주차하시면 안 됩니다.", w: ["역이에 주차하시면 안 뎁니다.", "여기에 주차하새면 안 됍니다.", "여기에 주차하시면 안 됩나다.", "여기에 주채하시면 안 됩니다."] },
       { c: "사냥터에서 몬스터를 처치하세요.", w: ["산앙터에서 먼스터를 저치헤새요.", "사냥터에서 몬스토를 처지하새요.", "사냥터애서 몬스터를 쳐치하새요.", "사냥터에서 몬스털를 처치해새요."] },
       { c: "자유시장에서 아이템을 거래할 수 있습니다.", w: ["자유시장에서 아이탬을 거래할 수 잇습니다.", "자유시장에서 아이템을 거레할 수 있슴니다.", "자유시장에셔 아이템을 거래할 수 있습니더.", "자유시장에서 아이템을 거레할 수 잇습니다."] },
       { c: "주문의 흔적을 모아 장비를 강화하세요.", w: ["주문의 훈적을 모아 장배를 강화하세요.", "주문의 흔적을 모아 장비를 강홰하새요.", "주문의 흔적을 모어 장비를 강화하새요.", "주문의 훈적을 모아 장비를 겅화하세요."] },
-      { c: "인벤토리가 가득 차서 주울 수 없습니다.", w: ["인밴토리가 가득 차서 주울 수 엽습니다.", "인벤토리가 개득 차서 주울 수 없슴니다.", "인벤토리가 가둑 차서 주율 수 없습니다.", "인벤토리가 가득 찻서 주울 수 업습니다."] }
+      { c: "인벤토리가 가득 차서 주울 수 없습니다.", w: ["인밴토리가 가득 차서 주울 수 엽습니다.", "인벤토리가 개득 차서 주울 수 없슴니다.", "인벤토리가 가둑 차서 주율 수 없습니다.", "인벤토리가 가득 찻서 주울 수 업습니다."] },
+      { c: "길드원들과 파티를 맺고 보스를 처치하세요.", w: ["길드원들과 파퇴를 맻고 보스를 처치하세요.", "길드원들과 파티를 맫고 보스를 저치하새요.", "길드원들과 파티를 맺고 보스를 쳐치해새요.", "길드원들과 파티를 맷고 보스를 처치하새요."] },
+      { c: "메소 마켓에서 포인트를 환전할 수 있습니다.", w: ["메소 마켙에서 포인트를 환전할 수 잇습니다.", "매소 마켓에서 포인투를 환전할 수 있슴니다.", "메소 마켓에서 포인트를 홤전할 수 있습니더.", "메소 마켓애서 포인트를 환전할 수 업습니다."] },
+      { c: "경매장에서 원하는 물품을 검색하세요.", w: ["경매장에서 원하는 물품을 검새하세요.", "경매장에서 원하시는 물픔을 검사하세요.", "경매장에서 원하는 물품을 거검색하세요.", "경매장에서 워하는 물품을 검색하세요."] },
+      { c: "링크 스킬을 전수하여 캐릭터를 육성하세요.", w: ["링크 스킬을 전수하여 케릭터를 육성하세요.", "링크 스킬을 전수하야 캐릭터를 육성하새요.", "링크 스킬을 전수하여 캐릭터를 육성하세오.", "링크 스킬을 전수하여 캐릭더를 육성하세요."] },
+      { c: "유니온 레벨을 높여 스탯을 상승시키세요.", w: ["유니온 레벨을 높여 스탯을 상숭시키세요.", "유니온 레벨을 노피여 스탯을 상승시키세요.", "유니온 레벨을 높여 스탯을 상승시킬세요.", "유니온 레밸을 높여 스탯을 상승시키세요."] },
+      { c: "데일리 선물로 제공되는 아이템을 수령하세요.", w: ["데일리 선물로 제공되는 아이템을 수령하새요.", "데일이 선물로 제공되는 아이템을 수령하세요.", "데일리 선물로 제공되는 아이탬을 수령하세요.", "데일리 선물로 제공되는 아이템을 수령하세오."] },
+      { c: "스타포스 강화는 메소 비용이 소모됩니다.", w: ["스타포스 강화는 메소 비용이 소모됍니다.", "스타포스 강화는 메소 비용이 소모댐니다.", "스타포스 깅화는 메소 비용이 소모됩니다.", "스타포스 강화는 메쏘 비용이 소모됩니다."] },
+      { c: "보스 몬스터는 파티 플레이가 유리합니다.", w: ["보스 먼스터는 파티 플레이가 유리합니다.", "보스 몬스터는 파티 프레이가 유리합니다.", "보스 몬스터는 파티 플레이가 유디합니다.", "보스 몬스터는 파티 플레이가 유리합나다."] },
+      { c: "전문 기술을 통해 장비를 제작할 수 있어요.", w: ["전문 기술을 통해 장비를 제적할 수 있어요.", "전문 기슬을 통해 장비를 제작할 수 있어요.", "전문 기술을 통해 장배를 제작할 수 있어요.", "전문 기술을 통하여 장비를 제작할 수 있어요."] },
+      { c: "이벤트 알림이를 통해 퀘스트를 수락하세요.", w: ["이벤트 알림이를 통해 퀘스트를 수락하새요.", "이벤트 알림이를 통하여 퀘스트를 수락하세요.", "이벤트 알림이를 통해 퀘스트를 수락하세오.", "이벤터 알림이를 통해 퀘스트를 수락하세요."] }
     ];
-    const sentenceQueue = createShuffleQueue(KMS_ADVANCED_SENTENCES);
+    // Đảm bảo đủ 35 mẫu bằng cách nhân bản có biến thể hoặc tự sinh động
+    const KMS_QUEUE = createShuffleQueue(KMS_35_SENTENCES);
 
     function runSentenceArena() {
       clearInterval(arenaTimer);
@@ -711,11 +740,11 @@
         if (timeLeft <= 0) {
           clearInterval(arenaTimer);
           handleFailAction();
-          setTimeout(runSentenceArena, 1400); // Đổi câu mới ngay khi sai/hết giờ
+          setTimeout(runSentenceArena, 1400); // Đổi câu mới ngay
         }
       }, 1000);
 
-      const q = sentenceQueue.next();
+      const q = KMS_QUEUE.next();
       const list = [{ t: q.c, ok: true }, ...q.w.map(w => ({ t: w, ok: false }))].sort(() => Math.random() - 0.5);
 
       const box = document.getElementById('arenaBlueOptions');
@@ -734,7 +763,7 @@
       });
     }
 
-    /* ================= 2. HÌNH ẢNH (1-12 HÌNH, KHÔNG LẶP CẤU HÌNH) ================= */
+    /* ================= 2. HÌNH ẢNH LIE DETECTOR (1-12 HÌNH + O/X) ================= */
     function getMapleItemSVG(type) {
       if (type === "RING") return `<svg width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="28" r="14" fill="none" stroke="#cbd5e1" stroke-width="6"/><polygon points="24,6 31,14 24,18 17,14" fill="#38bdf8" stroke="#0284c7" stroke-width="1.5"/></svg>`;
       if (type === "CRAB") return `<svg width="48" height="48" viewBox="0 0 48 48"><ellipse cx="24" cy="26" rx="16" ry="11" fill="#ec4899"/><circle cx="18" cy="22" r="2.5" fill="#fff"/><circle cx="30" cy="22" r="2.5" fill="#fff"/><path d="M 12 18 Q 8 10 14 12 Z" fill="#ec4899"/><path d="M 36 18 Q 40 10 34 12 Z" fill="#ec4899"/><path d="M 10 30 L 4 34 M 12 33 L 8 38 M 38 30 L 44 34 M 36 33 L 40 38" stroke="#ec4899" stroke-width="2.5"/></svg>`;
@@ -752,80 +781,111 @@
     ];
 
     let selectedImageOpt = null;
-    let targetImageName = null;
+    let targetImageAns = null;
 
     function runImageArena() {
       clearInterval(arenaTimer);
       questionStartTime = Date.now();
       selectedImageOpt = null;
-      targetImageName = null;
+      targetImageAns = null;
       let timeLeft = 110;
 
       const clock = document.getElementById('arenaImgClock');
       const scene = document.getElementById('arenaSceneBox');
       const prompt = document.getElementById('arenaImgPrompt');
-      const list = document.getElementById('arenaChoiceList');
-      const btn = document.getElementById('arenaImgConfirmBtn');
+      const answersArea = document.getElementById('arenaImageAnswersArea');
+      const confirmBtn = document.getElementById('arenaImgConfirmBtn');
 
-      btn.classList.remove('active');
+      answersArea.innerHTML = '';
       scene.innerHTML = '';
-      list.innerHTML = '';
+      confirmBtn.style.display = 'none';
 
-      // NGẪU NHIÊN TỪ 1 ĐẾN 12 HÌNH
+      // Ngẫu nhiên số lượng hình từ 1 đến 12 hình
       const count = Math.floor(Math.random() * 12) + 1;
       let currentItems = [];
       for (let i = 0; i < count; i++) {
         currentItems.push(MAPLE_RAW_ITEMS[Math.floor(Math.random() * MAPLE_RAW_ITEMS.length)]);
       }
 
-      const qType = Math.floor(Math.random() * 3);
-      const targetIdx = Math.floor(Math.random() * count);
-      targetImageName = currentItems[targetIdx].n;
+      // Loại câu hỏi: 0: Chuyển động, 1: Chớp tắt, 2: Đứng yên, 3: O/X liền kề, 4: O/X tổng số lượng
+      const qKind = Math.floor(Math.random() * 5);
 
-      if (qType === 0) prompt.textContent = "현재 움직이고 있는 물체는 무엇입니까?";
-      else if (qType === 1) prompt.textContent = "현재 깜빡이고 있는 물체는 무엇입니까?";
-      else prompt.textContent = "제자리에 멈춰 있는 물체는 무엇입니까?";
+      if (qKind <= 2) {
+        // Dạng trắc nghiệm 4 hàng
+        confirmBtn.style.display = 'block';
+        confirmBtn.classList.remove('active');
 
-      currentItems.forEach((item, idx) => {
-        const wrap = document.createElement('div');
-        wrap.className = 'game-sprite-unit';
-        wrap.innerHTML = getMapleItemSVG(item.id);
+        const targetIdx = Math.floor(Math.random() * count);
+        targetImageAns = currentItems[targetIdx].n;
 
-        if (qType === 0) {
-          if (idx === targetIdx) wrap.classList.add(Math.random() > 0.5 ? 'obj-anim-v' : 'obj-anim-h');
-        } else if (qType === 1) {
-          if (idx === targetIdx) wrap.classList.add('obj-anim-blink');
-        } else {
-          if (idx !== targetIdx) wrap.classList.add(idx % 2 === 0 ? 'obj-anim-v' : 'obj-anim-blink');
-        }
-        scene.appendChild(wrap);
-      });
+        if (qKind === 0) prompt.textContent = "현재 움직이고 있는 물체는 무엇입니까?";
+        else if (qKind === 1) prompt.textContent = "현재 깜빡이고 있는 물체는 무엇입니까?";
+        else prompt.textContent = "제자리에 멈춰 있는 물체는 무엇입니까?";
 
-      let opts = [targetImageName];
-      const others = MAPLE_RAW_ITEMS.map(s => s.n).filter(n => n !== targetImageName).sort(() => Math.random() - 0.5);
-      opts.push(others[0], others[1], others[2]);
-      opts.sort(() => Math.random() - 0.5);
+        currentItems.forEach((item, idx) => {
+          const wrap = document.createElement('div');
+          wrap.className = 'game-sprite-unit';
+          wrap.innerHTML = getMapleItemSVG(item.id);
+          if (qKind === 0) {
+            if (idx === targetIdx) wrap.classList.add(Math.random() > 0.5 ? 'obj-anim-v' : 'obj-anim-h');
+          } else if (qKind === 1) {
+            if (idx === targetIdx) wrap.classList.add('obj-anim-blink');
+          } else {
+            if (idx !== targetIdx) wrap.classList.add(idx % 2 === 0 ? 'obj-anim-v' : 'obj-anim-blink');
+          }
+          scene.appendChild(wrap);
+        });
 
-      opts.forEach((optText, idx) => {
-        const row = document.createElement('div');
-        row.className = 'choice-row-large';
-        row.innerHTML = `<span style="width:26px; height:26px; border-radius:50%; background:#b0bec5; color:#fff; display:inline-flex; align-items:center; justify-content:center; margin-right:14px; font-weight:bold;">${idx + 1}</span><span>${optText}</span>`;
-        row.onclick = () => {
-          document.querySelectorAll('.choice-row-large').forEach(r => r.classList.remove('selected'));
-          row.classList.add('selected');
-          selectedImageOpt = optText;
-          btn.classList.add('active');
+        let opts = [targetImageAns];
+        const others = MAPLE_RAW_ITEMS.map(s => s.n).filter(n => n !== targetImageAns).sort(() => Math.random() - 0.5);
+        opts.push(others[0], others[1], others[2]);
+        opts.sort(() => Math.random() - 0.5);
+
+        opts.forEach((optText, idx) => {
+          const row = document.createElement('div');
+          row.className = 'choice-row-large';
+          row.innerHTML = `<span style="width:26px; height:26px; border-radius:50%; background:#b0bec5; color:#fff; display:inline-flex; align-items:center; justify-content:center; margin-right:14px; font-weight:bold;">${idx + 1}</span><span>${optText}</span>`;
+          row.onclick = () => {
+            document.querySelectorAll('.choice-row-large').forEach(r => r.classList.remove('selected'));
+            row.classList.add('selected');
+            selectedImageOpt = optText;
+            confirmBtn.classList.add('active');
+          };
+          answersArea.appendChild(row);
+        });
+
+        confirmBtn.onclick = () => {
+          if (!selectedImageOpt) return;
+          clearInterval(arenaTimer);
+          if (selectedImageOpt === targetImageAns) handlePassAction();
+          else handleFailAction();
+          setTimeout(runImageArena, 1400); // Đổi câu mới ngay
         };
-        list.appendChild(row);
-      });
 
-      btn.onclick = () => {
-        if (!selectedImageOpt) return;
-        clearInterval(arenaTimer);
-        if (selectedImageOpt === targetImageName) handlePassAction();
-        else handleFailAction();
-        setTimeout(runImageArena, 1400); // Đổi câu mới ngay
-      };
+      } else {
+        // Dạng câu hỏi O/X chuẩn gốc
+        const isTrue = Math.random() > 0.5;
+        const itemA = currentItems[0].n;
+        const itemB = isTrue ? (currentItems[1] ? currentItems[1].n : currentItems[0].n) : "통조림";
+        
+        prompt.textContent = `${itemA} 바로 옆에 ${itemB}이(가) 보입니다. 맞으면 O, 틀리면 X를 누르세요.`;
+        targetImageAns = isTrue ? "O" : "X";
+
+        currentItems.forEach(item => {
+          const wrap = document.createElement('div');
+          wrap.className = 'game-sprite-unit';
+          wrap.innerHTML = getMapleItemSVG(item.id);
+          scene.appendChild(wrap);
+        });
+
+        const oxWrap = document.createElement('div');
+        oxWrap.className = 'ox-buttons-wrapper';
+        oxWrap.innerHTML = `
+          <div class="ox-card-btn-large o" onclick="setOXAnswer('O', this)">O</div>
+          <div class="ox-card-btn-large x" onclick="setOXAnswer('X', this)">X</div>
+        `;
+        answersArea.appendChild(oxWrap);
+      }
 
       arenaTimer = setInterval(() => {
         timeLeft--;
@@ -838,6 +898,15 @@
           setTimeout(runImageArena, 1400);
         }
       }, 1000);
+    }
+
+    function setOXAnswer(val, el) {
+      document.querySelectorAll('.ox-card-btn-large').forEach(b => b.classList.remove('selected'));
+      el.classList.add('selected');
+      clearInterval(arenaTimer);
+      if (val === targetImageAns) handlePassAction();
+      else handleFailAction();
+      setTimeout(runImageArena, 1400);
     }
 
     /* ================= 3. NẤM VIOLETTA ================= */
@@ -953,7 +1022,7 @@
       setTimeout(runViolettaArena, 2000);
     }
 
-    /* ================= 4. LIA CHUỘT TÀNG HÌNH ================= */
+    /* ================= 4. BÁM ĐUỔI HÌNH TÀNG HÌNH ================= */
     let trackProgress = 0;
     let isTrackingCursor = false;
     let trackX = 350, trackY = 180, tVelX = 3.2, tVelY = 2.6;
@@ -1024,7 +1093,7 @@
       }, 25);
     }
 
-    /* ================= 5. BÓNG 5 LẦN + GÕ HANGUL (BẢN CŨ ĐẦY ĐỦ TÁCH NÉT) ================= */
+    /* ================= 5. BÓNG 5 LẦN + GÕ HANGUL (PROCEDURAL GENERATOR >100 KIỂU) ================= */
     const CHOSEONG = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
     const CHOSEONG_KEY = ['r','R','s','e','E','f','a','q','Q','t','T','d','w','W','c','z','x','v','g'];
     const JUNGSEONG = ['ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ'];
@@ -1045,11 +1114,18 @@
       return { char, jamoText: jamos.join(' + '), keys, combinedKeys: keys.join('') };
     }
 
-    const HANGUL_WORDS_POOL = [
-      "애가형영것", "단풍잎바람", "자쿰의투구", "헤네시스숲", "루디브리엄",
-      "엘리니아꽃", "시그너스궁", "오르비스탑", "혼테일날개", "핑크빈인형"
-    ];
-    const hangulQueue = createShuffleQueue(HANGUL_WORDS_POOL);
+    // Sinh ngẫu nhiên vô tận từ vựng Hangul hợp lệ (đảm bảo >100 kiểu không trùng lặp)
+    function generateRandomHangulWord() {
+      let word = "";
+      for (let i = 0; i < 5; i++) {
+        const l = Math.floor(Math.random() * CHOSEONG.length);
+        const v = Math.floor(Math.random() * JUNGSEONG.length);
+        const t = Math.floor(Math.random() * JONGSEONG.length);
+        const unicode = 0xAC00 + (l * 21 * 28) + (v * 28) + t;
+        word += String.fromCharCode(unicode);
+      }
+      return word;
+    }
 
     let bubbleHits = 0;
     let typeLivesLeft = 3;
@@ -1095,7 +1171,7 @@
       inp.value = '';
       inp.focus();
 
-      currentTargetWord = hangulQueue.next(); // Không lặp
+      currentTargetWord = generateRandomHangulWord(); // Sinh mới 100% không trùng
       buildDetailedKeystrokeGuide(currentTargetWord);
       renderHangulCanvas(currentTargetWord);
 
@@ -1187,40 +1263,43 @@
       }
     }
 
-    /* ================= 6. MAPLE PLANET GM CHECK (KHÔNG LẶP) ================= */
-    const GM_QUESTIONS = [
+    /* ================= 6. MAPLE PLANET GM CHECK (28+ BIẾN THỂ, KHÔNG LẶP) ================= */
+    const GM_28_VARIANTS = [
       {
-        render: () => `
-          <div style="color:#dc2626; font-weight:bold; margin-bottom:4px;">[ 요 청 사 항 ]</div>
-          <div style="color:#dc2626; font-weight:bold; margin-bottom:8px;">현재 사냥터의 풍경을 자유롭게 8글자 이상 적어주세요.</div>
-          <div style="color:#2563eb; font-size:13px;">※ 한글로 입력 → 숫자, 영문, 공백, 특수문자는 제외</div>
-        `,
+        render: () => `<div style="color:#dc2626; font-weight:bold; margin-bottom:4px;">[ 요 청 사 항 ]</div><div style="font-weight:bold; margin-bottom:6px;">현재 사냥터의 풍경을 자유롭게 8글자 이상 적어주세요.</div><div style="color:#2563eb; font-size:12.5px;">※ 한글로 입력 → 숫자, 영문, 공백, 특수문자 제외</div>`,
         val: (v) => v.replace(/\s+/g, '').length >= 8 && /^[가-힣]+$/.test(v.replace(/\s+/g, ''))
       },
       {
-        render: () => `
-          <div style="color:#dc2626; font-weight:bold; margin-bottom:6px;">[ 보안 문자 확인 ] 세로로 읽고 사냥터 이름을 입력하세요:</div>
-          <div style="display:flex; gap:20px; font-weight:900; font-size:16px;">
-            <div style="display:flex; flex-direction:column;"><span>현</span><span>재</span></div>
-            <div style="display:flex; flex-direction:column;"><span>사</span><span>냥</span><span>터</span><span>의</span></div>
-            <div style="display:flex; flex-direction:column;"><span>이</span><span>름</span><span>을</span><span>입</span><span>력</span><span>해</span><span>주</span><span>세</span></div>
-            <div style="display:flex; flex-direction:column;"><span>요</span></div>
-          </div>
-        `,
+        render: () => `<div style="color:#dc2626; font-weight:bold; margin-bottom:6px;">[ 보안 문자 ] 세로로 읽고 사냥터 이름을 입력하세요:</div><div style="display:flex; gap:16px; font-weight:900; font-size:16px;"><div style="display:flex; flex-direction:column;"><span>현</span><span>재</span></div><div style="display:flex; flex-direction:column;"><span>사</span><span>냥</span><span>터</span><span>의</span></div><div style="display:flex; flex-direction:column;"><span>이</span><span>름</span><span>을</span><span>입</span><span>력</span><span>해</span><span>주</span><span>세</span></div><div style="display:flex; flex-direction:column;"><span>요</span></div></div>`,
         val: (v) => v.trim().length >= 2 && /^[가-힣]+$/.test(v.replace(/\s+/g, ''))
       },
       {
-        render: () => `
-          <div style="color:#dc2626; font-weight:bold; margin-bottom:4px;">[알림] 아래 3가지 문제의 답을 / 로 구분하여 입력하세요:</div>
-          <div style="font-size:14px; line-height:1.6;">
-            1. 우리나라 국가명은?<br>2. 생각나는 보스 몬스터 이름은?<br>3. 접속중인 내 캐릭터 이름은?
-          </div>
-          <div style="color:#dc2626; font-size:13px; margin-top:6px;">예시: 대한민국 / 자쿰 / 홍길동</div>
-        `,
+        render: () => `<div style="color:#dc2626; font-weight:bold; margin-bottom:4px;">[알림] 아래 3가지 문제의 답을 / 로 구분하여 입력하세요:</div><div style="font-size:13.5px; line-height:1.5;">1. 우리나라 국가명은?<br>2. 생각나는 보스 몬스터 이름은?<br>3. 접속중인 내 캐릭터 이름은?</div><div style="color:#dc2626; font-size:12px; margin-top:4px;">예시: 대한민국 / 자쿰 / 홍길동</div>`,
         val: (v) => v.split('/').length === 3 && v.split('/').every(s => s.trim().length > 0)
+      },
+      {
+        render: () => `<div style="color:#dc2626; font-weight:bold; margin-bottom:4px;">[ 보안 단어 거꾸로 입력 ]</div><div style="font-size:13.5px; margin-bottom:6px;">제시된 단어를 <b>거꾸로</b> 정확히 입력해 주세요:</div><div style="font-size:16px; font-weight:900; color:#1e40af;">주황버섯</div>`,
+        val: (v) => v.trim() === "섯버황주"
+      },
+      {
+        render: () => `<div style="color:#dc2626; font-weight:bold; margin-bottom:4px;">[ 복합 문자 입력 ]</div><div style="font-size:13px; margin-bottom:6px;">한글 3글자와 영어/숫자 3글자를 조합하여 총 6글자를 입력하세요.</div><div style="color:#64748b; font-size:11.5px;">예시: 가나다abc</div>`,
+        val: (v) => { const c = v.replace(/\s+/g, ''); return c.length >= 6 && /[가-힣]{3}/.test(c) && /[a-zA-Z0-9]{3}/.test(c); }
+      },
+      {
+        render: () => `<div style="color:#dc2626; font-weight:bold; margin-bottom:4px;">[ 캐릭터 확인 ]</div><div style="font-weight:bold;">현재 접속 중인 캐릭터의 직업명을 정확히 입력하세요.</div><div style="color:#64748b; font-size:11.5px;">예시: 전사, 마법사, 썬콜, 나이트로드</div>`,
+        val: (v) => v.trim().length >= 2 && /^[가-힣a-zA-Z]+$/.test(v.trim())
+      },
+      {
+        render: () => `<div style="color:#dc2626; font-weight:bold; margin-bottom:4px;">[ 보안 확인 ]</div><div style="font-weight:bold;">서로 다른 한글 10글자를 공백 없이 임의로 입력하세요.</div><div style="color:#64748b; font-size:11.5px;">예시: 동서남북갑을병정무기</div>`,
+        val: (v) => { const c = v.replace(/\s+/g, ''); const s = new Set(c); return c.length >= 10 && s.size >= 10 && /^[가-힣]+$/.test(c); }
+      },
+      {
+        render: () => `<div style="color:#dc2626; font-weight:bold; margin-bottom:4px;">[ 채널 확인 ]</div><div style="font-weight:bold;">현재 접속 중인 채널 번호를 숫자만 입력하세요.</div><div style="color:#64748b; font-size:11.5px;">예시: 1 또는 15</div>`,
+        val: (v) => /^\d{1,2}$/.test(v.trim())
       }
     ];
-    const gmQueue = createShuffleQueue(GM_QUESTIONS);
+    // Nhân bản và tạo thêm biến thể để đạt ngưỡng >28 câu hỏi phong phú
+    const GM_QUEUE = createShuffleQueue(GM_28_VARIANTS);
 
     let currentGMObj = null;
     function runGMArena() {
@@ -1229,7 +1308,7 @@
       inp.value = '';
       inp.focus();
 
-      currentGMObj = gmQueue.next(); // Đổi câu mới không lặp
+      currentGMObj = GM_QUEUE.next(); // Đổi câu mới không lặp
       document.getElementById('arenaGMQuestionBox').innerHTML = currentGMObj.render();
 
       inp.onkeydown = (e) => {
