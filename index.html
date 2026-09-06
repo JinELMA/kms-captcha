@@ -3,19 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MapleStory KMS Captcha Ultimate</title>
+  <title>MapleStory KMS - Violetta Lie Detector</title>
   <style>
-    * { box-sizing: border-box; user-select: none; font-family: "Malgun Gothic", "Dotum", -apple-system, sans-serif; }
-
+    * { box-sizing: border-box; user-select: none; font-family: "Malgun Gothic", Dotum, sans-serif; }
     body {
       margin: 0;
-      padding: 20px;
       min-height: 100vh;
-      background: linear-gradient(rgba(10, 18, 30, 0.45), rgba(10, 18, 30, 0.65)),
+      background: linear-gradient(rgba(10, 18, 30, 0.4), rgba(10, 18, 30, 0.65)),
                   url('bg.jpg'),
                   url('https://images.alphacoders.com/279/279287.jpg') center/cover no-repeat fixed;
-      background-size: cover;
-      background-position: center;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -23,876 +19,435 @@
       color: #fff;
     }
 
-    /* Menu điều hướng 6 chế độ lớn */
-    .hub-navbar {
-      width: 760px;
-      margin-bottom: 16px;
-      background: rgba(15, 23, 42, 0.96);
-      border: 2px solid #f59e0b;
-      border-radius: 12px;
-      padding: 10px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-    }
-    .nav-btn {
-      padding: 11px 8px;
-      background: #1e293b;
-      color: #cbd5e1;
-      border: 1px solid #334155;
+    /* ================= GIAI ĐOẠN 1: MÀN HÌNH CẢNH BÁO ================= */
+    .notice-modal {
+      width: 500px;
+      background: #252830;
+      border: 2px solid #5a6578;
       border-radius: 8px;
-      font-size: 13.5px;
-      font-weight: 700;
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.2s;
+      box-shadow: 0 16px 45px rgba(0,0,0,0.85);
+      overflow: hidden;
+      display: block;
     }
-    .nav-btn.active {
-      background: #f59e0b;
-      color: #0f172a;
-      border-color: #f59e0b;
-      box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
-    }
-
-    /* Bảng điểm dưới cùng */
-    .score-footer {
-      margin-top: 16px;
+    .notice-header {
+      background: #1b1d24;
+      padding: 10px 14px;
       font-size: 15px;
-      font-weight: 700;
+      font-weight: bold;
       color: #fff;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.9);
-      background: rgba(15, 23, 42, 0.85);
-      border: 1px solid #475569;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 2px solid #383e4d;
+    }
+    .notice-timer-num {
+      color: #facc15;
+      font-size: 20px;
+      font-family: 'Consolas', monospace;
+    }
+    .notice-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .notice-blue-box {
+      background: #0284c7;
+      border: 1px solid #38bdf8;
+      border-radius: 6px;
+      padding: 12px 14px;
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: #ffffff;
+      font-weight: bold;
+    }
+    .notice-blue-box span.highlight {
+      color: #fef08a;
+    }
+    .notice-dialog-box {
+      background: #383f4d;
+      border: 1px solid #4f5869;
+      border-radius: 6px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+    .notice-dialog-text {
+      font-size: 13px;
+      color: #e2e8f0;
+      line-height: 1.5;
+      max-width: 320px;
+      font-weight: 600;
+    }
+    .notice-dialog-text span.warn {
+      color: #facc15;
+    }
+    .btn-start-now {
+      margin: 4px auto 0;
       padding: 8px 24px;
-      border-radius: 25px;
-    }
-    .score-footer b { color: #facc15; }
-
-    /* Màn hình chờ & Nút Bắt đầu */
-    .start-screen-card {
-      width: 760px;
-      background: rgba(24, 34, 52, 0.95);
-      border: 2px solid #3b82f6;
-      border-radius: 14px;
-      padding: 35px 25px;
-      text-align: center;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.7);
-    }
-    .start-screen-card h2 { margin-top: 0; color: #facc15; font-size: 24px; }
-    .start-screen-card p { color: #cbd5e1; font-size: 15px; line-height: 1.6; max-width: 580px; margin: 12px auto 25px; }
-    .btn-main-start {
-      padding: 12px 36px;
-      font-size: 18px;
-      font-weight: 900;
-      color: #0f172a;
-      background: #22c55e;
-      border: none;
-      border-radius: 8px;
+      background: #ea580c;
+      border: 1px solid #f97316;
+      border-radius: 4px;
+      color: #fff;
+      font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
-      transition: all 0.15s;
+      font-size: 13.5px;
     }
-    .btn-main-start:hover { background: #16a34a; transform: scale(1.03); }
+    .btn-start-now:hover { background: #c2410c; }
 
-    /* ================= 1. DẠNG CÂU TIẾNG HÀN 15S ================= */
-    .kms-blue-box {
-      width: 330px;
-      background: #18488e;
-      border: 3px solid #2b67be;
-      border-radius: 8px;
-      padding: 22px 18px 24px;
-      box-shadow: 0 14px 40px rgba(0,0,0,0.8);
+    /* ================= GIAI ĐOẠN 2: SÂN KHẤU BIỂU DIỄN ================= */
+    .stage-modal {
+      width: 580px;
+      background: #252830;
+      border: 3px solid #64748b;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+      display: none;
+    }
+    .stage-top-bar {
+      background: #0284c7;
+      padding: 8px 12px;
+      color: #ffffff;
+      font-size: 13.5px;
+      font-weight: bold;
+      text-align: center;
+      letter-spacing: -0.3px;
+      border-bottom: 2px solid #0369a1;
+    }
+    .stage-viewport {
+      width: 100%;
+      height: 220px;
+      background: #f1f5f9;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 3px solid #1e242d;
+    }
+
+    /* Rèm nhung đỏ hai bên sân khấu */
+    .curtain-left, .curtain-right {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 55px;
+      z-index: 10;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    }
+    .curtain-left {
+      left: 0;
+      background: repeating-linear-gradient(90deg, #991b1b, #b91c1c 12px, #7f1d1d 24px);
+      border-right: 2px solid #450a0a;
+    }
+    .curtain-right {
+      right: 0;
+      background: repeating-linear-gradient(90deg, #7f1d1d, #b91c1c 12px, #991b1b 24px);
+      border-left: 2px solid #450a0a;
+    }
+    .stage-floor-board {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 35px;
+      background: #cbd5e1;
+      border-top: 2px solid #94a3b8;
+    }
+
+    /* Khối nấm Violetta */
+    .v-slot {
+      position: absolute;
+      bottom: 22px;
+      width: 90px;
+      height: 110px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: flex-end;
+      transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 5;
     }
-    .kms-timer-yellow {
-      font-family: 'Consolas', monospace;
-      font-size: 50px;
+    .down-arrow-tag {
+      position: absolute;
+      top: -24px;
+      font-size: 26px;
+      color: #ef4444;
+      animation: bounce 0.5s infinite alternate;
+      display: none;
+    }
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-8px); }
+    }
+
+    /* 4 nút bấm số 1, 2, 3, 4 */
+    .stage-btn-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 14px 20px 16px;
+      background: #1b1d24;
+    }
+    .choice-btn {
+      height: 44px;
+      background: linear-gradient(180deg, #475569 0%, #334155 100%);
+      color: #94a3b8;
+      border: 1px solid #1e293b;
+      border-radius: 6px;
+      font-size: 18px;
       font-weight: 800;
-      color: #ffe600;
-      text-shadow: 0 0 10px rgba(255, 230, 0, 0.6);
-      line-height: 1;
-      margin-bottom: 10px;
+      cursor: not-allowed;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
     }
-    .kms-title {
-      font-size: 15px;
+    .choice-btn.active {
+      background: linear-gradient(180deg, #64748b 0%, #475569 100%);
       color: #ffffff;
-      margin-bottom: 16px;
-      font-weight: 600;
-    }
-    .kms-options-group { width: 100%; display: flex; flex-direction: column; gap: 8px; }
-    .kms-opt-btn {
-      width: 100%; min-height: 42px;
-      background-color: #bad3eb;
-      border: 1px solid #7c9fbe;
-      border-radius: 4px;
-      color: #1a222a;
-      font-size: 14.5px;
-      font-weight: 700;
-      display: flex; align-items: center;
-      padding: 6px 12px;
+      border-color: #64748b;
       cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     }
-    .kms-opt-btn:hover { background-color: #d1e5f8; }
-    .kms-opt-btn.correct { background-color: #4ade80 !important; border-color: #16a34a !important; color: #052e16 !important; }
-    .kms-opt-btn.wrong { background-color: #f87171 !important; border-color: #dc2626 !important; color: #fff !important; }
-
-    /* ================= 2. DẠNG LIE DETECTOR HÌNH ẢNH ================= */
-    .kms-card-modal {
-      width: 760px;
-      background: #f8fafc;
-      border: 2px solid #cbd5e1;
-      border-radius: 14px;
-      padding: 24px 28px 20px;
-      box-shadow: 0 18px 45px rgba(0,0,0,0.6);
-      color: #333;
-    }
-    .green-clock-badge {
-      display: flex; align-items: center; gap: 8px;
-      color: #1e293b; font-size: 22px; font-weight: 800; font-family: 'Consolas', monospace;
-    }
-    .clock-icon {
-      width: 22px; height: 22px; border: 3px solid #7cb342; border-radius: 50%; position: relative;
-    }
-    .clock-icon::after {
-      content: ''; position: absolute; width: 2px; height: 7px; background: #7cb342; top: 2px; left: 7px;
-    }
-    .scene-box {
-      background: #1e242d; border-radius: 8px; position: relative; overflow: hidden;
-      display: flex; align-items: center; justify-content: space-around;
-      box-shadow: inset 0 0 14px rgba(0,0,0,0.8);
-    }
-    .game-item { display: inline-block; font-size: 46px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6)); }
-
-    @keyframes moveH { 0%, 100% { transform: translateX(-20px); } 50% { transform: translateX(20px); } }
-    @keyframes moveV { 0%, 100% { transform: translateY(-16px); } 50% { transform: translateY(16px); } }
-    @keyframes blinkEffect { 0%, 100% { opacity: 1; } 50% { opacity: 0.08; } }
-    @keyframes pulseEffect { 0%, 100% { transform: scale(0.75); } 50% { transform: scale(1.35); } }
-    .anim-h { animation: moveH var(--s, 1.4s) ease-in-out infinite alternate; }
-    .anim-v { animation: moveV var(--s, 1.3s) ease-in-out infinite alternate; }
-    .anim-blink { animation: blinkEffect var(--s, 0.6s) steps(2, start) infinite; }
-    .anim-pulse { animation: pulseEffect var(--s, 1.1s) ease-in-out infinite alternate; }
-
-    .question-title { font-size: 16.5px; font-weight: 700; color: #1e293b; line-height: 1.4; }
-    .question-title .q-tag { color: #8bc34a; font-weight: 900; margin-right: 6px; }
-
-    /* Layout O/X */
-    .layout-ox .top-bar-ox { display: flex; justify-content: flex-end; margin-bottom: 10px; }
-    .layout-ox .scene-box { width: 440px; height: 210px; margin: 0 auto 16px; }
-    .layout-ox .question-title { text-align: center; margin-bottom: 22px; }
-    .layout-ox .ox-container { display: flex; gap: 30px; justify-content: center; margin-bottom: 20px; }
-    .ox-card-btn {
-      width: 100px; height: 100px; border: 2px solid #e1e5e8; background: #ffffff;
-      border-radius: 12px; display: flex; align-items: center; justify-content: center;
-      font-size: 56px; font-weight: 900; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
-    .ox-card-btn.o { color: #38b6c8; }
-    .ox-card-btn.x { color: #eb547c; }
-    .ox-card-btn.selected { border-color: #334155; background: #eaf1f5; }
-
-    /* Layout Choice */
-    .layout-choice .choice-header-split { display: flex; gap: 20px; margin-bottom: 16px; align-items: flex-start; }
-    .layout-choice .scene-box { width: 380px; height: 190px; flex-shrink: 0; }
-    .layout-choice .right-question-box { flex: 1; display: flex; flex-direction: column; justify-content: space-between; min-height: 190px; }
-    .layout-choice .right-top-clock { display: flex; justify-content: flex-end; }
-    .choices-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
-    .choice-item-bar {
-      display: flex; align-items: center; background: #ffffff; border: 1px solid #e2e5e8;
-      border-radius: 8px; padding: 11px 16px; cursor: pointer; font-size: 15px; font-weight: 600;
-    }
-    .choice-item-bar.selected { border-color: #8bc34a; background: #f4faed; }
-    .choice-round-num {
-      width: 22px; height: 22px; border-radius: 50%; background: #b0bec5; color: #fff;
-      font-size: 12px; display: inline-flex; align-items: center; justify-content: center;
-      margin-right: 14px; font-weight: bold;
-    }
-    .choice-item-bar.selected .choice-round-num { background: #8bc34a; }
-
-    .btn-confirm-green {
-      width: 120px; height: 40px; background: #b0bec5; color: #fff; border: none;
-      border-radius: 6px; font-weight: 700; font-size: 15px; margin: 0 auto; display: block; cursor: not-allowed;
-    }
-    .btn-confirm-green.active { background: #8bc34a; cursor: pointer; }
-
-    /* ================= 3. MINIGAME VIOLETTA ================= */
-    .violetta-stage {
-      width: 760px; background: #1c212d; border: 3px solid #e11d48; border-radius: 12px;
-      overflow: hidden; box-shadow: 0 18px 45px rgba(0,0,0,0.8); position: relative;
-    }
-    .curtain-top {
-      background: linear-gradient(180deg, #991b1b 0%, #dc2626 100%);
-      padding: 12px; text-align: center; color: #fff; font-weight: bold; font-size: 16px;
-      border-bottom: 2px solid #fca5a5;
-    }
-    .stage-floor {
-      height: 240px; background: #2e3440; position: relative;
-      overflow: hidden;
-    }
-    .curtain-side-left, .curtain-side-right {
-      position: absolute; top: 0; bottom: 0; width: 45px;
-      background: linear-gradient(90deg, #b91c1c, #7f1d1d); z-index: 10;
-    }
-    .curtain-side-left { left: 0; }
-    .curtain-side-right { right: 0; }
-    .shroom-box {
-      width: 110px; height: 120px; display: flex; flex-direction: column; align-items: center;
-      justify-content: center; position: absolute; bottom: 35px; transition: transform 0.28s ease-in-out;
-    }
-    .shroom-avatar {
-      width: 80px; height: 80px; background: #fb7185; border-radius: 50% 50% 30% 30%;
-      border: 3px solid #ffe4e6; position: relative; display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.4);
-    }
-    .shroom-dots {
-      position: absolute; width: 14px; height: 14px; background: #fff; border-radius: 50%; top: 12px; left: 14px;
-    }
-    .shroom-face {
-      position: absolute; bottom: 8px; width: 40px; height: 26px; background: #ffedd5;
-      border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: bold; color: #111;
-    }
-    .target-highlight::before {
-      content: '👑'; position: absolute; top: -20px; font-size: 26px; z-index: 5;
-    }
-    .target-highlight .shroom-face::after {
-      content: '🌸'; position: absolute; right: -12px; font-size: 16px;
-    }
-    .v-buttons {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; padding: 16px 28px 20px; background: #131720;
-    }
-    .v-btn {
-      height: 48px; background: #334155; color: #fff; font-size: 20px; font-weight: 800;
-      border: 2px solid #475569; border-radius: 8px; cursor: not-allowed; opacity: 0.5;
-    }
-    .v-btn.unlocked { cursor: pointer; opacity: 1; background: #2563eb; border-color: #60a5fa; box-shadow: 0 4px 10px rgba(37,99,235,0.4); }
-
-    /* ================= 4. BÁM ĐUỔI HÌNH TÀNG HÌNH ================= */
-    .track-window {
-      width: 760px; background: #926723; border: 3px solid #6b4712; border-radius: 12px;
-      padding: 20px; box-shadow: 0 18px 45px rgba(0,0,0,0.8);
-    }
-    .track-canvas-area {
-      width: 100%; height: 320px;
-      background: radial-gradient(circle, #eab308 15%, #a16207 90%);
-      border: 3px solid #452b06; border-radius: 8px; position: relative; overflow: hidden;
-      cursor: crosshair;
-    }
-    .stealth-target {
-      width: 60px; height: 60px; position: absolute; border-radius: 50%;
-      background: #ffffff; display: flex; align-items: center; justify-content: center;
-      border: 3px solid #16a34a; box-shadow: 0 0 20px rgba(255,255,255,0.9);
-      transition: opacity 0.4s;
-    }
-    .stealth-target::after {
-      content: '🎯'; font-size: 30px;
-    }
-    .track-progress-wrap {
-      margin-top: 14px; height: 20px; background: #2e1d05; border-radius: 10px; overflow: hidden; border: 1px solid #78350f;
-    }
-    .track-progress-bar { width: 0%; height: 100%; background: #22c55e; transition: width 0.1s; }
-
-    /* ================= 5. BÓNG 5 LẦN + GÕ CHỮ THƯ PHÁP ================= */
-    .click-field {
-      width: 760px; height: 360px; background: radial-gradient(circle, #1e3a5f 0%, #0f172a 100%);
-      border: 3px solid #3b82f6; border-radius: 12px; position: relative; overflow: hidden;
-    }
-    .bubble-target {
-      width: 70px; height: 70px; background: radial-gradient(circle, #93c5fd 0%, #2563eb 100%);
-      border: 3px solid #bfdbfe; border-radius: 50%; position: absolute;
-      display: flex; align-items: center; justify-content: center; font-size: 32px;
-      cursor: pointer; box-shadow: 0 0 20px #38bdf8;
-    }
-    .type-modal {
-      width: 440px; background: #3b1e28; border: 3px solid #e11d48; border-radius: 10px;
-      padding: 22px; text-align: center; box-shadow: 0 18px 45px rgba(0,0,0,0.8);
-    }
-    .type-timer-cyan { font-family: 'Consolas', monospace; font-size: 44px; font-weight: 800; color: #38bdf8; }
-    .distort-canvas-wrap {
-      width: 100%; height: 85px; background: #fff; border: 2px solid #475569;
-      margin: 14px 0; border-radius: 6px; overflow: hidden; position: relative;
-      background-image: radial-gradient(#64748b 1px, transparent 0); background-size: 6px 6px;
-    }
-    .distort-canvas-wrap::before {
-      content: ''; position: absolute; top: 42px; left: -20px; right: -20px; height: 3px;
-      background: #dc2626; transform: rotate(-5deg); z-index: 2; opacity: 0.6;
-    }
-    .distort-text-drift {
-      font-family: 'Batang', 'Gungsuh', serif; font-size: 40px; font-weight: 900;
-      color: #1e1b4b; line-height: 85px; white-space: nowrap; letter-spacing: 8px;
-      animation: moveH 2s ease-in-out infinite alternate;
-    }
-    .type-input {
-      width: 100%; height: 42px; padding: 6px 12px; font-size: 17px;
-      border: 2px solid #cbd5e1; border-radius: 6px; outline: none; font-weight: bold;
+    .choice-btn.active:hover {
+      background: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%);
+      border-color: #38bdf8;
     }
 
-    /* ================= 6. MAPLE PLANET GM CHECK ================= */
-    .gm-window {
-      width: 760px; background: #f1f5f9; border: 3px solid #64748b; border-radius: 10px;
-      box-shadow: 0 18px 45px rgba(0,0,0,0.8); color: #1e293b; overflow: hidden;
-    }
-    .gm-wood-clock {
-      background: #452d18; border-bottom: 2px solid #281708; padding: 8px 18px;
-      display: flex; justify-content: center; align-items: center;
-      color: #fde047; font-family: 'Consolas', monospace; font-size: 26px; font-weight: 800;
-    }
-    .gm-body-split { display: flex; padding: 22px 20px; gap: 20px; }
-    .gm-npc-side {
-      width: 140px; display: flex; flex-direction: column; align-items: center;
-      border-right: 2px solid #cbd5e1; padding-right: 18px;
-    }
-    .gm-npc-avatar {
-      width: 80px; height: 95px; background: #cbd5e1; border: 2px solid #94a3b8; border-radius: 8px;
-      display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 42px; margin-bottom: 8px;
-    }
-    .gm-npc-name {
-      background: #334155; color: #fff; font-size: 12px; padding: 3px 10px; border-radius: 4px; font-weight: bold;
-    }
-    .gm-content-side { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
-    .gm-question-text { font-size: 15px; line-height: 1.6; font-weight: 600; min-height: 100px; }
-    .gm-input-box {
-      width: 100%; height: 38px; border: 2px solid #475569; padding: 6px 12px; font-size: 15px; border-radius: 4px;
-    }
-    .gm-footer-action {
-      background: #cbd5e1; padding: 10px 20px; display: flex; justify-content: flex-end;
-    }
-    .gm-btn-confirm {
-      padding: 6px 26px; background: #ea580c; color: #fff; border: 1px solid #c2410c;
-      border-radius: 6px; font-weight: bold; font-size: 14px; cursor: pointer;
+    /* Bảng trạng thái */
+    .status-toast {
+      margin-top: 15px;
+      padding: 6px 18px;
+      border-radius: 20px;
+      background: rgba(0,0,0,0.7);
+      font-weight: bold;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
 
-  <div class="hub-navbar">
-    <button class="nav-btn active" onclick="selectTab('SENTENCE')">📝 1. Chữ 15s (KMS)</button>
-    <button class="nav-btn" onclick="selectTab('IMAGE')">🔍 2. Ảnh Lie Detector</button>
-    <button class="nav-btn" onclick="selectTab('VIOLETTA')">🍄 3. Nấm Violetta</button>
-    <button class="nav-btn" onclick="selectTab('TRACK')">🎯 4. Bám hình mờ</button>
-    <button class="nav-btn" onclick="selectTab('CLICK_TYPE')">🫧 5. Bóng 5 lần + Gõ</button>
-    <button class="nav-btn" onclick="selectTab('GM_CHECK')">👨‍💼 6. Maple GM Check</button>
-  </div>
-
-  <div class="start-screen-card" id="startScreen">
-    <h2 id="startTitle">1. CÂU CHỮ TIẾNG HÀN 15 GIÂY</h2>
-    <p id="startDesc">Chọn đúng câu tiếng Hàn có nghĩa logic chuẩn xác trong số 5 đáp án trước khi hết 15 giây.</p>
-    <button class="btn-main-start" onclick="launchGame()">▶ BẮT ĐẦU KIỂM TRA (시작)</button>
-  </div>
-
-  <div class="kms-blue-box" id="boxSentence" style="display: none;">
-    <div class="kms-timer-yellow" id="blueTimer">15</div>
-    <div class="kms-title">올바른 문장을 선택해 주세요</div>
-    <div class="kms-options-group" id="blueOptions"></div>
-  </div>
-
-  <div class="kms-card-modal" id="boxImage" style="display: none;">
-    <div id="dynamicImageContent"></div>
-    <button class="btn-confirm-green" id="confirmImageBtn">확인</button>
-  </div>
-
-  <div class="violetta-stage" id="boxVioletta" style="display: none;">
-    <div class="curtain-top">화장한 비올레타를 놓치지 말고 주목해주세요!</div>
-    <div class="stage-floor" id="vFloor">
-      <div class="curtain-side-left"></div>
-      <div class="curtain-side-right"></div>
-      <div class="shroom-box" id="shroom0">
-        <div class="shroom-avatar" id="sIcon0"><div class="shroom-dots"></div><div class="shroom-face">^^</div></div>
-      </div>
-      <div class="shroom-box" id="shroom1">
-        <div class="shroom-avatar" id="sIcon1"><div class="shroom-dots"></div><div class="shroom-face">^^</div></div>
-      </div>
-      <div class="shroom-box" id="shroom2">
-        <div class="shroom-avatar" id="sIcon2"><div class="shroom-dots"></div><div class="shroom-face">^^</div></div>
-      </div>
-      <div class="shroom-box" id="shroom3">
-        <div class="shroom-avatar" id="sIcon3"><div class="shroom-dots"></div><div class="shroom-face">^^</div></div>
-      </div>
+  <!-- 1. CỬA SỔ POP-UP CẢNH BÁO (Ảnh 1) -->
+  <div class="notice-modal" id="noticeModal">
+    <div class="notice-header">
+      <span class="notice-timer-num" id="noticeCount">14</span>
+      <span>초 후 거짓말 탐지 미니게임이 시작됩니다</span>
     </div>
-    <div class="v-buttons">
-      <button class="v-btn" onclick="guessVioletta(0)">1</button>
-      <button class="v-btn" onclick="guessVioletta(1)">2</button>
-      <button class="v-btn" onclick="guessVioletta(2)">3</button>
-      <button class="v-btn" onclick="guessVioletta(3)">4</button>
+    <div class="notice-body">
+      <div class="notice-blue-box">
+        • <span class="highlight">아름답게 화장한 비올레타</span>를 찾아주세요<br>
+        • 정답에 따라 테스트 통과 / 실패하게 됩니다
+      </div>
+      <div class="notice-dialog-box">
+        <div class="notice-dialog-text">
+          답을 입력하지 않으면<br>
+          거짓말 <span class="warn">탐지 테스트</span>에<br>
+          실패하니 주의해주세요!
+        </div>
+        <!-- Avatar Violetta góc dưới -->
+        <div id="violettaAvatar" style="width: 70px; height: 70px;"></div>
+      </div>
+      <button class="btn-start-now" onclick="startStageGame()">Bắt đầu ngay (시작)</button>
     </div>
   </div>
 
-  <div class="track-window" id="boxTrack" style="display: none;">
-    <div style="font-weight: 700; color: #fff; margin-bottom: 8px; font-size: 15px;">
-      도형 위에 마우스 커서를 유지하세요 (Rê chuột bám sát mục tiêu để nạp đầy 100%)
+  <!-- 2. SÂN KHẤU TRÁO VỊ TRÍ (Ảnh 2) -->
+  <div class="stage-modal" id="stageModal">
+    <div class="stage-top-bar" id="stageStatusText">
+      화장한 비올레타를 놓치지 말고 주목해주세요.
     </div>
-    <div class="track-canvas-area" id="trackArea">
-      <div class="stealth-target" id="stealthTarget"></div>
+    <div class="stage-viewport">
+      <div class="curtain-left"></div>
+      <div class="curtain-right"></div>
+      <div class="stage-floor-board"></div>
+
+      <!-- 4 Slot nấm -->
+      <div class="v-slot" id="slot0"><div class="down-arrow-tag" id="arrow0">▼</div><div class="v-sprite" id="sprite0"></div></div>
+      <div class="v-slot" id="slot1"><div class="down-arrow-tag" id="arrow1">▼</div><div class="v-sprite" id="sprite1"></div></div>
+      <div class="v-slot" id="slot2"><div class="down-arrow-tag" id="arrow2">▼</div><div class="v-sprite" id="sprite2"></div></div>
+      <div class="v-slot" id="slot3"><div class="down-arrow-tag" id="arrow3">▼</div><div class="v-sprite" id="sprite3"></div></div>
     </div>
-    <div class="track-progress-wrap">
-      <div class="track-progress-bar" id="trackBar"></div>
+
+    <!-- 4 Nút bấm lựa chọn -->
+    <div class="stage-btn-grid">
+      <button class="choice-btn" id="btn0" onclick="makeChoice(0)">1</button>
+      <button class="choice-btn" id="btn1" onclick="makeChoice(1)">2</button>
+      <button class="choice-btn" id="btn2" onclick="makeChoice(2)">3</button>
+      <button class="choice-btn" id="btn3" onclick="makeChoice(3)">4</button>
     </div>
   </div>
 
-  <div id="boxClickType" style="display: none;">
-    <div class="click-field" id="bubbleField">
-      <div style="padding: 14px; color: #93c5fd; font-size: 15px; font-weight: bold;">
-        Bong bóng di chuyển: Click trúng 5 lần (<span id="bubbleHits">0</span>/5)
-      </div>
-      <div class="bubble-target" id="bubbleObj">🫧</div>
-    </div>
-
-    <div class="type-modal" id="typeModal" style="display: none;">
-      <div class="type-timer-cyan" id="typeTimer">60</div>
-      <div style="color: #cbd5e1; font-size: 13.5px; margin: 6px 0;">
-        아래 이미지 안의 한글을 보이는 대로 입력하세요<br>
-        <span style="color: #f43f5e; font-weight: bold;" id="livesText">세번 남았습니다</span>
-      </div>
-      <div class="distort-canvas-wrap">
-        <div class="distort-text-drift" id="captchaWord">단풍잎바람</div>
-      </div>
-      <input type="text" class="type-input" id="typeInput" placeholder="Nhập chữ Hangul và bấm Enter" autofocus>
-    </div>
-  </div>
-
-  <div class="gm-window" id="boxGM" style="display: none;">
-    <div class="gm-wood-clock">
-      ● 남은시간 [ 00 : <span id="gmTimerText">53</span> ]
-    </div>
-    <div class="gm-body-split">
-      <div class="gm-npc-side">
-        <div class="gm-npc-avatar">👮‍♂️</div>
-        <div class="gm-npc-name">메이플 운영자</div>
-      </div>
-      <div class="gm-content-side">
-        <div class="gm-question-text" id="gmQuestionText">Đang tải câu hỏi...</div>
-        <input type="text" class="gm-input-box" id="gmInput" placeholder="Nhập câu trả lời...">
-      </div>
-    </div>
-    <div class="gm-footer-action">
-      <button class="gm-btn-confirm" onclick="submitGMAnswer()">확인</button>
-    </div>
-  </div>
-
-  <div class="score-footer">
-    Số câu đúng: <b id="scoreVal">0</b> | Chuỗi đúng liên tiếp: <b id="streakVal">0</b>
-  </div>
+  <div class="status-toast" id="statsBar">Đúng: 0 | Sai: 0</div>
 
   <script>
-    let activeTab = 'SENTENCE';
-    let score = 0, streak = 0;
-    let mainTimer = null;
+    // Hàm dựng hình ảnh vector chi tiết của Violetta
+    function renderViolettaSVG(isMakeup, isClosedEyes) {
+      const eyeDetails = isClosedEyes
+        ? `<path d="M 24 38 Q 28 42 32 38" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+           <path d="M 44 38 Q 48 42 52 38" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>`
+        : (isMakeup
+            ? `<!-- Mắt trang điểm có mi cong & má hồng phấn -->
+               <ellipse cx="28" cy="36" rx="4.5" ry="5.5" fill="#1e1e24"/>
+               <circle cx="27" cy="34" r="1.8" fill="#fff"/>
+               <path d="M 23 32 Q 25 29 27 30" stroke="#000" stroke-width="2" fill="none"/>
+               <path d="M 26 29 Q 29 27 31 29" stroke="#000" stroke-width="2" fill="none"/>
+               <ellipse cx="23" cy="40" rx="4" ry="2" fill="#fb7185" opacity="0.8"/>
+               
+               <ellipse cx="48" cy="36" rx="4.5" ry="5.5" fill="#1e1e24"/>
+               <circle cx="47" cy="34" r="1.8" fill="#fff"/>
+               <path d="M 53 32 Q 51 29 49 30" stroke="#000" stroke-width="2" fill="none"/>
+               <path d="M 50 29 Q 47 27 45 29" stroke="#000" stroke-width="2" fill="none"/>
+               <ellipse cx="53" cy="40" rx="4" ry="2" fill="#fb7185" opacity="0.8"/>`
+            : `<!-- Mắt thường -->
+               <ellipse cx="28" cy="37" rx="3.5" ry="4" fill="#333"/>
+               <circle cx="27" cy="35" r="1.2" fill="#fff"/>
+               <ellipse cx="48" cy="37" rx="3.5" ry="4" fill="#333"/>
+               <circle cx="47" cy="35" r="1.2" fill="#fff"/>`);
 
-    const TAB_INFO = {
-      SENTENCE: { title: "1. CÂU CHỮ TIẾNG HÀN 15 GIÂY", desc: "Chọn đúng câu tiếng Hàn có nghĩa chuẩn xác trong 5 đáp án dưới áp lực 15 giây." },
-      IMAGE: { title: "2. LIE DETECTOR HÌNH ẢNH", desc: "Quan sát hình ảnh thực chiến: phát hiện vật thể chớp tắt, đang di chuyển hoặc trả lời O/X và trắc nghiệm 4 đáp án." },
-      VIOLETTA: { title: "3. TÌM NẤM VIOLETTA TRANG ĐIỂM", desc: "Nhận diện nấm trang điểm trong 2 giây đầu, sau đó theo dõi quá trình tráo đổi vị trí và bấm đúng số 1, 2, 3, 4." },
-      TRACK: { title: "4. BÁM ĐUỔI HÌNH TÀNG HÌNH", desc: "Rê chuột liên tục bám sát hình khối đang bay lượn và mờ dần trên nền ngụy trang để sạc đầy 100% thanh đo." },
-      CLICK_TYPE: { title: "5. BÓNG 5 LẦN + GÕ CHỮ THƯ PHÁP", desc: "Click trúng quả bóng bay 5 lần, sau đó gõ chính xác dải chữ Hangul thư pháp có sọc gạch ngang với giới hạn 3 mạng." },
-      GM_CHECK: { title: "6. MAPLE PLANET GM CHECK", desc: "Đối thoại với Quản lý game: trả lời câu hỏi đọc chữ dọc, chuỗi câu hỏi phân cách dấu '/', hoặc nhập chuỗi Hangul 10 chữ không lặp." }
-    };
+      return `
+        <svg width="76" height="85" viewBox="0 0 76 85">
+          <!-- Vương miện vàng bên góc -->
+          <path d="M 46 8 L 52 2 L 56 9 L 62 4 L 63 15 Z" fill="#fbbf24" stroke="#d97706" stroke-width="1.5"/>
+          
+          <!-- Mũ nấm hồng chấm trắng -->
+          <ellipse cx="38" cy="26" rx="36" ry="24" fill="#f43f5e" stroke="#be123c" stroke-width="2"/>
+          <ellipse cx="20" cy="18" rx="7" ry="5" fill="#fff" opacity="0.9"/>
+          <ellipse cx="56" cy="18" rx="6" ry="4.5" fill="#fff" opacity="0.9"/>
+          <ellipse cx="38" cy="12" rx="5" ry="3.5" fill="#fff" opacity="0.9"/>
+          <ellipse cx="38" cy="27" rx="6" ry="4" fill="#fff" opacity="0.9"/>
 
-    function updateStats() {
-      document.getElementById('scoreVal').textContent = score;
-      document.getElementById('streakVal').textContent = streak;
+          <!-- Thân & Khuôn mặt nấm -->
+          <path d="M 16 32 C 16 52, 60 52, 60 32 Z" fill="#fef08a" stroke="#ca8a04" stroke-width="2"/>
+          
+          <!-- Miệng chúm chím -->
+          <path d="M 36 43 Q 38 45 40 43" stroke="#e11d48" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+          <!-- Mắt & Trang điểm -->
+          ${eyeDetails}
+        </svg>
+      `;
     }
 
-    function hideAllContainers() {
-      ['boxSentence', 'boxImage', 'boxVioletta', 'boxTrack', 'boxClickType', 'boxGM'].forEach(id => {
-        document.getElementById(id).style.display = 'none';
-      });
-      document.getElementById('startScreen').style.display = 'none';
-    }
+    // Render avatar ở màn hình 1
+    document.getElementById('violettaAvatar').innerHTML = renderViolettaSVG(true, false);
 
-    function selectTab(tab) {
-      clearInterval(mainTimer);
-      activeTab = tab;
+    let noticeTimer = 14;
+    let noticeInterval = null;
+    let targetIndex = 0; // Con nào được trang điểm (0 - 3)
+    let positions = [0, 1, 2, 3]; // Lưu vị trí tọa độ hiện thời
+    let scoreCount = 0, failCount = 0;
+    const X_SLOTS = [70, 190, 310, 430]; // 4 vị trí trên sân khấu (px)
 
-      const buttons = document.querySelectorAll('.nav-btn');
-      const tabs = ['SENTENCE', 'IMAGE', 'VIOLETTA', 'TRACK', 'CLICK_TYPE', 'GM_CHECK'];
-      buttons.forEach((b, idx) => b.classList.toggle('active', tabs[idx] === tab));
-
-      hideAllContainers();
-      document.getElementById('startScreen').style.display = 'block';
-      document.getElementById('startTitle').textContent = TAB_INFO[tab].title;
-      document.getElementById('startDesc').textContent = TAB_INFO[tab].desc;
-    }
-
-    function launchGame() {
-      hideAllContainers();
-      if (activeTab === 'SENTENCE') {
-        document.getElementById('boxSentence').style.display = 'flex';
-        initSentenceMode();
-      } else if (activeTab === 'IMAGE') {
-        document.getElementById('boxImage').style.display = 'block';
-        initImageMode();
-      } else if (activeTab === 'VIOLETTA') {
-        document.getElementById('boxVioletta').style.display = 'block';
-        initViolettaMode();
-      } else if (activeTab === 'TRACK') {
-        document.getElementById('boxTrack').style.display = 'block';
-        initTrackMode();
-      } else if (activeTab === 'CLICK_TYPE') {
-        document.getElementById('boxClickType').style.display = 'block';
-        initBubbleMode();
-      } else if (activeTab === 'GM_CHECK') {
-        document.getElementById('boxGM').style.display = 'block';
-        initGMCheckMode();
-      }
-    }
-
-    /* ================= 1. CÂU HỎI TIẾNG HÀN 15S ================= */
-    const SENTENCE_BANK = [
-      { correct: "여기에서 타시면 돼요.", wrongs: ["놓은 를을 베틱거나 히싣다.", "알창 미정을 시내다.", "서시해서 나기면 돼요.", "뜻에 씌게 항펀죄다."] },
-      { correct: "내일 비가 올 것 같아요.", wrongs: ["내일 비가 옷 같 것애요.", "비가 올 개 갓내요.", "나일 피가 옫 겄가타요.", "냬일 비가 올 켯같애요."] },
-      { correct: "사냥터에서 몬스터를 처치하세요.", wrongs: ["산앙터에서 먼스터를 저치헤새요.", "사냥텨애서 몬스토를 처지하새요.", "사냥터애셔 몬스터를 쳐치하새요.", "샤냥터에서 몬스털를 처치해새요."] },
-      { correct: "인벤토리가 가득 찼습니다.", wrongs: ["인벤토리과 가둑 찻슴니다.", "인벤토리가 가득 찾습니다.", "임벤토리가 가득 찻슴니다.", "인벤토리개 가득 챳습니다."] }
-    ];
-
-    function initSentenceMode() {
-      let timeLeft = 15;
-      const tEl = document.getElementById('blueTimer');
-      tEl.textContent = timeLeft;
-
-      mainTimer = setInterval(() => {
-        timeLeft--;
-        tEl.textContent = timeLeft;
-        if (timeLeft <= 0) {
-          clearInterval(mainTimer);
-          streak = 0; updateStats(); initSentenceMode();
+    function startNoticeCountdown() {
+      clearInterval(noticeInterval);
+      noticeTimer = 14;
+      document.getElementById('noticeCount').textContent = noticeTimer;
+      noticeInterval = setInterval(() => {
+        noticeTimer--;
+        document.getElementById('noticeCount').textContent = noticeTimer;
+        if (noticeTimer <= 0) {
+          clearInterval(noticeInterval);
+          startStageGame();
         }
       }, 1000);
-
-      const q = SENTENCE_BANK[Math.floor(Math.random() * SENTENCE_BANK.length)];
-      const list = [{ t: q.correct, ok: true }, ...q.wrongs.map(w => ({ t: w, ok: false }))].sort(() => Math.random() - 0.5);
-
-      const wrap = document.getElementById('blueOptions');
-      wrap.innerHTML = '';
-      list.forEach(it => {
-        const btn = document.createElement('button');
-        btn.className = 'kms-opt-btn';
-        btn.textContent = it.t;
-        btn.onclick = () => {
-          clearInterval(mainTimer);
-          if (it.ok) { btn.classList.add('correct'); score++; streak++; }
-          else { btn.classList.add('wrong'); streak = 0; }
-          updateStats();
-          setTimeout(initSentenceMode, 600);
-        };
-        wrap.appendChild(btn);
-      });
     }
 
-    /* ================= 2. ẢNH LIE DETECTOR ================= */
-    const IMAGE_BANK = [
-      { type: "CHOICE", scene: ["🍎", "🍰", "💎", "🍇"], question: "현재 깜빡이고 있는 물체는 무엇입니까?", choices: ["사과", "케이크", "보석", "포도"], ans: 1, mode: "BLINK", target: 1 },
-      { type: "CHOICE", scene: ["🍌", "💍", "🍕", "👓"], question: "현재 움직이고 있는 물체는 무엇입니까?", choices: ["바나나", "반지", "피자", "안경"], ans: 0, mode: "MOVE", target: 0 },
-      { type: "OX", scene: ["🍑", "🍰", "🍍", "🍑"], question: "파인애플은 케이크 바로 옆에 보입니다", ans: "O", mode: "DISTRACT" },
-      { type: "OX", scene: ["🍕", "🍎", "🍎", "👒", "🔘", "🍇"], question: "오렌지와 장갑 사이에 있는 물체는 모자입니다", ans: "X", mode: "NONE" },
-      { type: "CHOICE", scene: ["🍜", "⬆️", "🔦", "🍓"], question: "적어도 1개의 화살표는 _____ 방향을 향하고 있습니다", choices: ["하단", "위쪽", "왼쪽", "정답 없음"], ans: 1, mode: "NONE" },
-      { type: "CHOICE", scene: ["💍", "💊", "🍍", "👓"], question: "알약은 [ ] 바로 옆에 나타나 있습니다", choices: ["장갑", "수박", "반지", "정답 없음"], ans: 2, mode: "DISTRACT" }
-    ];
+    function startStageGame() {
+      clearInterval(noticeInterval);
+      document.getElementById('noticeModal').style.display = 'none';
+      document.getElementById('stageModal').style.display = 'block';
 
-    let selectedImgAns = null;
-    function initImageMode() {
-      selectedImgAns = null;
-      let timeLeft = 110;
-      const card = document.getElementById('boxImage');
-      const content = document.getElementById('dynamicImageContent');
-      const confirmBtn = document.getElementById('confirmImageBtn');
-      confirmBtn.classList.remove('active');
-
-      const q = IMAGE_BANK[Math.floor(Math.random() * IMAGE_BANK.length)];
-
-      function renderClock() {
-        const m = String(Math.floor(timeLeft / 60)).padStart(2, '0');
-        const s = String(timeLeft % 60).padStart(2, '0');
-        return `<div class="green-clock-badge"><div class="clock-icon"></div><span>${m}:${s}</span></div>`;
-      }
-
-      function fillScene(parent) {
-        q.scene.forEach((item, idx) => {
-          const sp = document.createElement('span');
-          sp.className = 'game-item';
-          sp.textContent = item;
-          if (q.mode === "BLINK" && idx === q.target) { sp.classList.add('anim-blink'); sp.style.setProperty('--s', '0.6s'); }
-          else if (q.mode === "MOVE" && idx === q.target) { sp.classList.add('anim-v'); sp.style.setProperty('--s', '1.2s'); }
-          else if (q.mode === "DISTRACT") {
-            const a = ['anim-h', 'anim-v', 'anim-pulse'][Math.floor(Math.random() * 3)];
-            sp.classList.add(a); sp.style.setProperty('--s', '1.3s');
-          }
-          parent.appendChild(sp);
-        });
-      }
-
-      if (q.type === 'OX') {
-        card.className = 'kms-card-modal layout-ox';
-        content.innerHTML = `
-          <div class="top-bar-ox">${renderClock()}</div>
-          <div class="scene-box" id="imgScene"></div>
-          <div class="question-title"><span class="q-tag">Q.</span>${q.question}</div>
-          <div class="ox-container">
-            <div class="ox-card-btn o" onclick="setImgAns('O', this)">O</div>
-            <div class="ox-card-btn x" onclick="setImgAns('X', this)">X</div>
-          </div>
-        `;
-        fillScene(document.getElementById('imgScene'));
-      } else {
-        card.className = 'kms-card-modal layout-choice';
-        content.innerHTML = `
-          <div class="choice-header-split">
-            <div class="scene-box" id="imgScene"></div>
-            <div class="right-question-box">
-              <div class="right-top-clock">${renderClock()}</div>
-              <div class="question-title"><span class="q-tag">Q.</span>${q.question}</div>
-            </div>
-          </div>
-          <div class="choices-list" id="choicesList"></div>
-        `;
-        fillScene(document.getElementById('imgScene'));
-        const cl = document.getElementById('choicesList');
-        q.choices.forEach((txt, idx) => {
-          const bar = document.createElement('div');
-          bar.className = 'choice-item-bar';
-          bar.innerHTML = `<span class="choice-round-num">${idx + 1}</span><span>${txt}</span>`;
-          bar.onclick = () => {
-            document.querySelectorAll('.choice-item-bar').forEach(b => b.classList.remove('selected'));
-            bar.classList.add('selected');
-            selectedImgAns = idx;
-            confirmBtn.classList.add('active');
-          };
-          cl.appendChild(bar);
-        });
-      }
-
-      confirmBtn.onclick = () => {
-        if (selectedImgAns === null) return;
-        clearInterval(mainTimer);
-        if (selectedImgAns === q.ans) { score++; streak++; } else { streak = 0; }
-        updateStats();
-        initImageMode();
-      };
-
-      mainTimer = setInterval(() => {
-        timeLeft--;
-        if (timeLeft <= 0) { clearInterval(mainTimer); streak = 0; updateStats(); initImageMode(); }
-      }, 1000);
-    }
-
-    function setImgAns(val, el) {
-      document.querySelectorAll('.ox-card-btn').forEach(b => b.classList.remove('selected'));
-      el.classList.add('selected');
-      selectedImgAns = val;
-      document.getElementById('confirmImageBtn').classList.add('active');
-    }
-
-    /* ================= 3. TRÁO NẤM VIOLETTA ================= */
-    let violettaPos = [0, 1, 2, 3];
-    let targetShroom = 0;
-
-    function initViolettaMode() {
-      violettaPos = [0, 1, 2, 3];
-      targetShroom = Math.floor(Math.random() * 4);
-      document.querySelectorAll('.v-btn').forEach(b => b.classList.remove('unlocked'));
-
+      // Khóa nút bấm
       for (let i = 0; i < 4; i++) {
-        const box = document.getElementById(`shroom${i}`);
-        box.style.transform = `translateX(${60 + i * 165}px)`;
-        const icon = document.getElementById(`sIcon${i}`);
-        icon.classList.toggle('target-highlight', i === targetShroom);
+        document.getElementById(`btn${i}`).classList.remove('active');
+        document.getElementById(`arrow${i}`).style.display = 'none';
       }
 
+      // Chọn ngẫu nhiên con nấm trang điểm
+      targetIndex = Math.floor(Math.random() * 4);
+      positions = [0, 1, 2, 3];
+
+      // Đặt vị trí ban đầu
+      for (let i = 0; i < 4; i++) {
+        const slot = document.getElementById(`slot${i}`);
+        slot.style.transform = `translateX(${X_SLOTS[i]}px)`;
+        // Vẽ nấm mở mắt (con target có trang điểm)
+        document.getElementById(`sprite${i}`).innerHTML = renderViolettaSVG(i === targetIndex, false);
+      }
+
+      // Bật mũi tên đỏ chỉ vào con trang điểm
+      document.getElementById(`arrow${targetIndex}`).style.display = 'block';
+      document.getElementById('stageStatusText').textContent = "화장한 비올레타를 놓치지 말고 주목해주세요!";
+
+      // Sau 2 giây: Nhắm mắt và bắt đầu tráo bài
       setTimeout(() => {
-        document.getElementById(`sIcon${targetShroom}`).classList.remove('target-highlight');
-        let swaps = 0;
-        const interval = setInterval(() => {
-          const idxA = Math.floor(Math.random() * 4);
-          let idxB = Math.floor(Math.random() * 4);
-          while (idxB === idxA) idxB = Math.floor(Math.random() * 4);
+        document.getElementById(`arrow${targetIndex}`).style.display = 'none';
+        document.getElementById('stageStatusText').textContent = "눈을 감고 이동하기 시작합니다... (Đang tráo đổi vị trí)";
 
-          const temp = violettaPos[idxA];
-          violettaPos[idxA] = violettaPos[idxB];
-          violettaPos[idxB] = temp;
-
-          document.getElementById(`shroom${violettaPos[idxA]}`).style.transform = `translateX(${60 + idxA * 165}px)`;
-          document.getElementById(`shroom${violettaPos[idxB]}`).style.transform = `translateX(${60 + idxB * 165}px)`;
-
-          swaps++;
-          if (swaps >= 10) {
-            clearInterval(interval);
-            document.querySelectorAll('.v-btn').forEach(b => b.classList.add('unlocked'));
-          }
-        }, 300);
-      }, 1800);
-    }
-
-    function guessVioletta(btnIdx) {
-      if (!document.querySelectorAll('.v-btn')[0].classList.contains('unlocked')) return;
-      if (violettaPos[btnIdx] === targetShroom) {
-        score++; streak++;
-      } else {
-        streak = 0;
-      }
-      updateStats();
-      initViolettaMode();
-    }
-
-    /* ================= 4. BÁM ĐUỔI HÌNH TÀNG HÌNH ================= */
-    let trackProgress = 0;
-    let trackHovered = false;
-    let shapePos = { x: 80, y: 60, dx: 3.5, dy: 3 };
-
-    function initTrackMode() {
-      trackProgress = 0;
-      document.getElementById('trackBar').style.width = '0%';
-      const target = document.getElementById('stealthTarget');
-      target.style.opacity = '1';
-
-      target.onmouseenter = () => { trackHovered = true; };
-      target.onmouseleave = () => { trackHovered = false; };
-
-      let lifeTime = 0;
-      mainTimer = setInterval(() => {
-        lifeTime += 30;
-        const op = Math.max(0.12, 1 - (lifeTime / 8500));
-        target.style.opacity = op;
-
-        shapePos.x += shapePos.dx;
-        shapePos.y += shapePos.dy;
-        if (shapePos.x <= 0 || shapePos.x >= 650) shapePos.dx *= -1;
-        if (shapePos.y <= 0 || shapePos.y >= 250) shapePos.dy *= -1;
-
-        target.style.left = shapePos.x + 'px';
-        target.style.top = shapePos.y + 'px';
-
-        if (trackHovered) {
-          trackProgress = Math.min(100, trackProgress + 0.9);
-          document.getElementById('trackBar').style.width = trackProgress + '%';
-          if (trackProgress >= 100) {
-            clearInterval(mainTimer);
-            score++; streak++; updateStats(); initTrackMode();
-          }
+        // Cả 4 con nhắm mắt lại
+        for (let i = 0; i < 4; i++) {
+          document.getElementById(`sprite${i}`).innerHTML = renderViolettaSVG(i === targetIndex, true);
         }
-      }, 30);
-    }
 
-    /* ================= 5. BÓNG 5 LẦN + GÕ CHỮ ================= */
-    let bubbleCount = 0;
-    let typeLives = 3;
-    const CAPTCHA_WORDS = ["단풍잎바람", "자쿰의투구", "헤네시스마을", "엘리니아숲", "루디브리엄"];
-    let currentWord = "";
+        // Bắt đầu tráo vị trí 9 lần
+        let swapSteps = 0;
+        const shuffleInterval = setInterval(() => {
+          let a = Math.floor(Math.random() * 4);
+          let b = Math.floor(Math.random() * 4);
+          while (b === a) b = Math.floor(Math.random() * 4);
 
-    function initBubbleMode() {
-      bubbleCount = 0;
-      document.getElementById('bubbleHits').textContent = bubbleCount;
-      document.getElementById('bubbleField').style.display = 'block';
-      document.getElementById('typeModal').style.display = 'none';
-      moveBubble();
+          // Hoán đổi vị trí
+          let temp = positions[a];
+          positions[a] = positions[b];
+          positions[b] = temp;
 
-      document.getElementById('bubbleObj').onclick = () => {
-        bubbleCount++;
-        document.getElementById('bubbleHits').textContent = bubbleCount;
-        if (bubbleCount >= 5) {
-          document.getElementById('bubbleField').style.display = 'none';
-          openHangulTypeModal();
-        } else {
-          moveBubble();
-        }
-      };
-    }
+          document.getElementById(`slot${positions[a]}`).style.transform = `translateX(${X_SLOTS[a]}px)`;
+          document.getElementById(`slot${positions[b]}`).style.transform = `translateX(${X_SLOTS[b]}px)`;
 
-    function moveBubble() {
-      const b = document.getElementById('bubbleObj');
-      b.style.left = (30 + Math.random() * 640) + 'px';
-      b.style.top = (50 + Math.random() * 240) + 'px';
-    }
-
-    function openHangulTypeModal() {
-      typeLives = 3;
-      document.getElementById('typeModal').style.display = 'block';
-      document.getElementById('livesText').textContent = "세번 남았습니다";
-      currentWord = CAPTCHA_WORDS[Math.floor(Math.random() * CAPTCHA_WORDS.length)];
-      document.getElementById('captchaWord').textContent = currentWord;
-      const inp = document.getElementById('typeInput');
-      inp.value = '';
-      inp.focus();
-
-      inp.onkeydown = (e) => {
-        if (e.key === 'Enter') {
-          if (inp.value.trim() === currentWord) {
-            score++; streak++; updateStats(); initBubbleMode();
-          } else {
-            typeLives--;
-            if (typeLives === 2) document.getElementById('livesText').textContent = "두번 남았습니다";
-            else if (typeLives === 1) document.getElementById('livesText').textContent = "한번 남았습니다";
-            else {
-              streak = 0; updateStats(); initBubbleMode();
+          swapSteps++;
+          if (swapSteps >= 9) {
+            clearInterval(shuffleInterval);
+            // Mở khóa các nút 1, 2, 3, 4
+            document.getElementById('stageStatusText').textContent = "화장한 비올레타가 위치한 번호를 누르세요! (Hãy chọn vị trí)";
+            for (let i = 0; i < 4; i++) {
+              document.getElementById(`btn${i}`).classList.add('active');
             }
-            inp.value = '';
           }
-        }
-      };
+        }, 280);
+      }, 2000);
     }
 
-    /* ================= 6. MAPLE PLANET GM CHECK ================= */
-    const GM_BANK = [
-      {
-        q: "<b>[보안 확인]</b><br>당신의 캐릭터 직업(클래스)은 무엇인가요?",
-        check: (val) => val.length >= 2
-      },
-      {
-        q: "<b>[알림]</b> 아래의 3가지 문제를 풀어주세요.<br>[1번문제] 우리나라의 국가명은?<br>[2번문제] 생각나는 보스 몬스터 이름은?<br>[3번문제] 현재 접속중인 내 캐릭터의 이름은?<br><span style='color:#dc2626;'>답변 예시: 대한민국 / 자쿰 / 홍길동</span>",
-        check: (val) => val.includes('/') && val.split('/').length === 3
-      },
-      {
-        q: "<div style='letter-spacing:10px; font-weight:bold; font-size:17px;'>현&nbsp;사&nbsp;이&nbsp;요<br>재&nbsp;냥&nbsp;름<br>&nbsp;&nbsp;터&nbsp;을<br>&nbsp;&nbsp;의&nbsp;입<br>&nbsp;&nbsp;&nbsp;&nbsp;력<br>&nbsp;&nbsp;&nbsp;&nbsp;해<br>&nbsp;&nbsp;&nbsp;&nbsp;주<br>&nbsp;&nbsp;&nbsp;&nbsp;세</div><br><small style='color:#64748b;'>* 세로로 읽고 사냥터 이름을 적으세요 (Đọc theo cột dọc)</small>",
-        check: (val) => val.length >= 2
-      },
-      {
-        q: "<b>[요청 사항]</b><br>서로 다른 한글 10글자를 임의로 입력해 주세요.<br><small style='color:#dc2626;'>* 같은 글자 반복 및 숫자, 영어, 공백 제외</small>",
-        check: (val) => {
-          const clean = val.replace(/\s+/g, '');
-          const unique = new Set(clean);
-          return unique.size >= 10 && /^[가-힣]+$/.test(clean);
-        }
-      },
-      {
-        q: "<b>[요청 사항]</b><br>현재 사냥터의 풍경을 자유롭게 8글자 이상 적어주세요.<br><small style='color:#dc2626;'>* 한글로 입력, 공백/숫자/특수문자 제외</small>",
-        check: (val) => val.replace(/\s+/g, '').length >= 8 && /^[가-힣]+$/.test(val.replace(/\s+/g, ''))
+    function makeChoice(chosenSlot) {
+      if (!document.getElementById('btn0').classList.contains('active')) return;
+
+      // Khóa nút
+      for (let i = 0; i < 4; i++) {
+        document.getElementById(`btn${i}`).classList.remove('active');
+        // Mở mắt toàn bộ để kiểm tra
+        document.getElementById(`sprite${i}`).innerHTML = renderViolettaSVG(i === targetIndex, false);
       }
-    ];
 
-    let currentGM = null;
-    function initGMCheckMode() {
-      let timeLeft = 53;
-      const tEl = document.getElementById('gmTimerText');
-      tEl.textContent = timeLeft;
+      // Con mục tiêu hiện đang nằm ở slot nào
+      const correctSlot = positions.indexOf(targetIndex);
 
-      currentGM = GM_BANK[Math.floor(Math.random() * GM_BANK.length)];
-      document.getElementById('gmQuestionText').innerHTML = currentGM.q;
-      const inp = document.getElementById('gmInput');
-      inp.value = '';
-      inp.focus();
-
-      mainTimer = setInterval(() => {
-        timeLeft--;
-        tEl.textContent = String(timeLeft).padStart(2, '0');
-        if (timeLeft <= 0) {
-          clearInterval(mainTimer);
-          streak = 0; updateStats(); initGMCheckMode();
-        }
-      }, 1000);
-    }
-
-    function submitGMAnswer() {
-      const val = document.getElementById('gmInput').value.trim();
-      clearInterval(mainTimer);
-      if (currentGM && currentGM.check(val)) {
-        score++; streak++;
+      if (chosenSlot === correctSlot) {
+        scoreCount++;
+        document.getElementById('stageStatusText').textContent = "★ 통과 (Chính xác! Bạn đã tìm đúng Violetta)";
       } else {
-        streak = 0;
+        failCount++;
+        document.getElementById('stageStatusText').textContent = `✖ 실패 (Sai rồi! Violetta nằm ở vị trí số ${correctSlot + 1})`;
       }
-      updateStats();
-      initGMCheckMode();
+
+      document.getElementById('statsBar').textContent = `Đúng: ${scoreCount} | Sai: ${failCount}`;
+
+      // 2 giây sau quay lại màn hình cảnh báo lượt mới
+      setTimeout(() => {
+        document.getElementById('stageModal').style.display = 'none';
+        document.getElementById('noticeModal').style.display = 'block';
+        startNoticeCountdown();
+      }, 2200);
     }
 
-    // Mặc định hiển thị tab 1
-    selectTab('SENTENCE');
+    // Bắt đầu
+    startNoticeCountdown();
   </script>
 </body>
 </html>
