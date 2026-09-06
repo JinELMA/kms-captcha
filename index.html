@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MapleStory KMS - 5회 클릭 & 문자 입력 거탐</title>
+  <title>MapleStory KMS - 5회 클릭 & 문자 입력 거탐 (Training Mode)</title>
   <style>
     * { box-sizing: border-box; user-select: none; font-family: "Malgun Gothic", Dotum, sans-serif; }
 
@@ -20,9 +20,9 @@
       color: #fff;
     }
 
-    /* ================= GIAI ĐOẠN 1: BÓNG 5 LẦN (CHUẨN ẢNH 1) ================= */
+    /* ================= GIAI ĐOẠN 1: BÓNG 5 LẦN (ẢNH 1) ================= */
     .bubble-stage-card {
-      width: 600px;
+      width: 620px;
       height: 420px;
       background: radial-gradient(circle at center, #15803d 0%, #064e3b 40%, #091e17 100%);
       border: 3px solid #4ade80;
@@ -35,7 +35,6 @@
       justify-content: space-between;
     }
 
-    /* Lớp hào quang & hiệu ứng lá xanh nổ tung */
     .green-blast-bg {
       position: absolute;
       top: -30px; left: -30px; right: -30px; bottom: -30px;
@@ -50,7 +49,6 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Các dòng chữ thư pháp vàng gây nhiễu */
     .distract-text-layer {
       position: absolute;
       width: 100%;
@@ -91,7 +89,6 @@
     }
     .bubble-count-text b { font-size: 19px; color: #4ade80; }
 
-    /* Quả bóng mục tiêu nổ sáng */
     .bubble-target-ball {
       position: absolute;
       width: 72px;
@@ -110,44 +107,41 @@
     }
     .bubble-target-ball:active { transform: scale(0.9); }
 
-    /* ================= GIAI ĐOẠN 2: KHUNG GÕ CHỮ (CHUẨN ẢNH 2) ================= */
+    /* ================= GIAI ĐOẠN 2: KHUNG GÕ CHỮ (ẢNH 2) ================= */
     .type-stage-card {
-      width: 440px;
+      width: 520px;
       background: #3a2228;
       border: 3px solid #5a3a42;
-      border-radius: 8px;
-      padding: 24px 20px 22px;
+      border-radius: 10px;
+      padding: 22px 20px 20px;
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95);
       position: relative;
       display: none;
-      /* Nền vân gạch xưởng Ludibrium */
       background-image: 
         repeating-linear-gradient(0deg, rgba(0,0,0,0.3) 0px, rgba(0,0,0,0.3) 2px, transparent 2px, transparent 18px),
         repeating-linear-gradient(90deg, rgba(0,0,0,0.2) 0px, rgba(0,0,0,0.2) 2px, transparent 2px, transparent 36px);
     }
 
-    /* Đồng hồ điện tử Cyan đếm lùi */
     .cyan-clock-display {
       font-family: 'Consolas', 'Courier New', monospace;
-      font-size: 54px;
+      font-size: 50px;
       font-weight: 900;
       color: #38bdf8;
       text-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
       text-align: center;
       line-height: 1;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       letter-spacing: 2px;
     }
 
-    /* Hướng dẫn tiếng Hàn màu xanh xám */
     .korean-prompt-text {
       text-align: center;
       color: #7dd3fc;
-      font-size: 15px;
+      font-size: 14.5px;
       font-weight: 700;
       line-height: 1.5;
       font-style: italic;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       text-shadow: 0 1px 3px rgba(0,0,0,0.8);
     }
     .lives-left-text {
@@ -157,7 +151,6 @@
       margin-top: 4px;
     }
 
-    /* Khung vẽ chữ Hangul Canvas có vết xước & nhiễu */
     .hangul-canvas-box {
       width: 100%;
       height: 90px;
@@ -165,9 +158,8 @@
       border: 2px solid #1e293b;
       border-radius: 4px;
       overflow: hidden;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-      position: relative;
     }
     #hangulCanvas {
       width: 100%;
@@ -175,7 +167,6 @@
       display: block;
     }
 
-    /* Ô gõ chữ tiếng Hàn */
     .hangul-input-bar {
       width: 100%;
       height: 42px;
@@ -183,10 +174,115 @@
       border: 2px solid #0f172a;
       border-radius: 4px;
       padding: 6px 12px;
-      font-size: 16.5px;
+      font-size: 17px;
       font-weight: bold;
       color: #000;
       outline: none;
+      margin-bottom: 12px;
+    }
+
+    /* ================= BẢNG HƯỚNG DẪN GÕ PHÍM CHO NHÂN VIÊN ================= */
+    .trainer-guide-panel {
+      background: #1e293b;
+      border: 1.5px solid #38bdf8;
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-top: 6px;
+    }
+    .trainer-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .trainer-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #facc15;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-toggle-hint {
+      background: #334155;
+      border: 1px solid #64748b;
+      color: #cbd5e1;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .btn-toggle-hint:hover { background: #475569; }
+
+    .syllable-hints-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .syllable-col {
+      background: #0f172a;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 6px 4px;
+      text-align: center;
+    }
+    .hangul-char-badge {
+      font-size: 18px;
+      font-weight: 900;
+      color: #38bdf8;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .jamo-split-text {
+      font-size: 11px;
+      color: #94a3b8;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .keycap-row {
+      display: flex;
+      justify-content: center;
+      gap: 2px;
+      flex-wrap: wrap;
+    }
+    kbd {
+      background: #e2e8f0;
+      color: #0f172a;
+      border: 1px solid #94a3b8;
+      border-bottom: 2px solid #64748b;
+      border-radius: 3px;
+      font-family: 'Consolas', monospace;
+      font-size: 12px;
+      font-weight: 900;
+      padding: 1px 5px;
+      display: inline-block;
+      min-width: 18px;
+      box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    }
+    kbd.shift-key {
+      background: #fde047;
+      border-color: #ca8a04;
+    }
+
+    .full-string-guide {
+      background: #090d16;
+      border: 1px dashed #64748b;
+      border-radius: 4px;
+      padding: 6px 10px;
+      font-size: 12.5px;
+      color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .full-keys-code {
+      font-family: 'Consolas', monospace;
+      font-size: 15px;
+      font-weight: 900;
+      color: #4ade80;
+      letter-spacing: 2px;
     }
 
     .score-toast {
@@ -203,7 +299,7 @@
 </head>
 <body>
 
-  <!-- 1. GIAI ĐOẠN 1: BÓNG 5 LẦN (Chuẩn ảnh 1) -->
+  <!-- 1. GIAI ĐOẠN 1: BÓNG 5 LẦN (ẢNH 1) -->
   <div class="bubble-stage-card" id="bubbleStage">
     <div class="green-blast-bg"></div>
 
@@ -213,7 +309,6 @@
       인벤토리가 가득 찼습니다.
     </div>
 
-    <!-- Số damage trôi nổi giả lập game -->
     <div class="fake-damage-num" style="top: 140px; right: 80px; font-size: 26px;">1181 COMBO</div>
     <div class="fake-damage-num" style="bottom: 80px; left: 40px; font-size: 28px;">48031 12975254</div>
 
@@ -222,7 +317,6 @@
       <span class="bubble-count-text">클릭 수: <b id="bubbleHits">0</b> / 5</span>
     </div>
 
-    <!-- Mục tiêu bóng di chuyển -->
     <div class="bubble-target-ball" id="bubbleTarget">🍀</div>
 
     <div style="padding: 10px; z-index: 20; text-align: center; font-size: 13px; color: #cbd5e1; background: rgba(0,0,0,0.5);">
@@ -230,7 +324,7 @@
     </div>
   </div>
 
-  <!-- 2. GIAI ĐOẠN 2: KHUNG GÕ CHỮ (Chuẩn ảnh 2) -->
+  <!-- 2. GIAI ĐOẠN 2: KHUNG GÕ CHỮ + BẢNG HUẤN LUYỆN (ẢNH 2) -->
   <div class="type-stage-card" id="typeStage">
     <div class="cyan-clock-display" id="cyanTimer">49</div>
 
@@ -240,16 +334,71 @@
     </div>
 
     <div class="hangul-canvas-box">
-      <canvas id="hangulCanvas" width="400" height="90"></canvas>
+      <canvas id="hangulCanvas" width="480" height="90"></canvas>
     </div>
 
-    <input type="text" class="hangul-input-bar" id="hangulInput" placeholder="Nhập chữ tiếng Hàn và bấm Enter..." autocomplete="off">
+    <input type="text" class="hangul-input-bar" id="hangulInput" placeholder="Gõ chữ Hangul và bấm Enter..." autocomplete="off">
+
+    <!-- BẢNG HƯỚNG DẪN TÁCH NÉT & PHÍM QWERTY DÀNH CHO NHÂN VIÊN -->
+    <div class="trainer-guide-panel" id="trainerGuidePanel">
+      <div class="trainer-header-row">
+        <span class="trainer-title">⌨️ HƯỚNG DẪN GÕ PHÍM CHO NHÂN VIÊN</span>
+        <button type="button" class="btn-toggle-hint" onclick="toggleHintView()" id="btnToggleHint">Ẩn gợi ý</button>
+      </div>
+
+      <div class="syllable-hints-grid" id="syllableHintsGrid"></div>
+
+      <div class="full-string-guide" id="fullStringGuide">
+        <span>Chuỗi phím gõ nhanh:</span>
+        <span class="full-keys-code" id="fullKeySequence"></span>
+      </div>
+    </div>
   </div>
 
   <div class="score-toast" id="scoreBar">Đúng: <b>0</b> | Chuỗi liên tiếp: <b>0</b></div>
 
   <script>
-    // Kho từ vựng Hangul mô phỏng captcha chữ biến dạng
+    // Bảng mã tra cứu chuẩn bàn phím 2-Set Hàn Quốc (Dubeolsik sang QWERTY)
+    const CHOSEONG = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+    const CHOSEONG_KEY = ['r','R','s','e','E','f','a','q','Q','t','T','d','w','W','c','z','x','v','g'];
+
+    const JUNGSEONG = ['ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ'];
+    const JUNGSEONG_KEY = ['k','o','i','O','j','p','u','P','h','hk','ho','hl','y','n','nj','np','nl','b','m','ml','l'];
+
+    const JONGSEONG = ['','ㄱ','ㄲ','ㄳ','ㄴ','ㄵ','ㄶ','ㄷ','ㄹ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ','ㅁ','ㅂ','ㅄ','ㅅ','ㅆ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+    const JONGSEONG_KEY = ['','r','R','rt','s','sw','sg','e','f','fr','fa','fq','ft','fx','fv','fg','a','q','qt','t','T','d','w','c','z','x','v','g'];
+
+    // Hàm tự động phân rã âm tiết Hangul thành nét ghép và phím gõ QWERTY
+    function decomposeHangul(char) {
+      const code = char.charCodeAt(0);
+      if (code < 0xAC00 || code > 0xD7A3) return null;
+      const index = code - 0xAC00;
+      const l = Math.floor(index / (21 * 28));
+      const v = Math.floor((index % (21 * 28)) / 28);
+      const t = index % 28;
+
+      const jamos = [];
+      const keys = [];
+
+      jamos.push(CHOSEONG[l]);
+      keys.push(CHOSEONG_KEY[l]);
+
+      jamos.push(JUNGSEONG[v]);
+      keys.push(JUNGSEONG_KEY[v]);
+
+      if (t > 0) {
+        jamos.push(JONGSEONG[t]);
+        keys.push(JONGSEONG_KEY[t]);
+      }
+
+      return {
+        char: char,
+        jamoText: jamos.join(' + '),
+        keys: keys,
+        combinedKeys: keys.join('')
+      };
+    }
+
     const HANGUL_WORDS = [
       "애가형영것", "단풍잎바람", "자쿰의투구", "헤네시스숲", 
       "엘리니아꽃", "루디브리엄", "시그너스궁", "오르비스탑"
@@ -261,6 +410,7 @@
     let timerInterval = null;
     let currentTargetWord = "";
     let score = 0, streak = 0;
+    let hintsVisible = true;
 
     const bubbleStage = document.getElementById('bubbleStage');
     const typeStage = document.getElementById('typeStage');
@@ -271,8 +421,16 @@
     const hangulInput = document.getElementById('hangulInput');
     const canvas = document.getElementById('hangulCanvas');
     const ctx = canvas.getContext('2d');
+    const syllableHintsGrid = document.getElementById('syllableHintsGrid');
+    const fullKeySequence = document.getElementById('fullKeySequence');
 
-    // ================= KHỞI TẠO BÓNG 5 LẦN =================
+    function toggleHintView() {
+      hintsVisible = !hintsVisible;
+      syllableHintsGrid.style.display = hintsVisible ? 'grid' : 'none';
+      document.getElementById('fullStringGuide').style.display = hintsVisible ? 'flex' : 'none';
+      document.getElementById('btnToggleHint').textContent = hintsVisible ? 'Ẩn gợi ý' : 'Hiện gợi ý';
+    }
+
     function startBubblePhase() {
       clearInterval(timerInterval);
       bubbleClicks = 0;
@@ -287,7 +445,6 @@
         bubbleHits.textContent = bubbleClicks;
 
         if (bubbleClicks >= 5) {
-          // Hoàn thành giai đoạn 1 -> Chuyển sang giai đoạn 2
           bubbleStage.style.display = 'none';
           typeStage.style.display = 'block';
           startTypePhase();
@@ -298,14 +455,12 @@
     }
 
     function moveBubbleToRandomPos() {
-      // Phạm vi khung 600 x 420 (trừ lề HUD và kích thước bóng 72px)
-      const x = 30 + Math.random() * 490;
+      const x = 30 + Math.random() * 510;
       const y = 70 + Math.random() * 260;
       bubbleTarget.style.left = x + 'px';
       bubbleTarget.style.top = y + 'px';
     }
 
-    // ================= KHỞI TẠO GÕ CHỮ THƯ PHÁP =================
     function startTypePhase() {
       typeLives = 3;
       remainingTime = 49;
@@ -315,11 +470,10 @@
       hangulInput.value = '';
       hangulInput.focus();
 
-      // Chọn 1 từ ngẫu nhiên và vẽ lên Canvas với các hiệu ứng biến dạng
       currentTargetWord = HANGUL_WORDS[Math.floor(Math.random() * HANGUL_WORDS.length)];
       renderDistortedHangul(currentTargetWord);
+      buildKeystrokeGuide(currentTargetWord);
 
-      // Đếm ngược thời gian từ 49s xuống 0
       timerInterval = setInterval(() => {
         remainingTime--;
         cyanTimer.textContent = remainingTime;
@@ -330,12 +484,44 @@
         }
       }, 1000);
 
-      // Lắng nghe phím Enter
       hangulInput.onkeydown = (e) => {
         if (e.key === 'Enter') {
           checkTypedAnswer();
         }
       };
+    }
+
+    // Dựng bảng gợi ý ghép nét & phím tiếng Anh
+    function buildKeystrokeGuide(word) {
+      syllableHintsGrid.innerHTML = '';
+      let totalKeys = '';
+
+      for (let i = 0; i < word.length; i++) {
+        const item = decomposeHangul(word[i]);
+        if (!item) continue;
+
+        totalKeys += item.combinedKeys + ' ';
+
+        const col = document.createElement('div');
+        col.className = 'syllable-col';
+
+        let kbdHtml = '';
+        item.keys.forEach(k => {
+          for (let char of k) {
+            const isShift = (char === char.toUpperCase() && char !== char.toLowerCase());
+            kbdHtml += `<kbd class="${isShift ? 'shift-key' : ''}">${char}</kbd>`;
+          }
+        });
+
+        col.innerHTML = `
+          <span class="hangul-char-badge">${item.char}</span>
+          <span class="jamo-split-text">${item.jamoText}</span>
+          <div class="keycap-row">${kbdHtml}</div>
+        `;
+        syllableHintsGrid.appendChild(col);
+      }
+
+      fullKeySequence.textContent = totalKeys.trim();
     }
 
     function updateLivesText() {
@@ -344,27 +530,24 @@
       else if (typeLives === 1) livesText.textContent = "한번 남았습니다";
     }
 
-    // Hàm vẽ chữ thư pháp, vết xước và hạt muối tiêu (Salt & Pepper Noise)
     function renderDistortedHangul(text) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // 1. Nền trắng có hạt xám li ti
       ctx.fillStyle = "#fafafa";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // 2. Vẽ từng ký tự chữ cái với màu sắc, góc nghiêng và độ méo khác nhau
       const colors = ["#451a03", "#0f172a", "#581c87", "#701a75", "#1c1917"];
-      const charWidth = 62;
-      const startX = 35;
+      const charWidth = 74;
+      const startX = 40;
 
       for (let i = 0; i < text.length; i++) {
         ctx.save();
         ctx.fillStyle = colors[i % colors.length];
-        ctx.font = "900 44px 'Batang', 'Gungsuh', serif";
+        ctx.font = "900 46px 'Batang', 'Gungsuh', serif";
 
         const x = startX + i * charWidth;
-        const y = 60 + (Math.random() * 8 - 4);
-        const angle = (Math.random() * 0.2 - 0.1); // Nghiêng nhẹ
+        const y = 62 + (Math.random() * 8 - 4);
+        const angle = (Math.random() * 0.2 - 0.1);
 
         ctx.translate(x, y);
         ctx.rotate(angle);
@@ -372,22 +555,20 @@
         ctx.restore();
       }
 
-      // 3. Vẽ các đường gạch xước ngang và chéo xuyên qua chữ (chống đọc máy)
       for (let i = 0; i < 7; i++) {
         ctx.beginPath();
         ctx.strokeStyle = (i % 2 === 0) ? "rgba(15, 23, 42, 0.65)" : "rgba(185, 28, 28, 0.45)";
         ctx.lineWidth = 1.2 + Math.random() * 1.5;
         ctx.moveTo(Math.random() * 50, Math.random() * canvas.height);
         ctx.bezierCurveTo(
-          120, Math.random() * canvas.height,
-          260, Math.random() * canvas.height,
+          140, Math.random() * canvas.height,
+          300, Math.random() * canvas.height,
           canvas.width - 20, Math.random() * canvas.height
         );
         ctx.stroke();
       }
 
-      // 4. Phủ lớp hạt nhiễu (noise speckles)
-      for (let i = 0; i < 650; i++) {
+      for (let i = 0; i < 700; i++) {
         ctx.fillStyle = Math.random() > 0.5 ? "rgba(0,0,0,0.7)" : "rgba(120,53,15,0.6)";
         const px = Math.random() * canvas.width;
         const py = Math.random() * canvas.height;
@@ -399,14 +580,12 @@
       const userVal = hangulInput.value.trim();
 
       if (userVal === currentTargetWord) {
-        // Đúng
         clearInterval(timerInterval);
         score++;
         streak++;
         alert("★ 통과 (Chính xác! Bạn đã hoàn thành xác minh)");
         resetGame();
       } else {
-        // Sai -> trừ mạng
         typeLives--;
         updateLivesText();
         hangulInput.value = '';
@@ -430,7 +609,6 @@
       startBubblePhase();
     }
 
-    // Bắt đầu
     startBubblePhase();
   </script>
 </body>
